@@ -1,0 +1,49 @@
+body {font-family: "microsoft yahei","SimSun","Arial",sans-serif;font-size: 12px;background: none repeat scroll 0 0 #FFF;color: #333;}
+* {padding: 0px;margin: 0px;}
+a {color: #337ab7;text-decoration: none;}
+a, img {border-style: none;}
+.part2 .taocan a:link, a:visited {text-decoration: underline;}
+.part2 .btn a:link, a:visited {text-decoration: none;}
+.part1 {width: 100%;background: #246fd5;}
+.part1 .block {overflow: hidden;width: 990px;margin: 0 auto;height: 30px;background: url("../img/top_banner.gif") no-repeat;}
+.part1 .block p {display: block;float: left;margin-top: 3px;color: #FFF;}
+.part1 .block div {display: block;float: right;margin-top: 3px;color: #FFF;}
+.part2 {width: 100%;border-bottom: 1px solid #CCC;}
+.part2 .block {width: 990px;height: 106px;margin: 0 auto;}
+.part2 .logo {float: left;margin-top: 5px;overflow: hidden;display: inline-block;}
+.part2 .taocan {float: left;width: auto;margin-top: 80px;margin-left: 205px;overflow: hidden;display: inline-block;}
+.part2 .taocan a {color: #00E;text-decoration: underline;}
+.part2 .taocan a:link, a:visited {text-decoration: underline;}
+.btn {display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;font-weight: normal;line-height: 1.42857143;text-align: center;
+    white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;
+    user-select: none;background-image: none;border: 1px solid rgba(0, 0, 0, 0);border-radius: 4px;}
+.part2 .btn {float: right;overflow: hidden;width: 120px;height: 59px;margin-top: 40px;display: inline-block;}
+.part3 .block {width: 990px;margin: 0 auto;}
+.part2 .btn div {display: inline;float: left;}
+.part2 .btn .header_02 {background: url("../img/exit.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);padding: 32px 12px 10px 17px;}
+.part3 .infoStyle {margin: 0 auto;position: relative;width: 700px;}
+.part3 .formClass{font-family: arial;font-size: 12px;}
+.part3 .formClass .main_form {width: 100%;padding-bottom: 10px;}
+ul, li, td, tr, table {margin: 0px;padding: 0px;list-style: none;}
+.part3 .formClass .item {width: 100%;height: 50px;line-height: 22px;padding-top: 1px;}
+.fps_left {float: left;padding-right: 5px;text-align: right;width: 36%;color: #4d4d4d;display: inline-block;overflow: hidden;}
+.leftfont {color: #4d4d4d;font-size: 14px;font-style: normal;vertical-align: middle;font-weight: bold;}
+/*.part3 .formClass .main_form */.text {border: 1px solid #BBBBBB;font-family: arial;font-size: 14px;height: 16px;padding: 4px 3px;width: 240px;}
+.part3 .formClass .main_form .highlight1{border:1px solid #EFA100;outline: 2px solid #FFDC97;}
+.part3 .formClass .main_form .highlight2 {border: 1px solid #FF0000;color: #FF0000;outline: 1px solid #FFC1C1;}
+.part3 .formClass .icon_orderly {background: url("../img/pwdstrength.gif") no-repeat scroll -105px 0 transparent;display: inline-block;font-size: 0;height: 16px;line-height: 0;vertical-align: middle;width: 16px;margin-left: 2px;}
+.addConTip {font-size: 12px;color: #999999;line-height: 22px;}
+.part3 .formClass .main_form .null, .error {font-size: 12px;color: red;line-height: 22px;}
+.part3 .formClass .main_form .error{padding-left: 3px;}
+.fps_right {float: left;}
+.keyClass {color: #FF0000;font-family: SimSun;font-size: 14px;margin-right: 3px;}
+.part3 .formClass .main_form .textareaBox {width: 248px;height: 44px;border: 1px solid #BBB;}
+.part3 .formClass .btndiv {padding-top: 10px;}
+.btn_sytle {background: url("../img/bgImg.gif") repeat-x scroll 0 0 transparent;border-radius: 5px;border: 0 none;color: #FFFFFF;cursor: pointer;display: inline-block;font-family: '΢���ź�','����','�꿬��';font-size: 14px;font-weight: bold;line-height: 20px;overflow: hidden;padding: 3px 15px 2px 15px !important;padding: 0px 8px 2px 6px;margin-right: 3px;vertical-align: middle;}
+.part3 .new_group {color: #0084B2;cursor: pointer;}
+.part3 .formClass .eitem {width: 100%;clear: both;line-height: 22px;padding-top: 1px;overflow: hidden;  height: 50px;}
+select, input, textarea {font-size: 12px;line-height: 1.2em;}
+input[type="checkbox"], input[type="radio"] {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;padding: 0;}
+input[type="radio"], input[type="checkbox"] {margin: 4px 0 0;line-height: normal;}
+input[type=radio], input[type=checkbox] {border: 0px none;vertical-align: middle;}
+select#departSelection{height: 26px;  width: 247px;  text-align: center;}

@@ -1,0 +1,91 @@
+.account-tab{}
+.bottom_line{border-bottom: 3px solid #BCCCEE;width:100%;margin-bottom: 10px;
+    clear: both;}
+.tab ul {
+    list-style: none outside none;
+    display: block;
+}
+.account-tab ul {
+    list-style: none outside none;
+    display: block;
+}
+li {
+    list-style-type: none;
+}
+.tab ul li {
+    display: block;
+    background-color: #FFF;
+    border-color: #D0D6EA #D0D6EA;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 2px 2px 0;
+    float: left;
+    font-size: 14px;
+    height: 40px;
+    line-height: 38px;
+    margin-left: 3px;
+    text-align: center;
+    width: 115px;
+}
+.account-tab ul li {
+    background-color: #DFEFFC;
+    margin-left: 0;
+    border-color: #D0D6EA #D0D6EA;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 2px 2px 0;
+    float: left;
+    font-size: 14px;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+    width: 115px;
+}
+.account-tab a {
+    color: #337ab7;
+    text-decoration: none;
+}
+.account-tab a:link, a:visited {
+    text-decoration: none;
+}
+.tab ul li a {
+    background-color: #FFF;
+    border-color: #FFF #FFFFFF;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 2px 2px 0;
+    display: block;
+    height: 38px;
+    text-decoration: none;
+    width: 111px;
+    cursor: pointer;
+}
+.account-tab ul li a {
+    border-color: #FFF #FFFFFF;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 2px 2px 0;
+    display: block;
+    height: 38px;
+    text-decoration: none;
+    width: 111px;
+    cursor: pointer;
+    background-color: #DFEFFC;
+}
+.tab .current {
+    border-color: #DFE7F5;
+    overflow: visible;
+}
+.account-tab .current {
+    border-color: #DFE7F5;
+    overflow: visible;
+}
+.account-tab .current a {
+    background-color: #FFF;
+    border-color: #B3C4E7;
+    color: #000;
+    height: 42px;
+    font-weight: bold;
+    outline: medium none;
+    text-decoration: none;
+}

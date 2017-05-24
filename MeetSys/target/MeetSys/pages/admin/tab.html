@@ -1,0 +1,15 @@
+<#macro tab num>
+<meta charset="UTF-8">
+<link type="text/css" href="${ctx!}/css/admin/tab.css" rel="stylesheet"/>
+<div class="account-tab tab">
+    <ul>
+        <li <#if num==1>class="current"</#if>>
+            <a href="${ctx!}/admin/rate">费率信息</a>
+        </li>
+        <li <#if num==2>class="current"</#if>>
+            <a href="${ctx!}/admin/threshold">余额阙值</a>
+        </li>
+    </ul>
+</div>
+<div class="bottom_line"></div>
+</#macro>

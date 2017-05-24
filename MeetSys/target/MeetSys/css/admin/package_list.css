@@ -1,0 +1,15 @@
+@import "charge_list.css";
+.usermgr table{width: 800px;border-collapse: collapse;/*margin: 50px 30px;*/}
+.usermgr table>thead>tr>th{background-color: #d7ebfd;border:1px solid #DEDEDE;text-align: center;
+    height: 25px;
+    color: #2E6E9E;}
+.usermgr table>tbody>tr>td{
+    text-align: center;
+    border:1px solid #DEDEDE;
+}
+.usermgr .t_index{ width:35px;}
+.usermgr .t_name{width:100px;}
+.usermgr .t_callin,.t_callout{width:100px;}
+.usermgr .t_sms{width:80px;}
+.usermgr .t_callin_mode,.usermgr .t_callin_rate{width:50px;}
+.usermgr .t_callout_mode,.usermgr .t_callout_rate{width:50px;}

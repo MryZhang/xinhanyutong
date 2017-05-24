@@ -1,0 +1,42 @@
+.roundstep{width:780px;height: 80px;overflow: hidden;}
+.roundstep-orange{background-image: url("/img/step-header.png");background-repeat: repeat-x;background-position: 0 -735px;}
+.roundstep li{float: left;width: 150px;padding: 0 20px 0 75px;list-style: none;}
+.roundstep-current em{background-position: -139px -84px;background-image: url("/img/step-header.png");background-repeat: no-repeat;}
+.roundstep em{color:#fff;font-size: 18px;font-style: normal;font-weight: 600;line-height: 58px;text-align: center;background-color: #f9f9f9;height: 57px;display: block;margin-left: 50px;position: relative;width: 45px;}
+.roundstep .roundstep-current span{color:#626262;}
+.roundstep span{font-size: 14px;color:#999;width: 150px;text-align: center;display: block;}
+.roundstep-current strong{width:127px;background: #fe9d00;display: block;height: 3px;position: absolute;right: 43px;top:29px;overflow: hidden;}
+.roundstep-todo em{background-position: -276px -183px;background-image: url("/img/step-header.png"); background-repeat: no-repeat;}
+.roundstep-success em{background-position: -370px -277px;background-image: url("/img/step-header.png");background-repeat: no-repeat;}
+.register-title{padding: 20px 0 0 90px;height: 68px;}
+.title-font{background: url("/img/title-reg.png") no-repeat scroll 0 0 transparent;width: 780px;height: 68px;font-size: 36px;color: #ffffff;text-align: center;font-weight: bold;line-height: 38px;padding-top: 12px;}
+.register-dv{border:1px solid #D4D4D4;box-shadow:0 0 5px #C7C5C5;margin-left: 90px;width: 778px;}
+.part3 .main_form{padding: 10px 0;}
+ul,li{margin: 0;padding: 0;list-style: none;}
+.main_form li{clear: both;line-height: 100%;padding: 0;}
+.main_form .itemMsg{height: 30px;line-height: 22px;font-size: 22px;padding-top: 10px;font-weight: bold;}
+.main_form .fps_left{float:left;padding-left: 5px;width: 130px;text-align: right;color: #4d4d4d;}
+.main_form .fps_right{float: left;}
+.main_form .labtitle{font-size: 14px;padding-top: 10px;}
+.main_form .compregitem{height: 65px;line-height: 22px;padding-top: 1px;}
+.main_form .required{color:#FF0000;font-family: SimSun;font-size: 14px;margin-right: 6px;}
+.main_form .regtext{border:1px solid #BBBBBB;font-family: arial;font-size: 14px;height: 18px;padding: 11px 10px;width: 300px;}
+.main_form input{vertical-align: middle;}
+.main_form .addConTip{color:#999999;font-size: 12px;line-height: 22px;}
+.main_form .regauthtext{border:1px solid #BBBBBB;font-family: arial;font-size: 14px;height: 18px;padding: 11px 10px;width: 100px;}
+.main_form .highline1{border:1px solid #EFA100;outline: 2px solid #FFDC97;}
+.main_form .highline2{border:1px solid #FF0000;color:#FF0000;outline: 1px solid #FFC1C1;}
+.main_form .i-help{color:#999999;}
+.icon_orderly{background: url("/img/pwdstrength.gif") no-repeat scroll -105px 0 transparent;display: inline-block;height: 16px;width: 16px;vertical-align: middle;margin-left: 2px;}
+.error{background: url("/img/errIcon.png") no-repeat scroll -3px 0 transparent;color:red;font-family: Verdana;line-height: 22px;font-size: 12px;padding-left: 18px;}
+#getChkAuthCodeId{float:left;padding:16px 0 0 3px;display: block;clear:right;}
+img{border: 0;margin: 0;padding: 0;}
+.main_form .info{float:left;padding-left: 3px;color:#999999;font-size: 12px;line-height: 22px;margin-top: -5px;}
+.main_form label{vertical-align: middle;}
+.main_form a:link{color:#033ed9;text-decoration: none;}
+.main_form a:VISITED {color:#666;text-decoration: none;}
+.main_form img{margin-top: -15px;}
+.main_form .itemButton{height: 50px;line-height: 22px;padding-top: 15px;}
+.main_form .btn-img{border: none;margin: 0;overflow: hidden;padding: 0;text-align: center;}
+.main_form .btn-regist{background: url("/img/btn-regist.png") no-repeat scroll 0 -31px transparent;color:#FFFFFF;font-size: 14px;font-weight: bold;height: 30px;width: 101px;cursor: pointer;}
+#vcodeMsg{overflow: hidden;clear: both;}

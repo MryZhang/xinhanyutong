@@ -1,0 +1,15 @@
+.part3 .flowsteps{height: 23px;margin-bottom: 10px;margin: 0 5px 0 5px;}
+.part3 .flowsteps ol{background: none repeat scroll 0 0 #EEEEEE;margin: 0;overflow: hidden;padding: 0;position: relative;}
+ol,ul{list-style: none outside none;}
+ul,li{margin: 0;list-style: none;padding: 0}
+.part3 .flowsteps .num4 li,.flowsteps .num4 .last{width: 25%;}
+.part3 .flowsteps li{float:left;font-size: 14px;font-weight: bold;height: 23px;line-height: 23px;overflow: hidden;text-align: center;}
+.part3 .flowsteps li, .flowsteps span {background: url("../img/findpassstep.png") no-repeat scroll 0 0 transparent;color: #777777;}
+.part3 .flowsteps li {list-style: none outside none;}
+.part3 .flowsteps .done span {background-color: #CDE0F5;background-position: 0 -46px;color: #5185B6;}
+.part3 .flowsteps span {display: block;}
+.part3 .flowsteps li .first {background-position: 0 -69px;}
+.part3 .flowsteps .current, .flowsteps .current span {background-color: #5185B6;background-position: 0 -46px;color: #FFFFFF;font-weight: normal;}
+.part3 .flowsteps .next {background-position: 0 -23px;}
+.part3 .flowsteps .next span {background-position: 0 -22px;}
+.part3 .flowsteps .last {background-position: 100% -92px;position: absolute;right: 0;}

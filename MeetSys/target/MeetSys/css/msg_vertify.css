@@ -1,0 +1,27 @@
+.part3 .rblock_h1{height: 538px;}
+.part3 .fp-position{margin: 5px 5px 20px 5px;border-bottom: 1px solid #D2D2D2;font-size: 16px;color: #999999;}
+.part3 .block{border: 1px solid #dcdcdc;}
+.part3 .cont-position{padding:0 0 0 108px;}
+.part3 .main_form{padding: 10px 0;}
+ul,li{margin: 0;padding: 0;list-style: none;}
+.part3 .main_form .regitem{line-height: 22px;padding-top: 10px;font-size: 14px;}
+.part3 .main_form li{clear:left;line-height: 100%;padding: 0;}
+.part3 .mobileMsg{background: url("../img/promptmsg.gif") no-repeat scroll 0 0 transparent;padding: 2px 0 0 18px;font-size: 12px;color:#4d4d4d;}
+.part3 .mobileContent{font-size: 14px;color:#4D4D4D;}
+.part3 .fps_left_reg{float: left;padding-right: 5px;text-align: right;width: 100px;}
+.part3 .fps_right{float: left;}
+.part3 .reg a:link{color:#2E6E9E;text-decoration: none;}
+.part3 .reg a:visited{color:#3D86E5;text-decoration: none;}
+.part3 .reg a{margin-left: 5px;padding: 2px;cursor: pointer;font-size: 14px;}
+.part3 .main_form input,label{vertical-align: middle;}
+.part3 .authtext{border: 1px solid #BBBBBB;font-family: arial;font-size: 12px;height: 16px;padding: 3px 3px;width: 88px;}
+#vcode_tip{font-size: 12px;}
+.texttip{color:#B2B2B2;}
+.part3 .main_form .highlight1{border: 1px solid #EFA100;outline: 2px solid #FFDC97;}
+.part3 .main_form .highlight2{border: 1px solid #FF0000;color: #FF0000;outline: 1px solid #FFC1C1;}
+.error{background: url("../img/errIcon.png") no-repeat scroll -3px 0 transparent;color: red;font-family: Verdana;line-height: 22px;font-size: 12px;padding-left: 18px;}
+.part3 .ui_sms_content{border: 1px solid #BBBBBB;padding: 5px;width:500px;margin-bottom: 15px;}
+.part3 .mobileContent2{font-size: 12px;color:#4D4D4D;}
+.part3 .ui-button{font-size: 14px;}
+.part3 .pbtn_graylong{background: url("../img/ButtonT-135-208.png") no-repeat scroll 0 -130px transparent;border: medium none;color: #000;cursor: pointer;display: inline-block;font-size: 12px;font-weight: normal;height: 26px;line-height: 26px;overflow: hidden;padding: 0;text-align: center;width: 116px;}
+.part3 .btn_submit{background: url("../img/ButtonT-135-208.png") no-repeat scroll 0 0 transparent;border: medium none;color: #FFFFFF;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 26px;line-height: 26px;overflow: hidden;padding: 0;text-align: center;width: 86px;}

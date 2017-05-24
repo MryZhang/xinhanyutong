@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>完善资料</title>
+<link href="${ctx!}/css/perfectinfo.css" rel="stylesheet" type="text/css"/>
+<link href="${ctx!}/artDialog/css/ui-dialog.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="header">
+	<div class="part1" id="part1">
+		<div class="block">
+			<p>会议管理</p>
+			<div>
+			欢迎 ${cname!} <span style="padding-left: 5px;">${uname!}</span>
+			</div>
+		</div>
+	</div>
+	<div id="part2" class="part2">
+		<div class="block">
+			<div class="logo">
+				<a href=""><img src="${ctx!}/img/meeting.jpg" alt="网络会议logo" height="100"/></a>
+			</div>
+			<!--<div class="taocan">
+				<span id="setinfo">
+				套餐（席位数：<font style="font-size: 14px;color:#FB7823"><span id="head_seats">不限</span></font>
+				，话费包余额：<font style="font-size: 14px;color:#FB7823"><span id="head_commuBalance">30.00</span></font>
+				元）账户余额：<font style="font-size: 14px;color:#FB7823"><span id="head_balance">0.00</span></font>
+				元</span>
+				<a href="javascript:;">刷新余额</a>
+			</div>-->
+			<div class="btn">
+				<a href="${ctx!}/logout"><div class="header_02">退出</div></a>
+			</div>
+		</div>
+	</div>
+	<div class="part3" class="part3" style="width:auto;">
+		<div class="block">
+			<form method="post" action="${ctx!}/employee/prefect" id="addForm">
+				<div class="formClass infoStyle">
+					<ul class="main_form">
+						<li class="item">
+							<div>
+								<label class="fps_left leftfont">&nbsp;</label>
+								<span id="personContent"></span>
+							</div>
+						</li>
+						<li class="item">
+							<label class="fps_left leftfont"><b class="keyClass">*</b>姓名：</label>
+							<div class="fps_right">
+								<input type="text" class="text" id="c_name" name="e.name" value="${(e.name)!}" maxlength="30">
+								<span id="c_name_icon" class="">&nbsp;</span>
+								<div id="c_name_Id" class="<#if nameMsg??>addConTip error<#else>null</#if>">${(name)!}</div>
+							</div>
+						</li>
+						<li class="item">
+							<label class="fps_left leftfont">邮箱：</label>
+							<div class="fps_right">
+								<input type="text" class="text" id="c_email" name="e.email" value="${(e.email)!}" maxlength="30">
+								<span id="c_email_icon" class="">&nbsp;</span>
+								<div id="c_email_Id" class="<#if emailMsg??>addConTip error<#else>null</#if>">${(emailMsg)!}</div>
+							</div>
+						</li>
+						<li class="eitem">
+							<label class="fps_left leftfont"><b class="keyClass">*</b>所属部门：</label>
+							<div class="fps_right">
+								<select class="text" name="e.did" id="departSelection">
+									<option value="0">--请选择--</option>
+									<#list dlist as item>
+										<option value="${item.id}" <#if e??&&e.did==item.id>selected="selected"</#if>>${item.name}</option>
+									</#list>
+								</select>
+								<a class="new_group" id="departmentshowId">新建部门</a>
+								<div id="c_department_Id" class="<#if didMsg??>addConTip error<#else>null</#if>">${(didMsg)!}</div>
+							</div>
+						</li>
+						<li class="item">
+							<label class="fps_left leftfont">职位：</label>
+							<div class="fps_right">
+								<input type="text" class="text" name="e.position" id="c_position" value="${(e.position)!}" maxlength="30">
+								<span id="c_position_icon" class="">&nbsp;</span>
+								<div id="c_position_Id" class="null"></div>
+							</div>
+						</li>
+						<li class="item">
+							<div class="btndiv">
+								<span class="fps_left">&nbsp;</span>
+								<button type="submit" id="c_saveContactId" class="btn_sytle">保存</button>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<input type="hidden" value="${ctx!}" id="contextPath"/>
+<script type="text/javascript" src="${ctx!}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx!}/js/common.js"></script>
+<script type="text/javascript" src="${ctx!}/artDialog/dist/dialog.js?skin=blue"></script>
+<script type="text/javascript" src="${ctx!}/js/employee/employee.js"></script>
+<script type="text/javascript">
+$(function () {
+	//添加部门
+	$("#departmentshowId").click(function () {
+		employee.showAddDepart();
+	});
+	//
+	$(".text").focus(function(){
+		$(this).attr("class","text highlight1").next().attr("class","blank").next().text("").attr("class","addConTip");
+	});
+
+	$("input[type=text],select").blur(function () {
+		if(employee.validate(this)){//验证成功
+			var id=$(this).attr("id");
+			if(id=="c_email"&&$(this).val()==""){
+				$(this).attr("class","text");
+				return;
+			}
+			$(this).attr("class","text");
+			if($(this).val()!=""&&id!="departSelection"){
+				$(this).next().attr("class","blank icon_orderly");
+			}
+		}
+	});
+
+	//添加信息
+	$("#addForm").submit(function () {
+		var flag=true;
+		$(".text").each(function () {
+			if(flag){
+				flag=employee.validate(this);
+			}else{
+				employee.validate(this);
+			}
+		});
+		return flag;
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<#include "/pages/common/layout.html">
+<@header "个人通信录" 4>
+    <meta charset="utf-8">
+    <link href="${ctx!}/css/personalcontact.css" rel="stylesheet" type="text/css"/>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div class="contact">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom">
+            <span id="contactnav" class="ctitle">个人通讯录</span>
+		<span class="exptitle">
+			<a class="i_contact mouseClass" href="javascript:location.href='${ctx!}/personalcontacts/showImport'+contact.getPageCondition()" id="importContacts">导入联系人</a>
+			&nbsp;&nbsp;
+			<a class="o_contact mouseClass" id="exportContacts"  href="javascript:window.open('${ctx!}/personalcontacts/exportContacts'+contact.getPageCondition());" target="_blank">导出联系人</a>
+		</span>
+        </div>
+        <div class="btn">
+            <input type="hidden" value="${search!}" id="searchStr"/>
+            <form method="post" action="${ctx!}/personalcontacts/page">
+            <div class="search_position">
+                <input type="hidden" value="${currentGroup!}" name="groupId"/>
+                <input type="text" id="conSearch" name="search" style="width:180px;" value="${search!}" class="inputtext index_tip_class" placeholder="用户名或电话">
+                <button type="submit" id="searchBtn" class="btn_style search_02">搜索</button>
+            </div>
+            </form>
+            <button type="button" id="addContact" class="btn_style addcontact" >新建联系人</button>
+            <button type="button" id="delContact" class="btn_style deleteClass">删除</button>
+            <!-- <div class="group_position" style="position:relative;">
+                <button type="button" id="addGroup" class="btn_style addgroup">复制到组▼</button>
+                <div id="groupMenuId" class="group_menu" style="display: none;">
+                </div>
+            </div> -->
+            <button type="button" id="addGroupMem" class="btn_style addgroup" style="display: none;">添加组成员</button>
+        </div>
+        <div class="block_h1_content">
+            <div class="left_content" id="left_content">
+                <table class="ctable" cellspacing="0" cellpadding="0">
+                    <tr class="theader">
+                        <th class="t_check">
+                            <input type="checkbox" id="chkAll">
+                        </th>
+                        <th class="t_name">姓名</th>
+                        <th class="t_tel">电话号码</th>
+                        <th class="t_email">邮箱</th>
+                        <th class="t_bak">备注</th>
+                        <th class="t_opara">操作</th>
+                    </tr>
+                </table>
+                <div id="contact-content" class="contact-content">
+                    <div id="loadTip" class="loadingStyle" style="display: none;"><img src="${ctx!}/img/loading.gif"/></div>
+                    <table class="ctable" id="contactsTable" cellpadding="0" cellspacing="0">
+                        <#if (contacts?size>0)>
+                            <#list contacts as item>
+                                <tr>
+                                    <td class="t_check"><input type="checkbox" value="${item.bid}"></td>
+                                    <td class="t_name">${item.name}</td>
+                                    <td class="t_tel">${item.phone}</td>
+                                    <td class="t_email">${(item.email)!}</td>
+                                    <td class="t_bak">${(item.remark)!}</td>
+                                    <td class="t_opara"><a href="javascript:location.href='${ctx!}/personalcontacts/editContact/${item.id}'+contact.getPageCondition()" class="c_edit">编辑</a></td>
+                                </tr>
+                            </#list>
+                            <#else>
+                                <tr>
+                                    <td colspan="5" class="meet_td_none">
+                                        没有符合条件的数据
+                                    </td>
+                                </tr>
+                        </#if>
+
+                    </table>
+                </div>
+                <div id="paginationBar" style="background: #FFF;border:1px solid #FFF;" class="pagination">
+                    <table cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td>
+                                <a href="javascript:;" icon="pagination-first" <#if currentPage==1>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+								<span class="l-btn-left">
+									<span class="l-btn-text">
+										<span class="l-btn-empty pagination-first">&nbsp;</span>
+									</span>
+								</span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="javascript:;" icon="pagination-prev" <#if currentPage==1>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+								<span class="l-btn-left">
+									<span class="l-btn-text">
+										<span class="l-btn-empty pagination-prev">&nbsp;</span>
+									</span>
+								</span>
+                                </a>
+                            </td>
+                            <td>
+                                <div class="pagination-btn-separator"></div>
+                            </td>
+                            <td>
+                                <span style="padding-left:6px;">第</span>
+                            </td>
+                            <td>
+                                <input class="pagination-num" type="text" id="currentPage" readonly="readonly" value="${currentPage}" size="2"/>
+                            </td>
+                            <td>
+                                <span style="padding-right: 6px;">页/共${totalPage}页</span>
+                            </td>
+                            <td>
+                                <div class="pagination-btn-separator"></div>
+                            </td>
+                            <td>
+                                <a icon="pagination-next"  <#if currentPage==totalPage||totalPage==0>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+								<span class="l-btn-left">
+									<span class="l-btn-text">
+										<span class="l-btn-empty pagination-next">&nbsp;</span>
+									</span>
+								</span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="javascript:;" icon="pagination-last" <#if currentPage==totalPage||totalPage==0>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+								<span class="l-btn-left">
+									<span class="l-btn-text">
+										<span class="l-btn-empty pagination-last">&nbsp;</span>
+									</span>
+								</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="pagination-info">显示 <#if (contacts?size>0)>${pageSize*(currentPage-1)+1}<#else>0</#if>到 ${pageSize*(currentPage-1)+contacts?size}总计 ${totalRow} 条记录</div>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+            <div class="right_content" id="right_content">
+                <input type="hidden" value="${currentGroup!}" id="currentGroup"/>
+                <ul class="ul_list">
+                    <li id="lifirst" initdel="all" class="<#if !currentGroup??>current</#if>">
+                        <span class="iconstyle ico_open"></span>
+                        <span class="lspan" id="gContactNumId"> 所有联系人</span>
+                    </li>
+                    <#list groups as item>
+                        <li title="${item.name}" class="<#if item.id!=0>group</#if> <#if currentGroup??&&currentGroup==item.id>current</#if>">
+                        <input type="hidden" value="${item.id}"/>
+                        <span class="iconstyle ico_open"></span>
+                        <span class="lspan">${item.name}</span>
+                            <#if item.id!=0><span class="rspan"><button type="button" class="edit_btn"></button><button type="button" class="del_btn"></button></span></#if>
+                        </li>
+                    </#list>
+                    <li id="lilast">
+                        <span class="lspan newgroup">新建联系人组</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" value="${totalPage}" id="totalPage"/>
+</@header>
+<@footer>
+<script type="text/javascript" src="${ctx!}/js/json2.js"></script>
+<script type="text/javascript" src="${ctx!}/js/common.js"></script>
+<script type="text/javascript" src="${ctx!}/js/personal/contact.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //新建联系人分组
+        $("ul.ul_list li:last").click(function () {
+            var that=this;
+            contact.addGroup(function (data) {
+                var item="<li title=\""+data.data.name+"\" class='group'>";
+                item+="<input type=\"hidden\" value=\""+data.data.id+"\"/>";
+                item+="<span class=\"iconstyle ico_open\"></span>";
+                item+="<span class=\"lspan\">"+data.data.name+"</span>";
+                item+="<span class=\"rspan\"><button class=\"edit_btn\" type=\"button\"></button><button type=\"button\" class=\"del_btn\"></button></span>";
+                item+="</li>";
+                $(that).before(item);
+            });
+        });
+
+        //修改分组名称
+        $(".block_h1_content").on("click",".edit_btn",function (e) {
+            var name=$(this).parent().prev().text();
+            var gid=$(this).closest("li").find("input[type=hidden]").val();
+            contact.updateGroup(name,gid,this);
+            //阻止冒泡
+            if(e&&e.stopPropagation ){
+                e.stopPropagation();
+            }else{//IE
+                window.event.cancelBubble = true;
+            }
+        });
+        $("body").on("focus","#gname",function(){
+            $(this).next().text("").hide();
+        });
+
+        //获取分组数据
+        $("ul.ul_list").on("click","span.lspan",function () {
+            var id=$(this).closest("li").attr("id");
+            if(id&&id=="lilast"){//如果当前点击的是最后一个
+                return;
+            }
+            var gid=$(this).closest("li").find("input[type=hidden]").val();
+            var obj={};
+            if(gid){
+                obj.groupId=gid;
+            }
+            var search=$("#searchStr").val();
+            if(search){
+                obj.search=search;
+            }
+            contact.getGroupPage(obj);
+        });
+
+        //删除组
+        $(".block_h1_content").on("click",".del_btn",function(){
+            var name=$(this).parent().prev().text();
+            var id=$(this).closest("li").find("input[type=hidden]").val();
+            contact.deleteGroup(id,name);
+        });
+
+        //添加联系人
+        $("#addContact").click(function () {
+            var query=contact.getPageCondition();
+            location.href="${ctx!}/personalcontacts/showAddContact"+query;
+        });
+        
+        //全选
+        $("#chkAll").change(function () {
+            contact.checkAll();
+        });
+        
+        //删除联系人
+        $("#delContact").click(function () {
+            contact.deleteContacts();
+        });
+
+        //首页
+        $(".pagination-first").click(function () {
+            contact.getPage(1);
+        });
+        //尾页
+        $(".pagination-last").click(function () {
+            contact.getPage($("#totalPage").val());
+        });
+        //上一页
+        $(".pagination-prev").click(function () {
+            var currentPage=$("#currentPage").val();
+            var pageIndex=parseInt(currentPage)-1;
+            contact.getPage(pageIndex);
+        });
+        //下一页
+        $(".pagination-next").click(function () {
+            var currentPage=$("#currentPage").val();
+            var pageIndex=parseInt(currentPage)+1;
+            contact.getPage(pageIndex);
+        });
+    });
+</script>
+</@footer>

@@ -1,0 +1,230 @@
+<#include "/pages/common/layout.html">
+<@header "公共通讯录" 6>
+    <meta charset="UTF-8">
+    <link href="${ctx!}/css/publiccontacts.css" rel="stylesheet" type="text/css"/>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div class="contact">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom">
+            <span id="contactnav" class="ctitle">公共通讯录</span>
+            <span class="exptitle">
+                <a class="i_contact mouseClass" href="javascript:location.href='${ctx!}/publiccontacts/showImport'+pub.getQueryString()" id="importContact">导入联系人</a>
+                &nbsp;&nbsp;
+                <a class="o_contact mouseClass" id="exportExcel" href="javascript:;" onclick="window.open('${ctx!}/publiccontacts/export'+pub.getQueryString())">导出联系人</a>
+            </span>
+        </div>
+        <div class="btn">
+            <div class="search_position">
+                <input type="hidden" value="${search!}" id="searchStr"/>
+                <form method="post" action="${ctx!}/publiccontacts">
+                    <input type="hidden" name="departId" id="departId" value="${departId!}" />
+                    <input type="text" id="conSearch" value="${search!}" name="search" style="width:180px;" class="inputtext index_tip_class" placeholder="联系人">
+                    <button type="submit" id="searchBtn" class="btn_style search_02">搜索</button>
+                </form>
+            </div>
+            <button type="button" id="addContact" class="btn_style addcontact">新建联系人</button>
+            <button type="button" id="delContact" class="btn_style deleteClass">删除</button>
+        </div>
+        <div class="block_h1_content">
+            <div class="left_content" id="left_content">
+                <table class="ctable">
+                    <tr class="theader">
+                        <th class="t_check"><input type="checkbox" id="chkAll"/></th>
+                        <th class="t_name">姓名</th>
+                        <th class="t_depart">部门</th>
+                        <th class="t_position">职位</th>
+                        <th class="t_tel">电话号码</th>
+                        <th class="t_opara">操作</th>
+                    </tr>
+                </table>
+                <div id="contact-content" class="contact-content">
+                    <table class="ctable" id="contab">
+                        <#if contacts??&&(contacts?size>0)>
+                            <#list contacts as item>
+                                <tr>
+                                    <td class="t_check"><input type="checkbox" value="${item.bid}"/></td>
+                                    <td class="t_name"><div title="${item.name}">${item.name}</div></td>
+                                    <td class="t_depart"><div title="${item.dname}">${item.dname}</div></td>
+                                    <td class="t_position"><div title="${(item.position)!}">${(item.position)!}</div></td>
+                                    <td class="t_tel"><div title="${item.phone}">${(item.phone)!}</div></td>
+                                    <td class="t_opara"><a href="javascript:location.href='${ctx!}/publiccontacts/showUpdate/${item.bid}'+pub.getQueryString();" class="tedit">编辑</a></td>
+                                </tr>
+                            </#list>
+                            <#else>
+                                <tr>
+                                    <td colspan="5" class="meet_td_none">
+                                        没有符合条件的数据
+                                    </td>
+                                </tr>
+                        </#if>
+                    </table>
+                </div>
+                <div id="paginationBar" style="background: #FFF;border:1px solid #FFF;" class="pagination">
+                    <table cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td>
+                                <a href="javascript:;" icon="pagination-first" <#if currentPage==1>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+                                    <span class="l-btn-left">
+                                        <span class="l-btn-text">
+                                            <span class="l-btn-empty pagination-first">&nbsp;</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="javascript:;" icon="pagination-prev" <#if currentPage==1>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+                                    <span class="l-btn-left">
+                                        <span class="l-btn-text">
+                                            <span class="l-btn-empty pagination-prev">&nbsp;</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                <div class="pagination-btn-separator"></div>
+                            </td>
+                            <td>
+                                <span style="padding-left:6px;">第</span>
+                            </td>
+                            <td>
+                                <input class="pagination-num" type="text" readonly="readonly" id="currentPage" value="${currentPage}" size="2"/>
+                            </td>
+                            <td>
+                                <span style="padding-right: 6px;">页/共${totalPage}页</span>
+                            </td>
+                            <td>
+                                <div class="pagination-btn-separator"></div>
+                            </td>
+                            <td>
+                                <a icon="pagination-next"  <#if currentPage==totalPage||totalPage==0>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+                                    <span class="l-btn-left">
+                                        <span class="l-btn-text">
+                                            <span class="l-btn-empty pagination-next">&nbsp;</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="javascript:;" icon="pagination-last" <#if currentPage==totalPage||totalPage==0>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+                                    <span class="l-btn-left">
+                                        <span class="l-btn-text">
+                                            <span class="l-btn-empty pagination-last">&nbsp;</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="pagination-info">显示 <#if (contacts?size>0)>${pageSize*(currentPage-1)+1}<#else>0</#if>到 ${pageSize*(currentPage-1)+contacts?size}总计 ${totalRow} 条记录</div>
+                    <div style="clear:both;"></div>
+                </div>
+                <input type="hidden" id="totalPage" value="${totalPage}"/>
+            </div>
+            <div class="right_content" id="right_content">
+                <ul class="ul_list">
+                    <li id="lifirst" initdel="all" class="group <#if !departId??>current</#if>">
+                        <span class="iconstyle ico_open"></span>
+                        <span class="lspan" id="gContactNumId"> 所有部门</span>
+                    </li>
+                    <#list dlist as item>
+                        <li title="${item.name}" class="group <#if departId??&&departId==item.id?string>current</#if>">
+                            <input type="hidden" value="${item.id}" class="did"/>
+                            <span class="iconstyle ico_open"></span>
+                            <span class="lspan">${item.name}</span>
+                            <span class="rspan"><button type="button" class="edit_btn"></button><button type="button" class="del_btn"></button></span>
+                        </li>
+                    </#list>
+                    <li id="lilast">
+                        <span class="lspan newgroup">新建部门</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript" src="${ctx!}/js/pub/contact.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //新建部门
+        $("#lilast span.newgroup").click(function () {
+            depart.showAddDepart(function (data) {
+                var depart="<li class='group' title='"+data.data.name+"'>";
+                depart+="<input type='hidden' value='"+data.data.id+"' class='did'/>";
+                depart+="<span class='iconstyle ico_open'></span>";
+                depart+="<span class='lspan'>"+data.data.name+"</span>";
+                depart+="<span class='rspan'><button type='button' class='edit_btn'></button><button type='button' class='del_btn'></button></span>";
+                depart+="</li>";
+                $("ul.ul_list li.group:last").after(depart);
+            });
+        });
+
+        //获取部门下的公共联系人信息
+        $("ul.ul_list").on("click",".group span.lspan",function(){
+            var obj=pub.getPageCondition();
+            var did=$(this).closest("li").find(".did").val();
+            if(did){
+                obj.departId=did;
+            }else{
+                delete obj.departId;
+            }
+            obj.pageIndex=1;
+            pub.getPage(obj);
+        });
+
+        //修改部门
+        $("ul.ul_list").on("click","button.edit_btn",function () {
+            pub.showUpdateDepart($(this).parent().prev().text());
+        });
+        //删除部门及相关信息
+        $("ul.ul_list").on("click","button.del_btn",function () {
+            pub.deleteDepart($(this).closest("li").find("input.did").val());
+        });
+
+        //首页
+        $(".pagination-first").click(function () {
+            var obj=pub.getPageCondition();
+            obj.pageIndex=1;
+            pub.getPage(obj);
+        });
+        //尾页
+        $(".pagination-last").click(function () {
+            var obj=pub.getPageCondition();
+            var totalPage = $("#totalPage").val();
+            obj.pageIndex=totalPage;
+            pub.getPage(obj);
+        });
+        //上一页
+        $(".pagination-prev").click(function () {
+            var currentPage=$("#currentPage").val();
+            var pageIndex=parseInt(currentPage)-1;
+            var obj=pub.getPageCondition();
+            obj.pageIndex=pageIndex;
+            pub.getPage(obj);
+        });
+        //下一页
+        $(".pagination-next").click(function () {
+            var currentPage=$("#currentPage").val();
+            var pageIndex=parseInt(currentPage)+1;
+            var obj=pub.getPageCondition();
+            obj.pageIndex=pageIndex;
+            pub.getPage(obj);
+        });
+
+        //全选
+        $("#chkAll").click(function () {
+            pub.checkAll();
+        });
+        
+        //添加联系人
+        $("#addContact").click(function () {
+            location.href=common.getContextPath()+"/publiccontacts/showAdd"+pub.getQueryString();
+        });
+
+        //删除选中联系人
+        $("#delContact").click(function () {
+            pub.deleteBatch();
+        });
+    });
+</script>
+</@footer>

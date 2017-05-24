@@ -1,0 +1,104 @@
+<#include "/pages/admin/layout.html">
+<@header title="扣费明细" num=6>
+    <link href="${ctx!}/artDialog/css/ui-dialog.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx!}/css/admin/charge_list.css" rel="stylesheet" type="text/css"/>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div class="usermgr" >
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom">
+            <span class="ctitle">扣费明细</span>
+        </div>
+        <div style="margin:8px 0;float:left;">
+            <input type="hidden" value="${beginTime!}" id="beginTime"/>
+            <input type="hidden" value="${endTime!}" id="endTime"/>
+            <input type="hidden" value="${search!}" id="searchStr"/>
+            <form method="post" action="${ctx!}/admin/charging">
+                开始日期：
+                <input type="text" class="Wdate" name="beginTime" value="${beginTime!}" id="searchBeginId" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false,maxDate:'%y-%M-%d'})" style="width:100px;"/>
+                &nbsp;&nbsp;结束日期：
+                <input type="text" class="Wdate" name="endTime" id="searchEndId" value="${endTime!}" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false,maxDate:'%y-%M-%d'})" style="width:100px;"/>
+                &nbsp;&nbsp;公司名称：
+                <input type="text" name="search" value="${search!}" class="searchText" id="searchconfVal"/>
+                &nbsp;<button type="submit" id="confsearchBtn" class="btnStyle">搜索</button>
+                <button type="button" id="exportBtn" class="btnStyle">导出</button>
+            </form>
+        </div>
+        <div class="block_h1_content" style="margin-top: 10px;">
+            <div class="content_table charge_record">
+                <table class="ctable">
+                    <tr class="theader">
+                        <th class="t_index">序号</th>
+                        <th class="t_name">公司名称</th>
+                        <th class="t_amount">扣费金额（元）</th>
+                        <th class="t_remark">扣费说明</th>
+                        <th class="t_time">时间</th>
+                    </tr>
+                </table>
+                <div id="user-content" class="user-content">
+                    <div id="loadTip" class="loadingStyle" style="display: none;"><img src="${ctx!}/img/loading.gif"></div>
+                    <table class="ctable" id="tdata">
+                        <#if (pages.list?size>0)>
+                            <#list pages.list as item>
+                                <tr>
+                                    <td class="t_index">${item_index+1}</td>
+                                    <td class="t_name">${item.name}</td>
+                                    <td class="t_amount">￥ ${item.fee}</td>
+                                    <td class="t_remark">${item.remark}</td>
+                                    <td class="t_time">${item.gmt_created?string("yyyy-MM-dd HH:mm:ss")}</td>
+                                </tr>
+                            </#list>
+                            <#else>
+                                <tr>
+                                    <td colspan="5" class="meet_td_none">
+                                        没有符合条件的数据
+                                    </td>
+                                </tr>
+                        </#if>
+                    </table>
+                </div>
+                <#include "/pages/common/paginate.html"><@paginate pages></@paginate>
+            </div>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript" src="${ctx!}/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="${ctx!}/js/admin/charging.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //首页
+        $("span.pagination-first").click(function () {
+            var cls = $(this).parents("a.l-btn").attr("class");
+            if(cls.indexOf("l-btn-disabled")==-1){//未被禁用
+                charging.page({"search":$("#searchStr").val(),"pageNum":1,"beginTime":$("#beginTime").val().trim(),"endTime":$("#endTime").val().trim()});
+            }
+        });
+        //上一页
+        $("span.pagination-prev").click(function () {
+            var cls = $(this).parents("a.l-btn").attr("class");
+            if(cls.indexOf("l-btn-disabled")==-1){//未被禁用
+                charging.page({"search":$("#searchStr").val(),"pageNum":parseInt($("#currentPage").val())-1,"beginTime":$("#beginTime").val().trim(),"endTime":$("#endTime").val().trim()});
+            }
+        });
+        //下一页
+        $("span.pagination-next").click(function () {
+            var cls = $(this).parents("a.l-btn").attr("class");
+            if(cls.indexOf("l-btn-disabled")==-1){//未被禁用
+                charging.page({"search":$("#searchStr").val(),"pageNum":parseInt($("#currentPage").val())+1,"beginTime":$("#beginTime").val().trim(),"endTime":$("#endTime").val().trim()});
+            }
+        });
+        //尾页
+        $("span.pagination-last").click(function () {
+            var cls = $(this).parents("a.l-btn").attr("class");
+            if(cls.indexOf("l-btn-disabled")==-1){//未被禁用
+                charging.page({"search":$("#searchStr").val(),"pageNum":"${pages.totalPage}","beginTime":$("#beginTime").val().trim(),"endTime":$("#endTime").val().trim()});
+            }
+        });
+        
+        //导出
+        $("#exportBtn").click(function () {
+            window.open("${ctx!}/admin/charging/export"+charging.getQueryString({"search":$("#searchStr").val(),"pageNum":"${pages.totalPage}","beginTime":$("#beginTime").val().trim(),"endTime":$("#endTime").val().trim()}));
+        });
+    });
+</script>
+</@footer>

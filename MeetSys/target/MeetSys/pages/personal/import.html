@@ -1,0 +1,85 @@
+<#include "/pages/common/layout.html">
+<@header "个人通信录" 4>
+    <meta charset="utf-8">
+    <link href="${ctx!}/css/export.css" rel="stylesheet" type="text/css"/>
+    <div class="contact">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom" id="addContact_title_id">导入联系人</div>
+        <div class="block_h1_content block_h1_content_h1">
+            <div id="import_form" style="display: block;">
+                <form method="post" enctype="multipart/form-data" id="importForm" action="${ctx!}/personalcontacts/importContacts">
+                    <input type="hidden" value="${queryString!}" id="queryString" name="queryString"/>
+                    <div class="person-style imp_style formClass">
+                        <ul class="main_form">
+                            <li class="item">
+                                <div>
+                                    <label class="fps_left improt_fps_left leftfont">&nbsp;</label>
+                                </div>
+                            </li>
+                            <li class="eitem">
+                                <label class="fps_left improt_fps_left leftfont">下载标准模板文件：</label>
+                                <div class="fps_right fps_right down_select_right">
+                                    <div class="down_description">下载标准模板文档，并按该文档的格式输入联系人信息后，即可快速导入联系人</div>
+                                    <div class="down_div">
+                                        <img class="down_ico" src="${ctx!}/img/20140120download.png">
+                                        <a class="down_text mouseClass" href="<#if dlist??>${ctx!}/publiccontacts/download<#elseif glist??>${ctx!}/personalcontacts/download</#if>">下载标准模板文件</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="eitem">
+                                <label class="fps_left improt_fps_left leftfont">请选择要导入的文件：</label>
+                                <div class="fps_right down_select_right" style="position: relative;">
+                                    <input type="file" name="contactFile" id="contactFile"/>
+                                    <!--<input type="text" class="file" readonly="readonly"  style="float:left" name="file" id="upfile"/><button type="button" id="btnUpload" style="height: 22px;padding: 0 3px;">浏览</button>-->
+								<span style="position:absolute; width:300px; height:30px; float:left; top:-24px; display:none; left:0;" id="import-tip">
+									<font class="rtip-txt-err">只能导入xls类型文件，请下载模板！</font>
+								</span>
+                                </div>
+                                <!--<iframe id="uploadIframe" src="/view/manage/upload.html" style="display: none;"></iframe>-->
+                            </li>
+                            <!-- <li class="eitem">
+                                <label class="fps_left improt_fps_left leftfont">导入到：</label>
+                                <div class="fps_right down_select_right">
+                                    <select class="down_sel" id="c_sel_group" name="gid">
+
+                                    </select>
+                                </div>
+                            </li> -->
+                            <!-- <li class="eitem">
+                                <label class="fps_left improt_fps_left leftfont">姓名和电话均重复的记录：</label>
+                                <div class="fps_right down_select_right">
+                                    <input type="radio" id="repeat_typeId0" name="repeat_type" value="0" checked="checked"/>
+                                    <label for="repeat_typeId0">跳过不导入</label>&nbsp;&nbsp;
+                                    <input type="radio" id="repeat_typeId1" name="repeat_type" value="1">
+                                    <label for="repeat_typeId1">覆盖原有记录</label>
+                                </div>
+                            </li> -->
+                            <li class="item" style="clear:both;">
+                                <div class="btndiv">
+                                    <span class="fps_left improt_fps_left">&nbsp;</span>
+                                    <button type="submit" id="c_importContactId" class="btn_sytle">导入联系人</button>
+                                    <button type="button" id="c_cancelId" class="btn_sytle">取消</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript" src="${ctx!}/js/personal/contact.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //取消返回
+        $("#c_cancelId").click(function () {
+            location.href="${ctx!}/personalcontacts/page"+$("#queryString").val();
+        });
+        //导入联系人
+        $("#importForm").submit(function () {
+            return importPage.importContacts();
+        });
+    });
+</script>
+</@footer>

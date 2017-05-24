@@ -1,0 +1,33 @@
+td input[type=checkbox]{vertical-align: middle;}
+.block div.panel{margin: 0 auto;}
+.part3 .block{border:1px solid #DCDCDC;padding:125px 0;}
+body{font-size: 12px;font-family: ËÎÌו;color: #000;line-height: 150%;}
+.login-panel{border:1px solid #b8d4e8;padding:20px;}
+.full-login{margin: 0 auto;width:360px;padding-top: 8px;}
+.shadow{border-right: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5;}
+.login-panel h2{margin-bottom: 15px;font-size: 14px;}
+.login-panel p{margin: 10px 0;}
+.clearfix{display: block;overflow: hidden;clear: both;}
+.login-panel p.clearfix label{font-size: 14px;width: 77px;float: left;text-align: right;margin: 3px 7px 0 0;}
+.login-panel p .input-text{width:212px;font-size:14px;border:1px solid #bdc7d8;padding:3px;}
+input,label{font-family: 'lucida grande',tahoma,verdana,arial,STHeiTi,simsun,sans-serif;vertical-align: middle;}
+img{border:0;margin: 0;padding: 0;}
+#authCodeImg{height: 28px;}
+.login-panel a:visited{color:#666;text-decoration: none;}
+.login-panel a:link{color:#666;text-decoration: none;}
+.login-panel p.right{margin-left: 85px;margin-right: 5px;}
+.float-right{float:right;}
+.input-checkbox{margin-right: 5px;}
+input.large{padding: 3px 15px;font-size: 14px;}
+.input-submit,.input-button{background-color: #005eac;border-color: #b8d4e8 #124680 #124680 #b8d4e8;border-style: solid;border-width: 1px;color: #fff;cursor: pointer;font-size: 12px;padding: 2px 15px;text-align: center;}
+.login-panel .separator{height: 0px;overflow: hidden;border-top: 1px solid #ccc;border-bottom: 1px solid #fff;margin: 18px 0 15px;}
+.error_tips{position: relative;
+    padding-left:80px;}
+.error_tips .error_logo{background: url(../img/icon_3_tiny.png) 0 -162px no-repeat;
+    line-height:18px;position: absolute;
+    left:82px;height: 18px;width: 18px;top:3px;}
+.error_tips .err_m{
+    line-height:18px;
+    display: inline-block;padding-left: 22px;
+    font-size: 14px;
+    color: #ff3b30;vertical-align: middle}

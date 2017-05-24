@@ -1,0 +1,18 @@
+@IMPORT url("/css/retrieve_common.css");
+.part3 .mian_cont {padding-left: 178px;}
+.part3 .main_form {padding: 10px 0;}
+.part3 .main_form li {clear: left;line-height: 100%;padding: 0;}
+.part3 .main_form .regitem {height: 30px;line-height: 22px;padding-top: 10px;}
+.part3 .main_form .mobileMsg {background: url('/img/promptmsg.gif') no-repeat scroll 0 0 transparent;padding: 2px 0 0 18px;font-size: 12px;color: #4d4d4d;}
+.part3 .main_form .mobileContent {font-size: 14px;color: #4D4D4D;}
+.part3 .main_form .fps_left_reg {float: left;padding-right: 5px;text-align: right;width: 100px;color: #4d4d4d;}
+.part3 .main_form .fps_right {float: left;}
+.part3 .main_form .ui-button {font-size: 14px;}
+.part3 .main_form .pbtn_graylong {background: url("/img/ButtonT-135-208.png") no-repeat scroll 0 -130px transparent;border: medium none;color: #4D4D4D;cursor: pointer;display: inline-block;font-size: 12px;font-weight: normal;height: 26px;line-height: 26px;overflow: hidden;padding: 0;text-align: center;width: 116px;}
+.part3 .main_form .smstip {color: #4D4D4D;font-size: 12px;padding: 2px 0 0 18px;}
+.part3 .main_form .authtext {border: 1px solid #BBBBBB;font-family: arial;font-size: 12px;height: 16px;padding: 4px 3px;width: 88px;}
+.part3 .main_form .addConTip {color: #999999;font-size: 12px;line-height: 22px;}
+.part3 .main_form .btn_submit {background: url("/img/ButtonT-135-208.png") no-repeat scroll 0 0 transparent;border: medium none;color: #FFFFFF;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 26px;line-height: 26px;overflow: hidden;padding: 0;text-align: center;width: 86px;}
+.part3 .main_form .highlight1{border:1px solid #EFA100;outline:2px solid #FFDC97;}
+.part3 .main_form .highlight2 {border: 1px solid #FF0000;color: #FF0000;outline: 1px solid #FFC1C1;}
+.part3 .main_form .null, .error {color: red;font-family: Verdana;line-height: 22px;font-size: 12px;}

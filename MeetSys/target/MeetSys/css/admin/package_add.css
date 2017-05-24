@@ -1,0 +1,15 @@
+@import "charge_detail.css";
+table#ptable{border-collapse: collapse;margin: 10px;}
+table#ptable>thead>tr>th{background-color: #d7ebfd;border:1px solid #DEDEDE;text-align: center;
+    height: 25px;
+    color: #2E6E9E;}
+table#ptable>tbody>tr>td{
+    text-align: center;
+    border:1px solid #DEDEDE;
+}
+.t_index{ width:35px;}
+.t_name{width:100px;}
+.t_callin,.t_callout{width:100px;}
+.t_sms{width:80px;}
+.t_callin_mode,.t_callin_rate{width:50px;}
+.t_callout_mode,.t_callout_rate{width:50px;}

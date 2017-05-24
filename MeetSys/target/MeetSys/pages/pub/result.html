@@ -1,0 +1,71 @@
+<#include "/pages/common/layout.html">
+<@header "公共通信录" 6>
+    <meta charset="UTF-8">
+    <link href="${ctx!}/css/personal/result.css" type="text/css" rel="stylesheet"/>
+    <div id="personInfo" class="contact">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom" id="addContact_title_Id">
+            导入联系人
+            <span id="seccessId" class="retClass" style="display: inline;" onclick="back()">返回通迅录管理</span>
+        </div>
+        <div class="block_h1_content block_h1_content_h1">
+            <div class="imp_message" style="display: block;">
+                <div class="imp_cont1">
+                    <span class="imp_ico imp_seccess_ico"></span>
+				<span class="imp_seccess_text">
+					&nbsp;本次共成功导入<span id="successNumId">${count!0}</span>个联系人
+				</span>
+                </div>
+                <#if (publicContacts??)||(privateContacts??)>
+                    <div id="failMessageId" class="imp_cont2" style="display: block;">
+                        <span class="imp_ico imp_fail_ico"></span>
+				<span class="imp_success_text">
+					以下 <span id="failNumId"><#if publicContacts??>${publicContacts?size}<#elseif privateContacts??>${privateContacts?size}</#if></span>
+					条联系记录可能由于缺少必填的项、与其他记录重复或者数据格式不正确而没有导入
+				</span>
+                    </div>
+                    <div class="imp_cont2 imp_table_div">
+                        <table class="ctable">
+                            <tr>
+                                <th>姓名</th>
+                                <#if publicContacts??>
+                                    <th>部门</th>
+                                    <th>职位</th>
+                                    <th>手机号码</th>
+                                    <#elseif privateContacts??>
+                                        <th>手机号</th>
+                                        <th>邮箱</th>
+                                </#if>
+                            </tr>
+                            <#if publicContacts??>
+                                <#list publicContacts as item>
+                                    <tr>
+                                        <td>${(item.name)!}</td>
+                                        <td>${(item.dname)!}</td>
+                                        <td>${(item.position)!}</td>
+                                        <td>${(item.phone)!}</td>
+                                    </tr>
+                                </#list>
+                                <#elseif privateContacts??>
+                                    <#list privateContacts as item>
+                                        <tr>
+                                            <td>${(item.name)!}</td>
+                                            <td>${(item.phone)!}</td>
+                                            <td>${(item.email)!}</td>
+                                        </tr>
+                                    </#list>
+                            </#if>
+                        </table>
+                    </div>
+                </#if>
+            </div>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript">
+function back() {
+    location.href="${ctx!}/publiccontacts/page${queryString!}";
+}
+</script>
+</@footer>

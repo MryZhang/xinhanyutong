@@ -1,0 +1,41 @@
+.arrange {width: 100%;}
+.sysmgr .block_h1_top, .arrange .block_h1_top {background: url("../img/bg_top.gif") no-repeat scroll 0 0 transparent;float: left;height: 10px;width: 800px;}
+.sysmgr .block_h1_bottom, .arrange .block_h1_bottom {background: url("../img/b6.gif") no-repeat scroll 10px 0 transparent;float: left;width: 747px;margin-top: -2px;padding: 5px 5px 5px 45px;border: 1px solid #D5D5D5;border-top: none;font-size: 14px;font-weight: bold;}
+.sysmgr .block_h1_content, .arrange .block_h1_content {float: left;width: 797px;min-height: 480px;_height: 480px;border: 1px solid #D5D5D5;border-top: none;}
+.arrange .arr_table {line-height: 22px;margin-left: 50px;margin-top: 30px;font-size: 14px;}
+.arrange .arr_table .line_height {line-height: 38px;}
+.hide {display: none !important;}
+.keyClass {color: #FF0000;font-family: SimSun;font-size: 14px;margin-right: 3px;}
+.import, .warn, .wrong {font-size: 12px;padding-left: 20px;padding-top: 2px;text-align: left;}
+.import, .wrong, .warn {background: url("../img/share_icon.png") no-repeat scroll 0 -2px transparent;}
+.wrong {background-position: 0 -174px;}
+select, input, textarea {font-size: 12px;line-height: 1.2em;}
+.sysmgr .inputBox, .arrange .inputBox {width: 170px;padding: 3px 0px;font-size: 14px;border: 1px solid #A6C9E2;}
+.arrange .inputDate {width: 170px;padding: 0px;font-size: 14px;border: 1px solid #A6C9E2;}
+b {font-weight: normal;}
+.arrange table th {text-align: right;font-weight: normal;}
+select, input, textarea {font-size: 12px;line-height: 1.2em;}
+select {cursor: pointer;font-style: normal;}
+option {font-weight: normal;display: block;padding: 0px 2px 1px;white-space: pre;min-height: 1.2em;}
+option {font-weight: normal;}
+.input_radio_check {border: 0px;}
+input[type="checkbox"], input[type="radio"] {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;padding: 0;}
+input[type="radio"], input[type="checkbox"] {margin: 4px 0 0;line-height: normal;}
+input[type=radio], input[type=checkbox] {border: 0px none;vertical-align: middle;}
+.arrange input[type=radio], .arrange input[type=checkbox] {vertical-align: middle;}
+.hand {cursor: pointer;}
+.arrange .title-obj {background-color: #D6E3FD;border-bottom: 1px solid #D6D6D6;font-size: 14px;}
+.arrange .arr_table .line_height_1 {line-height: 28px;}
+.arrange .btn_style {background-color: #1556af;border-radius: 5px;border: 0 none;color: #FFFFFF;cursor: pointer;display: inline-block;font-family: '΢���ź�','����','�꿬��';font-size: 12px;float: left;overflow: hidden;line-height: 20px;padding: 3px 2px 2px 18px !important;padding: 0 0 2px 13px;vertical-align: middle;margin-right: 3px;}
+.arrange .addContactFrm {background: url("../img/bg1.gif") no-repeat scroll -1px -3px transparent;width: 105px !important;}
+.arrange .addContactk {background: url("../img/bg2.gif") no-repeat scroll -1px -4px transparent;width: 80px !important;}
+.arrange .deleteAll {background: url("../img/bg4.gif") no-repeat scroll -1px -4px transparent;width: 80px !important;}
+.arrange .invbtn {margin: 5px 0;height: 30px;}
+.arrange .chkbox_label {padding-left: 2px;}
+hr {margin-top: 20px;margin-bottom: 20px;border: 0;border-top: 1px solid #eee;}
+.arrange .title-obj {background-color: #D6E3FD;border-bottom: 1px solid #D6D6D6;font-size: 14px;}
+.sysmgr .btn_submit, .arrange .btn_submit {background: url("../img/ButtonT-135-208.png") no-repeat scroll 0 0 transparent;border: medium none;color: #FFFFFF;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 26px;line-height: 26px;overflow: hidden;padding: 0;text-align: center;width: 86px;}
+.btn_sytle {background: url("../img/bgImg.gif") repeat-x scroll 0 0 transparent;border-radius: 5px;border: 0 none;color: #FFFFFF;cursor: pointer;display: inline-block;font-family: '΢���ź�','����','�꿬��';font-size: 14px;font-weight: bold;line-height: 20px;overflow: hidden;padding: 3px 15px 2px 15px !important;margin-right: 3px;vertical-align: middle;}
+table#addInv,table#addInv th,table#addInv td{border:1px solid #D6D6D6;}
+fieldset {border: 1px solid #DEDEDE;padding-left: 10px;}
+legend {display: block;width: 100%;padding: 0;margin-bottom: 20px;font-size: 21px;line-height: inherit;color: #333;border: 0;border-bottom: 1px solid #e5e5e5;}

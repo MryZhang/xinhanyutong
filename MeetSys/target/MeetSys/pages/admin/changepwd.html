@@ -1,0 +1,113 @@
+<#include "/pages/admin/layout.html">
+<@header "修改密码" 2>
+    <meta charset="utf-8">
+    <link href="${ctx!}/artDialog/css/ui-dialog.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx!}/css/info.css" rel="stylesheet" type="text/css"/>
+    <div class="personmgr">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom block_h1_pass">修改密码</div>
+        <div class="block_h1_content">
+            <form id="updpwdform" method="post" action="${ctx!}/admin/updatePwd">
+                <input type="hidden" id="contextPath" value="${ctx!}"/>
+                <input type="hidden" value="${publicKey!}" id="publicKey" name="publicKey">
+                <div class="person-style formClass">
+                    <ul class="main_form">
+                        <li class="item">
+                            <div>
+                                <label class="fps_left leftfont">&nbsp;</label>
+                                <span id="personContent"></span>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">
+                                <b class="keyClass">*</b>旧密码：
+                            </label>
+                            <div class="fps_right">
+                                <input type="hidden" name="p.encryptOldPwd" id="encryptOldPwd">
+                                <input type="password" id="oldpassword" value="${(p.oldPassword)!}" name="p.oldPassword" class="text" maxlength="16"/>
+                                <div id="oldpass_tip" class="<#if oldPasswordMsg??>error<#else>addConTip</#if>">${oldPasswordMsg!}</div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">
+                                <b class="keyClass">*</b>新密码：
+                            </label>
+                            <div class="fps_right">
+                                <input type="hidden" name="p.encryptNewPwd" id="encryptNewPwd">
+                                <input type="password" id="password" value="${(p.newPassword)!}" name="p.newPassword" class="text" value="" maxlength="16">
+                                <label id="password_icon" class=""></label>
+                                <div id="password_tip" class="<#if newPasswordMsg??>error<#else>null</#if>">${newPasswordMsg!}</div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">
+                                <b class="keyClass">*</b>
+                                确认密码：
+                            </label>
+                            <div class="fps_right">
+                                <input type="hidden" name="p.encryptConfirmPwd" id="encryptConfirmPwd">
+                                <input type="password" id="chkPwd" value="${(p.confirmPassword)!}" name="p.confirmPassword" class="text" value="" maxlength="16">
+                                <label id="chkPwd_icon" class="blank">&nbsp;</label>
+                                <div id="chkPwd_tip" class="<#if confirmPasswordMsg??>error<#else>null</#if>">${confirmPasswordMsg!}</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span class="fps_left">&nbsp;</span>
+                                <button type="submit" id="updpwdbtn" class="btn_sytle">确认</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript" src="${ctx!}/js/jsencrypt.min.js"></script>
+<script type="text/javascript" src="${ctx!}/artDialog/dist/dialog.js?skin=blue"></script>
+<script type="text/javascript" src="${ctx!}/js/admin/changepwd.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //验证输入
+        $("#updpwdbtn").click(function () {
+            var flag=true;
+            $("input.text").each(function () {
+                if(flag){
+                    flag=changepwd.validate(this);
+                }else{
+                    changepwd.validate(this);
+                }
+            });
+            if(flag){
+                var encrypt=new JSEncrypt();
+                encrypt.setPublicKey($("#publicKey").val());
+
+                var password=$("#oldpassword").val().trim();
+                $("#encryptOldPwd").val(encrypt.encrypt(password));
+                $("#oldpassword").val(common.generateMixed(password.length));
+
+                var newPwd=$("#password").val().trim();
+                $("#encryptNewPwd").val(encrypt.encrypt(newPwd));
+                $("#password").val(common.generateMixed(newPwd.length));
+
+                var confirmPwd=$("#chkPwd").val().trim();
+                $("#encryptConfirmPwd").val(encrypt.encrypt(confirmPwd));
+                $("#chkPwd").val(common.generateMixed(confirmPwd.length));
+            }
+            return flag;
+        });
+
+        $(".text").focus(function(){
+            var name=$(this).attr("name");
+            $(this).attr("class","text highlight1");
+        });
+
+        $(".text").blur(function(){
+            if(changepwd.validate(this)){
+                $(this).attr("class","text");
+            }
+        });
+    });
+</script>
+</@footer>
