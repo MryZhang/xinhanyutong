@@ -1,0 +1,107 @@
+<#include "/pages/common/layout.html">
+    <@header "SMTP邮箱" 12>
+    <meta charset="UTF-8">
+    <link href="${ctx!}/css/addcontact.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        p.desc{
+            margin: 25px 0;
+            line-height: 25px;
+            background-color: #ACACAC;
+            padding: 1px 5px;
+            color: #fff;
+        }
+    </style>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div id="personInfo" class="contact">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom" id="addContact_title_Id">设置SMTP邮箱</div>
+        <div class="block_h1_content block_h1_content_h1">
+            <form id="personformId" method="post">
+                <input type="hidden" value="${publicKey!}" id="publicKey" name="publicKey">
+                <input type="hidden" value="${(smtp.id)!}" id="sid" name="smtp.id">
+                <div class="person-style formClass">
+                    <p class="desc"><b>说明</b>：SMTP邮箱用于向参会人发送邮件通知，SMTP邮箱必须已开启SMTP服务。</p>
+                    <ul class="main_form">
+                        <li class="item">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>邮箱：</label>
+                            <div class="fps_right">
+                                <input type="text" class="text" id="c_email" name="smtp.email" value="${(smtp.email)!}">
+                                <span id="c_email_icon" class="">&nbsp;</span>
+                                <div id="c_email_Id" class="null"></div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>密码：</label>
+                            <div class="fps_right">
+                                <input type="password" class="text" id="c_password" name="smtp.password" value="${(smtp.password)!}" >
+                                <span id="c_password_icon" class="">&nbsp;</span>
+                                <div id="c_password_Id" class="null"></div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>确认密码：</label>
+                            <div class="fps_right">
+                                <input type="password" class="text" id="c_chkpwd" name="smtp.confirmPwd" value="${(smtp.confirmPwd)!}" >
+                                <span id="c_chkpwd_icon" class="">&nbsp;</span>
+                                <div id="c_chkpwd_Id" class="null"></div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="btndiv">
+                                <span class="fps_left">&nbsp;</span>
+                                <button type="button" id="c_saveContactId" class="btn_sytle">保存</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script src="${ctx!}/js/jsencrypt.min.js"></script>
+<script type="text/javascript" src="${ctx!}/js/smtp/smtp.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //当输入框获取焦点
+        $(".text").focus(function(){
+            var id = $(this).attr("id");
+            $(this).attr("class","text highlight1").next().attr("class","blank").next().text("").attr("class","addConTip");
+        });
+
+        $(".text").blur(function () {
+            smtpPage.validate(this);
+        });
+        //保存
+        $("#c_saveContactId").click(function () {
+           var flag=true;
+           $(".text").each(function () {
+               if(flag){
+                   flag = smtpPage.validate(this);
+               }else{
+                   smtpPage.validate(this);
+               }
+           });
+           if(flag){
+               var data={"smtp.email":$("#c_email").val()};
+
+               var encrypt=new JSEncrypt();
+               encrypt.setPublicKey($("#publicKey").val());
+               var password=$("input[name='smtp.password']").val().trim();
+               data["smtp.password"]=common.generateMixed(password.length);
+               data["smtp.encryptPwd"]=encrypt.encrypt(password);
+
+               var confirmPwd=$("input[name='smtp.confirmPwd']").val().trim();
+               data["smtp.confirmPwd"]=common.generateMixed(confirmPwd.length);
+               data["smtp.encryptConfirmPwd"]=encrypt.encrypt(confirmPwd);
+
+               var sid=$("#sid").val().trim();
+               if(sid){
+                    data["smtp.id"]=sid;
+               }
+               smtpPage.save(data);
+           }
+        });
+    });
+</script>
+</@footer>

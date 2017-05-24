@@ -1,0 +1,321 @@
+<#include "/pages/common/layout.html">
+<@header "预约会议" 2>
+    <meta charset="utf-8">
+    <link href="${ctx!}/css/phonemeeting.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="${ctx!}/Font-Awesome-3.2.1/css/font-awesome.min.css" type="text/css"/>
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="${ctx!}/Font-Awesome-3.2.1/css/font-awesome-ie7.min.css" type="text/css""/>
+    <![endif]-->
+    <link href="${ctx!}/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx!}/css/order/toast.css" rel="stylesheet" type="text/css"/>
+    <input type="hidden" id="contextPath" value="${ctx!}"/>
+    <div class="arrange" id="pstnarr">
+        <div class="block_h1_top"></div>
+        <div id="pstnarr_title" class="block_h1_bottom"><#if order??>修改<#else>创建</#if>预约电话会议</div>
+        <div class="block_h1_content" style="position: relative;">
+            <div style="clear:both;"></div>
+            <form id="arrform" method="post" action="<#if order??><#else>${ctx!}/ordermeet/add</#if>">
+                <table class="arr_table">
+                    <tr class="line_height_1">
+                        <th>
+                            <#if order??><input type="hidden" value="${order.id}" id="id" name="order.id"/></#if>
+                            <b class="keyClass">*</b>
+                            主题：
+                        </th>
+                        <td style="width: 510px;padding:2px 0;">
+                            <input type="text" id="subject" class="inputBox" name="order.subject" maxlength="50" value="<#if order??>${order.subject}<#else>${name}的电话会议</#if>">
+                            <span id="subjectError" class="wrong hide" style="color:red;"></span>
+                        </td>
+                    </tr>
+                    <tr id="startTimeTr">
+                        <th>时间：</th>
+                        <td style="padding:2px 0;">
+                            <input type="text" id="startTime" class="inputDate Wdate" name="order.startTime" value="<#if order??>${(order.startTime)!}<#else>${now?string('yyyy-MM-dd HH:mm')}</#if>" onFocus="WdatePicker({isShowClear:false,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm',minDate:'<#if order??>${(order.startTime)!}<#else>${now?string('yyyy-MM-dd HH:mm')}</#if>'})"/>
+                            <input type="text" id="stime" class="inputDate Wdate" name="order.stime" value="<#if order??>${(order.startTime)!}<#else>${now?string('HH:mm')}</#if>" onFocus="WdatePicker({isShowClear:false,readOnly:true,dateFmt:'HH:mm'})" style="display: none"/>
+                            <span id="timeError" class="wrong hide" style="color:red;"></span>
+                        </td>
+                    </tr>
+                    <tr class="line_height_1">
+                        <th>是否录音：</th>
+                        <td>
+                            <label><input type="radio" name="order.isRecord" value="0" <#if order??><#if order.isRecord==0>checked="checked"</#if><#else>checked="checked"</#if>/>否</label>
+                            <label><input type="radio" name="order.isRecord" value="1" <#if order??&&order.isRecord==1>checked="checked"</#if>/>是</label>
+                        </td>
+                    </tr>
+                    <tr class="line_height_1">
+                        <th style="vertical-align: text-top;">重复周期：</th>
+                        <td>
+                            <input type="radio" class="input_radio_check" id="period0" name="order.period" value="0" checked="checked">
+                            <label for="period0">无</label>
+                            <input type="radio" class="input_radio_check" id="period1" name="order.period" value="1">
+                            <label for="period1">每日</label>
+                            <input type="radio" class="input_radio_check" id="period2" name="order.period" value="2">
+                            <label for="period2">每周</label>
+                            <input type="radio" class="input_radio_check" id="period3" name="order.period" value="3">
+                            <label for="period3">每月</label>
+                            <input type="radio" class="input_radio_check" id="period4" name="order.period" value="4"/>
+                            <label for="period4">固定会议</label>
+                            <div id="everyday" class="repeat" style="display:none">
+                                <div>
+                                    <label>
+                                        <input type="radio" id="dayChoice1" checked="checked" name="order.dayChoice" value="interval"/>每<input type="text" name="order.interval" value="${(order.interval)!1}" id="dayInterval" class="intervalTxt"/>天
+                                        <span id="dayError" class="wrong hide" style="color:red;"></span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <label><input type="radio" id="dayChoice2" name="order.dayChoice" value="workday"/>每个工作日</label>
+                                </div>
+                            </div>
+                            <div id="everyWeek" class="repeat" style="display:none">
+                                <div>
+                                    每<input type="text" value="${(order.weekInterval)!1}" id="weekInterval" name="order.weekInterval" class="intervalTxt"/>周
+                                    <span id="weekError" class="wrong hide" style="color:red;"></span>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="order.weekdays" value="mon"/>星期一&nbsp;
+                                    <input type="checkbox" name="order.weekdays" value="tues"/>星期二&nbsp;
+                                    <input type="checkbox" name="order.weekdays" value="wed"/>星期三&nbsp;
+                                    <input type="checkbox" name="order.weekdays" value="thur"/>星期四&nbsp;<br>
+                                    <input type="checkbox" name="order.weekdays" value="fri"/>星期五&nbsp;
+                                    <input type="checkbox" name="order.weekdays" value="sat"/>星期六&nbsp;
+                                    <input type="checkbox" name="order.weekdays" value="sun"/>星期日
+                                </div>
+                            </div>
+                            <div id="everyMonth" class="repeat" style="display:none">
+                                <div>
+                                    <input type="radio" checked="checked" id="monthChoice1" value="dayOfInterval" name="order.monthChoice" class="intervalTxt"/>每个月的第<input id="monthInterval" type="text" name="order.dayOfInterval" value="${(order.dayOfInterval)!1}" class="intervalTxt"/>天
+                                    <span class="wrong hide" style="color:red;"></span>
+                                </div>
+                                <div>
+                                    <input type="radio" id="monthChoice2" value="weekdayOfInterval" name="order.monthChoice" class="intervalTxt"/>每个月的
+                                    <span class="wrong hide" style="color:red;"></span>
+                                    <select id="weekNum" name="order.weekNum">
+                                        <option value="1" selected="selected">第一个</option>
+                                        <option value="2">第二个</option>
+                                        <option value="3">第三个</option>
+                                        <option value="4">第四个</option>
+                                        <option value="L">最后一个</option>
+                                    </select>
+                                    <select id="weekday" name="order.weekday">
+                                        <option value="2">星期一</option>
+                                        <option value="3">星期二</option>
+                                        <option value="4">星期三</option>
+                                        <option value="5">星期四</option>
+                                        <option value="6">星期五</option>
+                                        <option value="7">星期六</option>
+                                        <option value="1">星期日</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="meetPwd" style="display: none;">
+                                <div>
+                                    <div style="float: left">主持人密码：</div>
+                                    <input type="text" class="inputBox" name="order.hostPwd" id="hostPwd" value="<#if hostPwd??>${hostPwd}<#elseif order.hostPwd??>${order.hostPwd}</#if>" style="float:left;width: 80px;text-align: center;" readonly="readonly"/>
+                                    <button type="button" class="btn_sytle btn_sel_host refresh_btn" style="margin-bottom: 5px;">重新生成</button>
+                                </div>
+                                <div style="display: none;">
+                                    <div style="float: left">参会者密码：</div>
+                                    <input type="text" class="inputBox" name="order.listenerPwd" id="listenerPwd" value="<#if listenerPwd??>${listenerPwd}<#elseif order.listenerPwd??>${order.listenerPwd}</#if>" style="float:left;width: 80px;text-align: center;" readonly="readonly"/>
+                                    <button type="button" class="btn_sytle btn_sel_host refresh_btn" style="margin-bottom: 5px;">重新生成</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- <tr id="timeRange" style="display: none;">
+                        <th style="vertical-align: text-top;" id="timeText">
+                            <b class="keyClass">*</b>
+                            结束日期：
+                        </th>
+                        <td style="padding:2px 0;">
+                            <div id="order">
+                                <input type="text" id="endTime" class="inputDate Wdate"  onFocus="WdatePicker({isShowClear:false,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm',minDate:'#F{$dp.$D(\'startTime\')}'})"/>
+                            </div>
+                        </td>
+                    </tr> -->
+                    <tr>
+                        <th class="topalgin">
+                            <b class="keyClass">*</b>
+                            主持人：
+                        </th>
+                        <td>
+                            <div>
+                                <input type="hidden" id="hostName" value="<#if order??>${order.hostName}<#else>${name}</#if>"/>
+                                <input type="text" id="hostNum" value="<#if order??>${order.hostNum}<#else>${phone}</#if>" class="inputBox ui-autocomplete-input" name="hostNum"  role="textbox" aria-autocomplete="list" aria-haspopup="true"/>
+                                <button type="button" id="selpstnhost" class="btn_sytle btn_sel_host" style="margin-bottom: 5px;">选择主持人</button>
+                            </div>
+                            <span style="display:inline;height:22px;" id="hosttip" class="pstnhnumtip">格式：手机/区号固话号码</span>
+                        </td>
+                    </tr>
+                    <tr style="width: 630px;" class="invitTr">
+                        <td colspan="2" style="width: 620px;">
+                            <div class="title-obj hand" style="padding:0px;width: 500px;margin-left: 30px;margin-top: 5px;">
+                                &nbsp;<img id="objImg" src="${ctx!}/img/plus.gif"/>
+                                邀请对象（可选，点击展开）
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="invitTr">
+                        <td colspan="2">
+                            <div id="inviteeObjId" style="margin-top: 3px;display: none;">
+                                <div style="margin-left:81px;">
+                                    <table id="gbox_gridTable" style="width:430px;" class="bsgrid">
+                                        <thead>
+                                            <tr>
+                                                <th w_index="name" w_align="center">姓名</th>
+                                                <th w_index="phone" w_align="center">电话号码</th>
+                                                <!--<th w_index="typename" w_align="center">类型</th>-->
+                                                <th w_render="operate">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <div id="addInv" class="confhide addInv">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label class="conflabel" for="addInvName">姓名：</label>
+                                                    <input type="text" id="addInvName" style="width:70px;" maxlength="30" class="inputBox inputtext"/>
+                                                </td>
+                                                <td style="text-align: right;">
+                                                    <label for="addInvTel">电话号码：</label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" style="width: 150px;" class="inputBox inputtext teltxttip" name="addInvTel" id="addInvTel" maxlength="20" value="手机/区号固话号码-分机号"/>
+                                                    <input type="checkbox" class="" id="assms" checked="checked" style="margin-left: 5px;"/>
+                                                    <label for="assms">使用该号码接收短信</label>
+                                                </td>
+                                                <td align="right">
+                                                    <button type="button" id="addTmpInv" class="btn_style btn_sel_host">+</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!-- <div>
+                                        成员类型：<label><input type="radio" value="2" name="memberType" checked="checked"/>主席</label>&nbsp;
+                                        <label><input type="radio" value="3" name="memberType"/>听众</label>
+                                    </div> -->
+                                    <div id="btn" class="invbtn">
+                                        <button type="button" id="addContactFrm" class="btn_style addContactFrm">从通讯录选择</button>
+                                        <button type="button" id="addContact" class="btn_style addContact">手工增加</button>
+                                        <button type="button" id="deleteAll" class="btn_style deleteAll" style="display: none;">全部删除</button>
+                                    </div>
+                                    <div><input type="checkbox" class="input_radio_check" id="smsRemind" name="smsRemind">
+                                        <label for="smsRemind" class="chkbox_label" style="margin-left:-5px;">在会议开始前</label>
+                                        <select id="smsRemindTime" name="smsRemindTime">
+                                            <option value="5" selected="">5</option>
+                                            <option value="10">10</option>
+                                            <option value="15">15</option>
+                                            <option value="20">20</option>
+                                            <option value="30">30</option>
+                                            <option value="40">40</option>
+                                            <option value="45">45</option>
+                                            <option value="50">50</option>
+                                        </select>分钟短信提醒
+                                    </div>
+                                   <!-- <div>
+                                        <input type="checkbox" class="input_radio_check" id="onlyInvitee" name="onlyInvitee" value="">
+                                        <label for="onlyInvitee" class="chkbox_label">只允许邀请对象参加会议</label>
+                                        <img id="label_onlyInv" class="help_tip" src="/img/icon-help.gif" data-hasqtip="true" onmouseenter="showTips(this)">
+                                    </div>-->
+                                    <div>
+                                        <input type="checkbox" class="input_radio_check" checked="checked" id="smsNotice" name="smsNotice" value="">
+                                        <label for="smsNotice" class="chkbox_label">向邀请对象发送邀请短信</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" class="input_radio_check" id="containHost" name="containHost" value="">
+                                        <label for="containHost" class="chkbox_label">包含主持人</label>
+                                    </div>
+                                </div>
+                                <hr style="margin-left:30px; width: 538px; height:1px; border:0 none; border-top:1px dashed #A6C9E2;">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr><th>&nbsp;</th><td><span>&nbsp;</span></td></tr>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <td>
+                            <div>
+                                <#if order??>
+                                    <button type="button" id="upBtn" class="btn_submit">保存</button>
+                                    <button type="button" id="cancelBtn" class="btn_submit">取消</button>
+                                    <#else>
+                                        <button type="button" id="okBtn" class="btn_submit">创建</button>
+                                </#if>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr><th>&nbsp;</th><td><span>&nbsp;</span></td></tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript" src="${ctx!}/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="${ctx!}/zTree_v3/js/jquery.ztree.core.min.js"></script>
+<script type="text/javascript" src="${ctx!}/zTree_v3/js/jquery.ztree.excheck.min.js"></script>
+<script type="text/javascript" src="${ctx!}/js/common.js"></script>
+<script type="text/javascript" src="${ctx!}/js/json2.js"></script>
+<script type="text/javascript" src="${ctx!}/js/order/order.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("input[name='order.period']").click(function () {
+            order.selectPeriod(this);
+        });
+        //选择主持人
+        $("#selpstnhost").click(function () {
+            order.selectHost($("#hostNum").val().trim());
+        });
+        //重新生成密码
+        $("button.refresh_btn").click(function () {
+            order.reproducePwd($(this).prev());
+        });
+        //展开或收起邀请人
+        $("div.title-obj").click(function () {
+            if($("#inviteeObjId").is(":hidden")){
+                $("#inviteeObjId").show();
+                $("#objImg").attr("src","${ctx!}/img/minus.gif");
+            }else{
+                $("#inviteeObjId").hide();
+                $("#objImg").attr("src","${ctx!}/img/plus.gif");
+            }
+        });
+
+        //从通讯录中选择参会人
+        $("#addContactFrm").click(function () {
+            order.selectAttendeeFromContacts();
+        });
+
+        /*============ START 手动添加联系人=================*/
+        $("#addContact").click(function(){
+            $("#addInv").show();
+        });
+        $("#addTmpInv").click(function () {
+            order.addTmpInv.add();
+        });
+        $("#addInvTel").focus(function(){
+            $(this).removeClass("highlight");
+            if($(this).val().trim()=="手机/区号固话号码-分机号"){
+                $(this).val("");
+            }
+        });
+
+        $("#addInvTel").blur(function(){
+            if($(this).val().trim()=="手机/区号固话号码-分机号"||$(this).val().trim()==""){
+                $(this).val("手机/区号固话号码-分机号");
+            }
+        });
+        /*=================== END 手动添加联系人===============*/
+
+        //创建预约会议
+        $("#okBtn").click(function () {
+            order.addOrderMeet.add();
+        });
+        $("#hostNum").focus(function () {
+            $(this).attr("class","inputBox ui-autocomplete-input");
+            $(this).parent().next().attr("class","pstnhnumtip").text("格式：手机/区号固话号码");
+        });
+    });
+</script>
+</@footer>

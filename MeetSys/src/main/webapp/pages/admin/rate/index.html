@@ -1,0 +1,63 @@
+ <#include "/pages/admin/layout.html">
+<@header title="费率信息" num=5>
+    <meta charset="UTF-8">
+    <link href="${ctx!}/artDialog/css/ui-dialog.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx!}/css/admin/rate.css" rel="stylesheet" type="text/css"/>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div class="usermgr" >
+        <#include "/pages/admin/tab.html">
+            <@tab num=1></@tab>
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom">
+            <span class="ctitle">费率信息</span>
+        </div>
+        <div class="block_h1_content block_h1_content_h1">
+            <table class="">
+                <thead>
+                <tr class="">
+                    <th class="t_index" rowspan="2">序号</th>
+                    <th class="t_name" rowspan="2">套餐名称</th>
+                    <th class="t_callin" colspan="2">呼入</th>
+                    <th class="t_callout" colspan="2">呼出</th>
+                    <th rowspan="2" class="t_sms">短信费率</th>
+                </tr>
+                <tr>
+                    <th class="t_callin_mode">计费模式</th>
+                    <th class="t_callin_rate">费率</th>
+                    <th class="t_callout_mode">计费模式</th>
+                    <th class="t_callout_rate">费率</th>
+                </tr>
+                </thead>
+                <tbody>
+                <#if (rateList?size>0)>
+                    <#list rateList as item>
+                        <tr>
+                            <td class="t_index">${item_index+1}</td>
+                            <td class="t_name">${item.name}</td>
+                            <td class="t_callin_mode">${item.callInMode}</td>
+                            <td class="t_callin_rate">${item.callInRate}</td>
+                            <td class="t_callout_mode">${item.callOutMode}</td>
+                            <td class="t_callout_rate">${item.callOutRate}</td>
+                            <td class="t_sms">${item.smsRate}</td>
+                        </tr>
+                    </#list>
+                    <#else>
+                        <tr>
+                            <td colspan="7" class="meet_td_none">
+                                没有符合条件的数据
+                            </td>
+                        </tr>
+                </#if>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript" src="${ctx!}/artDialog/dist/dialog.js?skin=blue"></script>
+<script type="text/javascript">
+    $(function () {
+        
+    });
+</script>
+</@footer>

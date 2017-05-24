@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>会议控制</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="${ctx!}/bootstrap-3.3.7-dist/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="${ctx!}/Font-Awesome-3.2.1/css/font-awesome.min.css" type="text/css"/>
+    <link href="${ctx!}/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="${ctx!}/css/mc/meet_control.css" type="text/css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="${ctx!}/audioplayer/css/audioplayer.css">
+</head>
+<body>
+<input type="hidden" value="${ctx!}" id="contextPath"/>
+<div id="loading"><i class="icon-spinner icon-spin icon-2x"></i></div>
+<!--模态窗口-->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeBtn"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="okBtn">确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelBtn">取消</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                    <div class="row" id="content">
+                         <div class="col-xs-4 col-sm-4 block">
+                                    <div class="bg-primary title" id="contacts_title">
+                                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;联系人管理
+                                        <div class="pull-right search">
+                                            <input type="text" class="form-control input-sm" id="search_contacts" placeholder="请输入搜索内容..."/>
+                                            <i class="icon-search"></i>
+                                            <ul class="list-unstyled search-result" style="display:none;" id="contactsResult">
+                                                <!--<li title="XXXXXXXXXXX">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</li>
+                                                <li>XXXXXX</li>-->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <ul class="nav nav-tabs" role="tablist" id="contact_tab">
+                                          <li role="presentation" class="active"><a href="#public_contacts" aria-controls="public_contacts" data-toggle="tab">公共通信录</a></li>
+                                          <li role="presentation" ><a href="#personl_contacts" aria-controls="personl_contacts" data-toggle="tab" >个人通信录</a></li>
+                                         <!-- <li role="presentation"><a href="#meeting_group" aria-controls="meeting_group" data-toggle="tab">会议分组</a></li>-->
+                                    </ul>
+                                    <div id="contacts">
+                                               <!--<ul class="nav nav-tabs" role="tablist" id="contact_tab">
+                                                     <li role="presentation" class="active"><a href="#personl_contacts" aria-controls="personl_contacts" data-toggle="tab">个人通信录</a></li>
+                                                      <li role="presentation"><a href="#public_contacts" aria-controls="public_contacts" data-toggle="tab" >公共通信录</a></li>
+                                                      <li role="presentation"><a href="#meeting_group" aria-controls="meeting_group" data-toggle="tab">会议分组</a></li>
+                                                </ul>-->
+                                                <div class="tab-content" id="contacts_content">
+                                                    <div role="tabpanel" class="tab-pane active" id="public_contacts">
+                                                        <table class="table table-hover table-condensed">
+                                                            <tr>
+                                                                <th>名称</th>
+                                                                <th>电话</th>
+                                                                <th>职位</th>
+                                                                <th>操作</th>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <!--<div role="tabpanel" class="tab-pane" id="meeting_group">
+                                                        <table class="table table-hover table-condensed">
+                                                           <tr>
+                                                               <th>名称</th>
+                                                               <th>电话</th>
+                                                               <th>操作</th>
+                                                           </tr>
+                                                       </table>
+                                                    </div>-->
+                                                    <div role="tabpanel" class="tab-pane" id="personl_contacts">
+                                                       <table class="table table-hover table-condensed">
+                                                           <tr>
+                                                               <th>名称</th>
+                                                               <th>电话</th>
+                                                               <th>操作</th>
+                                                           </tr>
+                                                       </table>
+                                                       <!--<div class="group" data-toggle="collapse" data-target="#group1" aria-expanded="false" aria-controls="group1">
+                                                           <i class="icon-caret-right"></i>&nbsp;&nbsp;<input type="checkbox" class="chkAll" />&nbsp;朋友
+                                                       </div>
+                                                        <div class="collapse" id="group1">
+                                                             <table class="table table-hover table-condensed">
+                                                                  <tr>
+                                                                        <td><input type="checkbox"/>&nbsp;aaa</td>
+                                                                       <td>13277054876</td>
+                                                                       <td><a href="javascript:;" class="add-invite"></a></td>
+                                                                 </tr>
+                                                             </table>
+                                                        </div>-->
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <div class="text-right" id="contact_ctrl">
+                                            <button type="button" class="btn btn-primary btn-xs" id="addInviteBtn"><i class="icon-plus"></i>&nbsp;添加</button>
+                                    </div>
+                                   <div class="bg-primary title" id="invite_title">
+                                       <span class="glyphicon glyphicon-menu-hamburger"></span>&nbsp;&nbsp;待参会人列表
+                                       <div class="pull-right search">
+                                            <input type="text" class="form-control input-sm" id="search_invite" placeholder="请输入搜索内容..."/>
+                                            <i class="icon-search"></i>
+                                            <ul  class="list-unstyled search-result" style="display:none;" id="inviteResult">
+                                            </ul>
+                                        </div>
+                                   </div>
+                                   <form class="form-inline" id="add_form">
+                                       <div class="form-group">
+                                           <label for="name" class="sr-only">姓名</label>
+                                           <input type="text" class="form-control input-sm" id="name" placeholder="姓名"/>
+                                       </div>
+                                       <div class="form-group">
+                                           <label for="phone" class="sr-only">电话</label>
+                                           <input type="text" class="form-control input-sm" id="phone" placeholder="电话"/>
+                                       </div>
+                                       <button type="button" class="btn btn-primary btn-xs" id="add_invite">添加</button>
+                                   </form>
+                                   <div id="invite">
+                                          <table class="table table-hover table-condensed">
+                                              <thead>
+                                              	<tr>
+                                                  <th>姓名</th>
+                                                  <th>电话</th>
+                                                  <th>状态</th>
+                                                  <th>操作</th>
+                                              	</tr>
+                                              </thead>
+                                              <tbody>
+                                              	
+                                              </tbody>
+                                          </table>
+                                   </div>
+                                    <div class="text-center" id="invite_ctrl" data-toggle="tooltip" data-placement="top" title="请先开始会议">
+                                        <button type="button" class="btn btn-primary" disabled="disabled" id="btn_callAll">呼叫全部</button>
+                                    </div>
+                         </div>
+                         <div class="col-xs-5 col-sm-5 block" id="attendees">
+                                   <!-- <div id="attendees">-->
+                                             <div class="bg-primary title" id="attendee_title">
+                                                 <span class="glyphicon glyphicon-menu-hamburger"></span>&nbsp;&nbsp;参会人列表
+                                                 <div class="pull-right search">
+                                                     <input type="text" class="form-control input-sm" id="searchInMeet" placeholder="请输入搜索内容..."/>
+                                                     <i class="icon-search"></i>
+                                                     <ul  class="list-unstyled search-result" style="display:none;" id="inmeetResult">
+                                           			 </ul>
+                                                  </div>
+                                             </div>
+                                             <div id="attendee_list">
+                                                 <table class="table table-hover table-condensed">
+                                                 	<thead>
+                                                 		<tr>
+                                                     		<th>姓名</th>
+                                                     		<th>电话</th>
+                                                     		<th>角色</th>
+                                                      		<th>操作</th>
+                                                  		</tr>
+                                                 	</thead>
+                                                 	<tbody>
+                                                 	</tbody>
+                                              	</table>
+                                             </div>
+                                    <!--</div>-->
+                                   <div id="info">
+                                              <div class="bg-primary title" id="info_title"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;消息<div class="pull-right" id="slide_btn"><span class="glyphicon glyphicon-chevron-down"></span></div></div>
+                                              <div id="info_list">
+                                              	
+                                              </div>
+                                   </div>
+                         </div>
+                         <div class="col-xs-3 col-sm-3" id="ctrlDv">
+                                    <div class="title bg-primary">
+                                        <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;会议控制
+                                    </div>
+                                    <h4 class="text-center" id="meetStatus">等待会议开始...</h4>
+                                    <div class="ctrl-panel">
+                                        <div>
+                                            <div class="ctrl">
+                                                会议主题：
+                                                <div class="ctrl-content" id="msubject" title="${(record.subject)!}">${(record.subject)!}</div>
+                                                <form class="form-inline" id="subject_form" style="display:none;">
+                                                    <div class="form-group">
+                                                        <label for="name" class="sr-only">主题</label>
+                                                        <input type="text" class="form-control input-sm" id="subject_txt" placeholder="姓名"/>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary btn-xs" id="btn_sub">确认</button>
+                                                </form>
+                                                <div class="pull-right"><a href="javascript:;" id="edit_subject"><i class="icon-edit"></i>&nbsp;编辑</a></div>
+                                            </div>
+                                            <div class="ctrl">
+                                                主持人：
+                                                <div class="ctrl-content" id="mhost" title="${uname!}（${(record.host)!}）">${uname!}（${(record.host)!}）</div>
+                                                <div class="pull-right"><a href="javascript:;" id="change_host"><i class="icon-exchange"></i>&nbsp;更换</a></div>
+                                            </div>
+                                            <div class="ctrl">
+                                                会议创建者：<span id="mcreator">${uname!}</span>
+                                            </div>
+                                            <div class="ctrl">
+                                                呼入号码：<span id="callNum">${callNum!}</span>
+                                            </div>
+                                            <div class="ctrl">
+                                                会议密码：<span id="mpwd">${(record.hostPwd)!}</span>
+                                            </div>
+                                            <br />
+                                            <div class="ctrl">
+                                                会议开始自动录音：<div class="pull-right"><input type="checkbox" name="mycheckbox" <#if record.isRecord?string=="1">checked="checked"</#if> id="isRecord" data-size="mini"/></div>
+                                            </div>
+                                            <div class="ctrl">
+                                                播出进入退出提示音：<div class="pull-right"><input type="checkbox" name="mycheckbox" data-size="mini" checked="checked" disabled="disabled"/></div>
+                                            </div>
+                                            <div class="ctrl">
+                                                主持人挂断结束会议：<div class="pull-right"><input type="checkbox" name="mycheckbox" data-size="mini" disabled="disabled"/></div>
+                                            </div>
+                                            <div class="ctrl">
+                                                进入会议自动允许发言：<div class="pull-right"><input type="checkbox" name="mycheckbox" data-size="mini" id="allowBegin" <#if (record.mid)??>disabled="disabled"</#if> <#if (record.allowBegin==3000)>checked="checked"</#if>></div>
+                                            </div>
+                                            <div class="ctrl">
+                                                呼叫失败后短信通知：<div class="pull-right"><input type="checkbox" name="mycheckbox" id="noticeFailed" data-size="mini" <#if (record.mid)??>disabled="disabled"</#if> <#if record.notice==3000>checked="checked"</#if>/></div>
+                                             </div>
+                                            <div class="ctrl">
+                                                背景音乐：<div class="pull-right"><input type="checkbox" name="mycheckbox" data-size="mini" disabled="disabled" id="playback"/></div>
+                                            </div>
+                                            <div class="ctrl">
+                                                会议锁门：<div class="pull-right"><input type="checkbox" name="mycheckbox" data-size="mini" disabled="disabled" id="lockMeet"/></div>
+                                            </div>
+                                            <div class="ctrl">
+                                                全体静音：<div class="pull-right"><button type="button" title="静音" disabled="disabled" class="btn btn-primary btn-xs" id="muteAll"><i class="glyphicon glyphicon-volume-off"></i></button><!--<input type="checkbox" name="mycheckbox" data-size="mini" disabled="disabled" id="isAllowSpeak"/>--></div>
+                                            </div><br/>
+                                        </div>
+
+                                    </div>
+                                    <div id="meet_ctrl" class="text-center">
+                                        <button type="button" class="btn btn-primary" id="startMeetBtn">开始会议</button>
+                                        <button type="button" class="btn btn-default" disabled="disabled" id="btn_record">开始录音</button>
+                                    </div>
+                         </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!-- HIDDEN DATA -->
+    <input type="hidden" id="rid" value="${(record.id)!}"/>
+    <input type="hidden" id="meetId" value="${(record.mid)!}"/>
+    <input type="hidden" id="recPrefix" value="${recPrefix!}">
+    <input type="hidden" id="hostNum" value="${(record.host)!}">
+    <div style="display:none;" id="inviteData">${inviteData!}</div>
+    <div style="display:none" id="inmeetData">${inMeetData!}</div>
+    <!-- END -->
+    
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="${ctx!}/js/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="${ctx!}/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="${ctx!}/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+    <script src="${ctx!}/js/json2.js" type="text/javascript"></script>
+    <script src="${ctx!}/audioplayer/js/audioplayer.js"></script>
+    <!--<script type="text/javascript" src="${ctx!}/js/mc/control-helper.js"  charset="utf-8"></script>
+    <script type="text/javascript" src="${ctx!}/js/mc/meet_control.js"  charset="utf-8"></script>-->
+    <script type="text/javascript" src="${ctx!}/js/common.js"></script>
+    <script type="text/javascript" src="${ctx!}/js/mc/commonUtil.js"></script>
+    <script type="text/javascript" src="${ctx!}/js/mc/reconnecting-websocket.min.js"></script>
+    <script type="text/javascript" src="${ctx!}/js/mc/webSocketUtil.js"></script>
+    <script type="text/javascript" src="${ctx!}/js/mc/meetService.js"></script>
+    <script type="text/javascript" src="${ctx!}/js/mc/meetControl.js"></script>
+<script>
+    window.onError=function (msg) {
+        console.log(msg);
+        return true;
+    }
+</script>
+</body>
+</html>

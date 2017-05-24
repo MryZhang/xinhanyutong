@@ -1,0 +1,133 @@
+<#macro header title="用户管理" num=1>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>${title!}</title>
+<link href="${ctx!}/css/admin.css" rel="stylesheet" type="text/css"/>
+</head>
+<body style="width: 100%;height:100%;">
+<div id="loading" class="loading">
+	<img src="${ctx!}/img/loading.jpg"/>
+</div>
+<div id="header">
+	<div class="part1" id="part1">
+		<div class="block">
+			<p>会议管理</p>
+			<div>
+			欢迎 ${cname!} <span style="padding-left: 5PX;">${uname!}</span>
+			</div>
+		</div>
+	</div>
+	<div id="part2" class="part2">
+		<div class="block">
+			<div class="logo">
+				<a href=""><img src="${ctx!}/img/meeting.jpg" alt="网络会议logo" height="100"/></a>
+			</div>
+			<!-- <div class="taocan">
+				<span id="setinfo">
+				套餐（席位数：<font style="font-size: 14px;color:#FB7823"><span id="head_seats">不限</span></font>
+				，话费包余额：<font style="font-size: 14px;color:#FB7823"><span id="head_commuBalance">30.00</span></font>
+				元）账户余额：<font style="font-size: 14px;color:#FB7823"><span id="head_balance">0.00</span></font>
+				元</span>
+				<a href="javascript:;">刷新余额</a>
+			</div> -->
+			<div class="btn">
+				<a href="${ctx!}/logout"><div class="header_02">退出</div></a>
+			</div>
+		</div>
+	</div>
+	<div id="part3" class="part3" style="width: auto;">
+		<div class="block">
+			<div id="sidebar" class="sidebar">
+				<div class="nav_tree">
+					<ul>
+						<li class="business_info tab_style" >
+							<span class="left_text">综合管理</span>
+							<span></span>
+						</li>
+						<li id="item1" class="lefttree_link <#if num==1>current_tab<#else>tab_style</#if>">
+							<span class="left_text">用户列表</span>
+							<span class="icon metting_list"></span>
+						</li>
+						<li id="item3" class="lefttree_link <#if num==3>current_tab<#else>tab_style</#if>">
+							<span class="left_text">充值列表</span>
+							<span class="icon metting_list"></span>
+						</li>
+						<li id="item4" class="lefttree_link <#if num==4>current_tab<#else>tab_style</#if>">
+							<span class="left_text">充值记录</span>
+							<span class="icon metting_list"></span>
+						</li>
+						<li id="item5" class="lefttree_link <#if num==5>current_tab<#else>tab_style</#if>">
+							<span class="left_text">资费管理</span>
+							<span class="icon metting_list"></span>
+						</li>
+						<#if aid==4>
+						<li id="item7" class="lefttree_link <#if num==7>current_tab<#else>tab_style</#if>">
+							<span class="left_text">套餐管理</span>
+							<span class="icon metting_list"></span>
+						</li>
+						</#if>
+						<li id="item6" class="lefttree_link <#if num==6>current_tab<#else>tab_style</#if>">
+							<span class="left_text">扣费明细</span>
+							<span class="icon metting_list"></span>
+						</li>
+						<li id="item2" class="lefttree_link <#if num==2>current_tab<#else>tab_style</#if>">
+							<span class="left_text">修改密码</span>
+							<span class="icon change_password"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="wrapmain" id="wrapmain">
+				<div id="maincontent">
+					<#nested>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</#macro>
+<#macro footer>
+	<script type="text/javascript" src="${ctx!}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${ctx}/js/common.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$("li.lefttree_link").click(function () {
+				var id=$(this).attr("id");
+				id=parseInt(id.substring(id.length-1));
+				switch(id){
+					case 1:
+							location.href="${ctx!}/admin";
+						break;
+					case 2:
+							location.href="${ctx!}/admin/showChangePwd";
+						break;
+					case 3:
+					    	location.href="${ctx!}/admin/charge";
+					    break;
+					case 4:
+					    location.href="${ctx!}/admin/charge/record";
+					    break;
+					case 5:
+					    location.href="${ctx!}/admin/rate";
+					    break;
+					case 6:
+					    location.href="${ctx!}/admin/charging";
+					    break;
+					case 7:
+					    location.href="${ctx!}/admin/package";
+					    break;
+				}
+			});
+		});
+	</script>
+	<#nested>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$("#loading").hide();
+            });
+		</script>
+</body>
+</html>
+</#macro>

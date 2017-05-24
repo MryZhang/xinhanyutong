@@ -1,0 +1,18 @@
+@IMPORT url("/css/retrieve_common.css");
+.part3 .mian_cont {padding-left: 178px;}
+.part3 .main_form {padding: 10px 0;}
+.part3 .main_form li {clear: left;line-height: 100%;padding: 0;}
+.part3 .main_form .item {height: 50px;line-height: 22px;padding-top: 1px;}
+.part3 .main_form .labtitle {font-size: 14px;}
+.part3 .main_form .fps_left {float: left;padding-right: 5px;text-align: right;width: 130px;color: #4d4d4d;}
+.item input, label {vertical-align: middle;}
+.keyClass {color: #FF0000;font-family: SimSun;font-size: 14px;margin-right: 6px;}
+.part3 .main_form .fps_right {float: left;}
+.part3 .main_form .text {border: 1px solid #BBBBBB;font-family: arial;font-size: 14px;height: 16px;padding: 4px 3px;width: 240px;}
+.part3 .main_form .null, .error {color: red;font-family: Verdana;line-height: 22px;font-size: 12px;}
+.part3 .main_form .itemButton {height: 50px;line-height: 22px;padding-top: 15px;}
+.part3 .main_form .up-postion {padding: 0 0 25px 158px;}
+.part3 .main_form .btn_submit {background: url("/img/ButtonT-135-208.png") no-repeat scroll 0 0 transparent;border: medium none;color: #FFFFFF;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 26px;line-height: 26px;overflow: hidden;padding: 0;text-align: center;width: 86px;}
+.part3 .main_form .highlight1{border:1px solid #EFA100;outline: 2px solid #FFDC97;}
+.part3 .main_form .highlight2{border: 1px solid #FF0000;color: #FF0000;outline: 1px solid #FFC1C1;}
+.part3 .main_form .addConTip{color:#999999;font-size: 12px;line-height: 22px;}

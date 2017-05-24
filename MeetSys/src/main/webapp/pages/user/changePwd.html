@@ -1,0 +1,107 @@
+<#include "/pages/common/layout.html">
+<@header "用户管理" 12>
+    <meta charset="utf-8">
+    <link href="${ctx!}/css/info.css" rel="stylesheet" type="text/css"/>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div class="personmgr">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom block_h1_pass">修改密码</div>
+        <div class="block_h1_content">
+            <form id="updpwdform" method="post" action="">
+                <div class="person-style formClass">
+                    <input type="hidden" value="${publicKey!}" id="publicKey" name="publicKey">
+                    <ul class="main_form">
+                        <li class="item">
+                            <div>
+                                <label class="fps_left leftfont">&nbsp;</label>
+                                <span id="personContent"></span>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">
+                                <b class="keyClass">*</b>旧密码：
+                            </label>
+                            <div class="fps_right">
+                                <input type="password" id="oldpassword" name="oldpassword" class="text" maxlength="16"/>
+                                <div id="oldpass_tip" class="addConTip"></div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">
+                                <b class="keyClass">*</b>新密码：
+                            </label>
+                            <div class="fps_right">
+                                <input type="password" id="password" name="password" class="text" value="" maxlength="16">
+                                <label id="password_icon" class=""></label>
+                                <div id="password_tip" class="null"></div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">
+                                <b class="keyClass">*</b>
+                                确认密码：
+                            </label>
+                            <div class="fps_right">
+                                <input type="password" id="chkPwd" name="chkPwd" class="text" value="" maxlength="16">
+                                <label id="chkPwd_icon" class="blank">&nbsp;</label>
+                                <div id="chkPwd_tip" class="null"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span class="fps_left">&nbsp;</span>
+                                <button type="button" id="updpwdbtn" class="btn_sytle">确认</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script src="${ctx!}/js/jsencrypt.min.js"></script>
+<script type="text/javascript" src="${ctx!}/js/user/user.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".text").focus(function () {
+            changePwdPage.showTips(this);
+        });
+        $(".text").blur(function () {
+            changePwdPage.validate(this);
+        });
+        //修改密码
+        $("#updpwdbtn").click(function () {
+            var flag=true;
+            $(".text").each(function () {
+                if(flag){
+                    flag = changePwdPage.validate(this);
+                }else{
+                    changePwdPage.validate(this);
+                }
+            });
+            if(flag){
+                var encrypt=new JSEncrypt();
+                encrypt.setPublicKey($("#publicKey").val());
+                var oldPassword=$("#oldpassword").val().trim();
+                var encryptOldPwd=encrypt.encrypt(oldPassword);
+
+                var newPassword=$("#password").val().trim();
+                var encryptNewPwd=encrypt.encrypt(newPassword);
+
+                var confirmPwd=$("#chkPwd").val().trim();
+                var encryptConfirmPwd=encrypt.encrypt(confirmPwd);
+                changePwdPage.changePwd({
+                    "p.oldPassword":encryptOldPwd,
+                    "p.newPassword":encryptNewPwd,
+                    "p.confirmPassword":encryptConfirmPwd
+                },function () {
+                    $("#oldpassword").val("");
+                    $("#password").val("");
+                    $("#chkPwd").val("");
+                })
+            }
+        });
+    });
+</script>
+</@footer>

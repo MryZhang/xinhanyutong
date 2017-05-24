@@ -1,0 +1,39 @@
+.head{background-color:#9FC4F0;color:#fff;padding:4px 5px;}
+.head img{vertical-align: middle;margin: 3px 0;}
+.addcontact{padding: 2px;}
+.center-head{clear:both;overflow: hidden;}
+.head-search{float: right;width: 50%;}
+.head .head-text{margin-top: 3px;}
+.meeting-status{text-align: center;padding: 20px 0;}
+ul{margin: 0;padding: 0;}
+ul li{list-style: none;}
+.meeting-info li{overflow: hidden;clear: both;line-height:20px;}
+.meeting-info li .left{float: left;text-align: right;width: 50%;}
+.meeting-info li .right{float: right;text-align: left;width: 50%;}
+input[type=checkbox]{vertical-align: middle;}
+.meeting-ctrl-1 label{display: inline-block;margin-left: 20%;}
+.meeting-ctrl-2{text-align: center;}
+.meeting-ctrl-2 a{margin: 2px 0;width: 120px;}
+.icon{width: 16px;height: 16px;display: inline-block;vertical-align: middle}
+.icon-start{background-image: url(../img/circle.png);}
+.icon-stop{background-image: url(../img/rangle.png);}
+.joinMeet{background-image: url(../img/add1.png);display: inline-block;height: 16px;width: 16px;vertical-align: middle;}
+a{text-decoration: none;}
+a:HOVER {text-decoration: none;}
+.searchResult{position: absolute;z-index: 9999;background: #fff;width: 98%;left: 1%;border: 1px solid #aaa;min-height: 70px;}
+.searchResult li{padding: 0 4px;}
+.searchResult li:HOVER {background-color: #D9D9D9;cursor: pointer;}
+.call{background-image: url(../img/call.png);display: inline-block;height: 16px;width: 16px;vertical-align: middle;}
+.call-end{background-image: url(../img/call-end.png);display: inline-block;height: 16px;width: 16px;vertical-align: middle;}
+.delete{background-image: url(../img/clear.png);display: inline-block;height: 16px;width: 16px;vertical-align: middle;}
+.up{background-image: url(../img/long-arrow-up.png);display: inline-block;height: 16px;width: 16px;vertical-align: middle;}
+.down{background-image: url(../img/long-arrow-down.png);display: inline-block;height: 16px;width: 16px;vertical-align: middle;}
+.mic{background-image: url(../img/mic.png);display: inline-block;height: 16px;width: 16px;vertical-align: middle;}
+.mic-off{background-image: url(../img/mic-off.png);display: inline-block;height: 16px;width: 16px;vertical-align: middle;}
+.loading{display:table-cell;width: 100%;height: 100%;z-index: 100;background-color: #fff;filter:alpha(opacity=50);-moz-opacity:0.5;opacity:0.5;position: absolute;top: 0;left: 0;text-align: center;vertical-align: middle;}
+.loading img{position: absolute;top: 50%;left: 50%;margin-top: -16px;margin-left: -16px;}
+ul.info li{clear: both;overflow: hidden;line-height: 20px;padding: 0 5px;}
+ul.info li:HOVER {background-color: #D9D9D9;cursor: pointer; }
+ul.info .left{float: left;}
+ul.info .right{float: right;color: gray;}
+select#selectHost{border: 1px solid #bbb;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;padding: 2px;vertical-align: middle;}

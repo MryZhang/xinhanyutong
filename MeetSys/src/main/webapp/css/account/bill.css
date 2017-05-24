@@ -1,0 +1,48 @@
+.bill {
+    width: 100%;
+}
+.bill .block_h1_top {
+    background: url(../../img/bg_top.gif) no-repeat scroll 0 0 transparent;
+    float: left;
+    height: 10px;
+    width: 800px;
+}
+.bill .block_h1_bottom {
+    background: url(../../img/b5.gif) no-repeat scroll 10px 0 transparent;
+    float: left;
+    width: 747px;
+    margin-top: -2px;
+    padding: 5px 5px 5px 45px;
+    border: 1px solid #D5D5D5;
+    border-top: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+.bill .bill_sel_area {
+    margin: 5px 0 15px 10px;
+}
+.btn_sytle {
+    background: url(../../img/bgImg.gif) repeat-x scroll 0 0 transparent;
+    border-radius: 5px;
+    border: 0 none;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: '微软雅黑','楷体','标楷体';
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    overflow: hidden;
+    padding: 3px 15px 2px 15px !important;
+    padding: 0px 8px 2px 6px;
+    margin-right: 3px;
+    vertical-align: middle;
+}
+.searchText {
+    border: 1px solid #BBB;
+    font-family: arial;
+    font-size: 14px;
+    height: 16px;
+    padding: 2px 3px;
+    width: 120px;
+}

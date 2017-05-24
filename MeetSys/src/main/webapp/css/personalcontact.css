@@ -1,0 +1,14 @@
+@IMPORT url("publiccontacts.css");
+.left_content .contact-content .loadingStyle{text-align: center;width: 582px;z-index: 9999;background-color: #fff;filter: alpha(opacity=50);-moz-opacity: 0.5;opacity: 0.5;position: absolute;top: 106px;}
+.error{color: red;line-height: 20px;font-size: 12px;margin-left: 98px;}
+.contact .addgroup {background: url("../img/addc.gif") no-repeat scroll -1px -1px transparent;width: 90px !important;width: 90px;}
+.contact .ctable .t_opara {width: 40px;}
+.contact .ctable tr {border-bottom: 1px solid #DEDEDE;}
+.srcInvitee {float: left;margin-left: 80px;}
+.selInvitee {float: right;margin-right: 80px;}
+.inviteeBtn {float: left;margin: 12px;margin-top: 50px;}
+.inviteeTree {float: left;margin-left: 20px;border: 1px solid #A6C9E2;width: 200px;height: 300px;overflow-y: scroll;overflow-x: auto;}
+.hide {display: none !important;}
+.selectedTree {float: right;margin-right: 20px;border: 1px solid #A6C9E2;width: 200px;height: 300px;overflow-y: scroll;overflow-x: auto;}
+.btn_remove{/* position: relative;top: 1px; */border: none;width: 15px;background-color: transparent;background-image: url(../img/zTreeStandard.png);background-repeat: no-repeat;background-position: -110px -66px;position: relative;top:-3px;}
+.btn_style {background: url("../img/bgImg.gif") repeat-x scroll 0 0 transparent;border-radius: 5px;border: 0 none;color: #FFFFFF;cursor: pointer;display: inline-block;font-family: 'microsoft yahei';font-size: 14px;font-weight: bold;line-height: 20px;overflow: hidden;padding: 3px 15px 2px 15px !important;padding: 0px 8px 2px 6px;margin-right: 3px;vertical-align: middle;}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登陆提示</title>
+</head>
+<body>
+<div style="width: 50%;margin: 100px auto;border: 1px solid #b8d4e8;padding-bottom: 27px;">
+	<h2 style="text-align: center;color:#00E;font-family: 'microsoft yahei'">对不起，您没有权限访问该页面</h2>
+	<div style="color:#FB7823;font-size: 12px;text-align: center;"><span id="second">5</span>s后跳转发到登陆页面...</div>
+</div>
+<script type="text/javascript">
+function jump(){
+	var n=document.getElementById("second").innerText;
+	n=parseInt(n);
+	if(n>1){
+		n--;
+		document.getElementById("second").innerText=n;
+		setTimeout("jump()",1000);
+	}else{
+		location.href="${ctx!}/login";
+	}
+}
+setTimeout("jump()",1000);
+</script>
+</body>
+</html>

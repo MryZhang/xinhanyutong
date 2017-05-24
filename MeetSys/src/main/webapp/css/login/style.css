@@ -1,0 +1,102 @@
+body{
+  font-family: MicrosoftJhengHei;
+  padding: 0;
+  margin: 0;
+}
+div.header{
+  clear: both;
+  overflow: hidden;
+  width: 60%;
+  margin: 0 auto;
+}
+.logo{
+  float: left;
+}
+.com_name{
+  color: #2B7EC2;
+  float: right;
+  vertical-align: middle;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: italic;
+  margin-top: 64px;
+  margin-right: 5px;
+}
+.c_left{
+  float: left;
+  width: 600px;
+  height: 300px;
+  display: inline-block;
+  background-image: url("../../img/bg_logo.png");
+  background-repeat: no-repeat;
+  background-position: 0px 1px;
+}
+.c_right{
+  overflow: hidden;
+  padding: 25px;
+}
+.c_right>form>div{
+  margin-bottom: 10px
+}
+.c_right input[type=text],input[type=password]{
+  width:200px;
+}
+.c_right button{
+  border-width: 1px;
+    border-style: outset;
+    border-color: buttonface;
+    border-image: initial;
+    align-items: flex-start;
+    text-align: center;
+    cursor: pointer;;
+    color: buttontext;
+    background-color: buttonface;
+    box-sizing: border-box;
+    color:#2B7EC2;
+    border-radius: 3px;
+    padding: 1px 15px;
+}
+.content{
+  background: #ACACAC;
+  color: #fff;
+}
+.content>div{
+  overflow: hidden;
+  clear: both;
+  width: 70%;
+  margin: 0 auto;
+}
+.footer>div{
+  width: 70%;
+  margin: 0 auto;
+}
+.footer span{
+  color:#565656;
+  font-style: italic;
+  margin-top: 15px;
+  display: block;
+  margin-left: 630px;
+}
+.error_tips{
+  position: relative;
+}
+.error_tips .err_m {
+  line-height: 18px;
+  display: inline-block;
+  padding-left: 22px;
+  font-size: 14px;
+  color: #ff3b30;
+  vertical-align: middle;
+}
+.error_tips .error_logo {
+  background: url(../../img/icon_3_tiny.png) 0 -162px no-repeat;
+  line-height: 18px;
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  top: 3px;
+}
+#vertifyCode img{
+  height: 22px;
+  vertical-align: middle;
+}

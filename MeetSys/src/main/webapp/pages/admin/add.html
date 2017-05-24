@@ -1,0 +1,158 @@
+<#include "/pages/admin/layout.html">
+<@header>
+    <meta charset="UTF-8">
+    <link href="${ctx!}/artDialog/css/ui-dialog.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx!}/css/addcontact.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx!}/css/admin/add.css" rel="stylesheet" type="text/css"/>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div id="personInfo" class="contact">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom" id="addContact_title_Id"><#if (user.id)??>修改账号信息<#else>新建账号</#if></div>
+        <div class="block_h1_content block_h1_content_h1">
+            <form id="personformId" method="post" action="<#if (user.id)??>${ctx!}/admin/update<#else>${ctx!}/admin/add</#if>">
+                <input type="hidden" id="uid" value="${(user.id)!}" name="user.id"/>
+                <input type="hidden" value="${query!}" name="queryStr"/>
+                <input type="hidden" value="${publicKey!}" id="publicKey" name="publicKey">
+                <div class="person-style formClass">
+                    <ul class="main_form">
+                        <li class="item">
+                            <div>
+                                <label class="fps_left leftfont">&nbsp;</label>
+                                <span id="personContent"></span>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>账号：</label>
+                            <div class="fps_right">
+                                <#if (user.id)??>
+                                    ${user.username}
+                                    <input type="hidden" value="${user.username}" name="user.username"/>
+                                    <input type="hidden" value="${user.cid}" name="user.cid">
+                                    <#else>
+                                        <input type="text" name="user.username" <#if (user.id)??>readonly="readonly"</#if>  class="text <#if usernameMsg??>highlight2</#if>" id="c_userName" value="${(user.username)!}" maxlength="30">
+                                        <span id="c_userName_icon" class="blank"></span>
+                                        <div id="c_userName_Id" class="addConTip <#if usernameMsg??>error</#if>"><#if usernameMsg??>${usernameMsg}<#else>请输入手机号码</#if></div>
+                                </#if>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>密码：</label>
+                            <div class="fps_right">
+                                <input type="hidden" name="user.encryptPassword" id="encryptPassword">
+                                <input type="password" name="user.password" class="text <#if passwordMsg??>highlight2</#if>" id="c_password" value="${(user.password)!}" maxlength="20">
+                                <span id="c_password_icon" class="">&nbsp;</span>
+                                <div id="c_password_Id" class="<#if passwordMsg??>addConTip error<#else>null</#if>"><#if passwordMsg??>${passwordMsg}</#if></div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>确认密码：</label>
+                            <div class="fps_right">
+                                <input type="hidden" name="user.encryptConfirmPwd" id="encryptConfirmPwd">
+                                <input type="password" name="user.confirmPwd" class="text <#if confirmPwdMsg??>highlight2</#if>" id="c_chkpwd" value="${(user.password)!}" maxlength="30">
+                                <span id="c_chkpwd_icon" class="">&nbsp;</span>
+                                <div id="c_chkpwd_Id" class="<#if confirmPwdMsg??>addConTip error<#else>null</#if>"><#if confirmPwdMsg??>${confirmPwdMsg}</#if></div>
+                            </div>
+                        </li>
+                        <#if !(user.id)??>
+                        <li class="eitem">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>所属公司：</label>
+                            <div class="fps_right">
+                                <select name="user.cid" id="c_companySelect" class="text <#if cidMsg??>highlight2</#if>">
+                                    <option value="0">--请选择--</option>
+                                    <#list clist as item>
+                                        <option value="${item.id}" <#if (user??&&user.cid??&&user.cid==item.id)>selected</#if>>${item.name}</option>
+                                    </#list>
+                                </select>
+                                <a class="new_group" id="companyshowId">新建公司</a>
+                                <div id="c_company_Id" class="<#if cidMsg??>addConTip error<#else>null</#if>"><#if cidMsg??>${cidMsg}</#if></div>
+                            </div>
+                        </li>
+                        </#if>
+                        <li class="item">
+                            <div class="btndiv">
+                                <span class="fps_left">&nbsp;</span>
+                                <button type="submit" id="c_saveContactId" class="btn_sytle">保存</button>
+                                <#if !(user.id)??><button type="submit" id="c_saveContactAgainId" class="btn_sytle">保存并继续新建</button></#if>
+                                <button type="button" id="c_cancelId" class="btn_sytle">取消</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript" src="${ctx!}/js/jsencrypt.min.js"></script>
+<script type="text/javascript" src="${ctx!}/artDialog/dist/dialog.js?skin=blue"></script>
+<script type="text/javascript" src="${ctx!}/js/common.js"></script>
+<script type="text/javascript" src="${ctx!}/js/admin/add.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //取消返回
+        $("#c_cancelId").click(function () {
+            location.href="${ctx!}/admin/page?${query!}";
+        });
+        //保存
+//        $("#c_saveContactId").click(function () {
+//            var flag=true;
+//            $("input.text,select").each(function () {
+//                if(flag){
+//                    flag=add.validate(this);
+//                }else {
+//                    add.validate(this);
+//                }
+//            });
+//        });
+        $("#personformId").submit(function () {
+            var flag=true;
+            $("input.text,select").each(function () {
+                if(flag){
+                    flag=add.validate(this);
+                }else {
+                    add.validate(this);
+                }
+            });
+
+            if(flag){
+                //加密密码
+                var encrypt=new JSEncrypt();
+                encrypt.setPublicKey($("#publicKey").val());
+
+                var password=$("#c_password").val().trim();
+                $("#encryptPassword").val(encrypt.encrypt(password));
+                $("#c_password").val(common.generateMixed(password.length));
+
+                var confirmPwd=$("#c_chkpwd").val().trim();
+                $("#encryptConfirmPwd").val(encrypt.encrypt(confirmPwd));
+                $("#c_chkpwd").val(common.generateMixed(confirmPwd.length));
+            }
+            return flag;
+        });
+        //获取焦点
+        $("input.text,select").focus(function () {
+            var id = $(this).attr("id");
+            $(this).attr("class","text highlight1").next().attr("class","blank").next().text("").attr("class","addConTip");
+            if(id=="c_userName"){
+                $(this).next().next().text("请输入手机号码");
+            }
+        });
+        //失去焦点
+        $("input.text,select").blur(function () {
+            if(add.validate(this)){
+                var id=$(this).attr("id");
+                if(id!="c_userName"&&id!="c_companySelect"){
+                    $(this).attr("class","text").next().attr("class","blank icon_orderly");
+                }else if(id=="c_companySelect"){
+                    $(this).attr("class","text");
+                }
+
+            }
+        });
+        //新建公司
+        $("#companyshowId").click(function () {
+            location.href="${ctx}/company/addnew?referrer="+encodeURIComponent(location.href);
+        });
+    });
+</script>
+</@footer>

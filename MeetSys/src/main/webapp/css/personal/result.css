@@ -1,0 +1,18 @@
+.contact {width: 100%;font-family: arial;font-size: 12px;}
+.contact .block_h1_top {background: url("../../img/bg_top.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);float: left;height: 8px !important;height: 2px;width: 800px;}
+.contact .block_h1_content {float: left;width: 797px;}
+.contact .block_h1_bottom {float: left;width: 782px;margin-top: -3px !important;margin-top: -8px;padding: 5px 5px 5px 10px;border: 1px solid #D5D5D5;border-top: none;font-size: 14px;font-weight: bold;position: relative;}
+.contact .block_h1_content_h1 {border: 1px solid #D5D5D5;border-top: none;padding-bottom: 50px;}
+.contact .imp_message {padding: 30px 40px 30px 50px;float: left;}
+.contact .imp_cont1 {width: 700px;float: left;padding-bottom: 30px;}
+.contact .imp_ico {background-image: url("../../img/20131402231542.gif");background-repeat: no-repeat;background-attachment: scroll;background-color: rgba(0, 0, 0, 0);padding: 14px 17px !important;padding: 9px 15px;clear: both;float: left;overflow: hidden;}
+.contact .imp_seccess_text {font-size: 14px;padding-top: 5px;float: left;overflow: hidden;}
+.contact .imp_cont2 {width: 700px;float: left;}
+.contact .imp_seccess_ico {background-position: -198px 0;}
+.contact .imp_fail_ico {background-position: -158px 0;}
+.contact .imp_table_div {width: 600px;height: 300px;margin-left: 30px;margin-top: 15px;overflow-x: hidden;overflow-y: auto;}
+.contact .ctable {width: 100%;border-collapse: collapse;color: #333;}
+.contact .ctable tr {border-bottom: 1px solid #DEDEDE;}
+.contact .ctable th {text-align: left;padding-left: 2px;height: 25px;background: url("../../img/ui-bg_glass_85_dfeffc_1x400.png") repeat-x scroll 50% 50% #DFEFFC;color: #2E6E9E;}
+.contact .retClass {background: url("../../img/20131402231542.gif") no-repeat scroll -328px -80px rgba(0, 0, 0, 0);padding: 9px 0 5px 15px;cursor: pointer;font-size: 12px;color: #0084B2;}
+.contact .ctable td {text-align: left;padding-left: 2px;height: 25px;}

@@ -1,0 +1,19 @@
+.usermgr .threshold_dv{background-color: rgba(242, 242, 242, 1);margin:0 40px;margin-top:50px;padding:20px;line-height: 25px;}
+.threshold_dv .threshold_info{font-family: 'Arial Negreta', 'Arial Normal', 'Arial';font-size:18px;
+font-weight: 700;}
+#threshold_value{color:#FF0000;}
+.explain_txt{ font-family: 'Arial Normal', 'Arial';  font-weight: 400;  font-size: 13px; color: #666666;}
+.threshold_dv a{text-decoration: none;}
+.text{
+    border: 1px solid #BBBBBB;
+    font-family: arial;
+    font-size: 14px;
+    height: 16px;
+    padding: 4px 3px;
+    width: 240px;
+}
+.error{
+    font-size: 12px;
+    color: red;
+    line-height: 22px;
+}

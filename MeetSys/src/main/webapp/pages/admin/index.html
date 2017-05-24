@@ -1,0 +1,248 @@
+<#include "/pages/admin/layout.html">
+<@header>
+    <meta charset="UTF-8">
+    <link href="${ctx!}/artDialog/css/ui-dialog.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx!}/css/ulist-left.css" rel="stylesheet" type="text/css"/>
+    <style>
+        span.rspan{position: relative;top: -11px;}
+        span.lspan{word-wrap: normal;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;}
+    </style>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div class="usermgr" >
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom">
+            <span class="ctitle">用户列表</span>
+        </div>
+        <div class="btn_group">
+            <div class="btn_left">
+                <button class="btn_style" id="addBtn" type="button">添加账号</button>
+                <button class="btn_style" id="delBtn" type="button">删除账号</button>
+                <button class="btn_style" id="addCompBtn" type="button">添加公司</button>
+            </div>
+
+            <div class="right_search">
+                <form method="get" action="${ctx!}/admin/page">
+                    <input type="hidden" value="${(currentPage)!1}" name="currentPage" id="currentIndex"/>
+                    <input type="hidden" value="${(cid)!}" name="cid" id="companyId"/>
+                    <input type="hidden" value="${(username)!}" id="username"/>
+                    <input type="text" class="inputtext" name="username" value="${(username)!}" id="regsearchid" name="search" placeholder="账号"/>
+                    <button class="btn_style search_01" id="searchBtn" type="submit">搜索</button>
+                </form>
+            </div>
+            <!-- <div class="choice">
+                <label>公司：</label>
+                <select id="companyId">
+                    <option value="0">--请选择--</option>
+                </select>
+            </div> -->
+        </div>
+        <div class="block_h1_content" style="margin-top: 10px;">
+            <div class="left_content" id="left_content">
+                <table class="ctable">
+                    <tr class="theader">
+                        <th class="t_check"><input type="checkbox" id="chkAll"/></th>
+                        <th class="t_name">账号</th>
+                        <th class="t_pwd">密码</th>
+                        <th class="t_type">账号类型</th>
+                        <th class="t_company">公司</th>
+                        <th class="t_code">呼叫号码</th>
+                        <th class="t_opara">操作</th>
+                    </tr>
+                </table>
+                <div id="user-content" class="user-content">
+                    <div id="loadTip" class="loadingStyle" style="display: none;"><img src="${ctx!}/img/loading.gif"></div>
+                    <table class="ctable" id="tdata">
+                        <#if (pages.list?size>0)>
+                            <#list pages.list as item>
+                                <tr>
+                                    <td class="t_check"><input type="checkbox" value="${item.id}"/></td>
+                                    <td class="t_name" title="${item.username}">${item.username}</td>
+                                    <td class="t_pwd" title="${item.password}">${item.password}</td>
+                                    <td class="t_type" title="${item.type}">${item.type}</td>
+                                    <td class="t_company" title="${item.name}">${item.name}</td>
+                                    <td class="t_code" title="${item.callNum}">${item.callNum}</td>
+                                    <td class="t_opara"><a href="javascript:location.href='${ctx!}/admin/edit/${item.id}'+admin.getQueryStr()" class="t_edit">编辑</a></td>
+                                </tr>
+                            </#list>
+                            <#else>
+                                <tr>
+                                    <td colspan="5" class="meet_td_none">
+                                        没有符合条件的数据
+                                    </td>
+                                </tr>
+                        </#if>
+                    </table>
+                </div>
+                <div class="pagination" id="paginationBar" style="background: #FFF;border:1px solid #FFF;">
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="javascript:;" <#if pages.pageNumber==1>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+                                    <span class="l-btn-left">
+                                        <span class="l-btn-text">
+                                            <span class="l-btn-empty pagination-first">&nbsp;</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="javascript:;" <#if pages.pageNumber==1>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+                                    <span class="l-btn-left">
+                                        <span class="l-btn-text">
+                                            <span class="l-btn-empty pagination-prev">&nbsp;</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                <div class="pagination-btn-separator"></div>
+                            </td>
+                            <td>
+                                <span style="padding-left:6px;">第</span>
+                            </td>
+                            <td>
+                                <input class="pagination-num" type="text" id="currentPage" value="${pages.pageNumber}" size="2">
+                            </td>
+                            <td>
+                                <span style="padding-right: 6px;">页/共${pages.totalPage}页</span>
+                            </td>
+                            <td>
+                                <div class="pagination-btn-separator"></div>
+                            </td>
+                            <td>
+                                <a href="javascript:;" <#if pages.pageNumber==pages.totalPage||pages.totalPage==0>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if> >
+                                    <span class="l-btn-left">
+                                        <span class="l-btn-text">
+                                            <span class="l-btn-empty pagination-next">&nbsp;</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="javascript:;" <#if pages.pageNumber==pages.totalPage||pages.totalPage==0>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+                                    <span class="l-btn-left">
+                                        <span class="l-btn-text">
+                                            <span class="l-btn-empty pagination-last">&nbsp;</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="pagination-info">显示 <#if (pages.list?size>0)>${pages.pageSize*(pages.pageNumber-1)+1}<#else>0</#if>到 ${pages.pageSize*(pages.pageNumber-1)+pages.list?size}总计 ${pages.totalRow} 条记录</div>
+                    <div style="clear:both;"></div>
+
+                </div>
+            </div>
+            <div class="right_content" id="right_content">
+                <ul class="ul_list">
+                    <li id="lifirst" <#if !cid??||cid?number==0>class="current"</#if>>
+                        <span class="iconstyle ico_open"></span>
+                        <span class="lspan" id="gContactNumId">所有公司</span>
+                    </li>
+                    <#list clist as item>
+                        <li class="group ${(cid??&&cid?number==item.id)?string('current','')}" title="${item.name}" >
+                            <input type="hidden" value="${item.id}" class="cid"/>
+                            <span class="iconstyle ico_open"></span>
+                            <span class="lspan">${item.name}</span>
+                            <span class="rspan"><button type="button" class="edit_btn"></button><button type="button" class="del_btn"></button></span>
+                        </li>
+                    </#list>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</@header>
+<@footer>
+    <script type="text/javascript" src="${ctx!}/artDialog/dist/dialog.js?skin=blue"></script>
+    <script type="text/javascript" src="${ctx!}/js/admin/index.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //查看指定公司的账号
+            $("ul.ul_list>li>span.lspan").click(function () {
+                var cid=$(this).parent().find("input.cid").val();
+                var condition;
+                if(cid){
+                    condition="?a.cid="+cid;
+                }
+                location.href="${ctx!}/admin/page"+(condition||"");
+            });
+            
+            
+            //添加账号
+            $("#addBtn").click(function () {
+                location.href="${ctx!}/admin/showAdd"+admin.getQueryStr();
+            });
+            //首页
+            $("span.pagination-first").click(function () {
+                var cls = $(this).parents("a.l-btn").attr("class");
+                if(cls.indexOf("l-btn-disabled")==-1){//未被禁用
+                    admin.page({"companyId":$("#companyId").val(),"username":$("#username").val(),"pageNum":1});
+                }
+            });
+            //上一页
+            $("span.pagination-prev").click(function () {
+                var cls = $(this).parents("a.l-btn").attr("class");
+                if(cls.indexOf("l-btn-disabled")==-1){//未被禁用
+                    admin.page({"companyId":$("#companyId").val(),"username":$("#username").val(),"pageNum":parseInt($("#currentIndex").val())-1});
+                }
+            });
+            //下一页
+            $("span.pagination-next").click(function () {
+                var cls = $(this).parents("a.l-btn").attr("class");
+                if(cls.indexOf("l-btn-disabled")==-1){//未被禁用
+                    admin.page({"companyId":$("#companyId").val(),"username":$("#username").val(),"pageNum":parseInt($("#currentIndex").val())+1});
+                }
+            });
+            //尾页
+            $("span.pagination-last").click(function () {
+                var cls = $(this).parents("a.l-btn").attr("class");
+                if(cls.indexOf("l-btn-disabled")!=-1){//未被禁用
+                    admin.page({"companyId":$("#companyId").val(),"username":$("#username").val(),"pageNum":"${pages.totalPage}"});
+                }
+            });
+            
+            //全选
+            $("#chkAll").click(function () {
+                var checked=this.checked;
+                $("#tdata").find("input[type=checkbox]").each(function () {
+                    this.checked=checked;
+                });
+            });
+
+            //修改公司信息
+            $("button.edit_btn").click(function () {
+                var $dom=$(this).parent().parent();
+                location.href="${ctx!}/company/modify/"+$dom.find("input.cid").val()+"?referrer="+encodeURIComponent(location.href);
+            });
+            //删除公司
+            $("button.del_btn").click(function () {
+                var id=$(this).parent().parent().find("input.cid").val();
+                admin.deleteCompany(id);
+            });
+            
+            //删除账号
+            $("#delBtn").click(function () {
+                var chks=$("#tdata input[type=checkbox]");
+                var obj=[];
+                for(var i=0,length=chks.length;i<length;i++){
+                    if(chks[i].checked){
+                        obj.push(chks[i].value);
+                    }
+                }
+                if(obj.length>0){
+                    admin.deleteUsers(obj);
+                }
+            });
+            
+            //添加公司
+            $("#addCompBtn").click(function () {
+                location.href="${ctx}/company/addnew?referrer="+encodeURIComponent(location.href);
+            });
+        });
+    </script>
+</@footer>

@@ -1,0 +1,77 @@
+<#include "/pages/admin/layout.html">
+<@header title="详情" num=3>
+    <meta charset="UTF-8"/>
+    <link href="${ctx!}/artDialog/css/ui-dialog.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx!}/css/admin/charge_detail.css" rel="stylesheet" type="text/css"/>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div class="usermgr">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom">
+            <span class="ctitle">详情</span>
+        </div>
+        <div class="block_h1_content block_h1_content_h1">
+            <input type="hidden" value="${query!}" name="queryStr"/>
+            <div class="person-style formClass">
+                <ul class="main_form">
+                    <li class="item">
+                        <div>
+                            <label class="fps_left leftfont">&nbsp;</label>
+                            <span id="personContent"></span>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <label class="fps_left leftfont">公司名称：</label>
+                        <div class="fps_right">
+                            ${account.name}
+                        </div>
+                    </li>
+                    <li class="item">
+                        <label class="fps_left leftfont">账户余额：</label>
+                        <div class="fps_right">
+                            ${account.balance}
+                        </div>
+                    </li>
+                    <li class="item">
+                        <label class="fps_left leftfont">套餐：</label>
+                        <div class="fps_right" style="width: 200px;">
+                            <span id="modeDescSpan" style="float: left;margin-right: 10px;">${account.pname}</span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="btn_style" id="modify_mode_btn" type="button">修改</button>
+                            <p style="margin-top: 10px;background-color: #DEDEDE;padding: 8px;border-radius: 3px;">
+                                <b>资费说明：</b>${account.description}
+                            </p>
+                        </div>
+                    </li>
+                    <li class="item" id="month_count" <#if account.callInMode==1>style="display:none;"</#if>>
+                        <label class="fps_left leftfont">包月方数：</label>
+                        <div class="fps_right">
+                            <span id="monthCountSpan">${account.count!0}</span>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="btndiv">
+                            <span class="fps_left">&nbsp;</span>
+                            <button type="button" id="c_backId" class="btn_sytle">返回</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript" src="${ctx!}/artDialog/dist/dialog.js?skin=blue"></script>
+<script type="text/javascript" src="${ctx!}/js/admin/charge_detail.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //返回
+        $("#c_backId").click(function () {
+            location.href=common.getContextPath()+"/admin/charge?"+$("input[name=queryStr]").val();
+        });
+        //修改套餐
+        $("#modify_mode_btn").click(function () {
+            location.href="${ctx!}/admin/charge/showChange/${account.id}?referrer="+encodeURIComponent(location.href);
+        });
+    });
+</script>
+</@footer>

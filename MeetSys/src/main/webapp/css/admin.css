@@ -1,0 +1,38 @@
+@IMPORT url("manage.css");
+.usermgr {width: 800px;_height: 670px;min-height: 570px;display: block;overflow: hidden;margin: 0 auto;}
+.usermgr .btn_group{width: 100%;clear: both;overflow: hidden;float: left;margin-top: 10px;}
+.usermgr .btn_style {background-color: #1556af;border-radius: 5px;border: 0 none;color: #FFF;cursor: pointer;display: inline-block;font-family: 'microsoft yahei','����','�꿬��';font-size: 12px;float: left;overflow: hidden;line-height: 20px;padding: 3px 5px 2px 5px!important;padding: 0 0 2px 13px;vertical-align: middle;margin-right: 3px;}
+.usermgr .btn_left{float:left;}
+select, input, textarea {font-size: 12px;line-height: 1.2em;}
+.usermgr .inputtext {border: 1px solid #BBB;line-hieght: 16px;margin-right: 5px;padding: 4px;width: 160px!important;width: 140px;float: left;overflow: hidden;display: inline_block;}
+.usermgr .search_01 {background: url("../img/search.gif") no-repeat scroll -3px 0 transparent;padding: 3px 5px 2px 18px!important;}
+.usermgr .right_search{float: right;}
+#companyId{border: 1px solid #BBB;padding: 2px;float:right;}
+.usermgr .choice{float:right;margin-right: 6px;}
+.usermgr .block_h1_top {background: url("../img/bg_top.gif") no-repeat scroll 0 0 transparent;float: left;height: 8px !important;height: 2px;width: 100%;}
+.usermgr .block_h1_bottom {float: left;width: 782px;margin-top: -3px !important;margin-top: -8px;padding: 5px 5px 5px 10px;border: 1px solid #D5D5D5;border-top: none;font-size: 14px;font-weight: bold;position: relative;}
+.usermgr .block_h1_content {float: left;width: 797px;}
+.usermgr .left_content {float: left;display: inline;width: 582px;}
+.usermgr .right_content {float: left;display: inline;margin-left: 5px;min-height: 450px;width: 200px;background-color: #D0E0FA;padding-right: 10px;padding-top: 15px;}
+ul, li, td, tr, table {margin: 0px;padding: 0px;list-style: none;}
+.usermgr .ul_list {width: 100%;}
+li {list-style-type: none;}
+.usermgr .ul_list li {height: 30px;line-height: 30px;color: #75787A;}
+.usermgr .ul_list li.current {background-color: #FFF;border: 1px solid #D9D9D9;border-left: 0 none;box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.1);font-weight: bold;}
+.usermgr .ul_list .lspan {padding: 0 0 0 1px;cursor: pointer;width: 140px;display: inline-block;}
+.usermgr .iconstyle {background-attachment: scroll;background-color: transparent;background-image: url("../img/zTreeStandard.png");background-repeat: no-repeat;border: 0 none;cursor: pointer;height: 16px;outline: medium none;width: 16px;background-position: -110px 0;
+    margin-right: 2px;
+    margin-top: 6px;
+    vertical-align: middle;
+    clear: both;
+    position: relative;
+    float: left;
+}
+.usermgr li.current .ico_open {background-position: -110px -16px;}
+.usermgr .ul_list .rspan {display: none;padding-right: 0;}
+button {cursor: pointer;}
+.usermgr .edit_btn {background-attachment: scroll;background-color: transparent;background-image: url("../img/contactIcon.png");background-position: 0 0;background-repeat: no-repeat;height: 16px;width: 16px;border: 0 none;vertical-align: middle;}
+.usermgr .del_btn {background-attachment: scroll;background-color: transparent;background-image: url("../img/contactIcon.png");background-position: -16px 0;background-repeat: no-repeat;height: 16px;width: 16px;border: 0 none;vertical-align: middle;}
+.usermgr .ul_list li.current {background-color: #FFF;border: 1px solid #D9D9D9;border-left: 0 none;box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.1);font-weight: bold;}
+.error{font-size: 12px;color: red;line-height: 22px;}
+.text {border: 1px solid #A6C9E2;font-family: arial;font-size: 12px;height: 16px;padding: 4px 3px;width: 200px;}
