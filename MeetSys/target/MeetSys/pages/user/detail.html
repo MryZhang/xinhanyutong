@@ -1,0 +1,168 @@
+<#include "/pages/common/layout.html">
+    <@header "个人资料" 11>
+    <meta charset="UTF-8">
+    <link href="${ctx!}/css/addcontact.css" rel="stylesheet" type="text/css"/>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div id="personInfo" class="contact">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom" id="addContact_title_Id">个人资料</div>
+        <div class="block_h1_content block_h1_content_h1">
+            <form id="personformId" method="post">
+                <input type="hidden" value="${publicKey!}" id="publicKey" name="publicKey">
+                <input type="hidden" value="${queryString!}" id="queryString" name="queryString"/>
+                <input type="hidden" id="uid" value="${(user.id)!}" name="user.id"/>
+                <input type="hidden" id="eid" value="${(user.eid)!}" name="user.eid"/>
+                <div class="person-style formClass">
+                    <ul class="main_form">
+                        <li class="item">
+                            <div>
+                                <label class="fps_left leftfont">&nbsp;</label>
+                                <span id="personContent"></span>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>账号：</label>
+                            <div class="fps_right">
+                                ${(user.username)!}
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>密码：</label>
+                            <div class="fps_right">
+                                <input type="hidden" name="user.encryptPwd" id="encryptPwd">
+                                <input type="password" class="text" id="c_password" name="user.password" value="${(user.password)!}" maxlength="20">
+                                <span id="c_password_icon" class="">&nbsp;</span>
+                                <div id="c_password_Id" class="<#if passwordMsg??>addConTip error<#else>null</#if>">${passwordMsg!}</div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>确认密码：</label>
+                            <div class="fps_right">
+                                <input type="hidden" name="user.encryptConfirmPwd" id="encryptConfirmPwd">
+                                <input type="password" class="text" id="c_chkpwd" name="user.confirmPwd" value="${(user.confirmPwd)!}" maxlength="30">
+                                <span id="c_chkpwd_icon" class="">&nbsp;</span>
+                                <div id="c_chkpwd_Id" class="<#if passwordMsg??>addConTip error<#else>null</#if>">${passwordMsg!}</div>
+                            </div>
+                        </li>
+                        <#if role==2>
+                        <li class="item">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>姓名：</label>
+                            <div class="fps_right">
+                                <input type="text" class="text" id="c_name" name="user.name" value="${(user.name)!}" maxlength="30">
+                                <span id="c_name_icon" class="">&nbsp;</span>
+                                <div id="c_name_Id" class="<#if nameMsg??>addConTip error<#else>null</#if>">${namgMsg!}</div>
+                            </div>
+                        </li>
+                        </#if>
+                        <!-- <li class="item">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>手机号码：</label>
+                            <div class="fps_right">
+                                <input type="text" class="text" id="c_phone" value="${(user.phone)!}" maxlength="30">
+                                <span id="c_phone_icon" class="">&nbsp;</span>
+                                <div id="c_phone_Id" class="null"></div>
+                            </div>
+                        </li> -->
+                        <li class="item">
+                            <label class="fps_left leftfont">邮箱：</label>
+                            <div class="fps_right">
+                                <input type="text" class="text" id="c_email" name="user.email" value="${(user.email)!}" maxlength="30">
+                                <span id="c_email_icon" class="">&nbsp;</span>
+                                <div id="c_email_Id" class="<#if emailMsg??>addConTip error<#else>null</#if>">${emailMsg!}</div>
+                            </div>
+                        </li>
+                        <#if role==2>
+                        <li class="eitem">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>所属部门：</label>
+                            <div class="fps_right">
+                                <select class="text" name="user.did" id="departSelection">
+                                    <option value="0">--请选择--</option>
+                                    <#list dlist as item>
+                                        <option value="${item.id}" <#if user??&&user.did==item.id>selected="selected"</#if>>${item.name}</option>
+                                    </#list>
+                                </select>
+                                <a class="new_group" id="departmentshowId">新建部门</a>
+                                <div id="c_department_Id" class="<#if didMsg??>addConTip error<#else>null</#if>">${(didMsg)!}</div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">职位：</label>
+                            <div class="fps_right">
+                                <input type="text" class="text" name="user.position" id="c_position" value="${(user.position)!}" maxlength="30">
+                                <span id="c_position_icon" class="">&nbsp;</span>
+                                <div id="c_position_Id" class="null"></div>
+                            </div>
+                        </li>
+                        </#if>
+                        <li class="item">
+                            <div class="btndiv">
+                                <span class="fps_left">&nbsp;</span>
+                                <button type="button" id="c_saveContactId" class="btn_sytle">保存修改</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script src="${ctx!}/js/jsencrypt.min.js"></script>
+<script type="text/javascript" src="${ctx!}/js/user/user.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //当输入框获取焦点
+        $(".text").focus(function(){
+            var id = $(this).attr("id");
+            $(this).attr("class","text highlight1").next().attr("class","blank").next().text("").attr("class","addConTip");
+            if(id=="c_userName"){
+                $(this).next().next().text("请输入手机号码");
+            }
+        });
+
+        $(".text").blur(function () {
+            userAdd.validate(this);
+        });
+
+        //保存
+        $("#c_saveContactId").click(function () {
+            var d=userAdd.validateAll();
+            //等待所有的验证完成
+            d.then(function (result) {
+                if(result){
+                    var data={"user.id":$("#uid").val(),"user.eid":$("#eid").val(),"user.email":$("#c_email").val()};
+
+                    var encrypt=new JSEncrypt();
+                    encrypt.setPublicKey($("#publicKey").val());
+                    var password=$("input[name='user.password']").val().trim();
+                    data["user.password"]=common.generateMixed(password.length);
+                    data["user.encryptPwd"]=encrypt.encrypt(password);
+
+                    var confirmPwd=$("input[name='user.confirmPwd']").val().trim();
+                    data["user.confirmPwd"]=common.generateMixed(confirmPwd.length);
+                    data["user.encryptConfirmPwd"]=encrypt.encrypt(confirmPwd);
+
+                    if($("#c_name").get(0)){
+                        data["user.name"]=$("#c_name").val();
+                    }
+                    if($("#departSelection").get(0)){
+                        data["user.did"]=$("#departSelection").val();
+                    }
+                    if($("#c_position").get(0)){
+                        data["user.position"]=$("#c_position").val();
+                    }
+                    updateSelf.update(data);
+                }
+            });
+
+        });
+
+        //添加部门
+        $("#departmentshowId").click(function () {
+            userPage.depart.showAddDepart(function (data) {
+                var option="<option value='"+data.data.id+"'>"+data.data.name+"</option>";
+                $("#departSelection").append(option);
+            });
+        });
+    });
+</script>
+</@footer>

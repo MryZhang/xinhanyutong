@@ -1,0 +1,87 @@
+.contact {width: 100%;font-family: arial;font-size: 12px;}
+.contact .block_h1_top {background: url("../img/bg_top.gif") no-repeat scroll 0 0 transparent;float: left;height: 8px !important;height: 2px;width: 800px;}
+.contact .block_h1_bottom {/* background: url("../images/new/b6.gif") no-repeat scroll 10px 0 transparent; */float: left;width: 782px;margin-top: -3px !important;margin-top: -8px;padding: 5px 5px 5px 10px;border: 1px solid #D5D5D5;border-top: none;font-size: 14px;font-weight: bold;position: relative;}
+.contact .ctitle {color: #085377;}
+.contact .exptitle {color: #0084B2;font-size: 12px;position: absolute;right: 0;font-weight: normal;width: 180px;_position: absolute;}
+a {color: #337ab7;text-decoration: none;}
+a, img {border-style: none;}
+.mouseClass {cursor: pointer;}
+.contact .i_contact {background: url("../img/2014021191150.gif") no-repeat scroll 0 0 transparent;padding: 3px 0 0 16px;}
+.contact .o_contact {background: url("../img/201402191151.gif") no-repeat scroll 0 0 transparent;padding: 3px 0 0 16px;}
+.btn {display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;font-weight: normal;line-height: 1.42857143;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;background-image: none;border: 1px solid transparent;border-radius: 4px;}
+.contact .search_position {float: right;line-hight: 20px;}
+button, input, optgroup, select, textarea {margin: 0;font: inherit;color: inherit;}
+select, input, textarea {font-size: 12px;line-height: 1.2em;}
+.index_tip_class {color: #999999;}
+.contact .btn {float: left;width: 790px;margin-bottom: 5px;margin-top: 5px;}
+.contact .inputtext {line-hieght: 16px;margin-right: 5px;border: 1px solid #BBBBBB;padding: 4px;width: 160px;float: left;overflow: hidden;display: inline_block;}
+button, select {text-transform: none;}
+button, html input[type="button"], input[type="reset"], input[type="submit"] {-webkit-appearance: button;cursor: pointer;}
+.contact .btn_style {background-color: #1556af;border-radius: 5px;border: 0 none;color: #FFFFFF;cursor: pointer;display: inline-block;font-family: 'microsoft yahei';font-size: 12px;float: left;overflow: hidden;line-height: 20px;padding: 3px 2px 2px 18px !important;padding: 0 0 2px 13px;vertical-align: middle;margin-right: 3px;}
+.contact .search_02 {background: url("../img/search.gif") no-repeat scroll -3px 0 transparent;}
+.contact .addcontact {background: url("../img/addc.gif") no-repeat scroll -1px -1px transparent;width: 90px !important;}
+.contact .deleteClass {background: url("../img/del.gif") no-repeat scroll -5px -2px transparent;width: 56px !important;}
+.contact .addgroup {background: url("../img/addc.gif") no-repeat scroll -1px -1px transparent;width: 90px !important;}
+.contact .group_menu {background-color: #FFFFFF;border: 1px solid #0084B2;box-shadow: 1px 1px 2px #CCCCCC;float: left;position: absolute;text-align: left;top: 25px;width: 120px;display: none;z-index: 10000;left: 0;}
+.contact .block_h1_content {float: left;width: 797px;}
+.contact .left_content {float: left;display: inline;width: 582px;}
+table {background-color: transparent;}
+ul, li, td, tr, table {margin: 0px;padding: 0px;list-style: none;}
+table {border-collapse: collapse;border-style: none;}
+.contact .ctable {width: 100%;border-collapse: collapse;color: #333;}
+contact .ctable tr {border-bottom: 1px solid #DEDEDE;}
+.contact .ctable .theader {border-bottom: 0 none;}
+.contact .ctable th {text-align: left;padding-left: 2px;height: 25px;background: url("../img/ui-bg_glass_85_dfeffc_1x400.png") repeat-x scroll 50% 50% #DFEFFC;color: #2E6E9E;}
+.contact .ctable .t_check {padding-left: 5px;width: 25px;}
+.contact .ctable .t_name {width: 140px;}
+.contact .ctable .t_depart {width: 133px;}
+.contact .ctable .t_position{width: 92px;}
+.contact .ctable .t_tel {width: 133px;}
+.contact .ctable .t_email {width: 90px;}
+.contact .ctable .t_lang {width: 30px;}
+.contact .ctable .t_opara {width: 48px;}
+.ctable td>div{overflow: hidden;  text-overflow: ellipsis;  white-space: nowrap;}
+.ctable .t_name div{ max-width: 140px; }
+.ctable .t_depart div{max-width: 133px;}
+.ctable .t_position div{max-width: 92px;}
+.ctable .t_tel div{max-width:133px; }
+.ctable .t_opara div{max-width: 48px;}
+.contact .ctable input[type=checkbox]{vertical-align: middle;}
+.contact .right_content {float: left;display: inline;margin-left: 5px;min-height: 450px;width: 200px;background-color: #D0E0FA;padding-right: 10px;padding-top: 15px;}
+.contact .ul_list {width: 100%;}
+li {list-style-type: none;}
+.contact .ul_list li {height: 30px;line-height: 30px;color: #75787A;}
+.contact .ul_list li.current {background-color: #FFF;border: 1px solid #D9D9D9;border-left: 0 none;box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.1);font-weight: bold;}
+.contact .iconstyle {background-attachment: scroll;background-color: transparent;background-image: url("../img/zTreeStandard.png");background-repeat: no-repeat;border: 0 none;cursor: pointer;height: 16px;outline: medium none;width: 16px;background-position: -110px 0;margin-right: 2px;margin-top: 6px;vertical-align: middle;clear: both;position: relative;float: left;}
+.contact li.current .ico_open {background-position: -110px -16px;}
+.contact .ul_list .lspan {padding: 0 0 0 1px;cursor: pointer;width: 140px;display: inline-block;}
+.contact .ul_list .newgroup {color: #0084B2;padding-left: 10px;}
+.text {border: 1px solid #A6C9E2;font-family: arial;font-size: 12px;height: 16px;padding: 4px 3px;width: 200px;}
+.contact .ul_list .rspan {display: none;padding-right: 0;}
+button {cursor: pointer;}
+.contact .edit_btn {background-attachment: scroll;background-color: transparent;background-image: url("../img/contactIcon.png");background-position: 0 0;background-repeat: no-repeat;height: 16px;width: 16px;border: 0 none;vertical-align: middle;}
+.contact .del_btn {background-attachment: scroll;background-color: transparent;background-image: url("../img/contactIcon.png");background-position: -16px 0;background-repeat: no-repeat;height: 16px;width: 16px;border: 0 none;vertical-align: middle;}
+.contact .ul_list li.current .rspan {display: inline-block;}
+.meet_td_none {text-align: center;font-size: 12px;color: #999999;line-height: 22px;}
+.contact .ctable td {text-align: left;padding-left: 2px;height: 25px;}
+.pagination {zoom: 1;}
+.pagination {display: inline-block;padding-left: 0;margin: 20px 0;border-radius: 4px;}
+.pagination span {font-size: 12px;}
+a.l-btn span.l-btn-left {display: inline-block;background: url('../img/button_span_bg.gif') no-repeat top left;padding: 4px 0 4px 18px;line-height: 16px;height: 16px;}
+a.l-btn-plain span.l-btn-left {background: transparent;padding-left: 5px;}
+a.l-btn span span.l-btn-text {display: inline-block;height: 16px;line-height: 16px;padding: 0;}
+.pagination-first {background: url('../img/pagination_first.gif') no-repeat;}
+a.l-btn span span span.l-btn-empty {display: inline-block;padding: 0;width: 16px;}
+.pagination-prev {background: url('../img/pagination_prev.gif') no-repeat;}
+.pagination-btn-separator {float: left;height: 24px;border-left: 1px solid #ccc;border-right: 1px solid #fff;margin: 3px 1px;}
+.pagination-num {border: 1px solid #ccc;margin: 0 2px;}
+.pagination-next {background: url('../img/pagination_next.gif') no-repeat;}
+.pagination-last {background: url('../img/pagination_last.gif') no-repeat;}
+.pagination-info {float: right;padding-right: 6px;padding-top: 7px;font-size: 12px;padding-left: 8px;}
+.pagination table {float: left;height: 30px;}
+.contact .ctable tr {border-bottom: 1px solid #DEDEDE;}
+a.l-btn {color: #444;background: url('../img/button_a_bg.gif') no-repeat top right;font-size: 12px;text-decoration: none;display: inline-block;zoom: 1;height: 24px;padding-right: 18px;cursor: pointer;outline: none;}
+a.l-btn-disabled {color: #ccc;opacity: .5;filter: alpha(opacity=50);cursor: default;}
+a.l-btn-plain {background: transparent;padding-right: 5px;border: 1px solid transparent;_border: 0 solid #efefef;_padding: 1px 6px 1px 1px;}
+.error {color: #F00;line-height: 20px;font-size: 12px;margin-left: 70px;}
+.loadingStyle {text-align: center;width: 582px;z-index: 9999;background-color: #fff;filter: alpha(opacity=50);-moz-opacity: 0.5;opacity: 0.5;position: absolute;top: 106px;}

@@ -1,0 +1,96 @@
+<#include "/pages/admin/layout.html">
+<@header title="充值列表" num=3>
+    <meta charset="UTF-8">
+    <link href="${ctx!}/artDialog/css/ui-dialog.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx!}/css/admin/charge_list.css" rel="stylesheet" type="text/css"/>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div class="usermgr" >
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom">
+            <span class="ctitle">充值列表</span>
+        </div>
+        <div class="btn_group">
+            <div class="right_search">
+                <form method="post" action="${ctx!}/admin/charging/page">
+                    <input type="hidden" value="${(currentPage)!1}" name="currentPage" id="currentIndex"/>
+                    <input type="hidden" value="${(companyName)!}" id="companyName"/>
+                    <input type="text" class="inputtext" name="companyName" value="${(companyName)!}" id="regsearchid" name="search" placeholder="公司名称"/>
+                    <button class="btn_style search_01" id="searchBtn" type="submit">搜索</button>
+                </form>
+            </div>
+        </div>
+        <div class="block_h1_content" style="margin-top: 10px;">
+            <div class="content_table">
+                <table class="ctable">
+                    <tr class="theader">
+                        <th class="t_index">序号</th>
+                        <th class="t_cname">公司名称</th>
+                        <th class="t_balance">账户余额</th>
+                        <th class="t_opara">操作</th>
+                    </tr>
+                </table>
+                <div id="user-content" class="user-content">
+                    <div id="loadTip" class="loadingStyle" style="display: none;"><img src="${ctx!}/img/loading.gif"></div>
+                    <table class="ctable" id="tdata">
+                        <#if (pages.list?size>0)>
+                            <#list pages.list as item>
+                                <tr>
+                                    <td class="t_index">${item_index+1}</td>
+                                    <td class="t_cname">${item.name}</td>
+                                    <td class="t_balance">￥ ${item.balance}</td>
+                                    <td class="t_opara">
+                                        <a href="javascript:location.href='${ctx!}/admin/charge/chargePage/${item.id}'+charge.getQueryString();">充值</a>
+                                        <a href="javascript:location.href='${ctx!}/admin/charge/detail/${item.id}'+charge.getQueryString()">详情</a>
+                                    </td>
+                                </tr>
+                            </#list>
+                            <#else>
+                                <tr>
+                                    <td colspan="4" class="meet_td_none">
+                                        没有符合条件的数据
+                                    </td>
+                                </tr>
+                        </#if>
+                    </table>
+                </div>
+                <#include "/pages/common/paginate.html"><@paginate pages></@paginate>
+            </div>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript" src="${ctx!}/artDialog/dist/dialog.js?skin=blue"></script>
+<script type="text/javascript" src="${ctx!}/js/admin/charge.js"/>
+<script type="text/javascript">
+    $(function () {
+        //首页
+        $("span.pagination-first").click(function () {
+            var cls = $(this).parents("a.l-btn").attr("class");
+            if(cls.indexOf("l-btn-disabled")==-1){//未被禁用
+                charge.page({"companyName":$("#companyName").val(),"pageNum":1});
+            }
+        });
+        //上一页
+        $("span.pagination-prev").click(function () {
+            var cls = $(this).parents("a.l-btn").attr("class");
+            if(cls.indexOf("l-btn-disabled")==-1){//未被禁用
+                charge.page({"companyName":$("#companyName").val(),"pageNum":parseInt($("#currentIndex").val())-1});
+            }
+        });
+        //下一页
+        $("span.pagination-next").click(function () {
+            var cls = $(this).parents("a.l-btn").attr("class");
+            if(cls.indexOf("l-btn-disabled")==-1){//未被禁用
+                charge.page({"companyName":$("#companyName").val(),"pageNum":parseInt($("#currentIndex").val())+1});
+            }
+        });
+        //尾页
+        $("span.pagination-last").click(function () {
+            var cls = $(this).parents("a.l-btn").attr("class");
+            if(cls.indexOf("l-btn-disabled")!=-1){//未被禁用
+                charge.page({"companyName":$("#companyName").val(),"pageNum":"${pages.totalPage}"});
+            }
+        });
+    });
+</script>
+</@footer>

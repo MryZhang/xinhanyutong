@@ -1,0 +1,39 @@
+<#macro layout title>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>${title!}</title>
+<link href="${ctx!}/css/common.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="part1">
+	<div class="block">
+		<div class="index_1"><#if !name??>| <a href="${ctx!}/login">登陆</a> </#if>| <a href="javascript:;" onclick="addfavorite()">加入收藏</a>
+		<#if name??>
+		| <a class="ny_1" href="javascript:;">${name}<b></b></a>
+		<span class="logout">
+			<a href="">[退出]</a>
+		</span>
+		</#if></div>
+	</div>
+</div>
+<div class="part2">
+	<div class="block">
+		<div class="index_left">
+			<a href=""><img src="${ctx!}/img/meeting.jpg"/></a>
+		</div>
+		<!--<div class="index_right">
+			<div class="index_phone">咨询热线：XXX-XXX-XXXX</div>
+		</div>-->
+	</div>
+	<div></div>
+</div>
+<#nested>
+</#macro>
+<#macro script>
+<script type="text/javascript" src="${ctx!}/js/jquery.min.js"></script>
+<#nested>
+</body>
+</html>
+</#macro>

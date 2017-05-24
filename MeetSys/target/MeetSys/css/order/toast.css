@@ -1,0 +1,24 @@
+.my-toast {
+    position: absolute;
+    width: 200px;
+    display: none;
+    z-index: 2015;
+    text-align: center;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1), 0 0 256px rgba(255, 255, 255, .3);
+    background-color: #FFF;
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    outline: 0;
+    border-radius: 5px;
+    top:50%;
+    left: 50%;
+    margin: -100px;
+}
+.my-toast>div.my-toast-title{
+    padding: 10px 0;
+    border-bottom: 1px solid #E5E5E5;
+}
+.my-toast>div.my-toast-content{
+    padding: 15px 0;
+}

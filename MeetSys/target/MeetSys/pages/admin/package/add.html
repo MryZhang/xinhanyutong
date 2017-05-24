@@ -1,0 +1,126 @@
+<#include "/pages/admin/layout.html">
+    <@header title="添加套餐" num=7>
+    <meta charset="UTF-8"/>
+    <link href="${ctx!}/artDialog/css/ui-dialog.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx!}/css/admin/package_add.css" rel="stylesheet" type="text/css"/>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div class="usermgr">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom">
+            <span class="ctitle">添加套餐</span>
+        </div>
+        <div class="block_h1_content block_h1_content_h1">
+            <form method="post" action="${ctx!}/admin/package/add" id="packageForm">
+                <div class="person-style formClass">
+                    <ul class="main_form">
+                        <li class="item">
+                            <div>
+                                <label class="fps_left leftfont">&nbsp;</label>
+                                <span id="personContent"></span>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">套餐名称：</label>
+                            <div class="fps_right">
+                                <input type="text" class="text <#if nameMsg??>highlight2</#if>" id="c_name" name="pv.name" value="${(pv.name)!}">
+                                <div id="c_name_id"  class="<#if nameMsg??>addConTip error<#else>null</#if>">${nameMsg!}</div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">呼入计费模式：</label>
+                            <div class="fps_right">
+                                <select name="pv.callInMode"  class="text <#if callInModeMsg??>highlight2</#if>" id="c_callInMode">
+                                    <#list modes as item>
+                                        <option value="${item.value}" <#if (pv.callInMode)??&&pv.callInMode==item.value>selected="selected"</#if>>${item.text}</option>
+                                    </#list>
+                                </select>
+                                <div id="c_callInMode_id" class="<#if callInModeMsg??>addConTip error<#else>null</#if>">${callInModeMsg!}</div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">呼入计费费率（元）：</label>
+                            <div class="fps_right">
+                                <input type="text" class="text" name="pv.callInRate" value="${(pv.callInRate)!}" id="c_callInRate">
+                                <div id="c_callInRate_Id" class="<#if callInRateMsg??>addConTip error<#else>null</#if>">${callInRateMsg!}</div>
+                            </div>
+                        </li>
+                        <li class="item" id="passRate" style="<#if (pv.passRate)??>display:block;<#else>display: none;</#if>">
+                            <label class="fps_left leftfont">超方费率（元）：</label>
+                            <div class="fps_right">
+                                <input type="text" class="text" name="pv.passRate" value="${(pv.passRate)!}" id="c_passRate">
+                                <div id="c_passRateId" class="<#if passRateMsg??>addConTip error<#else>null</#if>">${passRateMsg!}</div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">呼出计费费率（元）：</label>
+                            <div class="fps_right">
+                                <input type="text" class="text" name="pv.callOutRate" value="${(pv.callOutRate)!}" id="c_callOutRate"/>
+                                <div id="c_callOutRate_id" class="<#if callOutRateMsg??>addConTip error<#else>null</#if>">${callOutRateMsg!}</div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">短信计费费率（元）：</label>
+                            <div class="fps_right">
+                                <input type="text" class="text" name="pv.smsRate" value="${(pv.smsRate)!}" id="c_smsRate"/>
+                                <div id="c_smsRate_id" class="<#if callOutRateMsg??>addConTip error<#else>null</#if>">${smsRateMsg!}</div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="btndiv">
+                                <span class="fps_left">&nbsp;</span>
+                                <button type="submit" id="c_saveContactId" class="btn_sytle">保存</button>
+                                <button type="button" id="c_backId" class="btn_sytle">返回</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript" src="${ctx!}/artDialog/dist/dialog.js?skin=blue"></script>
+<script type="text/javascript" src="${ctx!}/js/admin/package.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //返回
+        $("#c_backId").click(function () {
+            location.href=common.getContextPath()+"/admin/package";
+        });
+
+        //获取焦点
+        $(".text").focus(function () {
+            $(this).attr("class","text highlight1").next().text("").attr("class","addConTip error");
+        });
+        //失去焦点
+        $(".text").blur(function () {
+            var flag=package.validate(this);
+            if(flag){
+                $(this).attr("class","text");
+            }
+        });
+
+        $("#packageForm").submit(function () {
+            var flag=true;
+            $(".text").each(function () {
+                if(flag){
+                    flag = package.validate(this);
+                }else{
+                    package.validate(this);
+                }
+            });
+            return flag;
+        });
+
+        //
+        $("#c_callInMode").change(function () {
+            var value=$(this).val();
+            if(value==2){//计费模式为包月
+                $("#passRate").show();
+            }else{
+                $("#passRate").hide();
+            }
+        });
+    });
+</script>
+</@footer>

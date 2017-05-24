@@ -1,0 +1,113 @@
+<#include "/pages/common/layout.html">
+<@header "会议列表">
+    <meta charset="UTF-8">
+    <link href="${ctx!}/css/meeting-detail.css" rel="stylesheet" type="text/css"/>
+    <div class="conference">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom">会议信息</div>
+        <div class="block_h1_content">
+            <input type="hidden" value="${record.id}" id="recordId"/>
+            <input type="hidden" value="${mid!}" id="meetId"/>
+            <input type="hidden" value="${mtype!}" id="mtype"/>
+            <div class="confInfo">
+                <!-- 会议主题 -->
+                <div class="title">${record.subject}</div>
+                <div class="cont_border">
+                    <ul class="itemdiv">
+                        <li class="wth"><div>主持人：</div></li>
+                        <li class="wtd"><div>${record.hostName}</div></li>
+                    </ul>
+                    <ul class="itemdiv">
+                        <li class="wth"><div>会议类型：</div></li>
+                        <li class="wtd">
+                            <div><#if mtype==1>即时会议<#elseif mtype==2>预约会议<#else>固定会议</#if></div>
+                        </li>
+                    </ul>
+                    <!-- 会议为固定会议时显示 -->
+                    <#if mtype==3>
+                        <ul class="itemdiv">
+                            <li class="wth"><div>呼入号码：</div></li>
+                            <li class="wtd"><div>${record.callNum}</div></li>
+                        </ul>
+                        <ul class="itemdiv">
+                            <li class="wth"><div>呼出号码：</div></li>
+                            <li class="wtd"><div>${record.showNum}</div></li>
+                        </ul>
+                    </#if>
+                    <!-- 会议为即时会议或者固定会议时显示 -->
+                    <#if mtype==1||mtype==3>
+                        <ul class="itemdiv">
+                            <li class="wth"><div>会议密码：</div></li>
+                            <li class="wtd"><div>${record.hostPwd}</div></li>
+                        </ul>
+                        <!-- <ul class="itemdiv">
+                            <li class="wth"><div>听众密码：</div></li>
+                            <li class="wtd"><div></div></li>
+                        </ul> -->
+                    </#if>
+                    <ul class="itemdiv">
+                        <li class="wth"><div>是否录音：</div></li>
+                        <li class="wtd"><div><#if record.isRecord==1>是<#else>否</#if></div></li>
+                    </ul>
+                    <!-- 会议为非固定会议时显示 -->
+                    <#if mtype!=3>
+                        <ul class="itemdiv">
+                            <li class="wth"><div>会议开始时间：</div></li>
+                            <li class="wtd"><div><#if mtype==1>${record.startTime}<#else>${record.time}</#if></div></li>
+                        </ul>
+                    </#if>
+                    <#if alist??>
+                        <ul class="itemdiv">
+                            <li class="wth"><div>参会者：</div></li>
+                            <li class="wtd">
+                                <div>
+                                    <#list alist as item>
+                                        ${item.name}(${item.phone})
+                                    </#list>
+                                </div>
+                            </li>
+                        </ul>
+                    </#if>
+                </div>
+            </div>
+            <div id="btn" style="padding:15px 0 0 185px;float:left; width:500px;">
+
+                <#if mtype==2>
+                    <!--<button type="button" class="btn_sytle" id="editMeetId">修改会议</button>-->
+                    <!--<button type="button" class="btn_sytle" id="cancelMeetId">取消会议</button>-->
+                    <#elseif mtype==1&&record.status==1||mtype==3>
+                        <#if mtype==3>
+                            <!--<button type="button" class="btn_sytle" id="editMeetId">修改会议</button>-->
+                        </#if>
+                        <button type="button" class="btn_sytle" id="enterMeetId">进入会议</button>
+                        <!--  <button type="button" class="btn_sytle" id="endMeetId">结束会议</button> -->
+                </#if>
+                <button type="button" id="returnId" class="btn_sytle">返回</button>
+            </div>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript">
+    $(function () {
+        //返回
+        $("#returnId").click(function () {
+            location.href="${ctx!}/meetlist";
+        });
+        //进入会议
+        $("#enterMeetId").click(function () {
+            var mtype=$("#mtype").val();
+            if(mtype=="1"){//即时会议
+                window.open("${ctx!}/meet/${record.id}");
+            }else if(mtype=="3"){//固定会议
+                window.open("${ctx!}/meet/createFixedMeet/${record.id}");
+            }
+
+        });
+        //取消会议
+        $("#cancelMeetId").click(function () {
+
+        });
+    })
+</script>
+</@footer>

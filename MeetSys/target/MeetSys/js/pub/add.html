@@ -1,0 +1,74 @@
+<#include "${ctx!}/pages/common/layout.html">
+<@header "公共通讯录" 6>
+    <meta charset="UTF-8">
+    <link href="${ctx!}/css/addcontact.css" rel="stylesheet" type="text/css"/>
+    <div class="contact">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom" id="addContact_title_Id"><#if contact??>修改联系人<#else>新建联系人</#if></div>
+        <div class="block_h1_content block_h1_content_h1">
+            <input type="hidden" id="pid" value="${(contact.bid)!}"/>
+            <input type="hidden" id="cid" value="${(contact.id)!}"/>
+            <form id="personformId" method="post">
+                <div class="person-style formClass">
+                    <ul class="main_form">
+                        <li class="item">
+                            <div>
+                                <label class="fps_left leftfont">&nbsp;</label>
+                                <span id="personContent"></span>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>姓名：</label>
+                            <div class="fps_right">
+                                <input type="text" class="text" id="c_userName" value="${(contact.name)!}" <#if contact??>readonly="readonly"</#if>/>
+                                <!-- <button type="button" class="btn_add" id="btnAddUser">+</button> -->
+                                <!-- <input type="text" class="text" id="c_userName" value="${(contact.name)!}" maxlength="30">-->
+                                <span id="c_userName_icon" class="blank"></span>
+                                <div id="c_userName_Id" class="null"></div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>手机/固话：</label>
+                            <div class="fps_right">
+                                <input type="text" class="text" id="c_mobile" value="${(contact.phone)!}" maxlength="20">
+                                <span id="c_mobile_icon" class="">&nbsp;</span>
+                                <div id="c_mobile_Id" class="null"></div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">部门：</label>
+                            <div class="fps_right">
+                                <select id="c_department">
+                                    <option value="0">--请选择--</option>
+                                    <#list dlist as item>
+                                        <option value="${item.id}" <#if (contact??)&&(contact.did==item.id)>selected="selected"</#if>>${item.name}</option>
+                                    </#list>
+                                </select>
+                                <a class="new_group" id="departmentshowId">新建部门</a>
+                                <div id="c_department_Id" class="<#if didMsg??>addConTip error<#else>null</#if>">${(didMsg)!}</div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">职位：</label>
+                            <div class="fps_right">
+                                <input type="text" class="text" id="c_position" value="${(contact.position)!}" maxlength="30">
+                                <span id="c_position_icon" class="">&nbsp;</span>
+                                <div id="c_position_Id" class="null"></div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="btndiv">
+                                <span class="fps_left">&nbsp;</span>
+                                <button type="button" id="c_saveContactId" class="btn_sytle">保存</button>
+                                <#if !(contact??)><button type="button" id="c_saveContactAgainId" class="btn_sytle">保存并继续新建</button></#if>
+                                <button type="button" id="c_cancelId" class="btn_sytle">取消</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</@header>
+<@footer>
+</@footer>

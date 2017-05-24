@@ -1,0 +1,62 @@
+<#macro paginate pages>
+    <div class="pagination" id="paginationBar" style="background: #FFF;border:1px solid #FFF;">
+        <table>
+            <tr>
+                <td>
+                    <a href="javascript:;" <#if pages.pageNumber==1>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+                        <span class="l-btn-left">
+                            <span class="l-btn-text">
+                                <span class="l-btn-empty pagination-first">&nbsp;</span>
+                            </span>
+                        </span>
+                    </a>
+                </td>
+                <td>
+                    <a href="javascript:;" <#if pages.pageNumber==1>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+                        <span class="l-btn-left">
+                            <span class="l-btn-text">
+                                <span class="l-btn-empty pagination-prev">&nbsp;</span>
+                            </span>
+                        </span>
+                    </a>
+                </td>
+                <td>
+                    <div class="pagination-btn-separator"></div>
+                </td>
+                <td>
+                    <span style="padding-left:6px;">第</span>
+                </td>
+                <td>
+                    <input class="pagination-num" type="text" id="currentPage" readonly="readonly" value="${pages.pageNumber}" size="2">
+                </td>
+                <td>
+                    <span style="padding-right: 6px;">页/共${pages.totalPage}页</span>
+                </td>
+                <td>
+                    <div class="pagination-btn-separator"></div>
+                </td>
+                <td>
+                    <a href="javascript:;" <#if pages.pageNumber==pages.totalPage||pages.totalPage==0>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if> >
+                        <span class="l-btn-left">
+                            <span class="l-btn-text">
+                                <span class="l-btn-empty pagination-next">&nbsp;</span>
+                            </span>
+                        </span>
+                    </a>
+                </td>
+                <td>
+                    <a href="javascript:;" <#if pages.pageNumber==pages.totalPage||pages.totalPage==0>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+                        <span class="l-btn-left">
+                            <span class="l-btn-text">
+                                <span class="l-btn-empty pagination-last">&nbsp;</span>
+                            </span>
+                        </span>
+                    </a>
+                </td>
+            </tr>
+        </table>
+        <div class="pagination-info">显示 <#if (pages.list?size>0)>${pages.pageSize*(pages.pageNumber-1)+1}<#else>0</#if>到 ${pages.pageSize*(pages.pageNumber-1)+pages.list?size}总计 ${pages.totalRow} 条记录</div>
+        <div style="clear:both;"></div>
+
+    </div>
+</#macro>

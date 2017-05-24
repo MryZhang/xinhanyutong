@@ -1,0 +1,100 @@
+<#include "/pages/admin/layout.html">
+    <@header title="修改套餐" num=3>
+    <meta charset="UTF-8"/>
+    <link href="${ctx!}/artDialog/css/ui-dialog.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx!}/css/admin/package_add.css" rel="stylesheet" type="text/css"/>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div class="usermgr">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom">
+            <span class="ctitle">修改套餐</span>
+        </div>
+        <div class="block_h1_content block_h1_content_h1">
+            <form method="post" action="${ctx!}/admin/charge/changePackage" id="packageForm">
+                <div class="person-style formClass">
+                    <ul class="main_form">
+                        <li class="item">
+                            <div>
+                                <label class="fps_left leftfont">&nbsp;</label>
+                                <span id="personContent">
+                                    <input type="hidden" value="${referrer!}" name="referrer">
+                                    <input type="hidden" value="${cv.id}" name="cv.id">
+                                </span>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">公司名称：</label>
+                            <div class="fps_right">
+                                ${cv.name}
+                            </div>
+                        </li>
+                        <li class="item">
+                            <label class="fps_left leftfont">选择套餐：</label>
+                            <div class="fps_right">
+                                <input type="hidden" name="cv.pid" value="${(cv.pid)!}" id="c_pid">
+                                <input type="text" class="text <#if pidMsg??>highlight2</#if>" readonly="readonly" value="${(cv.pname)!'请选择'}" id="c_package"/>
+                                <div id="c_package_id" class="<#if pidMsg??>addConTip error<#else>null</#if>">${pidMsg!"提示：修改将于下月生效"}</div>
+                            </div>
+                        </li>
+                        <li class="item" id="monthlyCount" <#if showCount??&&!showCount>style="display: none;"</#if>>
+                            <label class="fps_left leftfont">包月方数：</label>
+                            <div class="fps_right">
+                                <input type="number" class="text" name="cv.count" value="${(cv.count)!}" id="c_count">
+                                <div id="c_count_id" class="<#if countMsg??>addConTip error<#else>null</#if>">${countMsg!}</div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="btndiv">
+                                <span class="fps_left">&nbsp;</span>
+                                <button type="submit" id="c_saveContactId" class="btn_sytle">保存</button>
+                                <button type="button" id="c_backId" class="btn_sytle">返回</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript" src="${ctx!}/artDialog/dist/dialog.js?skin=blue"></script>
+<script type="text/javascript" src="${ctx!}/js/admin/company.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //返回
+        $("#c_backId").click(function () {
+            var referrer=$("input[name=referrer]").val();
+            location.href=referrer;
+        });
+
+        //获取焦点
+        $(".text").focus(function () {
+            $(this).attr("class","text highlight1").next().text("").attr("class","addConTip error");
+        });
+        //失去焦点
+        $(".text").blur(function () {
+            var flag=company.validate(this);
+            if(flag){
+                $(this).attr("class","text");
+            }
+        });
+
+        $("#packageForm").submit(function () {
+            var flag=true;
+            $(".text").each(function () {
+                if(flag){
+                    flag = company.validate(this);
+                }else{
+                    company.validate(this);
+                }
+            });
+            return flag;
+        });
+
+        //选择套餐
+        $("#c_package").click(function () {
+            company.selectPackage(this);
+        });
+    });
+</script>
+</@footer>

@@ -1,0 +1,87 @@
+<#include "/pages/admin/layout.html">
+<@header title="充值" num=3>
+    <meta charset="UTF-8"/>
+    <link href="${ctx!}/artDialog/css/ui-dialog.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx!}/css/admin/charge_detail.css" rel="stylesheet" type="text/css"/>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div class="usermgr">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom">
+            <span class="ctitle">充值</span>
+        </div>
+        <div class="block_h1_content block_h1_content_h1">
+            <form method="post" action="${ctx!}/admin/charge/doCharge" id="chargeForm">
+            <input type="hidden" value="${query!}" name="queryStr"/>
+            <input type="hidden" value="${account.id}" name="chargeVo.id"/>
+            <div class="person-style formClass">
+                <ul class="main_form">
+                    <li class="item">
+                        <div>
+                            <label class="fps_left leftfont">&nbsp;</label>
+                            <span id="personContent"></span>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <label class="fps_left leftfont">公司名称：</label>
+                        <div class="fps_right">
+                            ${account.name}
+                        </div>
+                    </li>
+                    <li class="item">
+                        <label class="fps_left leftfont">账户余额：</label>
+                        <div class="fps_right">
+                            ${account.balance}
+                        </div>
+                    </li>
+                    <li class="item">
+                        <label class="fps_left leftfont">实收金额：</label>
+                        <div class="fps_right">
+                            <input type="number" class="text" name="chargeVo.chargeAmount">
+                            <div id="c_amount_Id" class="<#if chargeAmountMsg??>addConTip error<#else>null</#if>"><#if chargeAmountMsg??>${chargeAmountMsg}</#if></div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <label class="fps_left leftfont">充值金额：</label>
+                        <div class="fps_right">
+                            <input type="number" class="text" name="chargeVo.actualCharge"/>
+                            <div id="c_charge_Id" class="<#if actualChargeMsg??>addConTip error<#else>null</#if>"><#if actualChargeMsg??>${actualChargeMsg}</#if></div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="btndiv">
+                            <span class="fps_left">&nbsp;</span>
+                            <button type="submit" id="c_saveContactId" class="btn_sytle">保存</button>
+                            <button type="button" id="c_backId" class="btn_sytle">返回</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </form>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript" src="${ctx!}/artDialog/dist/dialog.js?skin=blue"></script>
+<script type="text/javascript" src="${ctx!}/js/admin/charge.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //返回
+        $("#c_backId").click(function () {
+            location.href=common.getContextPath()+"/admin/charge?"+$("input[name=queryStr]").val();
+        });
+        
+        //获取焦点
+        $(".text").focus(function () {
+            $(this).attr("class","text highlight1").next().text("").attr("class","addConTip error");
+        });
+        //失去焦点
+        $(".text").blur(function () {
+            $(this).attr("class","text");
+        });
+        
+        $("#chargeForm").submit(function () {
+            return charge.validate();
+        });
+    });
+</script>
+</@footer>

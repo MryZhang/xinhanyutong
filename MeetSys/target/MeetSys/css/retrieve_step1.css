@@ -1,0 +1,27 @@
+.part3 .flowsteps li,.flowsteps span{background: url("/img/findpassstep.png") no-repeat scroll 0 0 transparent;color:#777777;}
+.part3 .flowsteps li{list-style: none outside none;width: 25%;}
+.part3 .flowsteps span{display: block;}
+.part3 .flowsteps .current,.flowsteps .current span{background-color: #5185B6;background-position: 0 -46px;color:#FFFFFF;font-weight: normal;}
+.part3 .flowsteps li{float:left;font-size:14px;font-weight: bold;height: 23px;line-height: 23px;overflow: hidden;text-align: center;}
+.part3 .flowsteps .next{background-position: 0 -23px;}
+.part3 .flowsteps li .first{background-position: 0 -69px;}
+.part3 .flowsteps .next span{background-position: 0 -22px;}
+.part3 .flowsteps .last{background-position: 100% -92px;}
+.part3 .main_form{padding: 10px 0;}
+.part3 .main_form .itemMsg{height: 30px;line-height: 22px;padding-top: 10px;font-size: 14px;font-weight: bold;}
+.part3 .main_form li{clear:left;line-height: 100%;padding: 0}
+.part3 .main_form .fps_left{float: left;padding-left: 5px;text-align: right;width: 130px;color:#4d4d4d;}
+.part3 .main_form .fps_right{float: left;}
+.null,.error{color:red;font-family: Verdana;line-height: 22px;font-size: 12px;}
+.part3 .main_form .item{height: 50px;line-height: 22px;padding-top: 1px;}
+.part3 .main_form .labtitle{font-size: 14px;}
+.part3 .cont-position{padding: 0 0 0 108px;}
+.part3 .main_form .text{border:1px solid #BBBBBB;font-family: arial;font-size: 14px;height: 16px;padding: 4px 3px;width: 240px;}
+.addConTip{color:#999999;font-size: 12px;line-height: 22px;}
+.part3 .main_form .authtext{border:1px solid #BBBBBB;font-family: arial;font-size: 12px;height: 16px;padding: 4px 3px;width: 88px;}
+.part3 .main_form .highlight1{border: 1px solid #EFA100;outline: 2px solid #FFDC97;}
+.part3 .main_form .highlight2{border: 1px solid #FF0000;color: #FF0000;outline: 1px solid #FFC1C1;}
+.part3 .main_form .info{color:#999999;font-size: 12px;line-height: 22px;padding-top: 5px;}
+.part3 .main_form .hand{cursor:pointer;height: 24px;}
+.part3 .main_form .itemButton{height: 50px;line-height: 22px;padding-top: 15px;}
+.part3 .main_form .btn_submit{background: url("/img/ButtonT-135-208.png") no-repeat scroll 0 0 transparent;border: medium none;color: #FFFFFF;cursor: pointer;display: inline-block;font-size: 14px;font-weight: bold;height: 26px; line-height: 26px;overflow: hidden;padding: 0;text-align: center;width: 88px;}

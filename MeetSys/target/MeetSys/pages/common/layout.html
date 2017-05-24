@@ -1,0 +1,208 @@
+<#macro header title num=1>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>${title!}</title>
+<link href="${ctx!}/css/manage.css" rel="stylesheet" type="text/css"/>
+<link href="${ctx!}/artDialog/css/ui-dialog.css" rel="stylesheet" type="text/css"/>
+</head>
+<body style="height: 100%;width:100%">
+<div id="loading" class="loading">
+	<img src="${ctx!}/img/loading.jpg"/>
+</div>
+<div id="header">
+	<div class="part1" id="part1">
+		<div class="block">
+			<p>会议管理</p>
+			<div>
+			欢迎 ${cname!} <span style="padding-left: 5px;">${uname!}</span>
+			</div>
+		</div>
+	</div>
+	<div id="part2" class="part2">
+		<div class="block">
+			<div class="logo">
+				<a href=""><img src="${ctx!}/img/meeting.jpg" alt="网络会议logo" height="100"/></a>
+			</div>
+			<#if amount??>
+				<div class="taocan">
+                    <span id="setinfo">
+                    （计费模式：<font style="font-size: 14px;color:#FB7823"><span id="head_mode">${amount.mode}</span></font>
+                    <#if amount.count??>
+						，包月方数：<font style="font-size: 14px;color:#FB7823"><span id="head_count">${amount.count}</span></font>方
+					</#if>
+                    ）账户余额：<font style="font-size: 14px;color:#FB7823"><span id="head_balance">${amount.balance}</span></font>
+                    元</span>
+                    <a href="javascript:;" id="refreshAmount">刷新余额</a>
+                </div>
+			</#if>
+			<div class="btn">
+				<a href="${ctx!}/logout" onclick=""><div class="header_02">退出</div></a>
+			</div>
+		</div>
+	</div>
+	<div id="part3" class="part3" style="width: auto;">
+		<div class="block">
+			<div id="sidebar" class="sidebar">
+				<div class="nav_tree">
+					<ul>
+						<li class="business_info tab_style" >
+							<span class="left_text"><#if aid==2>综合管理<#else>会议管理</#if></span>
+							<span></span>
+						</li>
+						<li id="item_1" class="lefttree_link <#if num==1>current_tab<#else>tab_style</#if>">
+							<span class="left_text">会议列表</span>
+							<span class="icon metting_list"></span>
+						</li>
+						<li id="item_2" class="lefttree_link <#if num==2>current_tab<#else>tab_style</#if>" >
+							<span class="left_text">预约会议</span>
+							<span class="icon net_metting"></span>
+						</li>
+						<li id="item_3" class="lefttree_link <#if num==3>current_tab<#else>tab_style</#if>">
+							<span class="left_text">即时会议</span>
+							<span class="icon phone_metting"></span>
+						</li>
+						<#if aid==2>
+						<li id="item_5" class="lefttree_link <#if num==5>current_tab<#else>tab_style</#if>">
+							<span class="left_text">用户列表</span>
+							<span class="icon metting_list"></span>
+						</li>
+						<li id="item_6" class="lefttree_link <#if num==6>current_tab<#else>tab_style</#if>">
+							<span class="left_text">公共通讯录</span>
+							<span class="icon public_message"></span>
+						</li>
+						</#if>
+						<li id="item_4" class="lefttree_link <#if num==4>current_tab<#else>tab_style</#if>">
+							<span class="left_text">个人通讯录</span>
+							<span class="icon person_message"></span>
+						</li>
+						<li id="item_7" class="lefttree_link <#if num==7>current_tab<#else>tab_style</#if>">
+							<span class="left_text">会议记录</span>
+							<span class="icon metting_list"></span>
+						</li>
+						<li class="metting_manage tab_style" >
+							<span class="left_text">企业信息</span>
+							<span></span>
+						</li>
+						<li id="item_8" class="lefttree_link <#if num==8>current_tab<#else>tab_style</#if>">
+							<span class="left_text">账户信息</span>
+							<span class="icon user_info"></span>
+						</li>
+						<!--<li id="item_9" class="lefttree_link <#if num==9>current_tab<#else>tab_style</#if>">
+							<span class="left_text">组织结构</span>
+							<span class="icon member_info"></span>
+						</li>
+						<li id="item_10" class="lefttree_link <#if num==10>current_tab<#else>tab_style</#if>">
+							<span class="left_text">企业设置</span>
+							<span class="icon business_setting"></span>-->
+						</li>
+						<li class="person_info tab_style" >
+							<span class="left_text">个人信息</span>
+							<span></span>
+						</li>
+						<li id="item_11" class="lefttree_link <#if num==11>current_tab<#else>tab_style</#if>">
+							<span class="left_text">个人资料</span>
+							<span class="icon person_setting"></span>
+						</li>
+						<li id="item_12" class="lefttree_link <#if num==12>current_tab<#else>tab_style</#if>">
+							<span class="left_text">SMTP邮箱</span>
+							<span class="icon change_password"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="wrapmain" id="wrapmain">
+				<div id="maincontent">
+					<#nested/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</#macro>
+<#macro footer>
+	<script type="text/javascript" src="${ctx!}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${ctx!}/js/common.js"></script>
+<script type="text/javascript" src="${ctx!}/artDialog/dist/dialog.js?skin=blue"></script>
+	<script type="text/javascript">
+		$(function () {
+		    //刷新账户余额
+			$("#refreshAmount").click(function () {
+				$.ajax({
+				    type:"post",
+					url:"${ctx!}/amount",
+					dataType:"json",
+					success:function (data) {
+						common.isLoginTimeout(data);
+						if(data.result){
+							var content="（计费模式：<font style=\"font-size: 14px;color:#FB7823\"><span id=\"head_mode\">"+data.data.mode+"</span></font>";
+							if(data.data.count){
+								content+="，包月方数：<font style=\"font-size: 14px;color:#FB7823\"><span id=\"head_count\">"+data.data.count+"</span></font>方";
+							}
+							content+="）";
+							content+="账户余额：<font style=\"font-size: 14px;color:#FB7823\"><span id=\"head_balance\">"+data.data.balance+"</span></font>元";
+							$("#setinfo").html(content);
+						}else{
+						    common.showDialog({"content":data.msg||"操作失败"});
+						}
+                    },error:function (err) {
+						console.log(err.responseText);
+                    }
+				});
+            });
+			//导航
+			$("li.lefttree_link").click(function () {
+				var id=$(this).attr("id");
+				id=id.substring(id.indexOf("_")+1);
+				id=parseInt(id);
+				switch (id){
+					case 1:
+						location.href="${ctx!}/meetlist";
+						break;
+					case 2:
+						location.href="${ctx!}/ordermeet";
+						break;
+					case 3:
+							window.open("${ctx!}/meet","_blank");
+						break;
+					case 4:
+							location.href="${ctx!}/personalcontacts";
+						break;
+					case 5:
+							location.href="${ctx!}/user";
+						break;
+					case 6:
+							location.href="${ctx!}/publiccontacts";
+						break;
+					case 7:
+							location.href="${ctx!}/record";
+						break;
+					case 8:
+					    location.href="${ctx!}/account/bill";
+					    break;
+					case 9:
+					case 10:
+                        common.showDialog({
+                            content:"该功能暂未开启"
+                        });
+					    break;
+					case 11:
+						location.href="${ctx!}/user/showSelf"
+						break;
+					case 12:
+							location.href="${ctx!}/smtp";
+						break;
+				}
+			});
+		});
+	</script>
+<#nested/>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#loading").hide();
+        });
+	</script>
+</body>
+</html>
+</#macro>

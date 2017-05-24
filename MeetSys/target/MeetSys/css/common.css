@@ -1,0 +1,11 @@
+*{font-family: "microsoft yahei"}
+.part1{width:100%;background:#555;position: fixed;top:0;z-index: 9999;border: 1px solid #DCDCDC;border-top: none;}
+.block{width:992px;margin: 0 auto;clear: both;overflow: hidden;} 
+.index_1{float:right;color:#fff;vertical-align: middle;margin: 8px 0;font-size: 12px;}
+.index_1 a{color:#fff;text-decoration: none;}
+.index_left{float:left;}
+.index_left img{height: 100px;}
+.index_right{float:right;background:url("../img/phone.jpg") no-repeat scroll left center rgba(0,0,0,0);height: 40px;padding-left: 45px;margin-top: 30px;}
+body{margin:0;}
+.part2{margin-top: 32px;}
+.index_phone{margin-top: 10px;color: #088ED7;font-size: 16px;font-weight: bold;}

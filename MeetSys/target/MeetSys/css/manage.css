@@ -1,0 +1,54 @@
+*{padding: 0px;margin: 0px;}
+ody, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, cite, em {font-style: normal;margin: 0;padding: 0;}
+body { font-family: "microsoft yahei","SimSun","Arial",sans-serif; font-size: 12px;background: none repeat scroll 0 0 #FFF;color: #333;}
+.part1 {width: 100%;background: #246fd5;}
+.part1 .block {overflow: hidden;width: 990px;margin: 0 auto;height: 30px;background: url("../img/top_banner.gif") no-repeat;}
+.part1 .block p {display: block;float: left;margin-top: 3px;color: #FFF;}
+.part1 .block div {display: block;float: right;margin-top: 3px;color: #FFF;}
+.part2 {width: 100%;border-bottom: 1px solid #CCC;}
+.part2 .block {width: 990px;height: 106px;margin: 0 auto;}
+.part2 .logo {float: left;margin-top: 5px;overflow: hidden;display: inline-block;}
+img {border-style: none;}
+.serachOrder input, img, label {vertical-align: middle;}
+.part2 .taocan {float: left;width: auto;margin-top: 80px;margin-left: 205px;overflow: hidden;display: inline-block;}
+.part2 .taocan a {color: #0000EE;text-decoration: underline;}
+.part2 .taocan a:link, a:visited {text-decoration: underline;}
+.btn {display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;font-weight: normal;line-height: 1.42857143;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;background-image: none;border: 1px solid transparent;border-radius: 4px;}
+.part2 .btn {float: right;overflow: hidden;width: 120px;height: 59px;margin-top: 40px;display: inline-block;}
+.part2 .btn a:link, a:visited {text-decoration: none;}
+.part2 .btn a {color: #0000EE;}
+.part2 .btn div {display: inline;float: left;}
+.part2 .btn .header_02 {background: url("../img/exit.gif") no-repeat scroll 0 0 transparent;padding: 32px 12px 10px 17px;}
+.part3 .block {width: 1000px;margin: 0 auto;}
+.part3 .sidebar {float: left;width: 186px;font-size: 12px;overflow: hidden;display: inline-block;margin-left: 10px;}
+.part3 .sidebar .nav_tree {float: left;overflow: hidden; width: 186px;margin-top: 10px;}
+.part3 .sidebar .nav_tree ul {float: left;overflow: hidden;width: 186px;display: block;}
+.part3 .sidebar .business_info {background: url("../img/business_info.gif") no-repeat scroll 0 0 transparent;color: #FFF;}
+.part3 .sidebar .tab_style {padding: 10px 12px 10px 30px;}
+.part3 .sidebar .nav_tree li {display: inline;float: left;width: 138px;}
+.part3 .sidebar .left_text {float: left;}
+.part3 .sidebar .lefttree_link {background: url("../img/llefttree_link.gif") no-repeat scroll 0 -1px transparent;color: #000;cursor: pointer;}
+.part3 .sidebar .icon {background-image: url("../img/left_treeIcon.gif");background-repeat: no-repeat;background-color: transparent;overflow: hidden;display: inline;}
+.part3 .sidebar .lefttree_link .metting_list {background-position: 0 -89px;float: right;width: 18px;height: 18px;}
+.part3 .sidebar .current_tab {background: url("../img/llefttree_over.gif") no-repeat scroll 0 -1px transparent;padding: 10px 18px 10px 30px;}
+.part3 .sidebar .lefttree_link .net_metting {background-position: 0 -193px;float: right;width: 18px;height: 18px;}
+.part3 .sidebar .lefttree_link .phone_metting {background-position: 0 -212px;float: right;width: 18px;height: 18px;}
+.part3 .sidebar .lefttree_link .public_message {background-position: 0 -248px;float: right;width: 18px;height: 18px;}
+.part3 .sidebar .lefttree_link .person_message {background-position: 0 -248px;float: right;width: 18px;height: 18px;}
+.part3 .sidebar .lefttree_link .metting_list {background-position: 0 -89px;float: right;width: 18px;height: 18px;}
+.part3 .sidebar .metting_manage {background: url("../img/metting_manage.gif") no-repeat scroll 0 0 transparent;color: #fff;}
+.part3 .sidebar .lefttree_link .user_info {background-position: 0 -35px;float: right;width: 18px;height: 18px;}
+.part3 .sidebar .lefttree_link .member_info {background-position: 0 -17px;float: right;width: 18px;height: 18px;}
+.part3 .sidebar .lefttree_link .business_setting {background-position: 0 -53px;float: right;width: 18px;height: 18px;}
+.part3 .sidebar .person_info {background: url("../img/person_info.gif") no-repeat scroll 0 0 transparent;color: #fff;}
+.part3 .sidebar .lefttree_link .person_setting {background-position: 0 -122px;float: right;width: 18px;height: 18px;}
+.part3 .sidebar .lefttree_link .change_password {background-position: 0 -140px;float: right;width: 18px;height: 18px;}
+.wrapmain {background: none repeat scroll 0 0 #FFFFFF;*float: left;width:800px;margin-top: 10px;margin-left: 3px;margin-bottom: 20px;min-height: 450px;overflow: hidden;display: inline-block;position: relative;padding-top: 10px;}
+/*.wrapmain {background: none repeat scroll 0 0 #FFFFFF;!*float: left;*!margin-top: 10px;margin-left: 3px;margin-bottom: 20px;min-height: 450px;overflow: hidden;display: block;position: relative;padding-top: 10px;padding-left: 5px; padding-right: 10px;}*/
+.loading{width: 100%;height: 100%;z-index: 9999;background-color: #fff;filter:alpha(opacity=50);-moz-opacity:0.5;opacity:0.5;position: absolute;top: 0;left: 0;}
+.loading img{height:40px;position: absolute;left: 45%;top: 45%;height: 40px;}
+table {background-color: transparent;}
+ul, li, td, tr, table {margin: 0px;padding: 0px;list-style: none;}
+table {border-collapse: collapse;border-style: none;}
+button, select {text-transform: none;}
+button, input, optgroup, select, textarea {margin: 0;font: inherit;color: inherit;}

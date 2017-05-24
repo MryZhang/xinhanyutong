@@ -1,0 +1,35 @@
+.contact .block_h1_top {background: url("../img/bg_top.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);float: left;height: 8px !important;height: 2px;width: 800px;}
+.contact .block_h1_bottom {float: left;width: 782px;margin-top: -3px !important;margin-top: -8px;padding: 5px 5px 5px 10px;border: 1px solid #D5D5D5;border-top: none;font-size: 14px;font-weight: bold;position: relative;}
+.contact .block_h1_content {float: left;width: 797px;}
+.contact .block_h1_content_h1 {border: 1px solid #D5D5D5;border-top: none;padding-bottom: 50px;}
+.contact .person-style {margin: 0 auto;position: relative;width: 700px;}
+.contact .formClass {font-family: arial;font-size: 12px;}
+.contact .imp_style {width: 750px;}
+.contact .formClass .main_form {width: 100%;padding-bottom: 10px;}
+li {list-style-type: none;}
+.contact .formClass .item {width: 100%;height: 50px;line-height: 22px;padding-top: 1px;}
+.contact .formClass .item input, label {vertical-align: middle;}
+.fps_left {float: left;padding-right: 5px;text-align: right;width: 160px;color: #4d4d4d;display: inline-block;overflow: hidden;}
+.leftfont {color: #4d4d4d;font-size: 14px;font-style: normal;vertical_align: middle;font-weight: bold;}
+.contact .improt_fps_left {width: 180px;font-size: 14px;font-weight: normal;color: #333;}
+.contact .formClass .eitem {width: 100%;clear: both;line-height: 22px;padding-top: 1px;}
+.fps_right {float: left;}
+.contact .down_select_right {padding-bottom: 20px;font-size: 13px;}
+select {cursor: pointer;font-style: normal;}
+select, input, textarea {font-size: 12px;line-height: 1.2em;}
+.contact .down_sel {border: 1px solid #BBB;font-family: arial;font-size: 12px;height: 22px;padding: 2px 0;width: 140px;}
+.contact .formClass .btndiv {padding-top: 10px;}
+.btn_sytle {background: url("../img/bgImg.gif") repeat-x scroll 0 0 rgba(0, 0, 0, 0);border-radius: 5px;border: 0 none;color: #FFF;cursor: pointer;display: inline-block;font-family: 'microsoft yahei','楷体','标楷体';font-size: 14px;font-weight: bold;line-height: 20px;overflow: hidden;
+    padding: 3px 15px 2px 15px !important;
+    padding: 0px 8px 2px 6px;
+    margin-right: 3px;
+    vertical-align: middle;
+}
+.contact .down_description {padding: 5px 0 10px 28px;color: #999;}
+.contact .down_div {padding: 10px 0 10px 23px;}
+img {border-style: none;}
+.contact .down_ico {width: 35px;height: 25px;}
+.contact .down_text {color: #0084B2;font-size: 12px;font-weight: normal;text-decoration: none;}
+.contact .rtip-txt-err {background: #FFF5C5;color: #F00;padding: 5px 10px;}
+.contact .file{border: 1px solid #BBB;font-family: arial;font-size: 12px;height: 16px;padding: 2px 0;}
+select, input, textarea {font-size: 12px;border: 1px solid #A6C9E2;line-height: 1.2em;}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+    <input type="hidden" id="publicKey" value="${publicKey!}">
+    <input type="text" id="text"><button type="button">提交</button>
+    <script src="${ctx!}/js/jquery.min.js"></script>
+    <script src="${ctx!}/js/jsencrypt.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                var text=$("#text").val().replace(/(^\s*)|(\s*$)/g,"");
+                if(text){
+                    var encrypt=new JSEncrypt();
+                    encrypt.setPublicKey($("#publicKey").val());
+                    var encrypted=encrypt.encrypt(text);
+                    alert(encrypted);
+                    $.ajax({
+                        type:"post",
+                        url:"${ctx!}/login/test",
+                        dataType:"text",
+                        data:{data:encrypted},
+                        success:function (data) {
+                            alert(data);
+                        },error:function (err) {
+                            console.log(err.responseText)
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<#include "/pages/common/layout.html">
+<@header "用户管理" 5>
+    <meta charset="UTF-8">
+    <link href="${ctx!}/css/user.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx!}/css/ulist-left.css" rel="stylesheet" type="text/css"/>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div class="usermgr" >
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom">
+            <span class="ctitle">用户列表</span>
+        </div>
+        <div class="btn_group">
+            <div class="btn_left">
+                <button class="btn_style" id="addBtn" type="button">添加账号</button>
+                <button class="btn_style" id="delBtn" type="button">删除账号</button>
+            </div>
+            <div class="right_search">
+                <input type="hidden" id="searchStr" value="${search!}"/>
+                <form method="post" action="${ctx!}/user">
+                    <input type="hidden" value="${departId!}" name="departId" id="departId"/>
+                    <input type="text" class="inputtext" value="${search!}" id="regsearchid" name="search" placeholder="账号"/>
+                    <button class="btn_style search_01" id="searchBtn" type="submit">搜索</button>
+                </form>
+            </div>
+            <!-- <div class="choice">
+                <label>公司：</label>
+                <select id="companyId">
+                    <option value="0">--请选择--</option>
+                </select>
+            </div> -->
+        </div>
+        <div class="block_h1_content" style="margin-top: 10px;">
+            <div class="left_content" id="left_content">
+                <table class="ctable">
+                    <tr class="theader">
+                        <th class="t_check"><input type="checkbox" id="chkAll"/></th>
+                        <th class="t_uname">账号</th>
+                        <th class="t_pwd">密码</th>
+                        <th class="t_name">姓名</th>
+                        <th class="t_phone">电话</th>
+                        <th class="t_email">邮箱</th>
+                        <th class="t_department">部门</th>
+                        <th class="t_position">职位</th>
+                        <th class="t_opara">操作</th>
+                    </tr>
+                </table>
+                <div id="user-content" class="user-content">
+                    <div id="loadTip" class="loadingStyle" style="display: none;"><img src="${ctx!}/img/loading.gif"></div>
+                    <table class="ctable" id="userTable">
+                        <#if (users?size>0)>
+                            <#list users as item>
+                                <tr>
+                                    <td class="t_check"><input type="checkbox" value="${item.id}"/></td>
+                                    <td class="t_uname" title="${item.username}">${item.username}</td>
+                                    <td class="t_pwd" title="${item.password}">${item.password}</td>
+                                    <td class="t_name" title="${item.ename}">${item.ename}</td>
+                                    <td class="t_phone" title="${item.phone}">${item.phone}</td>
+                                    <td class="t_email" title="${(item.email)!}">${(item.email)!}</td>
+                                    <td class="t_department" title=">${item.dname}">${item.dname}</td>
+                                    <td class="t_position" title="${(item.position)!}">${(item.position)!}</td>
+                                    <td class="t_opara"><a href="javascript:location.href='${ctx!}/user/showUpdate/${item.id}'+userPage.getQueryString(userPage.getPageCondition())" class="t_edit">编辑</a></td>
+                                </tr>
+                            </#list>
+                            <#else>
+                                <tr>
+                                    <td colspan="9" class="meet_td_none">
+                                        没有符合条件的数据
+                                    </td>
+                                </tr>
+                        </#if>
+                    </table>
+                </div>
+                <div class="pagination" id="paginationBar" style="background: #FFF;border:1px solid #FFF;">
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="javascript:;" <#if currentPage==1>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+                                    <span class="l-btn-left">
+                                        <span class="l-btn-text">
+                                            <span class="l-btn-empty pagination-first">&nbsp;</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="javascript:;" <#if currentPage==1>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+                                    <span class="l-btn-left">
+                                        <span class="l-btn-text">
+                                            <span class="l-btn-empty pagination-prev">&nbsp;</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                <div class="pagination-btn-separator"></div>
+                            </td>
+                            <td>
+                                <span style="padding-left:6px;">第</span>
+                            </td>
+                            <td>
+                                <input class="pagination-num" type="text" id="currentPage" readonly="readonly" value="${currentPage}" size="2">
+                            </td>
+                            <td>
+                                <span style="padding-right: 6px;">页/共${totalPage}页</span>
+                            </td>
+                            <td>
+                                <div class="pagination-btn-separator"></div>
+                            </td>
+                            <td>
+                                <a href="javascript:;" <#if currentPage==totalPage||totalPage==0>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if> >
+                                    <span class="l-btn-left">
+                                        <span class="l-btn-text">
+                                            <span class="l-btn-empty pagination-next">&nbsp;</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="javascript:;" <#if currentPage==totalPage||totalPage==0>class="l-btn l-btn-plain l-btn-disabled"<#else>class="l-btn l-btn-plain"</#if>>
+                                    <span class="l-btn-left">
+                                        <span class="l-btn-text">
+                                            <span class="l-btn-empty pagination-last">&nbsp;</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="pagination-info">显示 <#if (users?size>0)>${pageSize*(currentPage-1)+1}<#else>0</#if>到 ${pageSize*(currentPage-1)+users?size}总计 ${totalRow} 条记录</div>
+                    <div style="clear:both;"></div>
+                    <input type="hidden" id="totalPage" value="${totalPage!}">
+                </div>
+            </div>
+            <div class="right_content" id="right_content">
+                <ul class="ul_list">
+                    <li id="lifirst" class="group<#if !departId??> current</#if>">
+                        <span class="iconstyle ico_open"></span>
+                        <span class="lspan" id="gContactNumId">所有部门</span>
+                    </li>
+                    <#list dlist as item>
+                        <li class="group<#if departId??&&departId==item.id?string> current</#if>" title="${item.name}">
+                            <input type="hidden" value="${item.id}" class="did"/>
+                            <span class="iconstyle ico_open"></span>
+                            <span class="lspan">${item.name}</span>
+                            <span class="rspan"><button type="button" class="edit_btn"></button><button type="button" class="del_btn"></button></span>
+                        </li>
+                    </#list>
+                    <li id="lilast">
+                        <span class="lspan newgroup">新建部门</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript" src="${ctx!}/js/user/user.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //获取部门下的用户信息
+        $("ul.ul_list").on("click",".group span.lspan",function(){
+            var obj=userPage.getPageCondition();
+            var did=$(this).closest("li").find(".did").val();
+            if(did){
+                obj.departId=did;
+            }else{
+                delete obj.departId;
+            }
+            obj.pageIndex=1;
+            userPage.getPage(obj);
+        });
+        //添加部门
+        $("#lilast .newgroup").click(function () {
+            userPage.depart.showAddDepart(function (data) {
+                var depart="<li class='group' title='"+data.data.name+"'>";
+                depart+="<input type='hidden' value='"+data.data.id+"' class='did'/>";
+                depart+="<span class='iconstyle ico_open'></span>";
+                depart+="<span class='lspan'>"+data.data.name+"</span>";
+                depart+="<span class='rspan'><button type='button' class='edit_btn'></button><button type='button' class='del_btn'></button></span>";
+                depart+="</li>";
+                $("ul.ul_list li.group:last").after(depart);
+            });
+        });
+        
+        //修改部门
+        $("ul.ul_list").on("click","button.edit_btn",function () {
+            userPage.depart.showUpdateDepart($(this).parent().prev().text());
+        });
+        //删除部门及相关信息
+        $("ul.ul_list").on("click","button.del_btn",function () {
+            userPage.depart.deleteDepart($(this).closest("li").find("input.did").val());
+        });
+        //全选
+        $("#chkAll").click(function () {
+            userPage.checkAll();
+        });
+
+        //首页
+        $(".pagination-first").click(function () {
+            var obj=userPage.getPageCondition();
+            obj.pageIndex=1;
+            userPage.getPage(obj);
+        });
+        //尾页
+        $(".pagination-last").click(function () {
+            var obj=userPage.getPageCondition();
+            var totalPage = $("#totalPage").val();
+            obj.pageIndex=totalPage;
+            userPage.getPage(obj);
+        });
+        //上一页
+        $(".pagination-prev").click(function () {
+            var currentPage=$("#currentPage").val();
+            var pageIndex=parseInt(currentPage)-1;
+            var obj=userPage.getPageCondition();
+            obj.pageIndex=pageIndex;
+            userPage.getPage(obj);
+        });
+        //下一页
+        $(".pagination-next").click(function () {
+            var currentPage=$("#currentPage").val();
+            var pageIndex=parseInt(currentPage)+1;
+            var obj=userPage.getContextPath();
+            obj.pageIndex=pageIndex;
+            userPage.getPage(obj);
+        });
+
+        //新增
+        $("#addBtn").click(function () {
+            location.href="${ctx!}/user/showAdd"+userPage.getQueryString(userPage.getPageCondition());
+        });
+        
+        //删除用户
+        $("#delBtn").click(function () {
+            userPage.deleteUser();
+        });
+    });
+</script>
+</@footer>

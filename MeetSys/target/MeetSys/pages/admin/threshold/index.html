@@ -1,0 +1,29 @@
+<#include "/pages/admin/layout.html">
+    <@header title="费率信息" num=5>
+    <meta charset="UTF-8">
+    <link href="${ctx!}/artDialog/css/ui-dialog.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx!}/css/admin/threshold.css" rel="stylesheet" type="text/css"/>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div class="usermgr" >
+        <#include "/pages/admin/tab.html">
+            <@tab num=2></@tab>
+        <div class="threshold_dv">
+            <div>
+                <span class="threshold_info">余额阙值：<span id="threshold_value">${tval!}</span> 元</span>&nbsp;&nbsp;
+                <a href="javascript:;" id="t_edit">修改</a>
+            </div>
+            <p class="explain_txt">说明：当用户余额小于等于余额阙值时，用户将无法发起呼叫或召开会议。</p>
+        </div>
+    </div>
+</@header>
+<@footer>
+<script type="text/javascript" src="${ctx!}/artDialog/dist/dialog.js?skin=blue"></script>
+<script type="text/javascript" src="${ctx!}/js/admin/threshold.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#t_edit").click(function () {
+            threshold.udpate($("#threshold_value"));
+        });
+    });
+</script>
+</@footer>

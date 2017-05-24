@@ -1,0 +1,47 @@
+.conference{font-size: 14px;}
+.conference .block_h1_top {background: url("../img/bg_top.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);float: left;height: 10px;width: 800px;}
+.conference .block_h1_bottom {background: url("../img/b3.gif") no-repeat scroll 10px 0 rgba(0, 0, 0, 0);float: left;width: 747px;margin-top: -2px;padding: 5px 5px 5px 45px;border: 1px solid #D5D5D5;border-top: none;font-size: 14px;font-weight: bold;}
+select, input, textarea {font-size: 12px;line-height: 1.2em;}
+.searchText {border: 1px solid #BBB;font-family: arial;font-size: 14px;height: 16px;padding: 2px 3px;width: 120px;}
+.btnStyle {background: url("../img/bgImg.gif") repeat-x scroll 0 0 rgba(0, 0, 0, 0);border-radius: 5px;border: 0 none;color: #FFF;cursor: pointer;
+    display: inline-block;
+    font-family: 'microsoft yahei','楷体','标楷体';
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    overflow: hidden;
+    padding: 3px 15px 2px 15px !important;
+    padding: 0px 8px 2px 6px;
+    margin-right: 3px;
+    vertical-align: middle;
+}
+ul, li, td, tr, table {margin: 0px;padding: 0px;list-style: none;}
+.tb-todaymeeting {text-align: left;height: 22px;}
+.tb-todaymeeting th {background: url("../img/ui-bg_glass_85_dfeffc_1x400.png") repeat-x scroll 50% 50% #DFEFFC;border: 1px solid #A6C9E2;color: #2E6E9E;}
+.cwidth {width: 120px;height: 22px;text-align: left;padding-left: 5px;font-size: 12px;}
+.swidth {width: 219px;height: 22px;text-align: left;padding-left: 10px;font-size: 12px;}
+.twidth {width: 62px;height: 22px;text-align: left;padding-left: 10px;font-size: 12px;}
+.owidth{width:80px;height: 22px;text-align: left;padding-left: 10px;font-size: 12px;}
+.pagination {zoom: 1;}
+.pagination {display: inline-block;padding-left: 0;margin: 20px 0;border-radius: 4px;}
+.meet_td_none {text-align: center;font-size: 12px;color: #999;line-height: 22px;}
+.conference a {color: #00E;text-decoration: none;}
+table {background-color: rgba(0, 0, 0, 0);}
+table {border-collapse: collapse;border-style: none;}
+.pagination table {float: left;height: 30px;}
+.pagination-info {float: right;padding-right: 6px;padding-top: 8px;font-size: 12px;}
+.conference a:link, a:visited {text-decoration: none;}
+.pagination span {font-size: 12px;}
+a.l-btn span.l-btn-left {display: inline-block;background: url('../img/button_span_bg.gif') no-repeat top left;padding: 4px 0 4px 18px;line-height: 16px;height: 16px;}
+a.l-btn-plain span.l-btn-left {background: rgba(0, 0, 0, 0);padding-left: 5px;}
+a.l-btn span span.l-btn-text {display: inline-block;height: 16px;line-height: 16px;padding: 0;}
+.pagination-first {background: url('../img/pagination_first.gif') no-repeat;}
+a.l-btn span span span.l-btn-empty {display: inline-block;padding: 0;width: 16px;}
+.pagination-prev {background: url('../img/pagination_prev.gif') no-repeat;}
+.pagination-btn-separator {float: left;height: 24px;border-left: 1px solid #ccc;border-right: 1px solid #fff;margin: 3px 1px;}
+.pagination-num {border: 1px solid #ccc;margin: 0 2px;}
+.pagination-next {background: url('../img/pagination_next.gif') no-repeat;}
+.pagination-last {background: url('../img/pagination_last.gif') no-repeat;}
+a.l-btn {color: #444;background: url('../img/button_a_bg.gif') no-repeat top right;font-size: 12px;text-decoration: none;display: inline-block;zoom: 1;height: 24px;padding-right: 18px;cursor: pointer;outline: none;}
+a.l-btn-plain {background: rgba(0, 0, 0, 0);padding-right: 5px;border: 1px solid rgba(0, 0, 0, 0);_border: 0 solid #efefef;_padding: 1px 6px 1px 1px;}
+a.l-btn-disabled {color: #ccc;opacity: .5;filter: alpha(opacity=50);cursor: default;}

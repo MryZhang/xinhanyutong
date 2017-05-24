@@ -1,0 +1,60 @@
+<#include "/pages/common/layout.html">
+<@header "会议记录" 8>
+    <meta charset="UTF-8">
+    <link href="${ctx!}/css/account/bill.css" rel="stylesheet" type="text/css"/>
+    <!--jQuery dependencies-->
+    <link rel="stylesheet" href="${ctx!}/jqueryui/1.9.1/themes/base/jquery-ui.css"/>
+    <!--PQ Grid files-->
+    <link rel="stylesheet" href="${ctx!}/grid-2.2.0/pqgrid.min.css" />
+    <!--PQ Grid Office theme-->
+    <link rel="stylesheet" href="${ctx!}/grid-2.2.0/themes/Office/pqgrid.css" />
+    <style>
+        div.ui-dialog{width:auto;}
+    </style>
+    <input type="hidden" value="${ctx!}" id="contextPath"/>
+    <div class="bill">
+        <div class="block_h1_top"></div>
+        <div class="block_h1_bottom">查询话单详情</div>
+        <div style="clear:both;"></div>
+        <div id="bill">
+            <div id="search" class="bill_sel_area">
+                <form method="post" action="${ctx!}/account/bill">
+                    开始日期：
+                    <input type="text" class="Wdate" name="beginTime" value="${beginTime!}" id="searchBeginId" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false,maxDate:'%y-%M-%d'})" style="width:100px;"/>
+                    &nbsp;&nbsp;结束日期：
+                    <input type="text" class="Wdate" name="endTime" id="searchEndId" value="${endTime!}" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false,maxDate:'%y-%M-%d'})" style="width:100px;"/>
+                    &nbsp;&nbsp;
+                    会议主题：
+                    <input type="text" class="searchText" name="search" value="${search!}" id="searchTxtId"/>
+                    &nbsp;&nbsp;
+                    <label>消费合计：<span id="total_consume" style="color:#FB7823;font-weight:bold;">${total!0}</span>元</label>
+                    <button class="btn_sytle" type="submit">查询</button>
+                    <button class="btn_sytle" type="button" id="export_btn">导出</button>
+                </form>
+            </div>
+            <div class="billcontent" style="float:left;">
+                <div id="bill_grid" ></div>
+            </div>
+        </div>
+    </div>
+</@header>
+<@footer>
+<!--jQuery dependencies-->
+<script src="${ctx!}/jqueryui/1.9.1/jquery-ui.min.js"></script>
+<!--PQ Grid files-->
+<script src="${ctx!}/grid-2.2.0/pqgrid.min.js"></script>
+<script src="${ctx!}/grid-2.2.0/localize/pq-localize-zh.js"></script>
+<script type="text/javascript" src="${ctx!}/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="${ctx!}/js/account/bill.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //初始化grid
+        bill.initGrid();
+
+        //数据导出
+        $("#export_btn").click(function () {
+            window.open(common.getContextPath()+"/account/exportBill"+bill.getQueryStr());
+        });
+    });
+</script>
+</@footer>
