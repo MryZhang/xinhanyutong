@@ -2,6 +2,7 @@ package com.dbkj.meet.services.inter;
 
 import com.dbkj.meet.dto.BaseNode;
 import com.dbkj.meet.dto.Result;
+import com.dbkj.meet.model.OrderMeet;
 import com.dbkj.meet.model.User;
 import com.jfinal.core.Controller;
 
@@ -46,4 +47,11 @@ public interface IOrderMeetService {
     boolean cancelMeet(long oid,int type);
 
     Map<String,Object> getShowUpdatePageData(Long id,Integer type);
+
+    /**
+     * 获取预约会议的开始时间
+     * @param orderMeet
+     * @return
+     */
+    String getOrderMeetStartTime(OrderMeet orderMeet);
 }

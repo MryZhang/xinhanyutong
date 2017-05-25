@@ -2,8 +2,8 @@ package com.dbkj.meet.services;
 
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dto.Result;
-import com.dbkj.meet.model.SmtpEmail;
-import com.dbkj.meet.model.User;
+import com.dbkj.meet.model.*;
+import com.dbkj.meet.services.inter.IOrderMeetService;
 import com.dbkj.meet.services.inter.ISMTPService;
 import com.dbkj.meet.utils.MailUtil;
 import com.dbkj.meet.utils.RSAUtil2;
@@ -13,8 +13,10 @@ import com.jfinal.i18n.I18n;
 import com.jfinal.i18n.Res;
 import com.jfinal.kit.StrKit;
 
+
 import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
@@ -22,6 +24,8 @@ import java.util.Map;
  * Created by DELL on 2017/05/23.
  */
 public class SMTPServiceImpl implements ISMTPService {
+
+    private IOrderMeetService orderMeetService=new OrderMeetService();
 
     @Override
     public SmtpEmailVO getByUserId(Long uid) {
@@ -123,4 +127,52 @@ public class SMTPServiceImpl implements ISMTPService {
         sendMail(mailBean);
     }
 
+    @Override
+    public void sendMail(long uid, String[] to, long rid) {
+        SmtpEmail smtpEmail=SmtpEmail.dao.findByUserId(uid);
+        //smtp不为空，才可以发送邮件
+        if(smtpEmail!=null){
+            Record record=Record.dao.findById(rid);
+            String subject="邮件主题";
+            //邮件内容
+            StringBuilder content=new StringBuilder(250);
+            content.append(record.getHostName());
+            content.append("邀请您于");
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            content.append(simpleDateFormat.format(new Date()));
+            content.append("参加");
+            content.append(record.getSubject());
+            content.append(",请拨打");
+            Company company=Company.dao.findById(User.dao.findById(record.getBelong()).getCid());
+            content.append(AccessNum.dao.findById(company.getCallNum()).getNum());
+            content.append("并输入");
+            content.append(record.getHostPwd());
+            content.append("参加会议。");
+
+            sendMail(smtpEmail.getEmail(),to,smtpEmail.getPassword(),smtpEmail.getHost(),subject,content.toString());
+        }
+    }
+
+    @Override
+    public void sendMail(long uid, String[] to, OrderMeet orderMeet) {
+        SmtpEmail smtpEmail=SmtpEmail.dao.findByUserId(uid);
+        //smtp不为空，才可以发送邮件
+        if(smtpEmail!=null){
+            String subject="会议邀请";
+            //短信内容
+            StringBuilder content=new StringBuilder(250);
+            content.append(orderMeet.getHostName());
+            content.append("邀请您于");
+            content.append(orderMeetService.getOrderMeetStartTime(orderMeet));
+            content.append("参加");
+            content.append(orderMeet.getSubject());
+            content.append("，");
+            Company company=Company.dao.findById(User.dao.findById(orderMeet.getBelong()).getCid());
+            content.append("请注意接听");
+            content.append(AccessNum.dao.findById(company.getCallNum()).getNum());
+            content.append("的来电");
+
+            sendMail(smtpEmail.getEmail(),to,smtpEmail.getPassword(),smtpEmail.getHost(),subject,content.toString());
+        }
+    }
 }

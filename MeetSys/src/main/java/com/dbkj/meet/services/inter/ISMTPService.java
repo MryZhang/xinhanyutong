@@ -1,6 +1,7 @@
 package com.dbkj.meet.services.inter;
 
 import com.dbkj.meet.dto.Result;
+import com.dbkj.meet.model.OrderMeet;
 import com.dbkj.meet.model.SmtpEmail;
 import com.dbkj.meet.model.User;
 import com.dbkj.meet.utils.MailUtil;
@@ -39,4 +40,19 @@ public interface ISMTPService {
      */
     void sendMail(String from,String[] to,String password,String host,String subject,String content);
 
+    /**
+     * 发送邮件
+     * @param uid 要送邮件的用户id
+     * @param to 收件邮箱
+     * @param rid 会议记录Record ID
+     */
+    void sendMail(long uid,String[] to,long rid);
+
+    /**
+     * 发送邮件
+     * @param uid 要送邮件的用户id
+     * @param to 收件邮箱
+     * @param orderMeet 预约会议记录
+     */
+    void sendMail(long uid, String[] to, OrderMeet orderMeet);
 }
