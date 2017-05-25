@@ -2,6 +2,7 @@ package com.dbkj.meet.controller;
 
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dic.UserType;
+import com.dbkj.meet.interceptors.AmountInterceptor;
 import com.dbkj.meet.interceptors.InfoInterceptor;
 import com.dbkj.meet.interceptors.LoginInterceptor;
 import com.dbkj.meet.model.User;
@@ -32,7 +33,7 @@ import java.util.Map;
 /**
  * Created by MrQin on 2016/11/4.
  */
-@Clear({LoginInterceptor.class, InfoInterceptor.class})
+@Clear({LoginInterceptor.class, InfoInterceptor.class, AmountInterceptor.class})
 public class LoginController extends Controller {
 
     private ILoginService loginService=new LoginService();
