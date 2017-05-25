@@ -3,7 +3,7 @@ package com.dbkj.meet.services;
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dto.Result;
 import com.dbkj.meet.model.*;
-import com.dbkj.meet.services.inter.IOrderMeetService;
+import com.dbkj.meet.services.inter.IOrderTimeService;
 import com.dbkj.meet.services.inter.ISMTPService;
 import com.dbkj.meet.utils.MailUtil;
 import com.dbkj.meet.utils.RSAUtil2;
@@ -25,7 +25,7 @@ import java.util.Map;
  */
 public class SMTPServiceImpl implements ISMTPService {
 
-    private IOrderMeetService orderMeetService=new OrderMeetService();
+    private IOrderTimeService orderTimeService = new OrderTimeServiceImpl();
 
     @Override
     public SmtpEmailVO getByUserId(Long uid) {
@@ -44,13 +44,13 @@ public class SMTPServiceImpl implements ISMTPService {
             Date date=new Date();
 
             //获取对应邮箱的SMTP的Host
-            String host="smtp."+smtpEmailVO.getEmail().substring(smtpEmailVO.getEmail().lastIndexOf("@"));
+            String host="smtp."+smtpEmailVO.getEmail().substring(smtpEmailVO.getEmail().lastIndexOf("@")+1);
             //修改
             if(smtpEmailVO.getId()!=null){
                 SmtpEmail smtpEmail=SmtpEmail.dao.findById(smtpEmailVO.getId());
-                smtpEmail.setUsername(smtpEmail.getEmail());
-                smtpEmail.setPassword(smtpEmail.getPassword());
-                smtpEmail.setEmail(smtpEmail.getEmail());
+                smtpEmail.setUsername(smtpEmailVO.getEmail());
+                smtpEmail.setPassword(smtpEmailVO.getPassword());
+                smtpEmail.setEmail(smtpEmailVO.getEmail());
                 smtpEmail.setHost(host);
                 smtpEmail.setGmtModified(date);
                 result.setResult(smtpEmail.update());
@@ -163,7 +163,7 @@ public class SMTPServiceImpl implements ISMTPService {
             StringBuilder content=new StringBuilder(250);
             content.append(orderMeet.getHostName());
             content.append("邀请您于");
-            content.append(orderMeetService.getOrderMeetStartTime(orderMeet));
+            content.append(orderTimeService.getOrderMeetStartTime(orderMeet));
             content.append("参加");
             content.append(orderMeet.getSubject());
             content.append("，");

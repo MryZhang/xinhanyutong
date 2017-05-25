@@ -2,8 +2,7 @@ package com.dbkj.meet.services;
 
 import com.dbkj.meet.dic.MeetType;
 import com.dbkj.meet.services.common.MeetManager;
-import com.dbkj.meet.services.ordermeet.BaseOrderMeetType;
-import com.dbkj.meet.services.ordermeet.NoRepeateOrderMeet;
+import com.dbkj.meet.services.inter.ISMTPService;
 import com.dbkj.meet.services.ordermeet.RemindScheduleJob;
 import com.dbkj.meet.services.ordermeet.ScheduleJob;
 import com.dbkj.meet.dic.AttendeeType;
@@ -26,7 +25,6 @@ import com.jfinal.core.Controller;
 import com.jfinal.i18n.I18n;
 import com.jfinal.i18n.Res;
 import com.jfinal.kit.JsonKit;
-import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.*;
 import com.jfinal.plugin.activerecord.Record;
@@ -60,7 +58,8 @@ public class OrderMeetService implements IOrderMeetService {
     private final String PHONE_FIELD="phone";
     private final String NAME_FIELD="name";
 
-    private final MessageService messageService=new MessageServiceImpl();
+    private MessageService messageService=new MessageServiceImpl();
+    private ISMTPService smtpService=new SMTPServiceImpl();
 
 
     public Map<String, Object> getRenderData(Controller controller) {
@@ -518,7 +517,7 @@ public class OrderMeetService implements IOrderMeetService {
                 result.setResult(flag);
                 if(flag){//预约会议创建成功
                     //根据用户选择发送通知短信
-                    smsNotice(orderModel.isSmsNotice(),orderModel.isContainHost(),orderMeet.getId(),orderAttendeeList);
+                    notice(orderModel.isSmsNotice(),orderModel.isContainHost(),orderMeet.getId(),orderAttendeeList,user.getId());
                 }
             }
         }
@@ -553,16 +552,22 @@ public class OrderMeetService implements IOrderMeetService {
      * @param isNotice 是否通知
      * @param orid 预约会议记录id
      * @param list 预约会议参会人
+     * @param uid
      */
-    private void smsNotice(boolean isNotice,boolean containHost,Long orid,List<OrderAttendee> list){
+    private void notice(boolean isNotice, boolean containHost, Long orid, List<OrderAttendee> list,Long uid){
         if(isNotice){
             OrderMeet orderMeet=OrderMeet.dao.findById(orid);
+            List<String> plist=new ArrayList<>(list.size());
             for(OrderAttendee attendee:list){
                 if(!containHost&&attendee.getType()==AttendeeType.HOST.getCode()){
                     continue;
                 }
                 messageService.sendSms(orderMeet,attendee.getPhone());
+                plist.add(attendee.getPhone());
             }
+            //根据号码去查询获取邮箱
+            List<String> toList=Employee.dao.getEmailByUsername(plist);
+            smtpService.sendMail(uid,toList.toArray(new String[toList.size()]),orderMeet);
         }
     }
 
@@ -813,53 +818,4 @@ public class OrderMeetService implements IOrderMeetService {
         return map;
     }
 
-    @Override
-    public String getOrderMeetStartTime(OrderMeet orderMeet) {
-        Map<String,Object> params=new HashMap<>();
-        params.put("oid",orderMeet.getId());
-        List<Schedule> scheduleList=Schedule.dao.getScheduleList(params);
-        Iterator<Schedule> itr=scheduleList.iterator();
-        SimpleDateFormat sdf=new SimpleDateFormat("HH:mm:ss");
-        int count=scheduleList.size();
-        int n=0;
-        StringBuilder temp=new StringBuilder();
-        while (itr.hasNext()){
-            n++;
-            Schedule sch=itr.next();
-            int type=sch.getOrderType();
-            String interval=sch.getInterval();
-            switch (type){
-                case 0://无重复周期
-                    return orderMeet.getStartTime();
-                case 1://重复周期为天
-                    if("workday".equals(interval)){
-                        return "每个工作日"+orderMeet.getStartTime();
-                    }else{
-                        return "每隔"+interval+"天"+orderMeet.getStartTime();
-                    }
-                case 2://重复周期为星期
-                    if(temp.length()==0){
-                        temp.append("每隔"+interval+"周周"+ DateUtil.getWeekday(sch.getOrderNum()));
-                    }else{
-                        temp.append("、周"+DateUtil.getWeekday(sch.getOrderNum()));
-                    }
-                    if(n==count){
-                        temp.append(" "+orderMeet.getStartTime());
-                        return temp.toString();
-                    }
-                case 3://重复周期为月
-                    String orderNum=sch.getOrderNum();
-                    if(orderNum==null){
-                        return "每个月第"+interval+"天"+orderMeet.getStartTime();
-                    }else{
-                        if("L".equals(interval)){
-                            return "每个月最后一周"+DateUtil.getWeekdayByNum(Integer.parseInt(orderNum))+" "+orderMeet.getStr("startTime");
-                        }else{
-                            return "每个月第"+interval+"周周"+DateUtil.getWeekdayByNum(Integer.parseInt(orderNum))+" "+orderMeet.getStr("startTime");
-                        }
-                    }
-            }
-        }
-        return temp.toString();
-    }
 }

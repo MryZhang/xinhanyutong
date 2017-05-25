@@ -48,10 +48,4 @@ public interface IOrderMeetService {
 
     Map<String,Object> getShowUpdatePageData(Long id,Integer type);
 
-    /**
-     * 获取预约会议的开始时间
-     * @param orderMeet
-     * @return
-     */
-    String getOrderMeetStartTime(OrderMeet orderMeet);
 }

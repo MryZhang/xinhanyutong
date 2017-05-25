@@ -174,9 +174,19 @@ $(function () {
             if (phone.trim() == "") {
                 Alert("电话号码不能为空！");
                 flag = false;
-            } else if (!common.phoneRegex.test(phone) && !common.telRegex.test(phone)) {
-                Alert("电话号码格式不正确！");
-                flag=false;
+            } else  {
+                //如果号码中包含"-"，且短横前的位数小于4位，则去掉"-"
+                var idx=phone.indexOf("-");
+                if(idx!=-1){
+                    var prefix=phone.substring(0,idx);
+                    if(prefix<=4){
+                        phone = phone.replace("-","");
+                    }
+                }
+                if (!common.phoneRegex.test(phone) && !common.telRegex.test(phone)){
+                    Alert("电话号码格式不正确！");
+                    flag=false;
+                }
             }
         }
 

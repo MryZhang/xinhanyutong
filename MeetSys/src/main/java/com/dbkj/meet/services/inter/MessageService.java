@@ -14,7 +14,7 @@ public interface MessageService {
      * 发送短信
      * @param
      */
-    void sendMsg(HttpServletRequest request);
+    void sendNotice(HttpServletRequest request);
 
     /**
      * 向参会人发送通知短信(即时会议使用)

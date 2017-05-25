@@ -56,7 +56,10 @@ public class MailUtil {
                 int length = mailBean.getTo().length;
                 InternetAddress[] toAddrs=new InternetAddress[length];
                 for (int i = 0; i < length; i++) {
-                    toAddrs[i]=new InternetAddress(mailBean.getTo()[i]);
+                    String email=mailBean.getTo()[i];
+                    if(email!=null){
+                        toAddrs[i]=new InternetAddress(email);
+                    }
                 }
                 //加载收件人地址
                 message.addRecipients(Message.RecipientType.TO,toAddrs);

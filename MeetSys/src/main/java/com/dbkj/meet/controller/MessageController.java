@@ -12,8 +12,7 @@ public class MessageController extends Controller {
     MessageService messageService=new MessageServiceImpl();
 
     public void send(){
-        Long id=getParaToLong();
-        messageService.sendMsg(getRequest());
+        messageService.sendNotice(getRequest());
         renderNull();
     }
 }

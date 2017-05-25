@@ -1,11 +1,12 @@
 package com.dbkj.meet.services;
 
 import com.dbkj.meet.dic.CallTypeEnum;
+import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dic.MessageConstant;
 import com.dbkj.meet.model.*;
-import com.dbkj.meet.services.inter.IOrderMeetService;
+import com.dbkj.meet.services.inter.IOrderTimeService;
+import com.dbkj.meet.services.inter.ISMTPService;
 import com.dbkj.meet.services.inter.MessageService;
-import com.dbkj.meet.utils.DateUtil;
 import com.dbkj.meet.utils.MessageUtil;
 import com.dbkj.meet.utils.ValidateUtil;
 import com.jfinal.plugin.activerecord.Db;
@@ -26,10 +27,11 @@ public class MessageServiceImpl implements MessageService {
 
     private final Logger log= LoggerFactory.getLogger(this.getClass());
 
-    private IOrderMeetService orderMeetService=new OrderMeetService();
+    private IOrderTimeService orderTimeService = new OrderTimeServiceImpl();
+    private ISMTPService smtpService=new SMTPServiceImpl();
 
     @Override
-    public void sendMsg(HttpServletRequest request) {
+    public void sendNotice(HttpServletRequest request) {
         Long rid=null;
         try {
             rid = Long.parseLong(request.getParameter("rid"));
@@ -38,6 +40,10 @@ public class MessageServiceImpl implements MessageService {
         }
         String phone=request.getParameter("phone");
         sendMsg(rid,phone);
+        //发送邮件通知
+        Long uid = ((User)request.getSession().getAttribute(Constant.USER_KEY)).getId();
+        List<String> toList=Employee.dao.getEmailByUsername(Arrays.asList(phone));
+        smtpService.sendMail(uid,toList.toArray(new String[toList.size()]),rid);
     }
 
     @Override
@@ -124,7 +130,7 @@ public class MessageServiceImpl implements MessageService {
             StringBuilder smsContent=new StringBuilder(250);
             smsContent.append(orderMeet.getHostName());
             smsContent.append("邀请您于");
-            smsContent.append(orderMeetService.getOrderMeetStartTime(orderMeet));
+            smsContent.append(orderTimeService.getOrderMeetStartTime(orderMeet));
             smsContent.append("参加");
             smsContent.append(orderMeet.getSubject());
             smsContent.append("，");

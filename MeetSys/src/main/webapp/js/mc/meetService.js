@@ -1255,8 +1255,8 @@ var meetService={
      */
     sendMsg:function (rid,phone,name) {
         $.post(common.getContextPath()+"/msg/send",{rid:rid,phone:phone,name:name},function (data) {
-            showInfo("已向"+name+"("+phone+")发送短信通知");
-            Alert("已向"+name+"("+phone+")发送短信通知");
+            showInfo("已向"+name+"("+phone+")发送通知");
+            Alert("已向"+name+"("+phone+")发送通知");
         });
     },
     /**
