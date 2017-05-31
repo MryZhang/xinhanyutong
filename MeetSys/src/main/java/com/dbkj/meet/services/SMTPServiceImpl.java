@@ -130,12 +130,16 @@ public class SMTPServiceImpl implements ISMTPService {
     @Override
     public void sendMail(long uid, String[] to, long rid) {
         SmtpEmail smtpEmail=SmtpEmail.dao.findByUserId(uid);
+        if(smtpEmail==null){//如果用户没有设置SMTP邮箱，则用默认的SMTP邮箱
+            smtpEmail=SmtpEmail.dao.findByUserId(0);
+        }
         //smtp不为空，才可以发送邮件
         if(smtpEmail!=null){
             Record record=Record.dao.findById(rid);
-            String subject="邮件主题";
+            String subject="公司电话会议邀请函";
             //邮件内容
             StringBuilder content=new StringBuilder(250);
+            content.append("\t尊敬的电话会议客户，您好！");
             content.append(record.getHostName());
             content.append("邀请您于");
             SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

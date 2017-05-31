@@ -134,11 +134,12 @@ public class AESUtil1 {
     }
 
     public static void main(String[] args) throws Exception {
-        String encodingAesKey = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG";
-        String text = "我是中文abcd123";
-        String encrypted=encrypt(encodingAesKey,text);
-        System.out.println("加密后："+encrypted);
-        String decrypted=decrypt(encodingAesKey,encrypted);
-        System.out.println("解密后："+decrypted);
+//        String encodingAesKey = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG";
+//        String text = "我是中文abcd123";
+//        String encrypted=encrypt(encodingAesKey,text);
+//        System.out.println("加密后："+encrypted);
+//        String decrypted=decrypt(encodingAesKey,encrypted);
+//        System.out.println("解密后："+decrypted);
+        System.out.println(decrypt(Constant.ENCRYPT_KEY,"qnFsjic4wGbO3TXO/pGVrg=="));
     }
 }

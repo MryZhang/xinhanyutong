@@ -26,15 +26,12 @@ public class MeetManager {
 
     private MeetManager(){}
 
+    private static class InstanceHolder{
+        private static MeetManager instance=new MeetManager();
+    }
+
     public static MeetManager getInstance(){
-        if(instance==null){
-            synchronized (lock){
-                if(instance==null){
-                    instance=new MeetManager();
-                }
-            }
-        }
-        return instance;
+        return InstanceHolder.instance;
     }
 
     /**
@@ -120,7 +117,14 @@ public class MeetManager {
         }
         map.put(Constant.ACTION,Constant.ACTION_CREATE_CALLMEET);
         String result = HttpKit.post(getMeetServiceUrl(), JsonKit.toJson(map));
-        return getResult(result);
+        Map<String,Object> resultMap = getResult(result);
+        //如果创建失败，则在删除缓存对应中的已使用的集合中的密码
+        if(!Constant.SUCCESS.equals(resultMap.get(Constant.STATUS).toString())){
+            Set<String> usedSet = getUsedPassword();
+            usedSet.remove(map.get(Constant.CHAIRMANPWD));
+            usedSet.remove(map.get(Constant.AUDIENCEPWD));
+        }
+        return resultMap;
     }
 
     public Map<String,Object> getResult(String result){

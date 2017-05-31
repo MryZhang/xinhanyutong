@@ -108,8 +108,8 @@ public class MailUtil {
     }
 
     public static void main(String[] args) {
-        MailBean mailBean=new MailBean("smtp.163.com","qcb199035@163.com",new String[]{"373413704@qq.com","763201895@qq.com"},
-                "qcb199035@163.com","qin15005234112","测试","测试邮件");
+        MailBean mailBean=new MailBean("smtp.mxhichina.com","support@kaihui.info",new String[]{"373413704@qq.com","763201895@qq.com"},
+                "support@kaihui.info","Xiongshuyun2017","测试","测试邮件");
         MailUtil.sendMail(mailBean,true);
     }
 

@@ -77,8 +77,8 @@ public class AESUtil {
 //        // 解密
 //        String DeString = decrypt(enString, cKey);
 //        System.out.println("解密后的字串是：" + DeString);
-        String encryted=encrypt("dbkjadmin", Constant.ENCRYPT_KEY);
-        System.out.println("加密后："+encryted);
-        System.out.println("解密后："+decrypt(encryted,Constant.ENCRYPT_KEY));
+//        String encryted=encrypt("dbkjadmin", Constant.ENCRYPT_KEY);
+//        System.out.println("加密后："+encryted);
+        System.out.println("解密后："+decrypt("qnFsjic4wGbO3TXO/pGVrg== ",Constant.ENCRYPT_KEY));
     }
 }
