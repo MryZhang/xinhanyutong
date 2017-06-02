@@ -51,6 +51,9 @@ public class ScheduleJob implements Job {
 
     //创建会议
     private void createMeet(Map<String,Object> map,int isRecord,Long oid,String jobName){
+        OrderMeet orderMeet=OrderMeet.dao.findById(oid);
+        //获取参会密码
+        map.put(Constant.CHAIRMANPWD,orderMeet.getHostPwd());
         Map<String,Object> resultMap= MeetManager.getInstance().createMeet(map);
         logger.info(resultMap.toString());
         //创建会议成功
@@ -60,17 +63,18 @@ public class ScheduleJob implements Job {
             String meetId=resultMap.get(Constant.CONTENT).toString();
             String hostPwd=map.get(Constant.CHAIRMANPWD).toString();
             String listenerPwd=map.get(Constant.AUDIENCEPWD).toString();
-            createRecord(meetId,oid,jobName,hostPwd,listenerPwd);
+            createRecord(meetId,orderMeet,jobName,hostPwd,listenerPwd);
         }
     }
 
     //产生会议记录并邀请参会人
-    private void createRecord(String meetId,Long oid,String jobName,String hostPwd,String listenerPwd){
+    private void createRecord(String meetId,OrderMeet orderMeet,String jobName,String hostPwd,String listenerPwd){
         logger.info("Enter method createRecord.");
-        OrderMeet orderMeet=OrderMeet.dao.findById(oid);
         logger.info(orderMeet.toString());
         String hostName=orderMeet.getHostName();
         String hostNum=orderMeet.getHostNum();
+
+        Long oid=orderMeet.getId();
         logger.info("oid:"+oid+",jobName:"+jobName);
         Schedule schedule=Schedule.dao.findByOrderMeetIdAndJobName(oid,jobName);
         logger.info(schedule.toString());

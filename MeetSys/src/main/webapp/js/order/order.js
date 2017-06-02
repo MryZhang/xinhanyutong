@@ -27,7 +27,7 @@ var order={
                 $("#timeRange").hide();
                 $("tr.invitTr").show();
                 $("#startTimeTr").show();
-                $("#meetPwd").hide();
+                // $("#meetPwd").hide();
                 break;
             case "1":
                 $("#startTime").hide();
@@ -36,7 +36,7 @@ var order={
                 $("#timeRange").show();
                 $("tr.invitTr").show();
                 $("#startTimeTr").show();
-                $("#meetPwd").hide();
+                // $("#meetPwd").hide();
                 break;
             case "2":
                 $("#startTime").hide();
@@ -45,7 +45,7 @@ var order={
                 $("#timeRange").show();
                 $("tr.invitTr").show();
                 $("#startTimeTr").show();
-                $("#meetPwd").hide();
+                // $("#meetPwd").hide();
                 break;
             case "3":
                 $("#startTime").hide();
@@ -54,12 +54,12 @@ var order={
                 $("#timeRange").show();
                 $("tr.invitTr").show();
                 $("#startTimeTr").show();
-                $("#meetPwd").hide();
+                // $("#meetPwd").hide();
                 break;
             case "4":
                 $("tr.invitTr").hide();
                 $("#startTimeTr").hide();
-                $("#meetPwd").show();
+                // $("#meetPwd").show();
                 break;
         }
     },
@@ -438,6 +438,9 @@ var order={
                     obj["order.contacts"]=JSON.stringify(contacts);
                 }
             }
+            //主持人密码
+            var hostPwd=$("#hostPwd").val();
+            obj["order.hostPwd"]=hostPwd;
             switch(cycleType){
                 case "0":
                     obj["order.startTime"]=$("#startTime").val();
@@ -510,9 +513,7 @@ var order={
                     setContacts();
                     break;
                 case "4":
-                    var hostPwd=$("#hostPwd").val();
                     var listenerPwd=$("#listenerPwd").val();
-                    obj["order.hostPwd"]=hostPwd;
                     obj["order.listenerPwd"]=listenerPwd;
                     break;
             }

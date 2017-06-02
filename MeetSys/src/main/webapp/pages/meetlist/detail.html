@@ -23,28 +23,28 @@
                             <div><#if mtype==1>即时会议<#elseif mtype==2>预约会议<#else>固定会议</#if></div>
                         </li>
                     </ul>
-                    <!-- 会议为固定会议时显示 -->
-                    <#if mtype==3>
-                        <ul class="itemdiv">
-                            <li class="wth"><div>呼入号码：</div></li>
-                            <li class="wtd"><div>${record.callNum}</div></li>
-                        </ul>
-                        <ul class="itemdiv">
-                            <li class="wth"><div>呼出号码：</div></li>
-                            <li class="wtd"><div>${record.showNum}</div></li>
-                        </ul>
-                    </#if>
-                    <!-- 会议为即时会议或者固定会议时显示 -->
-                    <#if mtype==1||mtype==3>
-                        <ul class="itemdiv">
-                            <li class="wth"><div>会议密码：</div></li>
-                            <li class="wtd"><div>${record.hostPwd}</div></li>
-                        </ul>
-                        <!-- <ul class="itemdiv">
-                            <li class="wth"><div>听众密码：</div></li>
-                            <li class="wtd"><div></div></li>
-                        </ul> -->
-                    </#if>
+
+
+                    <ul class="itemdiv">
+                        <li class="wth"><div>呼入号码：</div></li>
+                        <li class="wtd"><div>${record.callNum!}</div></li>
+                    </ul>
+                    <ul class="itemdiv">
+                        <li class="wth"><div>呼出号码：</div></li>
+                        <li class="wtd"><div>${record.showNum!}</div></li>
+                    </ul>
+
+
+
+                    <ul class="itemdiv">
+                        <li class="wth"><div>会议密码：</div></li>
+                        <li class="wtd"><div>${record.hostPwd!}</div></li>
+                    </ul>
+                    <!-- <ul class="itemdiv">
+                           <li class="wth"><div>听众密码：</div></li>
+                           <li class="wtd"><div></div></li>
+                    </ul> -->
+
                     <ul class="itemdiv">
                         <li class="wth"><div>是否录音：</div></li>
                         <li class="wtd"><div><#if record.isRecord==1>是<#else>否</#if></div></li>

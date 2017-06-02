@@ -134,20 +134,35 @@ public class MeetListService implements IMeetListService {
         if(mtype== MeetType.NORMAL_MEET.getCode()){//及时会议
             String meetId=controller.getPara("mid");
             map.put("mid",meetId);
-            Record record=Record.dao.findById(id);
+            Record rd=Record.dao.findById(id);
+
+            com.jfinal.plugin.activerecord.Record record=new com.jfinal.plugin.activerecord.Record();
+            record.set("id",rd.getId());
+            record.set("subject",rd.getSubject());
+            record.set("hostName",rd.getHost());
+            record.set("hostPwd",rd.getHostPwd());
+            record.set("isRecord",rd.getIsRecord());
+            record.set("status",rd.getStatus());
+            record.set("startTime",rd.getStartTime());
+            //获取呼入呼出号码
+            Company company=Company.dao.findById(User.dao.findById(rd.getBelong()).getCid());
+            record.set("callNum", AccessNum.dao.findById(company.getCallNum()).getNum());
+            record.set("showNum", AccessNum.dao.findById(company.getShowNum()).getNum());
+
             map.put("record",record);
             List<Attendee> attendeeList=Attendee.dao.findByRecordId(id);
             map.put("alist",attendeeList);
         }else if(mtype==MeetType.ORDER_MEET.getCode()){//预约会议
             OrderMeet orderMeet=OrderMeet.dao.findById(id);
-//            Company company=Company.dao.findById(User.dao.findById(orderMeet.getBelong()).getCid());
+            Company company=Company.dao.findById(User.dao.findById(orderMeet.getBelong()).getCid());
             com.jfinal.plugin.activerecord.Record record=new com.jfinal.plugin.activerecord.Record();
             record.set("id",orderMeet.getId());
             record.set("subject",orderMeet.getSubject());
             record.set("hostName",orderMeet.getHostName());
             record.set("isRecord",orderMeet.getIsRecord());
-//            record.set("callNum", AccessNum.dao.findById(company.getCallNum()).getNum());
-//            record.set("showNum", AccessNum.dao.findById(company.getShowNum()).getNum());
+            record.set("callNum", AccessNum.dao.findById(company.getCallNum()).getNum());
+            record.set("showNum", AccessNum.dao.findById(company.getShowNum()).getNum());
+            record.set("hostPwd",orderMeet.getHostPwd());
 
             Map<String,Object> params=new HashMap<>();
             params.put("oid",orderMeet.getId());

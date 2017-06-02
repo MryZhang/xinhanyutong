@@ -49,6 +49,14 @@ public abstract class BaseOrderMeet<M extends BaseOrderMeet<M>> extends Model<M>
 		return get("hostNum");
 	}
 
+	public void setHostPwd(java.lang.String hostPwd) {
+		set("hostPwd", hostPwd);
+	}
+
+	public java.lang.String getHostPwd() {
+		return get("hostPwd");
+	}
+
 	public void setIsRecord(java.lang.Integer isRecord) {
 		set("isRecord", isRecord);
 	}

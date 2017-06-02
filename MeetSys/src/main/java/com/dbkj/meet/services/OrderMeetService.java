@@ -232,6 +232,8 @@ public class OrderMeetService implements IOrderMeetService {
                 orderMeet.setBelong(Integer.parseInt(user.getId().toString()));
                 orderMeet.setHostName(orderModel.getHostName());
                 orderMeet.setStartTime(orderModel.getStartTime());
+                orderMeet.setHostPwd(orderModel.getHostPwd());
+
                 orderMeet.setCreated(now);
                 if(orderModel.isSmsRemind()){
                     orderMeet.setSmsRemind(Integer.parseInt(Constant.YES));
