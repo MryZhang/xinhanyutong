@@ -52,6 +52,16 @@ public class ScheduleJob implements Job {
     //创建会议
     private void createMeet(Map<String,Object> map,int isRecord,Long oid,String jobName){
         OrderMeet orderMeet=OrderMeet.dao.findById(oid);
+        //防止定时任务开始是，预约会议记录还未插入
+        while (orderMeet==null){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            orderMeet=OrderMeet.dao.findById(oid);
+        }
+        logger.info("order id:{},{}",oid,orderMeet);
         //获取参会密码
         map.put(Constant.CHAIRMANPWD,orderMeet.getHostPwd());
         Map<String,Object> resultMap= MeetManager.getInstance().createMeet(map);
