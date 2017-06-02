@@ -81,6 +81,14 @@ public abstract class BaseOrderMeet<M extends BaseOrderMeet<M>> extends Model<M>
 		return get("sms_remind");
 	}
 
+	public void setIsCallInitiative(java.lang.Integer isCallInitiative) {
+		set("is_call_initiative", isCallInitiative);
+	}
+
+	public java.lang.Integer getIsCallInitiative() {
+		return get("is_call_initiative");
+	}
+
 	public void setCreated(java.util.Date created) {
 		set("created", created);
 	}

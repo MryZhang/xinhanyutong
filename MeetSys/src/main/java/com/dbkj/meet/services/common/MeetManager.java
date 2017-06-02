@@ -89,9 +89,13 @@ public class MeetManager {
         return passwordSet;
     }
 
-    public synchronized boolean isUsedPassword(String password) {
+    public boolean isUsedPassword(String password) {
         Set<String> passwordSet=getUsedPassword();
         return passwordSet.contains(password);
+    }
+
+    public void addUsedPassword(String password){
+        getUsedPassword().add(password);
     }
 
     /**

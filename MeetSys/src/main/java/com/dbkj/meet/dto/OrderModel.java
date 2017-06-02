@@ -31,6 +31,7 @@ public class OrderModel {
     private int smsRemindTime;//会议开始前多少分钟提醒
     private boolean smsNotice;//预约会议创建后是否向参会人发短信通知
     private boolean containHost;//是否包含主持人
+    private boolean callInitiative;//是否主动呼叫
 
 
     public Long getId() {
@@ -215,5 +216,13 @@ public class OrderModel {
 
     public void setContainHost(boolean containHost) {
         this.containHost = containHost;
+    }
+
+    public boolean isCallInitiative() {
+        return callInitiative;
+    }
+
+    public void setCallInitiative(boolean callInitiative) {
+        this.callInitiative = callInitiative;
     }
 }

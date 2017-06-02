@@ -127,26 +127,18 @@ public class MessageServiceImpl implements MessageService {
     public void sendSms(OrderMeet orderMeet, String phone) {
         if(orderMeet!=null&&ValidateUtil.validateMobilePhone(phone)){
             //短信内容
-            StringBuilder smsContent=new StringBuilder(250);
-            smsContent.append(orderMeet.getHostName());
-            smsContent.append("邀请您于");
-            smsContent.append(orderTimeService.getOrderMeetStartTime(orderMeet));
-            smsContent.append("参加");
-            smsContent.append(orderMeet.getSubject());
-            smsContent.append("，");
             Company company=Company.dao.findById(User.dao.findById(orderMeet.getBelong()).getCid());
-            smsContent.append("请注意接听");
-            smsContent.append(AccessNum.dao.findById(company.getCallNum()).getNum());
-            smsContent.append("的来电");
+            OrderSmsType type=orderMeet.getIsCallInitiative()==Integer.parseInt(Constant.YES)?OrderSmsType.CALL_INITIATIVE:OrderSmsType.CALL_ONLY_HOST;
+            String smsContent=getOrderSmsContent(orderMeet,company,type);
 
             Map<String,Object> paraMap=new HashMap<String,Object>();
             paraMap.put(MessageConstant.MOBILE,phone);
-            paraMap.put(MessageConstant.SMS_CONTENT,smsContent.toString());
+            paraMap.put(MessageConstant.SMS_CONTENT,smsContent);
 
             Map<String,Object> resultMap= MessageUtil.sendMessage(paraMap);
             //短信发送成功，扣费
             if(resultMap.get(MessageConstant.STATUS).equals(MessageConstant.SUCCESS)){
-                orderMeetCharging(company.getId(),smsContent.toString());
+                orderMeetCharging(company.getId(),smsContent);
             }else{
                 //发送失败，重发
                 try {
@@ -197,5 +189,38 @@ public class MessageServiceImpl implements MessageService {
         map.put(Fee.dao.TYPE_KEY, CallTypeEnum.CALL_TYPE_MESSAGE.getCode());
         List<Fee> feeList=Fee.dao.getFee(map);
         return feeList.isEmpty()?null:feeList.get(0);
+    }
+
+    /**
+     * 获取预约会议短信通知的内容
+     * @param orderMeet
+     * @param type
+     * @return
+     */
+    private String getOrderSmsContent(OrderMeet orderMeet,Company company,OrderSmsType type){
+        //短信内容
+        StringBuilder smsContent=new StringBuilder(250);
+        smsContent.append(orderMeet.getHostName());
+        smsContent.append("邀请您于");
+        smsContent.append(orderTimeService.getOrderMeetStartTime(orderMeet));
+        smsContent.append("参加");
+        smsContent.append(orderMeet.getSubject());
+        smsContent.append("，");
+
+        String callNum=AccessNum.dao.findById(company.getCallNum()).getNum();
+        if(type==OrderSmsType.CALL_INITIATIVE) {
+            smsContent.append("请注意接听");
+            smsContent.append(callNum);
+            smsContent.append("的来电");
+        }else{
+            smsContent.append("请拨打"+callNum);
+            smsContent.append("并输入"+orderMeet.getHostPwd()+"参加会议");
+        }
+        return smsContent.toString();
+    }
+
+    private static enum OrderSmsType{
+        CALL_INITIATIVE,//主动呼叫所有参会人
+        CALL_ONLY_HOST//只呼叫主持人
     }
 }

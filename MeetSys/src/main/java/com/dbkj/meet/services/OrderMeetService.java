@@ -233,6 +233,7 @@ public class OrderMeetService implements IOrderMeetService {
                 orderMeet.setHostName(orderModel.getHostName());
                 orderMeet.setStartTime(orderModel.getStartTime());
                 orderMeet.setHostPwd(orderModel.getHostPwd());
+                orderMeet.setIsCallInitiative(orderModel.isCallInitiative()?Integer.parseInt(Constant.YES):Integer.parseInt(Constant.NO));
 
                 orderMeet.setCreated(now);
                 if(orderModel.isSmsRemind()){
@@ -526,8 +527,8 @@ public class OrderMeetService implements IOrderMeetService {
 
         //预约会议创建成功
         if(result.getResult()){
-            //会议创建成功后，先清空缓存中使用过的密码缓存
-            MeetManager.getInstance().removeUsedPasswordInCache();
+            //会议创建成功后，将会议密码添加为已使用的密码中
+            MeetManager.getInstance().addUsedPassword(orderModel.getHostPwd());
         }
 
         return result;
@@ -600,6 +601,15 @@ public class OrderMeetService implements IOrderMeetService {
             return new Result(false,res.get("hostNum.format.wrong"));
         }
 
+        //判断会议密码是否正确
+        if(StrKit.isBlank(orderModel.getHostPwd())||!ValidateUtil.validate4DigitalPassword(orderModel.getHostPwd())){
+            return new Result(false,res.get("password.format.wrong"));
+        }
+        MeetManager meetManager=MeetManager.getInstance();
+        if(meetManager.isUsedPassword(orderModel.getHostPwd())){
+            return new Result(false,res.get("password.repeat"));
+        }
+
         int type=orderModel.getPeriod();
         if(type==RepeatType.NONE.getCode()){//无重复周期
             if(!validateDateTime(orderModel.getStartTime())){
@@ -656,13 +666,7 @@ public class OrderMeetService implements IOrderMeetService {
                 }
             }
         }else if(orderModel.getPeriod()==RepeatType.FIEXD.getCode()){//固定会议
-            if(StrKit.isBlank(orderModel.getHostPwd())||!ValidateUtil.validate4DigitalPassword(orderModel.getHostPwd())){
-                return new Result(false,res.get("password.format.wrong"));
-            }
-            MeetManager meetManager=MeetManager.getInstance();
-            if(meetManager.isUsedPassword(orderModel.getHostPwd())){
-                return new Result(false,res.get("password.repeat"));
-            }
+
         }else{
             return new Result(false,res.get("data.format.wrong"));
         }

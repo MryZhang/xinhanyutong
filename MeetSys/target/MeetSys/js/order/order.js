@@ -535,6 +535,8 @@ var order={
                 }
                 obj["order.smsNotice"]=$("#smsNotice").get(0).checked;
                 obj["order.containHost"]=$("#containHost").get(0).checked;
+                var $isCallInitDom=$("#isCallInitiative");
+                obj["order.callInitiative"]=$isCallInitDom.get(0)?$isCallInitDom.get(0).checked:true;
                 return {result:true,data:obj};
             }
             return {result:false};

@@ -6,6 +6,7 @@ import com.dbkj.meet.dic.MeetState;
 import com.dbkj.meet.dic.MeetType;
 import com.dbkj.meet.model.*;
 import com.dbkj.meet.services.common.MeetManager;
+import com.google.gson.internal.LinkedTreeMap;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.IAtom;
 import org.quartz.Job;
@@ -110,7 +111,10 @@ public class ScheduleJob implements Job {
 
         if(record.save()){
             logger.info("Add record success.");
-            joinMeet(meetId,oid,record.getId(),hostName,hostNum);
+            //如果预约会议是主动呼叫，则才开始呼叫所有参会人
+            if(orderMeet.getIsCallInitiative()==Integer.parseInt(Constant.YES)){
+                joinMeet(meetId,oid,record.getId(),hostName,hostNum);
+            }
         }else{
             logger.error("添加会议记录失败");
         }
@@ -121,6 +125,11 @@ public class ScheduleJob implements Job {
         if(orderAttendees.size()>1){//除了会议主持人还有其他参会者
             List<Map<String,String>> callers=new ArrayList<Map<String, String>>();
             final List<Attendee> attendeeList=new ArrayList<Attendee>();
+
+            Map<String,Object> resultMap = MeetManager.getInstance().getMeetCallStatus(meetId);
+            List<LinkedTreeMap<String,String>> attendees= (List<LinkedTreeMap<String, String>>) resultMap.get(Constant.CONTENT);
+
+
             for(int i=0,len=orderAttendees.size();i<len;i++){
                 OrderAttendee orderAttendee=orderAttendees.get(i);
 
@@ -133,10 +142,20 @@ public class ScheduleJob implements Job {
                 attendeeList.add(attendee);
                 //如何是非主持人
                 if(orderAttendee.getType()== AttendeeType.ATTENDEE.getCode()){
-                    Map<String,String> map=new HashMap<String, String>();
-                    map.put(Constant.CALLER,orderAttendee.getPhone());
-                    map.put(Constant.NAME,orderAttendee.getName());
-                    callers.add(map);
+                    boolean flag=true;
+                    //判断参会人是否已进入会议
+                    for(LinkedTreeMap<String,String> map:attendees){
+                        if(map.get(Constant.CALLER).equals(orderAttendee.getPhone())){
+                            flag=false;
+                            break;
+                        }
+                    }
+                    if(flag){
+                        Map<String,String> map=new HashMap<String, String>();
+                        map.put(Constant.CALLER,orderAttendee.getPhone());
+                        map.put(Constant.NAME,orderAttendee.getName());
+                        callers.add(map);
+                    }
                 }
             }
 
@@ -144,7 +163,7 @@ public class ScheduleJob implements Job {
             map.put(Constant.MEETID,meetId);
             map.put(Constant.CALLERS,callers);
 
-            Map<String,Object> resultMap=MeetManager.getInstance().joinMeet(map);
+            resultMap=MeetManager.getInstance().joinMeet(map);
             if(Constant.SUCCESS.equals(resultMap.get(Constant.STATUS))){//加入会议成功
                 logger.info("Join meetting success.");
                 Db.tx(new IAtom() {

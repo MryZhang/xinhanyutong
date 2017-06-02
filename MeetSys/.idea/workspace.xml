@@ -7,459 +7,63 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25e089e4-e597-4075-8aab-6a6578aaa22a" name="Default" comment="修预约会议为重复类型的，首次开始时间为当前时间之前的时间时，预约会议会立即开始的bug。">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/NameServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/inter/INameService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys.war" afterPath="$PROJECT_DIR$/target/MeetSys.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/model/Employee.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/model/Employee.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/model/PrivateContacts.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/model/PrivateContacts.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$1.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$1.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/MeetSys.war" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/dto/OrderModel.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/dto/OrderModel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/model/base/BaseOrderMeet.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/model/base/BaseOrderMeet.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$10.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$10.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$11.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$11.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$12.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$12.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$13.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$13.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$2.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$3.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$4.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$5.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$5.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$6.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$6.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$7.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$7.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$8.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$8.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$9.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService$9.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MeetControlService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MessageServiceImpl$2.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MessageServiceImpl$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MessageServiceImpl.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/MessageServiceImpl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/OrderMeetService$1.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/OrderMeetService$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/OrderMeetService$2.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/OrderMeetService$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/OrderMeetService$3.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/OrderMeetService$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/OrderMeetService.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/OrderMeetService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/common/MeetManager.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/common/MeetManager.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/ordermeet/ScheduleJob$1.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/ordermeet/ScheduleJob$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/ordermeet/ScheduleJob.class" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/com/dbkj/meet/services/ordermeet/ScheduleJob.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/model/Employee.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/model/Employee.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/model/PrivateContacts.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/model/PrivateContacts.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$1.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/dto/OrderModel.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/dto/OrderModel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/model/base/BaseOrderMeet.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/model/base/BaseOrderMeet.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$10.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$10.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$11.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$11.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$12.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$12.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$13.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$13.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$2.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$3.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$4.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$5.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$5.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$6.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$6.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$7.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$7.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$8.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$8.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$9.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService$9.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MeetControlService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MessageServiceImpl$2.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MessageServiceImpl$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MessageServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/MessageServiceImpl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/OrderMeetService$1.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/OrderMeetService$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/OrderMeetService$2.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/OrderMeetService$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/OrderMeetService$3.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/OrderMeetService$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/OrderMeetService.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/OrderMeetService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/common/MeetManager$2.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/common/MeetManager$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/common/MeetManager.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/common/MeetManager.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/ordermeet/ScheduleJob$1.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/ordermeet/ScheduleJob$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/ordermeet/ScheduleJob.class" afterPath="$PROJECT_DIR$/target/classes/com/dbkj/meet/services/ordermeet/ScheduleJob.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/Employee.java" afterPath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/Employee.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/PrivateContacts.java" afterPath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/PrivateContacts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/MeetControlService.java" afterPath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/MeetControlService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/sql.properties" afterPath="$PROJECT_DIR$/src/main/resources/sql.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/css/font-awesome-ie7.css" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/css/font-awesome-ie7.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/css/font-awesome-ie7.min.css" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/css/font-awesome-ie7.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/css/font-awesome.css" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/css/font-awesome.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/css/font-awesome.min.css" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/css/font-awesome.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/font/fontawesome-webfont.svg" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/font/fontawesome-webfont.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/bootstrap.less" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/bootstrap.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/core.less" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/core.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/extras.less" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/extras.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/font-awesome-ie7.less" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/font-awesome-ie7.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/font-awesome.less" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/font-awesome.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/icons.less" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/icons.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/mixins.less" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/mixins.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/path.less" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/path.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/variables.less" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/less/variables.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/_bootstrap.scss" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/_bootstrap.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/_core.scss" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/_core.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/_extras.scss" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/_extras.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/_icons.scss" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/_icons.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/_mixins.scss" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/_mixins.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/_path.scss" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/_path.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/_variables.scss" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/_variables.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/font-awesome-ie7.scss" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/font-awesome-ie7.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/font-awesome.scss" afterPath="$PROJECT_DIR$/target/MeetSys/Font-Awesome-3.2.1/scss/font-awesome.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/ehcache.xml" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/ehcache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/logging.properties" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/logging.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/sql.properties" afterPath="$PROJECT_DIR$/target/MeetSys/WEB-INF/classes/sql.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/.gitignore" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/Gruntfile.js" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/Gruntfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/LICENSE.md" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/LICENSE.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/README.md" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/bower.json" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/css/ui-dialog.css" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/css/ui-dialog.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/dist/dialog-min.js" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/dist/dialog-min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/dist/dialog-plus-min.js" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/dist/dialog-plus-min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/dist/dialog-plus.js" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/dist/dialog-plus.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/dist/dialog.js" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/dist/dialog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/lib/jquery-1.10.2.js" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/lib/jquery-1.10.2.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/lib/require.js" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/lib/require.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/lib/sea.js" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/lib/sea.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/package.json" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/src/dialog-config.js" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/src/dialog-config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/src/dialog-plus.js" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/src/dialog-plus.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/src/dialog.js" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/src/dialog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/src/drag.js" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/src/drag.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/src/global_modules/jquery.js" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/src/global_modules/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/artDialog/src/popup.js" afterPath="$PROJECT_DIR$/target/MeetSys/artDialog/src/popup.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/audioplayer/css/audioplayer.css" afterPath="$PROJECT_DIR$/target/MeetSys/audioplayer/css/audioplayer.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/audioplayer/css/reset.css" afterPath="$PROJECT_DIR$/target/MeetSys/audioplayer/css/reset.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/audioplayer/css/style.css" afterPath="$PROJECT_DIR$/target/MeetSys/audioplayer/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/audioplayer/fonts/icomoon.svg" afterPath="$PROJECT_DIR$/target/MeetSys/audioplayer/fonts/icomoon.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/audioplayer/js/audioplayer.js" afterPath="$PROJECT_DIR$/target/MeetSys/audioplayer/js/audioplayer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/audioplayer/js/jquery.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/audioplayer/js/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/css/bootstrap-theme.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/css/bootstrap.css" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/js/bootstrap.js" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/js/bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/js/bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/js/npm.js" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-3.3.7-dist/js/npm.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/dist/css/bootstrap2/bootstrap-switch.css" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/dist/css/bootstrap2/bootstrap-switch.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/dist/css/bootstrap2/bootstrap-switch.min.css" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/dist/css/bootstrap2/bootstrap-switch.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/dist/js/bootstrap-switch.js" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/dist/js/bootstrap-switch.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/dist/js/bootstrap-switch.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/dist/js/bootstrap-switch.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/css/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/css/highlight.css" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/css/highlight.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/css/main.css" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/fonts/glyphicons-halflings-regular.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/js/bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/js/highlight.js" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/js/highlight.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/js/jquery.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/js/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/js/main.js" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/docs/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/coffee/bootstrap-switch.coffee" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/coffee/bootstrap-switch.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/coffee/bootstrap-switch.tests.coffee" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/coffee/bootstrap-switch.tests.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/coffee/main.coffee" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/coffee/main.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/css/highlight.css" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/css/highlight.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/jade/documentation-2.jade" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/jade/documentation-2.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/jade/events.jade" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/jade/events.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/jade/examples.jade" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/jade/examples.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/jade/index.jade" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/jade/index.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/jade/main.jade" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/jade/main.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/jade/methods.jade" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/jade/methods.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/jade/options.jade" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/jade/options.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/js/highlight.js" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/js/highlight.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/less/main.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/docs/less/main.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap2/bootstrap-switch.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap2/bootstrap-switch.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap2/build.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap2/build.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap2/mixins.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap2/mixins.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap2/variables.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap2/variables.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/bootstrap-switch.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/bootstrap-switch.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/build.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/build.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/alerts.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/alerts.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/background-variant.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/background-variant.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/border-radius.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/border-radius.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/buttons.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/buttons.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/center-block.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/center-block.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/clearfix.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/clearfix.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/forms.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/forms.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/gradients.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/gradients.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/grid-framework.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/grid-framework.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/grid.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/grid.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/hide-text.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/hide-text.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/image.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/image.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/labels.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/labels.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/list-group.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/list-group.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/nav-divider.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/nav-divider.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/nav-vertical-align.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/nav-vertical-align.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/opacity.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/opacity.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/pagination.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/pagination.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/panels.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/panels.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/progress-bar.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/progress-bar.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/reset-filter.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/reset-filter.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/reset-text.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/reset-text.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/resize.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/resize.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/responsive-visibility.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/responsive-visibility.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/size.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/size.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/tab-focus.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/tab-focus.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/table-row.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/table-row.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/text-emphasis.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/text-emphasis.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/text-overflow.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/text-overflow.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/vendor-prefixes.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/mixins/vendor-prefixes.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/variables.less" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/src/less/bootstrap3/variables.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/test/bootstrap-switch.js" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/test/bootstrap-switch.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/test/bootstrap-switch.tests.js" afterPath="$PROJECT_DIR$/target/MeetSys/bootstrap-switch/test/bootstrap-switch.tests.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/fullcalendar.css" afterPath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/fullcalendar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/fullcalendar.js" afterPath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/fullcalendar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/fullcalendar.min.css" afterPath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/fullcalendar.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/fullcalendar.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/fullcalendar.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/fullcalendar.print.css" afterPath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/fullcalendar.print.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/gcal.js" afterPath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/gcal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/lang-all.js" afterPath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/lang-all.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/lib/cupertino/jquery-ui.min.css" afterPath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/lib/cupertino/jquery-ui.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/lib/jquery-ui.custom.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/lib/jquery-ui.custom.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/lib/jquery.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/lib/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/lib/moment.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/fullcalendar-2.6.1/lib/moment.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/angular/ng.pqgrid.dev.js" afterPath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/angular/ng.pqgrid.dev.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-de.js" afterPath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-de.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-es.js" afterPath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-es.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-fr.js" afterPath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-fr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-hu.js" afterPath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-hu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-it.js" afterPath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-it.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-nl.js" afterPath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-nl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-pt-br.js" afterPath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-pt-br.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-ru.js" afterPath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-ru.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-zh.js" afterPath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-zh.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-zh_TW.js" afterPath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/localize/pq-localize-zh_TW.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/pqgrid.dev.css" afterPath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/pqgrid.dev.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/pqgrid.dev.js" afterPath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/pqgrid.dev.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/pqgrid.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/pqgrid.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/themes/Office/pqgrid.css" afterPath="$PROJECT_DIR$/target/MeetSys/grid-2.2.0/themes/Office/pqgrid.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/easyloader.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/easyloader.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/jquery.easyui.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/jquery.easyui.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/jquery.easyui.mobile.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/jquery.easyui.mobile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/jquery.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/locale/easyui-lang-it.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/locale/easyui-lang-it.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/locale/easyui-lang-tr.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/locale/easyui-lang-tr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.accordion.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.accordion.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.calendar.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.calendar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.combo.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.combo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.combobox.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.combobox.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.combogrid.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.combogrid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.combotree.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.combotree.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.datagrid.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.datagrid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.datalist.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.datalist.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.datebox.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.datebox.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.datetimebox.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.datetimebox.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.datetimespinner.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.datetimespinner.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.dialog.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.dialog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.draggable.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.draggable.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.droppable.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.droppable.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.filebox.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.filebox.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.form.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.form.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.layout.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.layout.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.linkbutton.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.linkbutton.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.menu.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.menu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.menubutton.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.menubutton.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.messager.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.messager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.mobile.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.mobile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.numberbox.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.numberbox.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.numberspinner.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.numberspinner.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.pagination.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.pagination.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.panel.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.panel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.parser.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.parser.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.progressbar.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.progressbar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.propertygrid.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.propertygrid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.resizable.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.resizable.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.searchbox.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.searchbox.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.slider.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.slider.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.spinner.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.spinner.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.splitbutton.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.splitbutton.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.switchbutton.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.switchbutton.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.tabs.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.tabs.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.textbox.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.textbox.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.timespinner.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.timespinner.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.tooltip.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.tooltip.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.tree.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.tree.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.treegrid.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.treegrid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.validatebox.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.validatebox.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.window.js" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/plugins/jquery.window.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/accordion.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/accordion.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/calendar.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/calendar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/combo.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/combo.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/combobox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/combobox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/datagrid.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/datagrid.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/datalist.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/datalist.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/datebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/datebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/dialog.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/dialog.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/easyui.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/easyui.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/filebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/filebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/layout.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/layout.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/linkbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/linkbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/menu.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/menu.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/menubutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/menubutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/messager.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/messager.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/pagination.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/pagination.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/panel.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/panel.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/progressbar.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/progressbar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/propertygrid.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/propertygrid.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/searchbox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/searchbox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/slider.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/slider.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/spinner.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/spinner.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/splitbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/splitbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/switchbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/switchbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/tabs.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/tabs.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/textbox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/textbox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/tooltip.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/tooltip.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/tree.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/tree.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/validatebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/validatebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/window.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/black/window.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/accordion.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/accordion.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/calendar.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/calendar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/combo.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/combo.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/combobox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/combobox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/datagrid.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/datagrid.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/datalist.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/datalist.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/datebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/datebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/dialog.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/dialog.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/easyui.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/easyui.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/filebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/filebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/layout.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/layout.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/linkbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/linkbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/menu.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/menu.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/menubutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/menubutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/messager.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/messager.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/pagination.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/pagination.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/panel.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/panel.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/progressbar.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/progressbar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/propertygrid.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/propertygrid.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/searchbox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/searchbox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/slider.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/slider.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/spinner.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/spinner.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/splitbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/splitbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/switchbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/switchbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/tabs.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/tabs.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/textbox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/textbox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/tooltip.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/tooltip.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/tree.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/tree.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/validatebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/validatebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/window.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/bootstrap/window.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/accordion.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/accordion.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/calendar.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/calendar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/combo.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/combo.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/combobox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/combobox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/datagrid.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/datagrid.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/datalist.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/datalist.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/datebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/datebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/dialog.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/dialog.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/easyui.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/easyui.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/filebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/filebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/layout.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/layout.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/linkbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/linkbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/menu.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/menu.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/menubutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/menubutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/messager.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/messager.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/pagination.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/pagination.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/panel.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/panel.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/progressbar.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/progressbar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/propertygrid.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/propertygrid.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/searchbox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/searchbox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/slider.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/slider.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/spinner.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/spinner.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/splitbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/splitbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/switchbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/switchbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/tabs.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/tabs.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/textbox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/textbox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/tooltip.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/tooltip.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/tree.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/tree.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/validatebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/validatebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/window.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/default/window.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/accordion.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/accordion.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/calendar.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/calendar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/combo.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/combo.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/combobox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/combobox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/datagrid.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/datagrid.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/datalist.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/datalist.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/datebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/datebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/dialog.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/dialog.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/easyui.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/easyui.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/filebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/filebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/layout.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/layout.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/linkbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/linkbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/menu.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/menu.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/menubutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/menubutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/messager.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/messager.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/pagination.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/pagination.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/panel.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/panel.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/progressbar.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/progressbar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/propertygrid.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/propertygrid.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/searchbox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/searchbox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/slider.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/slider.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/spinner.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/spinner.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/splitbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/splitbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/switchbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/switchbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/tabs.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/tabs.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/textbox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/textbox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/tooltip.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/tooltip.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/tree.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/tree.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/validatebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/validatebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/window.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/gray/window.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/accordion.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/accordion.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/calendar.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/calendar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/combo.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/combo.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/combobox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/combobox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/datagrid.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/datagrid.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/datalist.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/datalist.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/datebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/datebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/dialog.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/dialog.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/easyui.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/easyui.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/filebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/filebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/layout.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/layout.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/linkbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/linkbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/menu.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/menu.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/menubutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/menubutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/messager.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/messager.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/pagination.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/pagination.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/panel.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/panel.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/progressbar.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/progressbar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/propertygrid.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/propertygrid.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/searchbox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/searchbox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/slider.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/slider.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/spinner.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/spinner.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/splitbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/splitbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/switchbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/switchbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/tabs.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/tabs.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/textbox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/textbox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/tooltip.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/tooltip.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/tree.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/tree.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/validatebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/validatebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/window.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/material/window.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/accordion.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/accordion.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/calendar.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/calendar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/combo.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/combo.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/combobox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/combobox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/datagrid.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/datagrid.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/datalist.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/datalist.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/datebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/datebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/dialog.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/dialog.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/easyui.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/easyui.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/filebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/filebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/layout.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/layout.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/linkbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/linkbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/menu.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/menu.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/menubutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/menubutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/messager.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/messager.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/pagination.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/pagination.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/panel.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/panel.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/progressbar.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/progressbar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/propertygrid.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/propertygrid.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/searchbox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/searchbox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/slider.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/slider.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/spinner.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/spinner.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/splitbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/splitbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/switchbutton.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/switchbutton.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/tabs.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/tabs.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/textbox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/textbox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/tooltip.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/tooltip.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/tree.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/tree.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/validatebox.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/validatebox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/window.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/metro/window.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/mobile.css" afterPath="$PROJECT_DIR$/target/MeetSys/jquery-easyui-1.4.5/themes/mobile.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/js/jquery.cookie.js" afterPath="$PROJECT_DIR$/target/MeetSys/js/jquery.cookie.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/js/jquery.json.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/js/jquery.json.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/js/jquery.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/js/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/js/jsencrypt.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/js/jsencrypt.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/js/json2.js" afterPath="$PROJECT_DIR$/target/MeetSys/js/json2.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/js/mc/reconnecting-websocket.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/js/mc/reconnecting-websocket.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/css/awesomeStyle/awesome.css" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/css/awesomeStyle/awesome.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/css/awesomeStyle/awesome.less" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/css/awesomeStyle/awesome.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/css/awesomeStyle/fa.less" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/css/awesomeStyle/fa.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/css/demo.css" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/css/demo.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/css/metroStyle/metroStyle.css" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/css/metroStyle/metroStyle.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/css/zTreeStyle/zTreeStyle.css" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/css/zTreeStyle/zTreeStyle.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery-1.4.4.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery-1.4.4.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.all.js" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.all.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.all.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.all.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.core.js" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.core.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.core.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.excheck.js" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.excheck.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.excheck.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.excheck.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.exedit.js" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.exedit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.exedit.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.exedit.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.exhide.js" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.exhide.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.exhide.min.js" afterPath="$PROJECT_DIR$/target/MeetSys/zTree_v3/js/jquery.ztree.exhide.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/ehcache.xml" afterPath="$PROJECT_DIR$/target/classes/ehcache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/logging.properties" afterPath="$PROJECT_DIR$/target/classes/logging.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/sql.properties" afterPath="$PROJECT_DIR$/target/classes/sql.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jfinal_demo.log" afterPath="$PROJECT_DIR$/jfinal_demo.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/dto/OrderModel.java" afterPath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/dto/OrderModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/base/BaseOrderMeet.java" afterPath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/base/BaseOrderMeet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/MessageServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/MessageServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/OrderMeetService.java" afterPath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/OrderMeetService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/common/MeetManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/common/MeetManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/inter/MessageService.java" afterPath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/inter/MessageService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/ordermeet/ScheduleJob.java" afterPath="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/ordermeet/ScheduleJob.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/js/order/order.js" afterPath="$PROJECT_DIR$/src/main/webapp/js/order/order.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/order/index.html" afterPath="$PROJECT_DIR$/src/main/webapp/pages/order/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/js/order/order.js" afterPath="$PROJECT_DIR$/target/MeetSys/js/order/order.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MeetSys/pages/order/index.html" afterPath="$PROJECT_DIR$/target/MeetSys/pages/order/index.html" />
     </list>
     <ignored path="MeetSys.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -500,90 +104,96 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="ScheduleJob.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/order/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="229" column="127" lean-forward="false" selection-start-line="229" selection-start-column="111" selection-end-line="229" selection-end-column="127" />
+              <folding>
+                <element signature="n#tr#3;n#table#0;n#form#0;n#div#2;n#div#0;n#\sinclude#0;n#!!top" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScheduleJob.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/ordermeet/ScheduleJob.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="48" column="45" lean-forward="true" selection-start-line="48" selection-start-column="45" selection-end-line="48" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MeetListService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/MeetListService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="63" column="23" lean-forward="false" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MeetController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/controller/MeetController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="39" column="58" lean-forward="false" selection-start-line="39" selection-start-column="58" selection-end-line="39" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MeetControlService.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/MeetControlService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="424" column="47" lean-forward="false" selection-start-line="424" selection-start-column="47" selection-end-line="424" selection-end-column="47" />
+            <state relative-caret-position="184">
+              <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
               <folding>
-                <element signature="e#2043#2059#0" expanded="true" />
-                <element signature="e#2968#2974#0" expanded="true" />
-                <element signature="e#3082#3088#0" expanded="true" />
-                <element signature="e#5506#5888#0" expanded="true" />
-                <element signature="e#5887#5888#0" expanded="true" />
-                <element signature="e#5932#6314#0" expanded="true" />
-                <element signature="e#6313#6314#0" expanded="true" />
-                <element signature="e#6677#7015#0" expanded="true" />
-                <element signature="e#7014#7015#0" expanded="true" />
+                <element signature="e#1655#1671#0" expanded="true" />
+                <element signature="e#5039#5049#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NameServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/NameServiceImpl.java">
+      <file leaf-file-name="RemindScheduleJob.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/ordermeet/RemindScheduleJob.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="18" column="3" lean-forward="true" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
+            <state relative-caret-position="256">
+              <caret line="36" column="25" lean-forward="true" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MessageServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/MessageServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="325">
+              <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="order.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/js/order/order.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="291">
+              <caret line="548" column="37" lean-forward="true" selection-start-line="548" selection-start-column="37" selection-end-line="548" selection-end-column="37" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#745#2179#0" expanded="true" />
-                <element signature="e#2178#2179#0" expanded="true" />
-                <element signature="e#2259#2260#0" expanded="true" />
-                <element signature="e#2308#2309#0" expanded="true" />
+                <marker date="1496397284963" expanded="true" signature="11132:11138" ph="&amp;nbsp;" />
+                <marker date="1496397284963" expanded="true" signature="11138:11144" ph="&amp;nbsp;" />
+                <marker date="1496397284963" expanded="true" signature="11285:11362" ph="..." />
+                <marker date="1496397284963" expanded="true" signature="13683:13712" ph="..." />
+                <marker date="1496397284963" expanded="true" signature="13903:13932" ph="..." />
+                <marker date="1496397284963" expanded="true" signature="14071:14100" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Employee.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/Employee.java">
+      <file leaf-file-name="OrderMeetService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/OrderMeetService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="70" column="41" lean-forward="false" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="41" />
+            <state relative-caret-position="452">
+              <caret line="610" column="9" lean-forward="true" selection-start-line="610" selection-start-column="9" selection-end-line="610" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MeetManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/common/MeetManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="295">
+              <caret line="79" column="17" lean-forward="true" selection-start-line="79" selection-start-column="17" selection-end-line="79" selection-end-column="17" />
               <folding>
-                <element signature="e#1875#1876#0" expanded="true" />
-                <element signature="e#1937#1938#0" expanded="true" />
+                <element signature="e#2838#2839#0" expanded="true" />
+                <element signature="e#2885#2886#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sql.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/sql.properties">
+      <file leaf-file-name="il8n_zh_CN.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/il8n_zh_CN.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="23" column="90" lean-forward="true" selection-start-line="23" selection-start-column="90" selection-end-line="23" selection-end-column="90" />
+            <state relative-caret-position="400">
+              <caret line="34" column="25" lean-forward="false" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -594,13 +204,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="AnnotationType" />
         <option value="CSS File" />
         <option value="JavaScript File" />
         <option value="HTML File" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -620,7 +230,6 @@
       <find>开始</find>
       <find>getContactInfo</find>
       <find>edit</find>
-      <find>create</find>
       <find>getUserPageData</find>
       <find>updae</find>
       <find>setPageData</find>
@@ -636,6 +245,7 @@
       <find>getMeetDetail</find>
       <find>getOrderMeetList</find>
       <find>Employee</find>
+      <find>create</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -654,9 +264,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/freemarker/HasRoleFreeMarkerMethod.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/interceptors/LoginedUserInterceptor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/utils/UserUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/inter/IUserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/validator/UserDataValidator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/UserService.java" />
@@ -668,7 +275,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/dic/Constant.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/inter/IRSAService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/RSAServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/il8n_zh_CN.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/vo/SmtpEmailVO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/controller/SMTPController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/pages/user/detail.html" />
@@ -679,32 +285,36 @@
         <option value="$PROJECT_DIR$/src/main/webapp/My97DatePicker/开发包/skin/whyGreen/datepicker.css" />
         <option value="$PROJECT_DIR$/src/main/webapp/grid-2.2.0/localize/pq-localize-pl.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/inter/ISMTPService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/inter/MessageService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/controller/MessageController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/inter/IOrderTimeService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/OrderTimeServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/inter/IOrderMeetService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/MessageServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/js/mc/meetService.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/utils/AESUtil1.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/utils/AESUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/utils/MailUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/SMTPServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/common/MeetManager.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pages/order/index.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/js/order/order.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/OrderMeetService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/utils/ScheduleHelper.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/pages/meetlist/detail.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/MeetListService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/ordermeet/ScheduleJob.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/PrivateContacts.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/Employee.java" />
         <option value="$PROJECT_DIR$/src/main/resources/sql.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/NameServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/inter/INameService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/MeetControlService.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/pages/order/index.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/dto/OrderModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/ordermeet/ScheduleJob.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/dic/OrderSmsType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/ordermeet/RemindScheduleJob.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/inter/MessageService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/MessageServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/js/order/order.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/il8n_zh_CN.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/common/MeetManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/OrderMeetService.java" />
       </list>
     </option>
   </component>
@@ -825,6 +435,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MeetSys" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MeetSys" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -881,7 +517,71 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MeetSys" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MeetSys" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="meet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ordermeet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MeetSys" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MeetSys" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="meet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dic" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1726,7 +1426,7 @@
       <workItem from="1495712287275" duration="57000" />
       <workItem from="1495852769751" duration="2163000" />
       <workItem from="1496220548903" duration="20556000" />
-      <workItem from="1496383375365" duration="6596000" />
+      <workItem from="1496383375365" duration="14614000" />
     </task>
     <task id="LOCAL-00001" summary="登录页面排除获取账户余额信息的过滤器，防止出现错误后无法返回登录页面">
       <created>1495693189177</created>
@@ -1753,7 +1453,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1600570000" />
+    <option name="totallyTimeSpent" value="1608588000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1780,7 +1480,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3997735" sideWeight="0.48056155" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29898074" sideWeight="0.48056155" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3171008" sideWeight="0.46369138" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1901,13 +1601,19 @@
           <option name="timeStamp" value="323" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/MeetControlService.java</url>
-          <line>69</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/ordermeet/ScheduleJob.java</url>
+          <line>82</line>
           <properties />
-          <option name="timeStamp" value="342" />
+          <option name="timeStamp" value="344" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/ordermeet/ScheduleJob.java</url>
+          <line>35</line>
+          <properties />
+          <option name="timeStamp" value="347" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="343" />
+      <option name="time" value="348" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1916,21 +1622,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/2.2/jfinal-2.2.jar!/com/jfinal/plugin/ehcache/CacheKit.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="69" column="24" lean-forward="false" selection-start-line="69" selection-start-column="24" selection-end-line="69" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/LoginService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="49" column="18" lean-forward="false" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/SMTPServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="366">
@@ -1939,39 +1630,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/order/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="250" column="14" lean-forward="false" selection-start-line="250" selection-start-column="14" selection-end-line="250" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/GeneratorDemo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="36" column="8" lean-forward="false" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/js/order/order.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="440" column="19" lean-forward="false" selection-start-line="440" selection-start-column="19" selection-end-line="440" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/dto/OrderModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="14" column="26" lean-forward="false" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/base/BaseOrderMeet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-384">
           <caret line="9" column="22" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2071,39 +1734,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/controller/OrderMeetController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="57" column="50" lean-forward="true" selection-start-line="57" selection-start-column="50" selection-end-line="57" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/utils/ScheduleHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
           <caret line="132" column="18" lean-forward="true" selection-start-line="132" selection-start-column="18" selection-end-line="132" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/inter/MessageService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="37" column="9" lean-forward="false" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/MessageServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="133" column="36" lean-forward="true" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/ordermeet/RemindScheduleJob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -2126,14 +1760,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="17" column="34" lean-forward="false" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/common/MeetManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
-          <caret line="108" column="31" lean-forward="false" selection-start-line="108" selection-start-column="31" selection-end-line="108" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -2163,16 +1789,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/OrderMeetService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7375">
-          <caret line="335" column="88" lean-forward="false" selection-start-line="335" selection-start-column="88" selection-end-line="335" selection-end-column="88" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/2.2/jfinal-2.2.jar!/com/jfinal/plugin/activerecord/Model.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -2181,22 +1797,6 @@
             <element signature="e#15889#15890#0" expanded="true" />
             <element signature="e#15964#15965#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/ordermeet/ScheduleJob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="48" column="45" lean-forward="true" selection-start-line="48" selection-start-column="45" selection-end-line="48" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/OrderMeet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2213,18 +1813,6 @@
         <state relative-caret-position="25">
           <caret line="63" column="23" lean-forward="false" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/base/BaseRecord.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding>
-            <element signature="e#421#422#0" expanded="false" />
-            <element signature="e#682#683#0" expanded="false" />
-            <element signature="e#707#708#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2328,20 +1916,156 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/GeneratorDemo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="36" column="8" lean-forward="false" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/OrderMeet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/dto/OrderModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="221" column="30" lean-forward="true" selection-start-line="221" selection-start-column="30" selection-end-line="221" selection-end-column="30" />
+          <folding>
+            <element signature="e#4943#4944#0" expanded="true" />
+            <element signature="e#4980#4981#0" expanded="true" />
+            <element signature="e#5041#5042#0" expanded="true" />
+            <element signature="e#5093#5094#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/order/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="229" column="127" lean-forward="false" selection-start-line="229" selection-start-column="111" selection-end-line="229" selection-end-column="127" />
+          <folding>
+            <element signature="n#tr#3;n#table#0;n#form#0;n#div#2;n#div#0;n#\sinclude#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/dic/OrderSmsType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/ordermeet/RemindScheduleJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="36" column="25" lean-forward="true" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/inter/MessageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="33" column="30" lean-forward="true" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/MeetControlService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="424" column="47" lean-forward="false" selection-start-line="424" selection-start-column="47" selection-end-line="424" selection-end-column="47" />
+        <state relative-caret-position="146">
+          <caret line="504" column="33" lean-forward="true" selection-start-line="504" selection-start-column="33" selection-end-line="504" selection-end-column="33" />
           <folding>
             <element signature="e#2043#2059#0" expanded="true" />
             <element signature="e#2968#2974#0" expanded="true" />
             <element signature="e#3082#3088#0" expanded="true" />
-            <element signature="e#5506#5888#0" expanded="true" />
-            <element signature="e#5887#5888#0" expanded="true" />
-            <element signature="e#5932#6314#0" expanded="true" />
-            <element signature="e#6313#6314#0" expanded="true" />
-            <element signature="e#6677#7015#0" expanded="true" />
-            <element signature="e#7014#7015#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/model/base/BaseRecord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#421#422#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/controller/OrderMeetController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="57" column="50" lean-forward="false" selection-start-line="57" selection-start-column="50" selection-end-line="57" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/js/order/order.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="548" column="37" lean-forward="true" selection-start-line="548" selection-start-column="37" selection-end-line="548" selection-end-column="37" />
+          <folding>
+            <marker date="1496397284963" expanded="true" signature="11132:11138" ph="&amp;nbsp;" />
+            <marker date="1496397284963" expanded="true" signature="11138:11144" ph="&amp;nbsp;" />
+            <marker date="1496397284963" expanded="true" signature="11285:11362" ph="..." />
+            <marker date="1496397284963" expanded="true" signature="13683:13712" ph="..." />
+            <marker date="1496397284963" expanded="true" signature="13903:13932" ph="..." />
+            <marker date="1496397284963" expanded="true" signature="14071:14100" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/il8n_zh_CN.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="34" column="25" lean-forward="false" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/MessageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/common/MeetManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="79" column="17" lean-forward="true" selection-start-line="79" selection-start-column="17" selection-end-line="79" selection-end-column="17" />
+          <folding>
+            <element signature="e#2838#2839#0" expanded="true" />
+            <element signature="e#2885#2886#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/OrderMeetService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="610" column="9" lean-forward="true" selection-start-line="610" selection-start-column="9" selection-end-line="610" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dbkj/meet/services/ordermeet/ScheduleJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding>
+            <element signature="e#1655#1671#0" expanded="true" />
+            <element signature="e#5039#5049#0" expanded="true" />
           </folding>
         </state>
       </provider>
