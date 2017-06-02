@@ -154,4 +154,8 @@ public class PrivateContacts extends BasePrivateContacts<PrivateContacts> {
 	public PrivateContacts findByNameAndUserId(String name,long uid){
 		return findFirst(SqlUtil.getSql("findByNameAndUserId",this),name,uid);
 	}
+
+	public List<Record> getContactsByCompanyId(long cid){
+		return Db.find(SqlUtil.getSql("getContactsByCompanyId",this),cid);
+	}
 }

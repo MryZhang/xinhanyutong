@@ -52,11 +52,13 @@ public class MeetControlService implements IMeetControlService {
 
     private final Logger logger=Logger.getLogger(this.getClass());
 
-    private final IChargeService chargeService=new ChargeService();
+    private IChargeService chargeService=new ChargeService();
 
-    private final MessageService messageService=new MessageServiceImpl();
+    private MessageService messageService=new MessageServiceImpl();
 
-    private final ChargingService chargingService=new ChargingServiceImpl();
+    private ChargingService chargingService=new ChargingServiceImpl();
+
+    private INameService nameService=new NameServiceImpl();
 
     /**
      * 获取会议的相关数据
@@ -418,7 +420,11 @@ public class MeetControlService implements IMeetControlService {
                     }
                 }
                 String name=map.get(Constant.NAME);
-                node.setName(name);;
+                if(StrKit.isBlank(name)||phone.equals(name)){
+                    name=nameService.getNameByPhone(uid,phone);
+                    name=name==null?phone:name;
+                }
+                node.setName(name);
                 node.setStatus(map.get(Constant.STATUS));
                 nodes.add(node);
             }

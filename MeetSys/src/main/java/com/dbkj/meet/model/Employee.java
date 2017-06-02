@@ -67,4 +67,8 @@ public class Employee extends BaseEmployee<Employee> {
 		}
 		return rlist;
 	}
+
+	public List<Employee> findByCompanyId(long cid){
+		return find(SqlUtil.getSql("findByCompanyId",this),cid);
+	}
 }
