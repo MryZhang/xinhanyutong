@@ -235,7 +235,7 @@ public class ScheduleHelper {
 				}
 				Date now=new Date();
 				int n = DateUtil.compareDateTime(now, stime);
-				if(n<0){//说明当前时间已超过执行时间
+				if(n>0){//说明当前时间已超过执行时间
 					cal.setTime(stime);
 					cal.add(Calendar.DAY_OF_MONTH, 7);
 					stime=cal.getTime();
