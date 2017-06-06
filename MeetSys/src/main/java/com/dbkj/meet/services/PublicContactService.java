@@ -4,6 +4,8 @@ import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dto.BaseNode;
 import com.dbkj.meet.dto.PubContact;
 import com.dbkj.meet.dto.Result;
+import com.dbkj.meet.interceptors.ContactCacheInterceptor;
+import com.dbkj.meet.interceptors.NameCacheInterceptor;
 import com.dbkj.meet.model.Department;
 import com.dbkj.meet.model.PublicContacts;
 import com.dbkj.meet.model.PublicPhone;
@@ -12,6 +14,7 @@ import com.dbkj.meet.services.inter.IPublicContactService;
 import com.dbkj.meet.utils.ExcelUtil;
 import com.dbkj.meet.utils.FileUtil;
 import com.dbkj.meet.utils.ValidateUtil;
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.StrKit;
@@ -120,6 +123,7 @@ public class PublicContactService implements IPublicContactService {
      * @param cid
      * @return
      */
+    @Before({NameCacheInterceptor.class, ContactCacheInterceptor.class})
     public boolean addContact(final PubContact pubContact, final Integer cid) {
         if(pubContact!=null){
             final PublicPhone publicPhone=new PublicPhone();
@@ -166,6 +170,7 @@ public class PublicContactService implements IPublicContactService {
     }
 
 
+    @Before({NameCacheInterceptor.class, ContactCacheInterceptor.class})
     public boolean updateContactData(PubContact pubContact) {
         if(pubContact!=null){
             final PublicContacts publicContacts=PublicContacts.dao.findById(pubContact.getPid());
@@ -215,6 +220,7 @@ public class PublicContactService implements IPublicContactService {
         return new File(path+fileName);
     }
 
+    @Before({NameCacheInterceptor.class, ContactCacheInterceptor.class})
     public boolean deleteContacts(String idStr, final long cid) {
         String[] arr=idStr.split(",");
         final int[] ids=new int[arr.length];
@@ -246,6 +252,7 @@ public class PublicContactService implements IPublicContactService {
      * @param cid
      * @return
      */
+    @Before({NameCacheInterceptor.class, ContactCacheInterceptor.class})
     public Result<Map<String, Object>> importContacts(File file, final Integer cid) {
         //读取数据
         List<Record> list=new ArrayList<Record>();

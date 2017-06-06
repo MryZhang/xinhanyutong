@@ -1,7 +1,9 @@
 package com.dbkj.meet.services;
 
+import com.dbkj.meet.interceptors.NameCacheInterceptor;
 import com.dbkj.meet.model.*;
 import com.dbkj.meet.services.inter.IEmployeeService;
+import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.IAtom;
 
@@ -23,6 +25,7 @@ public class EmployeeService implements IEmployeeService {
      * @param user
      * @return
      */
+    @Before(NameCacheInterceptor.class)
     public boolean addEmployee(final Employee employee, final User user) {
         if(employee!=null){
             //添加员工信息并将信息添加到公共联系人中

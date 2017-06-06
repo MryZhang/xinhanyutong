@@ -5,6 +5,7 @@ package com.dbkj.meet.dic;
  * Created by MrQin on 2016/11/7.
  */
 public enum MeetState {
+    OREDER_RECORD(-1,"预约会议记录"),
     STARTED(0,"会议开始"),
     GOINGON(1,"会议进行中"),
     FINSHED(2,"会议结束")

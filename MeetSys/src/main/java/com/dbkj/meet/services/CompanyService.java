@@ -3,11 +3,13 @@ package com.dbkj.meet.services;
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dic.RateModeEnum;
 import com.dbkj.meet.dto.Result;
+import com.dbkj.meet.interceptors.NameCacheInterceptor;
 import com.dbkj.meet.model.*;
 import com.dbkj.meet.services.inter.ICompanyService;
 import com.dbkj.meet.utils.ScheduleHelper;
 import com.dbkj.meet.utils.ValidateUtil;
 import com.dbkj.meet.vo.CompanyVo;
+import com.jfinal.aop.Before;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
@@ -175,6 +177,7 @@ public class CompanyService implements ICompanyService {
      * @param id
      * @return
      */
+    @Before(NameCacheInterceptor.class)
     public boolean deleteCompany(final Long id) {
         return Db.tx(new IAtom() {
             public boolean run() throws SQLException {

@@ -110,6 +110,18 @@ public class ValidateUtil {
         return matcher.find();
     }
 
+    /**
+     * 验证域名格式
+     * @param value
+     * @return
+     */
+    public static boolean validateDomain(String value){
+        String regex="^([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,6}$";
+        Pattern pattern=Pattern.compile(regex);
+        Matcher matcher=pattern.matcher(value);
+        return matcher.find();
+    }
+
     public static void main(String[] args) {
         System.out.println(validateSpecialString("%阿斯蒂芬"));
     }

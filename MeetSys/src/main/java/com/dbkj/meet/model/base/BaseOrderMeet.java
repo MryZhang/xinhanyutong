@@ -89,12 +89,28 @@ public abstract class BaseOrderMeet<M extends BaseOrderMeet<M>> extends Model<M>
 		return get("is_call_initiative");
 	}
 
-	public void setCreated(java.util.Date created) {
-		set("created", created);
+	public void setRid(java.lang.Integer rid) {
+		set("rid", rid);
 	}
 
-	public java.util.Date getCreated() {
-		return get("created");
+	public java.lang.Integer getRid() {
+		return get("rid");
+	}
+
+	public void setGmtCreated(java.util.Date gmtCreated) {
+		set("gmt_created", gmtCreated);
+	}
+
+	public java.util.Date getGmtCreated() {
+		return get("gmt_created");
+	}
+
+	public void setGmtModified(java.util.Date gmtModified) {
+		set("gmt_modified", gmtModified);
+	}
+
+	public java.util.Date getGmtModified() {
+		return get("gmt_modified");
 	}
 
 }

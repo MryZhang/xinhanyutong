@@ -37,7 +37,7 @@
                 <#if (records?size>0)>
                     <#list records as item>
                         <tr class="tb-todaymeeting">
-                            <td class="cwidth">${item.startTime}</td>
+                            <td class="cwidth">${(item.startTime)!}</td>
                             <td class="swidth">${item.subject}</td>
                             <td class="twidth">${item.hostName}</td>
                             <td class="twidth">${item.count}</td>

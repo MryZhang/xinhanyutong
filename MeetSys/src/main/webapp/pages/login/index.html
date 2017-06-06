@@ -34,7 +34,7 @@
                 <input type="hidden" name="user.encryptPwd" id="encryptPwd">
               </div>
             </div>
-            <#if (times??&&times?number>=1)||(user.authCode)??>
+            <#if (times??&&times?number>=3)||(user.authCode)??>
               <div class="clearfix" id="vertifyCode">
                 <label for="authCode">验证码：</label>
                 <div>

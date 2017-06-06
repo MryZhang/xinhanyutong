@@ -29,7 +29,7 @@
                             <#if inmeet??&&(inmeet?size>0)>
                                 <#list inmeet as item>
                                     <tr>
-                                        <td>${item.createTime}</td>
+                                        <td>${(item.createTime)!}</td>
                                         <td><a href="javascript:;" class="detail" title="${item.subject}" >${item.subject}</a></td>
                                         <td class="twidth">${item.hostName}</td>
                                         <td>

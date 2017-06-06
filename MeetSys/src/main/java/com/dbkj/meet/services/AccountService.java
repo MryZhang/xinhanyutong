@@ -156,6 +156,7 @@ public class AccountService implements IAccountService {
         for(Bill bill:list.getList()){
             detailList.add(BillDetailConverter.to(bill));
         }
+
         return new BillVo<BillDetailVo>(curpage,list.getTotalRow(),detailList);
     }
 

@@ -9,6 +9,7 @@ import com.dbkj.meet.services.DepartmentService;
 import com.dbkj.meet.services.inter.IDepartmentService;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
+import com.jfinal.aop.Enhancer;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.POST;
 
@@ -17,7 +18,7 @@ import com.jfinal.ext.interceptor.POST;
  */
 public class DepartmentController extends Controller {
 
-    private IDepartmentService departmentService=new DepartmentService();
+    private IDepartmentService departmentService= Enhancer.enhance(DepartmentService.class);
 
     @Clear({InfoInterceptor.class})
     @Before({POST.class})

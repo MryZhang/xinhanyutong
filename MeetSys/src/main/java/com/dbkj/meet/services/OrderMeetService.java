@@ -1,13 +1,11 @@
 package com.dbkj.meet.services;
 
-import com.dbkj.meet.dic.MeetType;
+import com.dbkj.meet.dic.*;
+import com.dbkj.meet.interceptors.RemoveBillCacheInterceptor;
 import com.dbkj.meet.services.common.MeetManager;
 import com.dbkj.meet.services.inter.ISMTPService;
 import com.dbkj.meet.services.ordermeet.RemindScheduleJob;
 import com.dbkj.meet.services.ordermeet.ScheduleJob;
-import com.dbkj.meet.dic.AttendeeType;
-import com.dbkj.meet.dic.Constant;
-import com.dbkj.meet.dic.RepeatType;
 import com.dbkj.meet.dto.BaseNode;
 import com.dbkj.meet.dto.ChildrenNode;
 import com.dbkj.meet.dto.OrderModel;
@@ -21,6 +19,7 @@ import com.dbkj.meet.utils.ScheduleHelper;
 import com.dbkj.meet.utils.ValidateUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.i18n.I18n;
 import com.jfinal.i18n.Res;
@@ -235,9 +234,24 @@ public class OrderMeetService implements IOrderMeetService {
                 orderMeet.setHostPwd(orderModel.getHostPwd());
                 orderMeet.setIsCallInitiative(orderModel.isCallInitiative()?Integer.parseInt(Constant.YES):Integer.parseInt(Constant.NO));
 
-                orderMeet.setCreated(now);
+                orderMeet.setGmtCreated(now);
                 if(orderModel.isSmsRemind()){
                     orderMeet.setSmsRemind(Integer.parseInt(Constant.YES));
+                }
+
+                //如果开启会议预约会议创建后发送短信通知，则添加会议记录，以便与短信发送记录关联
+                final com.dbkj.meet.model.Record record=new com.dbkj.meet.model.Record();
+                if(orderModel.isSmsNotice()){
+                    record.setSubject(orderMeet.getSubject());
+                    record.setHostName(orderMeet.getHostName());
+                    record.setHost(orderMeet.getHostNum());
+                    record.setIsRecord(orderMeet.getIsRecord());
+                    record.setBelong(Integer.parseInt(user.getId().toString()));
+                    record.setStatus(MeetState.STARTED.getStateCode());
+                    record.setHostPwd(orderMeet.getHostPwd());
+                    record.setMeetNums(MeetManager.getInstance().getMeetNums());
+                    record.setType(MeetType.ORDER_MEET.getCode());
+                    record.setGmtCreate(now);
                 }
 
                 final String jgroup=user.getUsername();//将当前用户名当做定时任务组名
@@ -402,14 +416,15 @@ public class OrderMeetService implements IOrderMeetService {
                                         JobDetail remindJob=newJob(RemindScheduleJob.class)
                                                 .withIdentity(jname+"_"+wks[i]+"_remind",jgroup)
                                                 .usingJobData(RemindScheduleJob.ORDER_MEET_ID,pid)
-                                                .usingJobData(RemindScheduleJob.SMS_REMIND,orderModel.isSmsRemind())
+                                                .usingJobData(RemindScheduleJob.USER_ID,user.getId())
+                                                .usingJobData(RemindScheduleJob.CONTAIN_HOST,orderModel.isContainHost())
                                                 .usingJobData(RemindScheduleJob.SMS_REMIND_TIME,orderModel.getSmsRemindTime())
                                                 .build();
 
                                         Date remindDate=DateUtil.addByMinutes(date,orderModel.getSmsRemindTime()*(-1));
                                         Trigger remindTri=ScheduleHelper.getRemindWeekTrigger(jname+"_"+wks[i]+"_remind",
                                                 jgroup,remindDate,wks[i],n);
-                                        remindMap.put(jobDetail,remindTri);
+                                        remindMap.put(remindJob,remindTri);
                                     }
 
                                 } catch (ParseException e) {
@@ -436,7 +451,6 @@ public class OrderMeetService implements IOrderMeetService {
                                     schedule.setInterval(orderModel.getOrderNum());
                                     schedule.setOrderNum(orderModel.getWeekday());
                                 }
-
                                 isSuccess=schedule.save();
                             }
                             int[] temps=ScheduleHelper.getParaFromTime(orderModel.getStartTime());
@@ -481,6 +495,8 @@ public class OrderMeetService implements IOrderMeetService {
                                         .withIdentity(jname+"_remind",jgroup)
                                         .usingJobData(RemindScheduleJob.ORDER_MEET_ID,pid)
                                         .usingJobData(RemindScheduleJob.CONTAIN_HOST,orderModel.isContainHost())
+                                        .usingJobData(RemindScheduleJob.USER_ID,user.getId())
+                                        .usingJobData(RemindScheduleJob.REMIND_MINUTES,orderModel.getSmsRemindTime())
                                         .build();
                             }
 
@@ -519,6 +535,7 @@ public class OrderMeetService implements IOrderMeetService {
                 });
                 result.setResult(flag);
                 if(flag){//预约会议创建成功
+                    addRecord(orderMeet);
                     //根据用户选择发送通知短信
                     notice(orderModel.isSmsNotice(),orderModel.isContainHost(),orderMeet.getId(),orderAttendeeList,user.getId());
                 }
@@ -532,6 +549,50 @@ public class OrderMeetService implements IOrderMeetService {
         }
 
         return result;
+    }
+
+    /**
+     * 插入会议记录，和参会人记录，以及设置预约会议记录中rid字段
+     * @param orderMeet
+     * @return
+     */
+    private boolean addRecord(final OrderMeet orderMeet){
+        return Db.tx(new IAtom() {
+            @Override
+            public boolean run() throws SQLException {
+                com.dbkj.meet.model.Record record=new com.dbkj.meet.model.Record();
+                record.setSubject(orderMeet.getSubject());
+                record.setHostName(orderMeet.getHostName());
+                record.setHost(orderMeet.getHostNum());
+                record.setIsRecord(orderMeet.getIsRecord());
+                record.setBelong(orderMeet.getBelong());
+                record.setStatus(MeetState.OREDER_RECORD.getStateCode());
+                record.setHostPwd(orderMeet.getHostPwd());
+                record.setMeetNums(MeetManager.getInstance().getMeetNums());
+                record.setType(MeetType.ORDER_MEET.getCode());
+                record.setGmtCreate(new Date());
+                record.setOid(Integer.parseInt(orderMeet.getId().toString()));
+                if(record.save()) {
+                    List<OrderAttendee> orderAttendeeList = OrderAttendee.dao.findByOrderMeetId(orderMeet.getId());
+                    List<Attendee> attendeeList=new ArrayList<>();
+                    for(OrderAttendee orderAttendee:orderAttendeeList){
+                        Attendee attendee=new Attendee();
+                        attendee.setName(orderAttendee.getName());
+                        attendee.setRid(Integer.parseInt(record.getId().toString()));
+                        attendee.setPhone(orderAttendee.getPhone());
+                        attendee.setType(orderAttendee.getType());
+                        attendee.setStatus(Integer.parseInt(Constant.WATING_CALL));
+                        attendeeList.add(attendee);
+                    }
+                    Db.batchSave(attendeeList,100);
+
+                    orderMeet.setRid(Integer.parseInt(record.getId().toString()));
+                    orderMeet.setGmtModified(new Date());
+                    return orderMeet.update();
+                }
+                return false;
+            }
+        });
     }
 
     private String getRemindTime(String startTime,int minutes){
@@ -565,12 +626,14 @@ public class OrderMeetService implements IOrderMeetService {
                 if(!containHost&&attendee.getType()==AttendeeType.HOST.getCode()){
                     continue;
                 }
-                messageService.sendSms(orderMeet,attendee.getPhone());
+                messageService.sendOrderSms(orderMeet,attendee.getPhone(),attendee.getName());
                 plist.add(attendee.getPhone());
             }
             //根据号码去查询获取邮箱
             List<String> toList=Employee.dao.getEmailByUsername(plist);
-            smtpService.sendMail(uid,toList.toArray(new String[toList.size()]),orderMeet);
+            if(toList.size()>0){
+                smtpService.sendMail(uid,toList.toArray(new String[toList.size()]),orderMeet);
+            }
         }
     }
 
@@ -742,6 +805,7 @@ public class OrderMeetService implements IOrderMeetService {
      * @param type
      * @return
      */
+    @Before({RemoveBillCacheInterceptor.class})
     @Override
     public boolean cancelMeet(final long oid, int type) {
         boolean result=false;
@@ -754,6 +818,7 @@ public class OrderMeetService implements IOrderMeetService {
                     removeScheduleTask(oid);
                     if(OrderMeet.dao.deleteById(oid)){
                         if(Schedule.dao.deleteByOrderMeetId(oid)>0){
+                            com.dbkj.meet.model.Record.dao.updateRecordStatus(oid,MeetState.FINSHED);
                             return OrderAttendee.dao.deleteByOrderMeetId(oid)>0;
                         }
                     }

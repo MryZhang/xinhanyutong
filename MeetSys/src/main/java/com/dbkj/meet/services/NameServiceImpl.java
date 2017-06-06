@@ -60,6 +60,7 @@ public class NameServiceImpl implements INameService {
 
     @Override
     public String getNameByPhone(Long uid,String phone) {
-        return getAllName(uid).get(phone);
+        String name = getAllName(uid).get(phone);
+        return name!=null?name:phone;
     }
 }

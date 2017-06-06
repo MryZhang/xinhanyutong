@@ -33,6 +33,30 @@ public abstract class BaseSms<M extends BaseSms<M>> extends Model<M> implements 
 		return get("msg");
 	}
 
+	public void setName(java.lang.String name) {
+		set("name", name);
+	}
+
+	public java.lang.String getName() {
+		return get("name");
+	}
+
+	public void setPhone(java.lang.String phone) {
+		set("phone", phone);
+	}
+
+	public java.lang.String getPhone() {
+		return get("phone");
+	}
+
+	public void setRate(java.lang.String rate) {
+		set("rate", rate);
+	}
+
+	public java.lang.String getRate() {
+		return get("rate");
+	}
+
 	public void setFee(java.math.BigDecimal fee) {
 		set("fee", fee);
 	}

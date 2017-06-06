@@ -8,9 +8,9 @@ import com.dbkj.meet.model.Department;
 import com.dbkj.meet.model.User;
 import com.dbkj.meet.services.PublicContactService;
 import com.dbkj.meet.services.inter.IPublicContactService;
-import com.dbkj.meet.services.proxy.ClearCacheProxy;
 import com.dbkj.meet.validator.PubContactValidator;
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Enhancer;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.POST;
 import com.jfinal.kit.StrKit;
@@ -28,7 +28,7 @@ public class PublicContactsController extends Controller {
     /**
      * 使用代理类来清除相关缓存
      */
-    private IPublicContactService publicContactService= (IPublicContactService) new ClearCacheProxy().bind(new PublicContactService());
+    private IPublicContactService publicContactService= Enhancer.enhance(PublicContactService.class);
 
     private User user;
 

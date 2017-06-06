@@ -109,7 +109,7 @@ public class MailUtil {
 
     public static void main(String[] args) {
         MailBean mailBean=new MailBean("smtp.mxhichina.com","support@kaihui.info",new String[]{"373413704@qq.com","763201895@qq.com"},
-                "support@kaihui.info","Xiongshuyun2017","测试","测试邮件");
+                "support@kaihui.info","Yunhuiyi2017","测试","测试邮件");
         MailUtil.sendMail(mailBean,true);
     }
 

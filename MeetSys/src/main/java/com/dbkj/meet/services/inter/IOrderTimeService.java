@@ -13,4 +13,11 @@ public interface IOrderTimeService {
      * @return
      */
     String getOrderMeetStartTime(OrderMeet orderMeet);
+
+    /**
+     * 获取下次预约会议开始的时间
+     * @param orderMeet
+     * @return
+     */
+    String getNextStartTime(OrderMeet orderMeet);
 }

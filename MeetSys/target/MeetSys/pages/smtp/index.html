@@ -31,6 +31,14 @@
                             </div>
                         </li>
                         <li class="item">
+                            <label class="fps_left leftfont"><b class="keyClass">*</b>SMTP服务地址：</label>
+                            <div class="fps_right">
+                                <input type="text" class="text" id="c_smtp_host" name="smtp.host" value="${(smtp.email)!}">
+                                <span id="c_smtp_host_icon" class="">&nbsp;</span>
+                                <div id="c_smtp_host_Id" class="null"></div>
+                            </div>
+                        </li>
+                        <li class="item">
                             <label class="fps_left leftfont"><b class="keyClass">*</b>密码：</label>
                             <div class="fps_right">
                                 <input type="password" class="text" id="c_password" name="smtp.password" value="${(smtp.password)!}" >
@@ -95,6 +103,7 @@
                data["smtp.confirmPwd"]=common.generateMixed(confirmPwd.length);
                data["smtp.encryptConfirmPwd"]=encrypt.encrypt(confirmPwd);
 
+               data["smtp.host"]=$("#c_smtp_host").val();
                var sid=$("#sid").val().trim();
                if(sid){
                     data["smtp.id"]=sid;

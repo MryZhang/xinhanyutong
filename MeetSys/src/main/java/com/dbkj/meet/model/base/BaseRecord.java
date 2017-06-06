@@ -129,14 +129,6 @@ public abstract class BaseRecord<M extends BaseRecord<M>> extends Model<M> imple
 		return get("type");
 	}
 
-	public void setSid(java.lang.Integer sid) {
-		set("sid", sid);
-	}
-
-	public java.lang.Integer getSid() {
-		return get("sid");
-	}
-
 	public void setRec(java.lang.String rec) {
 		set("rec", rec);
 	}
@@ -175,6 +167,30 @@ public abstract class BaseRecord<M extends BaseRecord<M>> extends Model<M> imple
 
 	public java.lang.Integer getAllowBegin() {
 		return get("allow_begin");
+	}
+
+	public void setOid(java.lang.Integer oid) {
+		set("oid", oid);
+	}
+
+	public java.lang.Integer getOid() {
+		return get("oid");
+	}
+
+	public void setGmtCreate(java.util.Date gmtCreate) {
+		set("gmt_create", gmtCreate);
+	}
+
+	public java.util.Date getGmtCreate() {
+		return get("gmt_create");
+	}
+
+	public void setGmtModified(java.util.Date gmtModified) {
+		set("gmt_modified", gmtModified);
+	}
+
+	public java.util.Date getGmtModified() {
+		return get("gmt_modified");
 	}
 
 }

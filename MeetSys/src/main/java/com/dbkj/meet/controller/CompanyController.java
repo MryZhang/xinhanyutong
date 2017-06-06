@@ -11,6 +11,7 @@ import com.dbkj.meet.validator.CompanyValidator;
 import com.dbkj.meet.vo.CompanyVo;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
+import com.jfinal.aop.Enhancer;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.POST;
 
@@ -23,7 +24,7 @@ import java.util.List;
 @Clear({InfoInterceptor.class})
 public class CompanyController extends Controller{
 
-    private ICompanyService companyService=new CompanyService();
+    private ICompanyService companyService= Enhancer.enhance(CompanyService.class);
 
     public void addnew(){
         String referrer=getPara("referrer");

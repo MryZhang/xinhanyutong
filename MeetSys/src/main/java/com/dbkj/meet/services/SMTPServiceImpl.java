@@ -1,6 +1,7 @@
 package com.dbkj.meet.services;
 
 import com.dbkj.meet.dic.Constant;
+import com.dbkj.meet.dic.OrderCallType;
 import com.dbkj.meet.dto.Result;
 import com.dbkj.meet.model.*;
 import com.dbkj.meet.services.inter.IOrderTimeService;
@@ -44,14 +45,14 @@ public class SMTPServiceImpl implements ISMTPService {
             Date date=new Date();
 
             //获取对应邮箱的SMTP的Host
-            String host="smtp."+smtpEmailVO.getEmail().substring(smtpEmailVO.getEmail().lastIndexOf("@")+1);
+//            String host="smtp."+smtpEmailVO.getEmail().substring(smtpEmailVO.getEmail().lastIndexOf("@")+1);
             //修改
             if(smtpEmailVO.getId()!=null){
                 SmtpEmail smtpEmail=SmtpEmail.dao.findById(smtpEmailVO.getId());
                 smtpEmail.setUsername(smtpEmailVO.getEmail());
                 smtpEmail.setPassword(smtpEmailVO.getPassword());
                 smtpEmail.setEmail(smtpEmailVO.getEmail());
-                smtpEmail.setHost(host);
+                smtpEmail.setHost(smtpEmailVO.getHost());
                 smtpEmail.setGmtModified(date);
                 result.setResult(smtpEmail.update());
             }else{//添加
@@ -61,7 +62,7 @@ public class SMTPServiceImpl implements ISMTPService {
                 smtpEmail.setUsername(smtpEmailVO.getEmail());
                 smtpEmail.setEmail(smtpEmailVO.getEmail());
                 smtpEmail.setPassword(smtpEmailVO.getPassword());
-                smtpEmail.setHost(host);
+                smtpEmail.setHost(smtpEmailVO.getHost());
                 smtpEmail.setGmtCreate(date);
                 result.setResult(smtpEmail.save());
             }
@@ -86,6 +87,14 @@ public class SMTPServiceImpl implements ISMTPService {
             return result;
         }else if (!ValidateUtil.validateEmail(smtpEmailVO.getEmail())){
             result.setMsg(resCn.get("smtp.email.format.not.correct"));
+            return result;
+        }
+
+        if(StrKit.isBlank(smtpEmailVO.getHost())){
+            result.setMsg(resCn.get("smtp.host.not.empty"));
+            return result;
+        }else if (!ValidateUtil.validateDomain(smtpEmailVO.getHost())){
+            result.setMsg(resCn.get("smtp.host.format.not.correct"));
             return result;
         }
 
@@ -159,24 +168,44 @@ public class SMTPServiceImpl implements ISMTPService {
 
     @Override
     public void sendMail(long uid, String[] to, OrderMeet orderMeet) {
+        if(to==null||to.length==0){
+            return;
+        }
         SmtpEmail smtpEmail=SmtpEmail.dao.findByUserId(uid);
+        if(smtpEmail==null){//如果用户没有设置SMTP邮箱，则用默认的SMTP邮箱
+            smtpEmail=SmtpEmail.dao.findByUserId(0);
+        }
         //smtp不为空，才可以发送邮件
         if(smtpEmail!=null){
-            String subject="会议邀请";
-            //短信内容
-            StringBuilder content=new StringBuilder(250);
-            content.append(orderMeet.getHostName());
-            content.append("邀请您于");
-            content.append(orderTimeService.getOrderMeetStartTime(orderMeet));
-            content.append("参加");
-            content.append(orderMeet.getSubject());
-            content.append("，");
-            Company company=Company.dao.findById(User.dao.findById(orderMeet.getBelong()).getCid());
-            content.append("请注意接听");
-            content.append(AccessNum.dao.findById(company.getCallNum()).getNum());
-            content.append("的来电");
+            String subject="公司电话会议邀请函";
+            String content=getMailContent(orderMeet);
 
-            sendMail(smtpEmail.getEmail(),to,smtpEmail.getPassword(),smtpEmail.getHost(),subject,content.toString());
+            sendMail(smtpEmail.getEmail(),to,smtpEmail.getPassword(),smtpEmail.getHost(),subject,content);
         }
+    }
+
+    private String getMailContent(OrderMeet orderMeet){
+        //邮件内容
+        StringBuilder content=new StringBuilder(250);
+        content.append("\t尊敬的电话会议客户，您好！");
+        content.append(orderMeet.getHostName());
+        content.append("邀请您于");
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        content.append(simpleDateFormat.format(new Date()));
+        content.append("参加");
+        content.append(orderMeet.getSubject());
+        content.append(",");
+
+        Company company=Company.dao.findById(User.dao.findById(orderMeet.getBelong()).getCid());
+        String callNum=AccessNum.dao.findById(company.getCallNum()).getNum();
+        if(orderMeet.getIsCallInitiative()==Integer.parseInt(Constant.YES)){
+            content.append("请注意接听");
+            content.append(callNum);
+            content.append("的来电");
+        }else{
+            content.append("请拨打"+callNum);
+            content.append("并输入"+orderMeet.getHostPwd()+"参加会议");
+        }
+        return content.toString();
     }
 }

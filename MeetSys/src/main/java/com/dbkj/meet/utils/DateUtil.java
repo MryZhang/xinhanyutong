@@ -117,7 +117,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getWeekday(Date date){
-		String[] weekdays=new String[]{SUNDAY,MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY};
+		String[] weekdays=new String[]{DateUtil.SUNDAY,DateUtil.MONDAY,DateUtil.TUESDAY,DateUtil.WEDNESDAY,DateUtil.THURSDAY,DateUtil.FRIDAY,DateUtil.SATURDAY};
 		Calendar cal=Calendar.getInstance();
 		cal.setTime(date);
 		int w=cal.get(Calendar.DAY_OF_WEEK)-1;
@@ -369,6 +369,13 @@ public class DateUtil {
 		return calendar.getTime();
 	}
 
+	public static Date addByDays(Date date,int days){
+		Calendar calendar=Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.DAY_OF_MONTH,days);
+		return calendar.getTime();
+	}
+
 
 
 	/**
@@ -447,9 +454,10 @@ public class DateUtil {
 		SimpleDateFormat timeFormat=new SimpleDateFormat("HH:mm");
 		Date time =timeFormat.parse("10:55");
 		System.out.println(simpleDateFormat.format(time));
-//		Date now=new Date();
+		Date now=new Date();
 //		System.out.println(simpleDateFormat.format(now));
-		Date date=DateUtil.addByMinutes(time,-50);
+//		Date date=DateUtil.addByMinutes(time,-50);
+		Date date=DateUtil.addByDays(now,1);
 		System.out.println(simpleDateFormat.format(date));
 	}
 }

@@ -11,6 +11,8 @@ import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.POST;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.annotation.Annotation;
@@ -22,6 +24,9 @@ import java.lang.reflect.Method;
  * Created by DELL on 2017/03/01.
  */
 public class BalanceInterceptor implements Interceptor{
+
+    private Logger logger= LoggerFactory.getLogger(this.getClass());
+
     @Override
     public void intercept(Invocation invocation) {
         Controller controller = invocation.getController();
@@ -63,6 +68,8 @@ public class BalanceInterceptor implements Interceptor{
         AccountBalance accountBalance=AccountBalance.dao.findByCompanyId(cid);
         //获取设置的余额阙值
         Config config=Config.dao.findByType(ConfigTypeEnum.BALANCE_THRESHOLD.getCode());
+        logger.info("accountBalance:{}",accountBalance);
+        logger.info("config:{}",config);
         return Double.parseDouble(config.getValue())>(accountBalance.getBalance()
                 .add(accountBalance.getCreditLines()).doubleValue());
     }

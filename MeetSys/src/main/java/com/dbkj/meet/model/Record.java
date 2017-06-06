@@ -4,10 +4,12 @@ import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dic.MeetState;
 import com.dbkj.meet.model.base.BaseRecord;
 import com.dbkj.meet.utils.SqlUtil;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +39,8 @@ public class Record extends BaseRecord<Record> {
 	 * @return
      */
 	public List<Record> getMeetListByUserId(Long uid){
-		return find(SqlUtil.getSql("getMeetListByUserId",this),uid,MeetState.FINSHED.getStateCode());
+		return find(SqlUtil.getSql("getMeetListByUserId",this),uid,MeetState.OREDER_RECORD.getStateCode(),
+				MeetState.FINSHED.getStateCode());
 	}
 
 	/**
@@ -92,7 +95,7 @@ public class Record extends BaseRecord<Record> {
 				pageSize=Integer.parseInt(obj2.toString());
 			}
 		}
-		where.append(" ORDER BY r.startTime DESC");
+		where.append(" ORDER BY r.gmt_create DESC");
 		return paginate(currentPage,pageSize,SqlUtil.getSql("getRecordPages.select",this),
 				SqlUtil.getSql("getRecordPages.sqlExceptSelect",this).concat(where.toString()),params.toArray());
 	}
@@ -158,5 +161,18 @@ public class Record extends BaseRecord<Record> {
 		params.add(cid);
 		getWhere(paraMap,where,params,"startTime");
 		return findFirst(SqlUtil.getSql("getTotalFeeByCompanyId",this),cid).get("total");
+	}
+
+	public Record findByOrderRecordIdAndStartTime(long id,String startTime){
+		return findFirst(SqlUtil.getSql("findByOrderRecordIdAndStartTime",this),id,startTime);
+	}
+
+
+	/**
+	 * 将预约会议创建的会议记录状态更新为结束
+	 * @param orderId
+	 */
+	public void updateRecordStatus(long orderId,MeetState state){
+		Db.update(SqlUtil.getSql("updateRecordStatus",this),state.getStateCode(),new Date(),orderId);
 	}
 }

@@ -17,10 +17,12 @@ public class RedisUtil {
         jedis=Redis.use().getJedis();
     }
 
-    private static final RedisUtil instance=new RedisUtil();
+    private static class InstanceHolder{
+        public static RedisUtil instance=new RedisUtil();
+    }
 
     public static RedisUtil getInstance(){
-        return instance;
+        return InstanceHolder.instance;
     }
 
     /**

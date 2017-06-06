@@ -37,7 +37,9 @@ public class MeetListService implements IMeetListService {
                 item.setId(record.getId());
                 item.setSubject(record.getSubject());
                 item.setHostName(record.getHostName());
-                item.setCreateTime(datetimeFormat.format(record.getStartTime()));
+                if(record.getStartTime()!=null){
+                    item.setCreateTime(datetimeFormat.format(record.getStartTime()));
+                }
                 item.setStatus(record.getStatus());
                 list.add(item);
             }
@@ -76,7 +78,7 @@ public class MeetListService implements IMeetListService {
             MeetListItem meetListItem=new MeetListItem();
             meetListItem.setId(orderMeet.getId());
             meetListItem.setSubject(orderMeet.getSubject());
-            meetListItem.setCreateTime(sdf.format(orderMeet.getCreated()));
+            meetListItem.setCreateTime(sdf.format(orderMeet.getGmtCreated()));
             meetListItem.setHostName(orderMeet.getHostName());
 
             //获取预约会议类型

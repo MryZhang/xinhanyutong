@@ -25,7 +25,7 @@ public class OrderMeet extends BaseOrderMeet<OrderMeet> {
 		List<Object> params=new ArrayList<>();
 		StringBuilder where=new StringBuilder(100);
 		DaoUtil.getCondition(map,where,params);
-		where.append(" ORDER BY created DESC");
+		where.append(" ORDER BY gmt_created DESC");
 		return find(SqlUtil.getSql("getOrderMeetList",this).concat(where.toString()),params.toArray());
 	}
 }

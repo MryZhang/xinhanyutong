@@ -193,6 +193,9 @@ var order={
             var invited=order.getValue(order.INVITOR)||[];
             invited.push(obj);
             order.setValue(order.INVITOR,invited);
+            //清空
+            $("#addInvName").val("");
+            $("#addInvTel").val("");
         }
     },
     //获取邀请人树形菜单对象
@@ -546,26 +549,31 @@ var order={
             $("span.wrong").attr("class","wrong hide");
             var result=order.addOrderMeet.validate();
             if(result.result){//添加成功
-                $("#loading").show();
-                $.ajax({
-                    type:"post",
-                    url:common.getContextPath()+"/ordermeet/create",
-                    dataType:"json",
-                    data:result.data,
-                    success:function (data) {
-                        if(data.result){//添加成功
-                            order.toast("添加成功","div.block_h1_content");
-                        }else{
-                            if(data.result===false){//添加失败
-                                order.toast(data.msg||"操作失败","div.block_h1_content");
-                            }else{//登陆过期
-                                location.href=order.getContextPath()+"/login";
+                //判断是否添加会议邀请人
+                if(!result.data.contacts){
+                    common.showDialog({content:"没有添加会议邀请人，是否添加？",cancel:function () {
+                        $("#loading").show();
+                        $.ajax({
+                            type:"post",
+                            url:common.getContextPath()+"/ordermeet/create",
+                            dataType:"json",
+                            data:result.data,
+                            success:function (data) {
+                                if(data.result){//添加成功
+                                    order.toast("添加成功","div.block_h1_content");
+                                }else{
+                                    if(data.result===false){//添加失败
+                                        order.toast(data.msg||"操作失败","div.block_h1_content");
+                                    }else{//登陆过期
+                                        location.href=order.getContextPath()+"/login";
+                                    }
+                                }
+                            },complete:function () {
+                                $("#loading").hide();
                             }
-                        }
-                    },complete:function () {
-                        $("#loading").hide();
-                    }
-                });
+                        });
+                    }});
+                }
 
             }
         }

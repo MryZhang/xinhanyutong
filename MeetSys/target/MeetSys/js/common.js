@@ -87,6 +87,8 @@ var common={
     telRegex:/^([0-9]{3,4})?([0-9]{7,9}|[0-9]{5})((p|P|,|-)[0-9]{1,})?$/,
     //邮箱正则表达式
     emailRegex:/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
+    //域名正则表达式
+    domainRegex:/^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/,
     //显示模态窗口
     showDialog:function (obj) {
         dialog({
@@ -101,7 +103,9 @@ var common={
             },
             cancelValue:"取消",
             cancel:function () {
-
+                if(obj.cancel&&(typeof obj.cancel)=="function"){
+                    return obj.cancel();
+                }
             }
         }).show();
     },

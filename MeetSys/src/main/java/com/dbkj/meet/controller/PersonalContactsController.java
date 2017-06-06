@@ -8,9 +8,9 @@ import com.dbkj.meet.model.Group;
 import com.dbkj.meet.model.User;
 import com.dbkj.meet.services.PersonalContactService;
 import com.dbkj.meet.services.inter.IPersonalContactsService;
-import com.dbkj.meet.services.proxy.ClearCacheProxy;
 import com.dbkj.meet.validator.ContactInfoValidator;
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Enhancer;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.POST;
 import com.jfinal.kit.StrKit;
@@ -30,7 +30,7 @@ public class PersonalContactsController extends Controller {
 
     private final Logger logger= LoggerFactory.getLogger(this.getClass());
     //使用代理类来清除缓存
-    private final IPersonalContactsService personalContactService= (IPersonalContactsService) new ClearCacheProxy().bind(new PersonalContactService());
+    private final IPersonalContactsService personalContactService= Enhancer.enhance(PersonalContactService.class);
 
     private User user;
 

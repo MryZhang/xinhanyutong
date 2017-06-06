@@ -40,9 +40,11 @@ public class BillDetailConverter {
         }
 
         billDetailVo.setFee(bill.getFee().doubleValue());
-        billDetailVo.setCallTime((int) Math.ceil(bill.getCallTime()/60.0D));
+        if(bill.getCallTime()!=null){
+            billDetailVo.setCallTime((int) Math.ceil(bill.getCallTime()/60.0D));
+        }
         billDetailVo.setRate(bill.getRate());
-        billDetailVo.setCallType(CallTypeEnum.codeOf(bill.getCallType()).getDesc());
+        billDetailVo.setCallType(CallTypeEnum.codeOf(Integer.parseInt(bill.get("call_type").toString())).getDesc());
 
         return billDetailVo;
     }

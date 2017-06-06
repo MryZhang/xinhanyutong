@@ -5,6 +5,8 @@ import com.dbkj.meet.dto.BaseNode;
 import com.dbkj.meet.dto.ContactInfo;
 import com.dbkj.meet.dto.Node;
 import com.dbkj.meet.dto.Result;
+import com.dbkj.meet.interceptors.ContactCacheInterceptor;
+import com.dbkj.meet.interceptors.NameCacheInterceptor;
 import com.dbkj.meet.model.Group;
 import com.dbkj.meet.model.PrivateContacts;
 import com.dbkj.meet.model.PrivatePhone;
@@ -12,6 +14,7 @@ import com.dbkj.meet.services.inter.IPersonalContactsService;
 import com.dbkj.meet.utils.ExcelUtil;
 import com.dbkj.meet.utils.FileUtil;
 import com.dbkj.meet.utils.ValidateUtil;
+import com.jfinal.aop.Before;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.*;
@@ -164,6 +167,7 @@ public class PersonalContactService implements IPersonalContactsService {
      * @param gid
      * @return
      */
+    @Before({NameCacheInterceptor.class, ContactCacheInterceptor.class})
     public boolean deleteGroup(final Long gid) {
         boolean result= Db.tx(new IAtom() {
             public boolean run() throws SQLException {
@@ -185,6 +189,7 @@ public class PersonalContactService implements IPersonalContactsService {
      * @param contactInfo
      * @return
      */
+    @Before({NameCacheInterceptor.class, ContactCacheInterceptor.class})
     public boolean addContact(ContactInfo contactInfo) {
         final PrivateContacts privateContacts=new PrivateContacts();
         privateContacts.setName(contactInfo.getName());
@@ -269,6 +274,7 @@ public class PersonalContactService implements IPersonalContactsService {
      * @param ids
      * @return
      */
+    @Before({NameCacheInterceptor.class, ContactCacheInterceptor.class})
     public boolean deleteContacts(String ids) {
         String[] arr = ids.split("-");
         final int[] params=new int[arr.length];
@@ -351,6 +357,7 @@ public class PersonalContactService implements IPersonalContactsService {
      * @param contactInfo
      * @return
      */
+    @Before({NameCacheInterceptor.class, ContactCacheInterceptor.class})
     public boolean updateContactInfo(ContactInfo contactInfo) {
         if(contactInfo!=null){
             final PrivateContacts privateContacts=new PrivateContacts();
@@ -386,6 +393,7 @@ public class PersonalContactService implements IPersonalContactsService {
      * @param uid
      * @return
      */
+    @Before({NameCacheInterceptor.class, ContactCacheInterceptor.class})
     public Result<Map<String,Object>> importContacts(File file, final Long uid) {
         //读取数据
         List<Record> list=new ArrayList<Record>();

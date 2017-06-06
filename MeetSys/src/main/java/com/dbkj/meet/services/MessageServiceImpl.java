@@ -3,6 +3,7 @@ package com.dbkj.meet.services;
 import com.dbkj.meet.dic.CallTypeEnum;
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dic.MessageConstant;
+import com.dbkj.meet.dic.OrderCallType;
 import com.dbkj.meet.model.*;
 import com.dbkj.meet.services.inter.IOrderTimeService;
 import com.dbkj.meet.services.inter.ISMTPService;
@@ -28,7 +29,7 @@ public class MessageServiceImpl implements MessageService {
     private final Logger log= LoggerFactory.getLogger(this.getClass());
 
     private IOrderTimeService orderTimeService = new OrderTimeServiceImpl();
-    private ISMTPService smtpService=new SMTPServiceImpl();
+    private ISMTPService smtpService=null;
 
     @Override
     public void sendNotice(HttpServletRequest request) {
@@ -39,15 +40,19 @@ public class MessageServiceImpl implements MessageService {
             log.error(e.getMessage(),e);
         }
         String phone=request.getParameter("phone");
-        sendMsg(rid,phone);
+        String name=request.getParameter("name");
+        sendMsg(rid,phone,name);
         //发送邮件通知
+        if(smtpService==null){
+            smtpService=new SMTPServiceImpl();
+        }
         Long uid = ((User)request.getSession().getAttribute(Constant.USER_KEY)).getId();
         List<String> toList=Employee.dao.getEmailByUsername(Arrays.asList(phone));
         smtpService.sendMail(uid,toList.toArray(new String[toList.size()]),rid);
     }
 
     @Override
-    public void sendMsg(Long rid, String phone) {
+    public void sendMsg(Long rid, String phone,String name) {
         if(rid!=null&&ValidateUtil.validateMobilePhone(phone)){
             Record record = Record.dao.findById(rid);
             //短息内容
@@ -73,7 +78,7 @@ public class MessageServiceImpl implements MessageService {
             //短信发送成功，扣费
             if(resultMap.get(MessageConstant.STATUS).equals(MessageConstant.SUCCESS)){
 //                charging(record,company.getId());
-                charging(rid,company.getId(),smsContent.toString());
+                charging(rid,company.getId(),smsContent.toString(),name,phone);
             }else{
                 //发送失败，重发
                 try {
@@ -81,12 +86,12 @@ public class MessageServiceImpl implements MessageService {
                 } catch (InterruptedException e) {
                     log.error(e.getMessage(),e);
                 }
-                sendMsg(rid,phone);
+                sendMsg(rid,phone,name);
             }
         }
     }
 
-    private void charging(final Long rid, final Long cid, final String msg){
+    private void charging(final Long rid, final Long cid, final String msg, final String name, final String phone){
         Db.tx(new IAtom() {
             @Override
             public boolean run() throws SQLException {
@@ -96,6 +101,9 @@ public class MessageServiceImpl implements MessageService {
                 sms.setRid(rid!=null?Integer.parseInt(rid.toString()):null);
                 sms.setMsg(msg);
                 sms.setFee(fee.getRate());
+                sms.setRate(fee.getRate()+"元/条");
+                sms.setName(name);
+                sms.setPhone(phone);
                 sms.setGmtCreate(new Date());
                 if(sms.save()){
                     //扣除账户中短信费用
@@ -116,19 +124,12 @@ public class MessageServiceImpl implements MessageService {
         });
     }
 
-
     @Override
-    public void sendSms(Long orid, String phone) {
-        OrderMeet orderMeet=OrderMeet.dao.findById(orid);
-        sendSms(orderMeet,phone);
-    }
-
-    @Override
-    public void sendSms(OrderMeet orderMeet, String phone) {
+    public void sendOrderSms(Long rid, OrderMeet orderMeet, String phone, String name) {
         if(orderMeet!=null&&ValidateUtil.validateMobilePhone(phone)){
             //短信内容
             Company company=Company.dao.findById(User.dao.findById(orderMeet.getBelong()).getCid());
-            OrderSmsType type=orderMeet.getIsCallInitiative()==Integer.parseInt(Constant.YES)?OrderSmsType.CALL_INITIATIVE:OrderSmsType.CALL_ONLY_HOST;
+            OrderCallType type=orderMeet.getIsCallInitiative()==Integer.parseInt(Constant.YES)?OrderCallType.CALL_INITIATIVE:OrderCallType.CALL_ONLY_HOST;
             String smsContent=getOrderSmsContent(orderMeet,company,type);
 
             Map<String,Object> paraMap=new HashMap<String,Object>();
@@ -138,7 +139,7 @@ public class MessageServiceImpl implements MessageService {
             Map<String,Object> resultMap= MessageUtil.sendMessage(paraMap);
             //短信发送成功，扣费
             if(resultMap.get(MessageConstant.STATUS).equals(MessageConstant.SUCCESS)){
-                orderMeetCharging(company.getId(),smsContent);
+                charging(rid,company.getId(),smsContent,name,phone);
             }else{
                 //发送失败，重发
                 try {
@@ -146,12 +147,46 @@ public class MessageServiceImpl implements MessageService {
                 } catch (InterruptedException e) {
                     log.error(e.getMessage(),e);
                 }
-                sendSms(orderMeet,phone);
+                sendOrderSms(orderMeet,phone,name);
             }
         }
     }
 
-    private void orderMeetCharging(final Long cid, final String msg){
+    @Override
+    public void sendOrderSms(Long orid, String phone, String name) {
+        OrderMeet orderMeet=OrderMeet.dao.findById(orid);
+        sendOrderSms(orderMeet,phone,name);
+    }
+
+    @Override
+    public void sendOrderSms(OrderMeet orderMeet, String phone, String name) {
+        if(orderMeet!=null&&ValidateUtil.validateMobilePhone(phone)){
+            //短信内容
+            Company company=Company.dao.findById(User.dao.findById(orderMeet.getBelong()).getCid());
+            OrderCallType type=orderMeet.getIsCallInitiative()==Integer.parseInt(Constant.YES)?OrderCallType.CALL_INITIATIVE:OrderCallType.CALL_ONLY_HOST;
+            String smsContent=getOrderSmsContent(orderMeet,company,type);
+
+            Map<String,Object> paraMap=new HashMap<String,Object>();
+            paraMap.put(MessageConstant.MOBILE,phone);
+            paraMap.put(MessageConstant.SMS_CONTENT,smsContent);
+
+            Map<String,Object> resultMap= MessageUtil.sendMessage(paraMap);
+            //短信发送成功，扣费
+            if(resultMap.get(MessageConstant.STATUS).equals(MessageConstant.SUCCESS)){
+                charging(Long.parseLong(orderMeet.getRid().toString()),company.getId(),smsContent,name,phone);
+            }else{
+                //发送失败，重发
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    log.error(e.getMessage(),e);
+                }
+                sendOrderSms(orderMeet,phone,name);
+            }
+        }
+    }
+
+    private void orderMeetCharging(final Long cid, final String msg, final String name, final String phone){
         Db.tx(new IAtom() {
             @Override
             public boolean run() throws SQLException {
@@ -159,6 +194,9 @@ public class MessageServiceImpl implements MessageService {
                 //添加短信发送记录
                 Sms sms=new Sms();
                 sms.setMsg(msg);
+                sms.setName(name);
+                sms.setPhone(phone);
+                sms.setRate(fee.getRate()+"元/条");
                 sms.setFee(fee.getRate());
                 sms.setGmtCreate(new Date());
                 if(sms.save()){
@@ -197,7 +235,7 @@ public class MessageServiceImpl implements MessageService {
      * @param type
      * @return
      */
-    private String getOrderSmsContent(OrderMeet orderMeet,Company company,OrderSmsType type){
+    private String getOrderSmsContent(OrderMeet orderMeet,Company company,OrderCallType type){
         //短信内容
         StringBuilder smsContent=new StringBuilder(250);
         smsContent.append(orderMeet.getHostName());
@@ -208,7 +246,7 @@ public class MessageServiceImpl implements MessageService {
         smsContent.append("，");
 
         String callNum=AccessNum.dao.findById(company.getCallNum()).getNum();
-        if(type==OrderSmsType.CALL_INITIATIVE) {
+        if(type==OrderCallType.CALL_INITIATIVE) {
             smsContent.append("请注意接听");
             smsContent.append(callNum);
             smsContent.append("的来电");
@@ -219,8 +257,4 @@ public class MessageServiceImpl implements MessageService {
         return smsContent.toString();
     }
 
-    private static enum OrderSmsType{
-        CALL_INITIATIVE,//主动呼叫所有参会人
-        CALL_ONLY_HOST//只呼叫主持人
-    }
 }

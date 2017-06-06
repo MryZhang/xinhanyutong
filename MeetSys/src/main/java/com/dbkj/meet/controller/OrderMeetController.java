@@ -8,6 +8,7 @@ import com.dbkj.meet.model.User;
 import com.dbkj.meet.services.OrderMeetService;
 import com.dbkj.meet.services.inter.IOrderMeetService;
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Enhancer;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.POST;
 import org.slf4j.Logger;
@@ -23,7 +24,7 @@ public class OrderMeetController extends Controller {
 
     private final Logger logger= LoggerFactory.getLogger(this.getClass());
 
-    private IOrderMeetService orderMeetService=new OrderMeetService();
+    private IOrderMeetService orderMeetService= Enhancer.enhance(OrderMeetService.class);
 
     private User user;
 

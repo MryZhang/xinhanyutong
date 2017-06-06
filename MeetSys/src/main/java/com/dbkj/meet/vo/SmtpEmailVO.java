@@ -7,6 +7,7 @@ public class SmtpEmailVO {
 
     private Long id;
     private String email;
+    private String host;
     private String password;
     private String encryptPwd;
     private String confirmPassword;
@@ -73,6 +74,14 @@ public class SmtpEmailVO {
 
     public void setEncryptConfirmPwd(String encryptConfirmPwd) {
         this.encryptConfirmPwd = encryptConfirmPwd;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
     }
 
     @Override

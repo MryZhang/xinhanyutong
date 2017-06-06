@@ -116,7 +116,7 @@ public class Bill extends BaseBill<Bill> {
 		}
 		List<Object> params=new ArrayList<>();
 		String where = getWhereAndParam(params,paraMap);
-		where = where.concat(" ORDER BY startTime DESC");
+		where = where.concat(" ORDER BY gmt_modified DESC");
 		return Db.paginate(pageNumber,pageSize,SqlUtil.getSql("getBillPage.select",this),
 				SqlUtil.getSql("getBillPage.sqlExceptSelect",this).concat(where),params.toArray(new Object[params.size()]));
 	}

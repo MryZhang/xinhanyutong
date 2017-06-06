@@ -109,7 +109,7 @@
                             </div>
                             <div id="meetPwd">
                                 <div>
-                                    <div style="float: left">主持人密码：</div>
+                                    <div style="float: left">会议密码：</div>
                                     <input type="text" class="inputBox" name="order.hostPwd" id="hostPwd" value="<#if hostPwd??>${hostPwd}<#elseif order.hostPwd??>${order.hostPwd}</#if>" style="float:left;width: 80px;text-align: center;" readonly="readonly"/>
                                     <button type="button" class="btn_sytle btn_sel_host refresh_btn" style="margin-bottom: 5px;">重新生成</button>
                                 </div>
@@ -200,7 +200,7 @@
                                         <button type="button" id="addContact" class="btn_style addContact">手工增加</button>
                                         <button type="button" id="deleteAll" class="btn_style deleteAll" style="display: none;">全部删除</button>
                                     </div>
-                                    <div><input type="checkbox" class="input_radio_check" id="smsRemind" name="smsRemind">
+                                    <div><input type="checkbox" class="input_radio_check" id="smsRemind" name="smsRemind" checked="">
                                         <label for="smsRemind" class="chkbox_label" style="margin-left:-5px;">在会议开始前</label>
                                         <select id="smsRemindTime" name="smsRemindTime">
                                             <option value="5" selected="">5</option>

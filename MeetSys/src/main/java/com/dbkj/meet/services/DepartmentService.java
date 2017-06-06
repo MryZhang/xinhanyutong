@@ -1,8 +1,10 @@
 package com.dbkj.meet.services;
 
 import com.dbkj.meet.dto.Result;
+import com.dbkj.meet.interceptors.NameCacheInterceptor;
 import com.dbkj.meet.model.*;
 import com.dbkj.meet.services.inter.IDepartmentService;
+import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.IAtom;
@@ -95,6 +97,7 @@ public class DepartmentService implements IDepartmentService {
      * @param did
      * @return
      */
+    @Before(NameCacheInterceptor.class)
     public boolean deleteDepart(final long did, final Integer cid) {
         return Db.tx(new IAtom() {
             public boolean run() throws SQLException {

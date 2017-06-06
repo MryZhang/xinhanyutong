@@ -10,6 +10,7 @@ import com.dbkj.meet.services.inter.IEmployeeService;
 import com.dbkj.meet.validator.EmployeeValidator;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
+import com.jfinal.aop.Enhancer;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.POST;
 import com.sun.corba.se.impl.oa.poa.POACurrent;
@@ -21,11 +22,10 @@ import java.util.List;
  */
 public class EmployeeController extends Controller {
 
-    private IEmployeeService employeeService;
+    private IEmployeeService employeeService= Enhancer.enhance(EmployeeService.class);
 
     @Clear({InfoInterceptor.class})
     public void showPrefect(){
-        employeeService=new EmployeeService();
         User user=getSessionAttr(Constant.USER_KEY);
         int cid=user.getCid();
         List<Department> departmentList=employeeService.getDepartments(cid);
@@ -40,7 +40,6 @@ public class EmployeeController extends Controller {
         User user=getSessionAttr(Constant.USER_KEY);
         int cid=user.getCid();
         employee.setPhone(user.getUsername());
-        employeeService=new EmployeeService();
         boolean result=employeeService.addEmployee(employee,user);
         if(result){
             redirect("/meetlist");

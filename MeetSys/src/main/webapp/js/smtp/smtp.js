@@ -14,6 +14,15 @@ var smtpPage={
                     $(dom).attr("class","text highlight2").next().attr("class","blank").next().text("邮箱格式不正确").attr("class","addConTip error");
                 }
                 break;
+            case "c_smtp_host":
+                if(value==""){
+                    flag=false;
+                    $(dom).attr("class","text highlight2").next().attr("class","blank").next().text("smtp服务地址不能为空").attr("class","addConTip error");
+                }else if(!common.domainRegex.test(value)){
+                    flag=false;
+                    $(dom).attr("class","text highlight2").next().attr("class","blank").next().text("smtp服务地址格式不正确").attr("class","addConTip error");
+                }
+                break;
             case "c_password":
                 if(value==""){
                     $(dom).attr("class","text highlight2").next().attr("class","blank").next().text("密码不能为空").attr("class","addConTip error");
