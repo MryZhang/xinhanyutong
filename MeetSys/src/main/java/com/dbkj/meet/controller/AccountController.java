@@ -1,19 +1,19 @@
 package com.dbkj.meet.controller;
 
+import com.dbkj.meet.controller.base.BaseController;
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.model.User;
 import com.dbkj.meet.services.AccountService;
 import com.dbkj.meet.services.inter.IAccountService;
 import com.dbkj.meet.vo.BillDetailVo;
 import com.dbkj.meet.vo.BillVo;
-import com.jfinal.core.Controller;
 
 import java.io.File;
 
 /**
  * Created by DELL on 2017/03/01.
  */
-public class AccountController extends Controller {
+public class AccountController extends BaseController {
 
     private IAccountService accountService=new AccountService();
 

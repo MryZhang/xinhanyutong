@@ -1,5 +1,6 @@
 package com.dbkj.meet.controller;
 
+import com.dbkj.meet.controller.base.BaseController;
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.model.User;
 import com.dbkj.meet.services.MeetingRecordService;
@@ -12,7 +13,7 @@ import java.util.Map;
 /**
  * Created by MrQin on 2016/11/25.
  */
-public class MeetingRecordController extends Controller {
+public class MeetingRecordController extends BaseController {
 
     private IMeetingRecordService meetingRecordService=new MeetingRecordService();
 

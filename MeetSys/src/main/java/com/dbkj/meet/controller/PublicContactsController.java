@@ -1,5 +1,6 @@
 package com.dbkj.meet.controller;
 
+import com.dbkj.meet.controller.base.BaseController;
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dto.BaseNode;
 import com.dbkj.meet.dto.PubContact;
@@ -23,7 +24,7 @@ import java.util.Map;
 /**
  * Created by MrQin on 2016/11/24.
  */
-public class PublicContactsController extends Controller {
+public class PublicContactsController extends BaseController {
 
     /**
      * 使用代理类来清除相关缓存

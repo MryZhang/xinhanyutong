@@ -101,7 +101,8 @@ public class Record extends BaseRecord<Record> {
 	}
 
 	public Record findByUserId(long uid){
-		return findFirst(SqlUtil.getSql("findByUserId",this),uid,MeetState.FINSHED.getStateCode());
+		return findFirst(SqlUtil.getSql("findByUserId",this),uid,MeetState.OREDER_RECORD.getStateCode(),
+				MeetState.FINSHED.getStateCode());
 	}
 
 	public Record findByMeetId(String meetId){

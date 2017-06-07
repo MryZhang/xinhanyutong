@@ -1,9 +1,8 @@
 package com.dbkj.meet.controller;
 
+import com.dbkj.meet.controller.base.BaseAdminController;
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dto.ChangePwd;
-import com.dbkj.meet.interceptors.AdminInterceptor;
-import com.dbkj.meet.interceptors.InfoInterceptor;
 import com.dbkj.meet.model.Company;
 import com.dbkj.meet.model.User;
 import com.dbkj.meet.services.AdminService;
@@ -12,9 +11,7 @@ import com.dbkj.meet.validator.ChangePwdValidator;
 import com.dbkj.meet.validator.UserValidator;
 import com.dbkj.meet.vo.AdminUserVo;
 import com.jfinal.aop.Before;
-import com.jfinal.aop.Clear;
 import com.jfinal.core.ActionKey;
-import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.GET;
 import com.jfinal.ext.interceptor.POST;
 import com.jfinal.plugin.activerecord.Page;

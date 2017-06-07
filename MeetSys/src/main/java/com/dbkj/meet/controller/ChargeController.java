@@ -1,9 +1,7 @@
 package com.dbkj.meet.controller;
 
+import com.dbkj.meet.controller.base.BaseAdminController;
 import com.dbkj.meet.dic.Constant;
-import com.dbkj.meet.dto.Result;
-import com.dbkj.meet.interceptors.AdminInterceptor;
-import com.dbkj.meet.interceptors.InfoInterceptor;
 import com.dbkj.meet.model.User;
 import com.dbkj.meet.services.ChargeService;
 import com.dbkj.meet.services.inter.IChargeService;
@@ -13,13 +11,10 @@ import com.dbkj.meet.vo.ChangePackageVo;
 import com.dbkj.meet.vo.ChargeVo;
 import com.dbkj.meet.vo.ChargesDetailVo;
 import com.jfinal.aop.Before;
-import com.jfinal.aop.Clear;
-import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.POST;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
-import org.omg.PortableServer.POA;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

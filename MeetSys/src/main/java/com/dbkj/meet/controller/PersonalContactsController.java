@@ -1,5 +1,6 @@
 package com.dbkj.meet.controller;
 
+import com.dbkj.meet.controller.base.BaseController;
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dto.BaseNode;
 import com.dbkj.meet.dto.ContactInfo;
@@ -26,7 +27,7 @@ import java.util.Map;
  * 个人通讯录
  * Created by MrQin on 2016/11/17.
  */
-public class PersonalContactsController extends Controller {
+public class PersonalContactsController extends BaseController {
 
     private final Logger logger= LoggerFactory.getLogger(this.getClass());
     //使用代理类来清除缓存

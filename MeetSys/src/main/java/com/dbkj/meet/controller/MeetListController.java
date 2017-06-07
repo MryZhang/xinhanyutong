@@ -1,5 +1,6 @@
 package com.dbkj.meet.controller;
 
+import com.dbkj.meet.controller.base.BaseController;
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dto.MeetListItem;
 import com.dbkj.meet.model.User;
@@ -13,7 +14,7 @@ import java.util.Map;
 /**
  * Created by MrQin on 2016/11/7.
  */
-public class MeetListController extends Controller {
+public class MeetListController extends BaseController {
 
     private IMeetListService meetListService=new MeetListService();
 

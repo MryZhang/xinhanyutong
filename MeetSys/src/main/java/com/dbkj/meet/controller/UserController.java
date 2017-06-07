@@ -1,5 +1,6 @@
 package com.dbkj.meet.controller;
 
+import com.dbkj.meet.controller.base.BaseController;
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dto.ChangePwd;
 import com.dbkj.meet.dto.Result;
@@ -23,7 +24,7 @@ import java.util.Map;
  * Created by MrQin on 2016/11/8.
  */
 @Before({UserInterceptor.class})
-public class UserController extends Controller{
+public class UserController extends BaseController {
 
     private IUserService userService=new UserService();
 

@@ -57,7 +57,7 @@ public class Employee extends BaseEmployee<Employee> {
 				}
 				where.append(sqlTmp);
 			}
-			sql = sql.replace("{}",sqlTmp.toString());
+			sql = sql.replace("{}",where.toString());
 			List<com.jfinal.plugin.activerecord.Record> resultList=Db.find(sql,plist.toArray(new Object[plist.size()]));
 			if(resultList!=null){
 				for(Record record:resultList){

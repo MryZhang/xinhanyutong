@@ -115,7 +115,7 @@ public class MeetControlService implements IMeetControlService {
             //新增会议记录
             int meetNums=meetManager.getMeetNums();
             record=new Record().set("subject",name+"的电话会议").set("hostName", name).set("host", phone).set("allow_begin",Integer.parseInt(Constant.YES))
-                    .set("startTime",new Date()).set("hostPwd", hostPwd).set("listenerPwd", listenerPwd).set("meetNums", meetNums)
+                    .set("gmt_create",new Date()).set("hostPwd", hostPwd).set("listenerPwd", listenerPwd).set("meetNums", meetNums)
                     .set("belong", uid).set("status", MeetState.STARTED.getStateCode()).set("isRecord", 0).set("notice",Integer.parseInt(Constant.NO));
 
             boolean result= record.save();
@@ -629,9 +629,10 @@ public class MeetControlService implements IMeetControlService {
             hostName=hostNum;
         }
 
-        record.set("hostName", hostName).set("status", MeetState.GOINGON.getStateCode())//.set("startTime", new Date())
-                .set("isRecord", isRecord?1:0).set("subject",subject).set("mid",meetId).set("host",hostNum).
-                set("notice",notice?Constant.YES:Constant.NO).set("allow_begin",allowBegin?Constant.YES:Constant.NO);
+        Date date=new Date();
+        record.set("hostName", hostName).set("status", MeetState.GOINGON.getStateCode()).set("startTime", date)
+                .set("isRecord", isRecord?1:0).set("subject",subject).set("mid",meetId).set("host",hostNum).set("gmt_modified",date)
+                .set("notice",notice?Constant.YES:Constant.NO).set("allow_begin",allowBegin?Constant.YES:Constant.NO);
         return Db.tx(new IAtom() {
             @Override
             public boolean run() throws SQLException {
@@ -682,6 +683,7 @@ public class MeetControlService implements IMeetControlService {
         }
     }
 
+    @Before({RemoveBillCacheInterceptor.class})
     @Override
     public boolean cancelMeet(final Long rid) {
         if(rid!=null){
@@ -698,6 +700,7 @@ public class MeetControlService implements IMeetControlService {
 //                    }
 //                });
                 record.setStatus(MeetState.FINSHED.getStateCode());
+                record.setGmtModified(new Date());
                 return record.update();
             }
             //清除缓存中会议参会人数据

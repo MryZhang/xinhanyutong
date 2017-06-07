@@ -1,5 +1,6 @@
 package com.dbkj.meet.controller;
 
+import com.dbkj.meet.controller.base.BaseAdminController;
 import com.dbkj.meet.services.RateService;
 import com.dbkj.meet.services.inter.IRateService;
 import com.dbkj.meet.vo.PackageListItemVo;

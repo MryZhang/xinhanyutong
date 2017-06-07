@@ -1,7 +1,7 @@
 package com.dbkj.meet.controller;
 
+import com.dbkj.meet.controller.base.BaseAdminController;
 import com.dbkj.meet.services.ChargingServce;
-import com.jfinal.core.Controller;
 
 import java.io.File;
 import java.util.Map;

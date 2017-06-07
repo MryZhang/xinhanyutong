@@ -1,5 +1,6 @@
 package com.dbkj.meet.controller;
 
+import com.dbkj.meet.controller.base.BaseController;
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.interceptors.InfoInterceptor;
 import com.dbkj.meet.model.Department;
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * Created by MrQin on 2016/11/14.
  */
-public class EmployeeController extends Controller {
+public class EmployeeController extends BaseController {
 
     private IEmployeeService employeeService= Enhancer.enhance(EmployeeService.class);
 

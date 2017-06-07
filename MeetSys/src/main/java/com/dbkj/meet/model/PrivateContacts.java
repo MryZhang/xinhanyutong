@@ -48,7 +48,7 @@ public class PrivateContacts extends BasePrivateContacts<PrivateContacts> {
 				} else {
 					stringBuilder.append(" WHERE ");
 				}
-				stringBuilder.append("a.name LIKE ? OR b.phone LIKE ?");
+				stringBuilder.append("(a.name LIKE ? OR b.phone LIKE ?)");
 				params.add("%" + map.get("a.name") + "%");
 				params.add("%" + map.get("b.phone") + "%");
 			}

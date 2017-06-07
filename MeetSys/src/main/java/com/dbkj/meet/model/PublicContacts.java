@@ -53,7 +53,7 @@ public class PublicContacts extends BasePublicContacts<PublicContacts> {
 			} else {
 				stringBuilder.append(" WHERE ");
 			}
-			stringBuilder.append("a.name LIKE ? OR b.phone LIKE ?");
+			stringBuilder.append("(a.name LIKE ? OR b.phone LIKE ?)");
 			params.add("%" + map.get("a.name") + "%");
 			params.add("%" + map.get("b.phone") + "%");
 			map.remove("a.name");
