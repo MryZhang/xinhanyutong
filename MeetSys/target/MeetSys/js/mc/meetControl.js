@@ -179,7 +179,7 @@ $(function () {
                 var idx=phone.indexOf("-");
                 if(idx!=-1){
                     var prefix=phone.substring(0,idx);
-                    if(prefix<=4){
+                    if(prefix.length<=4){
                         phone = phone.replace("-","");
                     }
                 }

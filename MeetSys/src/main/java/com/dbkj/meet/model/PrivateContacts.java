@@ -133,20 +133,25 @@ public class PrivateContacts extends BasePrivateContacts<PrivateContacts> {
 		return Db.findFirst(SqlUtil.getSql("findContact",this).concat(where.toString()),params.toArray());
 	}
 
-	public int deleteBatchById(int[] ids){
-		if(ids!=null){
+	public int deleteBatchById(long uid,List<Integer> ids){
+		if(ids!=null&&ids.size()!=0){
+			boolean flag=false;
 			StringBuilder where=new StringBuilder(50);
 			where.append("(");
-			for(int i=0,len=ids.length;i<len;i++){
-				if(ids[i]!=0){
-					where.append(ids[i]);
+			for(int i=0,len=ids.size();i<len;i++){
+				Integer n=ids.get(i);
+				if(n!=null){
+					where.append(n);
+					flag=true;
 					if(i!=len-1){
 						where.append(",");
 					}
 				}
 			}
-			where.append(")");
-			return Db.update(SqlUtil.getSql("deleteBatchById",this).concat(where.toString()));
+			if(flag){
+				where.append(")");
+					return Db.update(SqlUtil.getSql("deleteBatchById",this).concat(where.toString()),uid);
+			}
 		}
 		return 0;
 	}

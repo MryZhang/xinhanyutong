@@ -53,7 +53,19 @@
                     <#if mtype!=3>
                         <ul class="itemdiv">
                             <li class="wth"><div>会议开始时间：</div></li>
-                            <li class="wtd"><div><#if mtype==1>${record.startTime}<#else>${record.time}</#if></div></li>
+                            <li class="wtd">
+                                <div>
+                                    <#if mtype==1>
+                                        <#if record.startTime??>
+                                            ${record.startTime}
+                                        <#else>
+                                            会议未召开
+                                        </#if>
+                                    <#else>
+                                        ${record.time}
+                                    </#if>
+                                </div>
+                            </li>
                         </ul>
                     </#if>
                     <#if alist??>

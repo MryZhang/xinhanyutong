@@ -55,7 +55,22 @@ public class OrderRecordServiceImpl implements IOrderRecordService {
             @Override
             public boolean run() throws SQLException {
                 boolean flag=false;
-                int rid=orderMeet.getRid();
+                Integer rid=orderMeet.getRid();
+                /**
+                 * 由于创建预约会议和定时任务是在不同的线程，为防止定时任务执行时，
+                 * 预约会议创建的事务还未提交，导致查不到预约会议的数据产生NPE，
+                 * 所以当获取不到预约会议的数据，休眠500毫秒后重新查询，一共重试5次
+                 */
+                int attempt=1;
+                while(rid==null||attempt>5){
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    rid=orderMeet.getRid();
+                    attempt++;
+                }
                 if(record.getId()!=null){
 //                    Record rd=Record.dao.findById(rid);
 //                    rd.setStatus(MeetState.GOINGON.getStateCode());

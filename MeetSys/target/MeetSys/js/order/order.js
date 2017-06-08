@@ -157,10 +157,10 @@ var order={
            for(var i=0,length=inviteArr.length;i<length;i++){
                if(inviteArr[i].phone==phone){
                    inviteArr.remove(inviteArr[i]);
-                   order.setValue(order.INVITOR,inviteArr);
                     break;
                }
            }
+           order.setValue(order.INVITOR,inviteArr);
             $tr.remove();
         }
     },
@@ -550,8 +550,8 @@ var order={
             var result=order.addOrderMeet.validate();
             if(result.result){//添加成功
                 //判断是否添加会议邀请人
-                if(!result.data["order.contacts"]){
-                    common.showDialog({content:"没有添加会议邀请人，是否添加？",cancel:function () {
+                if(!result.data["order.contacts"]||order.getValue(order.INVITOR).length==0){
+                    common.showDialog({content:"没有添加会议邀请人，是否继续？",ok:function () {
                         add(result.data);
                     }});
                 }else{
@@ -566,6 +566,7 @@ var order={
                         dataType:"json",
                         data:dataObj,
                         success:function (data) {
+                            common.isLoginTimeout(data);
                             if(data.result){//添加成功
                                 order.toast("添加成功","div.block_h1_content");
                             }else{

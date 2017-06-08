@@ -134,7 +134,7 @@ public class PersonalContactsController extends BaseController {
     public void deleteContacts(){
         String ids=getPara("ids");
         String queryString=getRequest().getQueryString();
-        personalContactService.deleteContacts(ids);
+        personalContactService.deleteContacts(getUser().getId(),ids);
         redirect("/personalcontacts/page"+queryString);
     }
 

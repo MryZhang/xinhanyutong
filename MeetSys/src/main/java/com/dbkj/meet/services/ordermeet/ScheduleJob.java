@@ -31,6 +31,7 @@ public class ScheduleJob implements Job {
     public static final String IS_RECORD="isRecord";
     public static final String CALL_NUM="callNum";
     public static final String SHOW_NUM="showNum";
+    public static final String TASK_COUNTER="tastCounter";
 
     private IOrderRecordService orderRecordService=new OrderRecordServiceImpl();
 

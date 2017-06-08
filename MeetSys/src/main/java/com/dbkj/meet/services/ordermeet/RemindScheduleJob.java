@@ -31,6 +31,7 @@ public class RemindScheduleJob implements Job {
     public static final String CONTAIN_HOST="containHost";
     public static final String USER_ID="userId";
     public static final String REMIND_MINUTES="remindMinutes";
+    public static final String TASK_COUNTER="tastCounter";
 
     private MessageService messageService=new MessageServiceImpl();
     private ISMTPService smtpService=new SMTPServiceImpl();

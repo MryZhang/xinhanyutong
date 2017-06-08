@@ -275,7 +275,7 @@ public class PersonalContactService implements IPersonalContactsService {
      * @return
      */
     @Before({NameCacheInterceptor.class, ContactCacheInterceptor.class})
-    public boolean deleteContacts(String ids) {
+    public boolean deleteContacts(final Long uid, String ids) {
         String[] arr = ids.split("-");
         final int[] params=new int[arr.length];
         for(int i=0,len=arr.length;i<len;i++){
@@ -285,9 +285,9 @@ public class PersonalContactService implements IPersonalContactsService {
             public boolean run() throws SQLException {
                 //由于一个联系人可能有多个号码，所有要判断当前号码对应的联系人
                 //是否有多个号码，如果有则只删除当前号码，否则就连联系人一起删除
-                int[] ids=getDeleteContactIds(params);
+                List<Integer> ids=getDeleteContactIds(params);
                 if(PrivatePhone.dao.deleteBatchById(params)==params.length){
-                    return PrivateContacts.dao.deleteBatchById(ids)==ids.length;
+                    return PrivateContacts.dao.deleteBatchById(uid,ids)==ids.size();
                 }
                 return false;
             }
@@ -297,20 +297,20 @@ public class PersonalContactService implements IPersonalContactsService {
     }
 
     //获取要删除的联系人id
-    private int[] getDeleteContactIds(int[] params){
+    private List<Integer> getDeleteContactIds(int[] params){
         if(params!=null){
-            int[] arr=new int[params.length];
+            List<Integer> list=new ArrayList<>(params.length);
             int n=0;
             for(int i=0;i<params.length;i++){
                 PrivatePhone privatePhone=PrivatePhone.dao.findById(params[i]);
                 int pid=privatePhone.getPid();
                 List<PrivatePhone> privatePhoneList=PrivatePhone.dao.findByContactId(pid);
                 if(privatePhoneList.size()==1){
-                    arr[n]=pid;
+                    list.add(pid);
                     n++;
                 }
             }
-            return arr;
+            return list;
         }
         return null;
     }

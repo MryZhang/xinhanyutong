@@ -36,6 +36,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
 
 import static org.quartz.CalendarIntervalScheduleBuilder.calendarIntervalSchedule;
 import static org.quartz.JobBuilder.newJob;
@@ -159,6 +160,7 @@ public class OrderMeetService implements IOrderMeetService {
         //获取个人联系人信息
         //获取所有分组信息
         List<Group> groups=Group.dao.findByUserId(user.getId());
+        groups.add(new Group().set("id",0L).set("name","未分组"));
         for(int i=0,length=groups.size();i<length;i++){
             Group group=groups.get(i);
             BaseNode<ChildrenNode> baseNode=new BaseNode<ChildrenNode>();
@@ -172,6 +174,7 @@ public class OrderMeetService implements IOrderMeetService {
             }
             if(user!=null){
                 map.put("b.gid",group.getId());
+                map.put("a.uid",user.getId());
             }
             List<ChildrenNode> childrenNodeList=new ArrayList<ChildrenNode>();
             List<com.jfinal.plugin.activerecord.Record> nodes=PrivateContacts.dao.getContacts(map);
@@ -280,6 +283,10 @@ public class OrderMeetService implements IOrderMeetService {
                     }
                 }
 
+                /**
+                 * 计数器，防止定时任务开始执行，预约会议的创建事务还未提交，定时任务出现NPE
+                 */
+                final CountDownLatch countDownLatch=new CountDownLatch(1);
                 boolean flag= Db.tx(new IAtom() {
                     public boolean run() throws SQLException {
                         //创建预约会议Quartz定时任务

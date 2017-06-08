@@ -36,7 +36,7 @@ public interface IPersonalContactsService {
 
     boolean isExistContactByName(String name,long pid,long uid);
 
-    boolean deleteContacts(String ids);
+    boolean deleteContacts(Long uid,String ids);
 
     ContactInfo getContactInfo(int id);
 
