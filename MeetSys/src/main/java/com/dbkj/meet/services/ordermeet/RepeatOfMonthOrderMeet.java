@@ -1,13 +1,19 @@
 package com.dbkj.meet.services.ordermeet;
 
-import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dic.RepeatType;
+import com.dbkj.meet.dto.OrderModel;
+import com.dbkj.meet.model.OrderMeet;
 import com.dbkj.meet.model.Schedule;
 import com.dbkj.meet.utils.ScheduleHelper;
 import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.IAtom;
+import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.sql.SQLException;
 
 import static org.quartz.JobBuilder.newJob;
 
@@ -20,115 +26,107 @@ public class RepeatOfMonthOrderMeet extends BaseOrderMeetType {
 
     private final int orderType = RepeatType.MONTH.getCode();
 
-    /**
-     * 重复周期
-     */
-    private String interval;
-    private String orderNum;
-    /**
-     * 周几
-     */
-    private String weekday;
-
     @Override
     public boolean add() {
-        Long pid = orderMeet.getId();
-        Schedule schedule = new Schedule();
-        schedule.setJobName(jname);
-        schedule.setJobGroup(jgroup);
-        schedule.setOrderType(orderType);
-        schedule.setOid(Integer.parseInt(pid.toString()));
-        if (StrKit.isBlank(orderNum)) {
-            schedule.setInterval(interval);
-        } else {
-            schedule.setInterval(orderNum);
-            schedule.setOrderNum(weekday);
-        }
-        boolean result = schedule.save();
-        if (!result) {
-            return false;
-        }
-        int[] temps = ScheduleHelper.getParaFromTime(orderMeet.getStartTime());
-        int[] arr = null;
+        final OrderModel orderModel=getOrderModel();
+        final String jgroup=getJobGroup();
+        final String jname=getJobName();
+        boolean flag= Db.tx(new IAtom() {
+            @Override
+            public boolean run() throws SQLException {
+                boolean isSuccess=orderMeet.save();
+                if(isSuccess){
+                    Long pid=orderMeet.getId();
+                    Schedule schedule=new Schedule();
+                    schedule.setJobName(jname);
+                    schedule.setJobGroup(jgroup);
+                    schedule.setOrderType(orderModel.getPeriod());
+                    schedule.setOid(Integer.parseInt(pid.toString()));
+                    if(StrKit.isBlank(orderModel.getOrderNum())){
+                        schedule.setInterval(orderModel.getInterval());
+                    }else{
+                        schedule.setInterval(orderModel.getOrderNum());
+                        schedule.setOrderNum(orderModel.getWeekday());
+                    }
+                    isSuccess=schedule.save();
+                    if(isSuccess){
+                        //添加参会人数据
+                        isSuccess = addAttendees();
+                        if(isSuccess){
+                            return addRecord();
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+        if(flag){
+            int[] temps=ScheduleHelper.getParaFromTime(orderModel.getStartTime());
+            int[] arr=null;
+            String cronExpression=null;
+            String remindCronExpression=null;
+            if(orderModel.isSmsRemind()){
+                arr=ScheduleHelper.getParaFromTime(getRemindTime(orderModel.getStartTime(),
+                        orderModel.getSmsRemindTime()*(-1)));
+            }
 
-        JobDetail detail = newJob(ScheduleJob.class)
-                .withIdentity(jname, jgroup)
-                .usingJobData(ScheduleJob.HOST_NUM, orderMeet.getHostNum())
-                .usingJobData(ScheduleJob.ORDER_MEET_ID, pid)
-                .usingJobData(ScheduleJob.IS_RECORD, orderMeet.getIsRecord())
-                .usingJobData(ScheduleJob.CALL_NUM, callNum)
-                .usingJobData(ScheduleJob.SHOW_NUM, showNum)
-                .build();
+            if(orderModel.getOrderNum()==null){
+                cronExpression="0 "+temps[1]+" "+temps[0]+" "+orderModel.getInterval()+" * ?";
+                if(orderModel.isSmsRemind()){//短信提醒定时任务
+                    remindCronExpression="0 "+arr[1]+" "+arr[0]+" "+orderModel.getInterval()+" * ?";
+                }
+            }else{
+                cronExpression="0 "+temps[1]+" "+temps[0]+" ? * ";
+                if("L".equals(orderModel.getInterval())){
+                    cronExpression+=orderModel.getOrderNum()+"L";
+                    if(orderModel.isSmsRemind()){//短信提醒定时任务
+                        remindCronExpression="0 "+arr[1]+" "+arr[0]+" ? * "+orderModel.getOrderNum()+"L";
+                    }
+                }else{
+                    cronExpression+=orderModel.getWeekday()+"#"+orderModel.getOrderNum();
+                    if(orderModel.isSmsRemind()){//短信提醒定时任务
+                        remindCronExpression="0 "+arr[1]+" "+arr[0]+" ? * "+orderModel.getWeekday()
+                                +"#"+orderModel.getOrderNum();
+                    }
+                }
+            }
+            String callNum=getCallNum();
+            String showNum=getShowNum();
+            Long pid=orderMeet.getId();
 
-        JobDetail remindDetail = null;
+            JobDataMap jobDataMap=new JobDataMap();
+            jobDataMap.put(ScheduleJob.HOST_NUM,orderModel.getHostNum());
+            jobDataMap.put(ScheduleJob.ORDER_MEET_ID,pid);
+            jobDataMap.put(ScheduleJob.IS_RECORD,orderModel.getIsRecord());
+            jobDataMap.put(ScheduleJob.CALL_NUM,callNum);
+            jobDataMap.put(ScheduleJob.SHOW_NUM,showNum);
 
-        if (orderMeet.getSmsRemind() == Integer.parseInt(Constant.YES)) {
-            arr = ScheduleHelper.getParaFromTime(getRemindTime(orderMeet.getStartTime(), smsRemindTime * (-1)));
-            remindDetail = newJob(RemindScheduleJob.class)
-                    .withIdentity(jname + "_remind", jgroup)
-                    .usingJobData(RemindScheduleJob.ORDER_MEET_ID, pid)
-                    .usingJobData(RemindScheduleJob.CONTAIN_HOST, containHost)
+            JobDetail detail=newJob(ScheduleJob.class)
+                    .withIdentity(jname, jgroup)
+                    .usingJobData(jobDataMap)
                     .build();
-        }
 
-        String cronExpression = null;
-        String remindCronExpression = null;
+            JobDataMap dataMap=new JobDataMap();
+            dataMap.put(RemindScheduleJob.ORDER_MEET_ID,pid);
+            dataMap.put(RemindScheduleJob.CONTAIN_HOST,orderModel.isContainHost());
+            dataMap.put(RemindScheduleJob.USER_ID,getUser().getId());
+            dataMap.put(RemindScheduleJob.REMIND_MINUTES,orderModel.getSmsRemindTime());
 
-        if (orderNum == null) {
-            cronExpression = "0 " + temps[1] + " " + temps[0] + " " + interval + " * ?";
-            if (orderMeet.getSmsRemind() == Integer.parseInt(Constant.YES)) {//短信提醒定时任务
-                remindCronExpression = "0 " + arr[1] + " " + arr[0] + " " + interval + " * ?";
+            JobDetail remindDetail=null;
+            if(orderModel.isSmsRemind()){
+                remindDetail=newJob(RemindScheduleJob.class)
+                        .withIdentity(jname+"_remind",jgroup)
+                        .usingJobData(dataMap)
+                        .build();
             }
-        } else {
-            cronExpression = "0 " + temps[1] + " " + temps[0] + " ? * ";
-            if ("L".equals(interval)) {
-                cronExpression += orderNum + "L";
-                if (orderMeet.getSmsRemind() == Integer.parseInt(Constant.YES)) {//短信提醒定时任务
-                    remindCronExpression = "0 " + arr[1] + " " + arr[0] + " ? * " + orderNum + "L";
-                }
-            } else {
-                cronExpression += weekday + "#" + orderNum;
-                if (orderMeet.getSmsRemind() == Integer.parseInt(Constant.YES)) {//短信提醒定时任务
-                    remindCronExpression = "0 " + arr[1] + " " + arr[0] + " ? * " + weekday
-                            + "#" + orderNum;
-                }
+
+            ScheduleHelper.addJob(detail,jname,jgroup,cronExpression,null);
+            if(remindCronExpression!=null){
+                ScheduleHelper.addJob(remindDetail,jname+"_remind",jgroup,remindCronExpression,null);
             }
+            return flag;
         }
-        if(result){
-            try{
-                ScheduleHelper.addJob(detail,jname,jgroup,cronExpression,null);
-                if(remindCronExpression!=null){
-                    ScheduleHelper.addJob(remindDetail,jname+"_remind",jgroup,remindCronExpression,null);
-                }
-            }catch (Exception e){
-                logger.error(e.getMessage(),e);
-                result=false;
-            }
-        }
-        return result;
+        return false;
     }
 
-    public String getInterval() {
-        return interval;
-    }
-
-    public void setInterval(String interval) {
-        this.interval = interval;
-    }
-
-    public String getOrderNum() {
-        return orderNum;
-    }
-
-    public void setOrderNum(String orderNum) {
-        this.orderNum = orderNum;
-    }
-
-    public String getWeekday() {
-        return weekday;
-    }
-
-    public void setWeekday(String weekday) {
-        this.weekday = weekday;
-    }
 }

@@ -537,6 +537,7 @@ var order={
                     obj["order.smsRemindTime"]=$("#smsRemindTime").val();
                 }
                 obj["order.smsNotice"]=$("#smsNotice").get(0).checked;
+                obj["order.emailNotice"]=$("#emailNotice").get(0).checked;
                 obj["order.containHost"]=$("#containHost").get(0).checked;
                 var $isCallInitDom=$("#isCallInitiative");
                 obj["order.callInitiative"]=$isCallInitDom.get(0)?$isCallInitDom.get(0).checked:true;
@@ -566,14 +567,14 @@ var order={
                         dataType:"json",
                         data:dataObj,
                         success:function (data) {
-                            common.isLoginTimeout(data);
+                            // common.isLoginTimeout(data);
                             if(data.result){//添加成功
-                                order.toast("添加成功","div.block_h1_content");
+                                // order.toast("添加成功","div.block_h1_content");
+                                common.showTips({content:"添加成功！"});
                             }else{
                                 if(data.result===false){//添加失败
-                                    order.toast(data.msg||"操作失败","div.block_h1_content");
-                                }else{//登陆过期
-                                    location.href=order.getContextPath()+"/login";
+                                    // order.toast(data.msg||"操作失败","div.block_h1_content");
+                                    common.showTips({content:data.msg||"操作失败！"});
                                 }
                             }
                         },complete:function () {

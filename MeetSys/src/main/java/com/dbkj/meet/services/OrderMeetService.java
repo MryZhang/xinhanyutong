@@ -4,8 +4,7 @@ import com.dbkj.meet.dic.*;
 import com.dbkj.meet.interceptors.RemoveBillCacheInterceptor;
 import com.dbkj.meet.services.common.MeetManager;
 import com.dbkj.meet.services.inter.ISMTPService;
-import com.dbkj.meet.services.ordermeet.RemindScheduleJob;
-import com.dbkj.meet.services.ordermeet.ScheduleJob;
+import com.dbkj.meet.services.ordermeet.*;
 import com.dbkj.meet.dto.BaseNode;
 import com.dbkj.meet.dto.ChildrenNode;
 import com.dbkj.meet.dto.OrderModel;
@@ -27,6 +26,7 @@ import com.jfinal.kit.JsonKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.*;
 import com.jfinal.plugin.activerecord.Record;
+import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
 import org.slf4j.Logger;
@@ -54,9 +54,6 @@ public class OrderMeetService implements IOrderMeetService {
 
     private final int NO=0;
     private final int YES=1;
-
-    private final String PHONE_FIELD="phone";
-    private final String NAME_FIELD="name";
 
     private MessageService messageService=new MessageServiceImpl();
     private ISMTPService smtpService=new SMTPServiceImpl();
@@ -202,8 +199,8 @@ public class OrderMeetService implements IOrderMeetService {
             final User user=controller.getSessionAttr(Constant.USER_KEY);
             //获取公司呼叫号码
             Company company=Company.dao.findById(user.getCid());
-            final String callNum=AccessNum.dao.findById(company.getCallNum()).getNum();
-            final String showNum=AccessNum.dao.findById(company.getShowNum()).getNum();
+            String callNum=AccessNum.dao.findById(company.getCallNum()).getNum();
+            String showNum=AccessNum.dao.findById(company.getShowNum()).getNum();
 
             Date now=new Date();//当前系统时间
             if(orderModel.getPeriod()==RepeatType.FIEXD.getCode()){//固定会议
@@ -227,423 +224,40 @@ public class OrderMeetService implements IOrderMeetService {
                 boolean flag = fixedMeet.save();
                 result.setResult(flag);
             }else{//预约会议
-                final OrderMeet orderMeet=new OrderMeet();
-                orderMeet.setSubject(orderModel.getSubject());
-                orderMeet.setHostNum(orderModel.getHostNum());
-                orderMeet.setIsRecord(orderModel.getIsRecord());
-                orderMeet.setBelong(Integer.parseInt(user.getId().toString()));
-                orderMeet.setHostName(orderModel.getHostName());
-                orderMeet.setStartTime(orderModel.getStartTime());
-                orderMeet.setHostPwd(orderModel.getHostPwd());
-                orderMeet.setIsCallInitiative(orderModel.isCallInitiative()?Integer.parseInt(Constant.YES):Integer.parseInt(Constant.NO));
-
-                orderMeet.setGmtCreated(now);
-                if(orderModel.isSmsRemind()){
-                    orderMeet.setSmsRemind(Integer.parseInt(Constant.YES));
+                BaseOrderMeetType orderMeetType=null;
+                if(orderModel.getPeriod()==RepeatType.NONE.getCode()){//无重复的预约会议类型
+                    orderMeetType=new NoRepeateOrderMeet();
+                }else if(orderModel.getPeriod()==RepeatType.DAY.getCode()){//重复周期为天的预约会议
+                    orderMeetType=new RepeatOfDayOrderMeet();
+                }else if(orderModel.getPeriod()==RepeatType.WEEK.getCode()){//重复周期为星期的预约会议类型
+                    orderMeetType=new RepeatOfWeekOrderMeet();
+                }else if(orderModel.getPeriod()==RepeatType.MONTH.getCode()) {//重复周期为月的预约会议类型
+                    orderMeetType=new RepeatOfMonthOrderMeet();
                 }
+                if(orderMeetType!=null){
+                    orderMeetType.setCallNum(callNum);
+                    orderMeetType.setShowNum(showNum);
+                    orderMeetType.setOrderModel(orderModel);
+                    orderMeetType.setUser(user);
+                    orderMeetType.setNow(new Date());
 
-                //如果开启会议预约会议创建后发送短信通知，则添加会议记录，以便与短信发送记录关联
-                final com.dbkj.meet.model.Record record=new com.dbkj.meet.model.Record();
-                if(orderModel.isSmsNotice()){
-                    record.setSubject(orderMeet.getSubject());
-                    record.setHostName(orderMeet.getHostName());
-                    record.setHost(orderMeet.getHostNum());
-                    record.setIsRecord(orderMeet.getIsRecord());
-                    record.setBelong(Integer.parseInt(user.getId().toString()));
-                    record.setStatus(MeetState.STARTED.getStateCode());
-                    record.setHostPwd(orderMeet.getHostPwd());
-                    record.setMeetNums(MeetManager.getInstance().getMeetNums());
-                    record.setType(MeetType.ORDER_MEET.getCode());
-                    record.setGmtCreate(now);
-                }
-
-                final String jgroup=user.getUsername();//将当前用户名当做定时任务组名
-                final SimpleDateFormat sdf=new SimpleDateFormat(dateTimeFormat);
-                final String jname=sdf.format(now);//将当前时间作为定时任务名称
-
-                //参会人
-                final List<OrderAttendee> orderAttendeeList=new ArrayList<OrderAttendee>();
-                //先将主持人添加到参会人中
-                final OrderAttendee host=new OrderAttendee();
-                host.setName(orderModel.getHostName());
-                host.setPhone(orderModel.getHostNum());
-                host.setType(AttendeeType.HOST.getCode());
-                orderAttendeeList.add(host);
-                //解析参会人json字符串
-                String constr=orderModel.getContacts();
-                if(!StrKit.isBlank(constr)){
-                    Gson gson=new Gson();
-                    List<Map<String,Object>> contacts = gson.fromJson(constr,new TypeToken<List<HashMap<String,Object>>>(){}.getType());
-                    for(Map<String,Object> map:contacts){
-                        OrderAttendee orderAttendee=new OrderAttendee();
-                        orderAttendee.setPhone(map.get(PHONE_FIELD).toString());
-                        orderAttendee.setName(map.get(NAME_FIELD).toString());
-                        orderAttendee.setType(AttendeeType.ATTENDEE.getCode());
-                        orderAttendeeList.add(orderAttendee);
+                    try {
+                        //添加
+                        OrderMeetContext context=new OrderMeetContext();
+                        context.setOrderMeetType(orderMeetType);
+                        context.handle();
+                    }catch (Exception e){
+                        logger.error(e.getMessage(),e);
+                        result.setResult(false);
+                        result.setMsg("服务器内部错误！");
                     }
-                }
-
-                /**
-                 * 计数器，防止定时任务开始执行，预约会议的创建事务还未提交，定时任务出现NPE
-                 */
-                final CountDownLatch countDownLatch=new CountDownLatch(1);
-                boolean flag= Db.tx(new IAtom() {
-                    public boolean run() throws SQLException {
-                        //创建预约会议Quartz定时任务
-                        String cronExpression=null;
-                        JobDetail detail=null;
-                        Trigger trigger=null;
-                        Long pid=0L;
-                        Map<JobDetail,Trigger> map=null;
-                        boolean isSuccess=true;
-
-                        //会议提醒定时任务
-                        String remindCronExpression=null;
-                        JobDetail remindDetail=null;
-                        Trigger remindTrigger=null;
-                        Map<JobDetail,Trigger> remindMap=null;
-                        orderMeet.setStartTime(orderModel.getStartTime());
-                        orderMeet.setSmsRemind(orderModel.isSmsRemind()?Integer.parseInt(Constant.YES):Integer.parseInt(Constant.NO));
-//                        isSuccess=orderMeet.save();
-//                        if(!isSuccess){
-//                            return false;
-//                        }
-                        if(orderModel.getPeriod()==RepeatType.NONE.getCode()){//无重复的预约会议类型
-//                            BaseOrderMeetType orderMeetType=new NoRepeateOrderMeet();
-//                            orderMeetType.setCallNum(callNum);
-                            if((isSuccess=orderMeet.save())){
-                                pid=orderMeet.getId();
-                                Schedule schedule=new Schedule();
-//                                schedule=new Schedule();
-                                schedule.setJobName(jname);
-                                schedule.setJobGroup(jgroup);
-                                schedule.setOid(Integer.parseInt(pid.toString()));
-                                schedule.setOrderType(orderModel.getPeriod());
-                                isSuccess=schedule.save();
-                            }
-                            try {
-                                Date startTime=sdf.parse(orderModel.getStartTime());
-                                trigger=newTrigger()
-                                        .withIdentity(jname,jgroup)
-                                        .startAt(startTime)
-                                        .build();
-
-                                //是否会前提醒
-                                if(orderModel.isSmsRemind()){
-                                    remindTrigger=newTrigger()
-                                            .withIdentity(jname+"_remind",jgroup)
-                                            .startAt(DateUtil.addByMinutes(startTime,orderModel.getSmsRemindTime()*(-1)))
-                                            .build();
-                                }
-
-                            } catch (ParseException e) {
-                                logger.error(e.getMessage(),e);
-                                isSuccess=false;
-                            }
-
-                        }else if(orderModel.getPeriod()==RepeatType.DAY.getCode()){//重复周期为天的预约会议
-                            if((isSuccess=orderMeet.save())){
-                                pid=orderMeet.getId();
-                                Schedule schedule=new Schedule();
-                                schedule.setJobGroup(jgroup);
-                                schedule.setJobName(jname);
-                                schedule.setOrderType(orderModel.getPeriod());
-                                schedule.setOid(Integer.parseInt(pid.toString()));
-                                schedule.setInterval(orderModel.getInterval());
-                                isSuccess=schedule.save();
-                            }
-
-                            int[] para=ScheduleHelper.getParaFromTime(orderModel.getStartTime());
-                            //预约会议重复周期为工作日
-                            if(ScheduleHelper.WORKDAY.equals(orderModel.getInterval())){
-                                cronExpression="0 "+para[1]+" "+para[0]+" ? * MON-FRI";
-                                if(orderModel.isSmsRemind()){//定时提醒任务
-                                    int[] arr=ScheduleHelper.getParaFromTime(getRemindTime(orderModel.getStartTime(),
-                                            orderModel.getSmsRemindTime()*(-1)));
-                                    remindCronExpression="0 "+arr[1]+" "+arr[0]+" ? * MON-FRI";
-                                }
-                            }else{
-                                int n=Integer.parseInt(orderModel.getInterval().trim());
-                                try {
-                                    String dateStr=jname.split(" ")[0];
-                                    trigger=newTrigger()
-                                            .withIdentity(jname,jgroup)
-                                            .startAt(sdf.parse(dateStr+" "+orderModel.getStartTime()))
-                                            .withSchedule(calendarIntervalSchedule().withIntervalInDays(n))
-                                            .build();
-
-                                    if(orderModel.isSmsRemind()){
-                                        remindTrigger=newTrigger()
-                                                .withIdentity(jname+"_remind",jgroup)
-                                                .startAt(sdf.parse(dateStr+" "+getRemindTime(orderModel.getStartTime(),
-                                                        orderModel.getSmsRemindTime()*(-1))))
-                                                .build();
-                                    }
-                                } catch (ParseException e) {
-                                    logger.error(e.getMessage(),e);
-                                    isSuccess=false;
-                                }
-                            }
-                        }else if(orderModel.getPeriod()==RepeatType.WEEK.getCode()){//重复周期为星期的预约会议类型
-                            if((isSuccess=orderMeet.save())){
-                                pid=orderMeet.getId();
-                            }
-                            int n=Integer.parseInt(orderModel.getInterval());
-                            String[] wks=orderModel.getOrderNum().split(",");
-                            map=new HashMap<JobDetail, Trigger>();
-                            if(orderModel.isSmsRemind()){
-                                remindMap=new HashMap<>();
-                            }
-                            List<Schedule> scheduleList=new ArrayList<Schedule>();
-                            for(int i=0,len=wks.length;i<len;i++){
-                                Schedule schedule=new Schedule();
-                                schedule.setJobName(jname+"_"+wks[i]);
-                                schedule.setJobGroup(jgroup);
-                                schedule.setOrderType(orderModel.getPeriod());
-                                schedule.setOid(Integer.parseInt(pid.toString()));
-                                schedule.setInterval(orderModel.getInterval());
-                                schedule.setOrderNum(wks[i]);
-                                scheduleList.add(schedule);
-
-                                JobDetail jobDetail=newJob(ScheduleJob.class)
-                                                        .withIdentity(jname+"_"+wks[i],jgroup)
-                                                        .usingJobData(ScheduleJob.HOST_NUM,orderModel.getHostNum())
-                                                        .usingJobData(ScheduleJob.ORDER_MEET_ID,pid)
-                                                        .usingJobData(ScheduleJob.IS_RECORD,orderModel.getIsRecord())
-                                                        .usingJobData(ScheduleJob.CALL_NUM,callNum)
-                                                        .usingJobData(ScheduleJob.SHOW_NUM,showNum)
-                                                        .build();
-                                try {
-                                    String dateStr=jname.split(" ")[0];
-                                    Date date=sdf.parse(dateStr+" "+orderModel.getStartTime());
-                                    Trigger tri=ScheduleHelper.getWeekTrigger(jname+"_"+wks[i],jgroup,date,wks[i],n);
-                                    map.put(jobDetail,tri);
-                                    //提醒定时任务
-                                    if(orderModel.isSmsRemind()){
-                                        JobDetail remindJob=newJob(RemindScheduleJob.class)
-                                                .withIdentity(jname+"_"+wks[i]+"_remind",jgroup)
-                                                .usingJobData(RemindScheduleJob.ORDER_MEET_ID,pid)
-                                                .usingJobData(RemindScheduleJob.USER_ID,user.getId())
-                                                .usingJobData(RemindScheduleJob.CONTAIN_HOST,orderModel.isContainHost())
-                                                .usingJobData(RemindScheduleJob.SMS_REMIND_TIME,orderModel.getSmsRemindTime())
-                                                .build();
-
-                                        Date remindDate=DateUtil.addByMinutes(date,orderModel.getSmsRemindTime()*(-1));
-                                        Trigger remindTri=ScheduleHelper.getRemindWeekTrigger(jname+"_"+wks[i]+"_remind",
-                                                jgroup,remindDate,wks[i],n);
-                                        remindMap.put(remindJob,remindTri);
-                                    }
-
-                                } catch (ParseException e) {
-                                    logger.error(e.getMessage(),e);
-                                    isSuccess=false;
-                                }
-                            }
-                            if(isSuccess){
-                                int[] result = Db.batchSave(scheduleList,100);
-                                isSuccess=getCount(result)==scheduleList.size();
-                            }
-
-                        }else if(orderModel.getPeriod()==RepeatType.MONTH.getCode()){//重复周期为月的预约会议类型
-                            if((isSuccess=orderMeet.save())){
-                                pid=orderMeet.getId();
-                                Schedule schedule=new Schedule();
-                                schedule.setJobName(jname);
-                                schedule.setJobGroup(jgroup);
-                                schedule.setOrderType(orderModel.getPeriod());
-                                schedule.setOid(Integer.parseInt(pid.toString()));
-                                if(StrKit.isBlank(orderModel.getOrderNum())){
-                                    schedule.setInterval(orderModel.getInterval());
-                                }else{
-                                    schedule.setInterval(orderModel.getOrderNum());
-                                    schedule.setOrderNum(orderModel.getWeekday());
-                                }
-                                isSuccess=schedule.save();
-                            }
-                            int[] temps=ScheduleHelper.getParaFromTime(orderModel.getStartTime());
-                            int[] arr=null;
-                            if(orderModel.isSmsRemind()){
-                                arr=ScheduleHelper.getParaFromTime(getRemindTime(orderModel.getStartTime(),
-                                        orderModel.getSmsRemindTime()*(-1)));
-                            }
-                            if(orderModel.getOrderNum()==null){
-                                cronExpression="0 "+temps[1]+" "+temps[0]+" "+orderModel.getInterval()+" * ?";
-                                if(orderModel.isSmsRemind()){//短信提醒定时任务
-                                    remindCronExpression="0 "+arr[1]+" "+arr[0]+" "+orderModel.getInterval()+" * ?";
-                                }
-                            }else{
-                                cronExpression="0 "+temps[1]+" "+temps[0]+" ? * ";
-                                if("L".equals(orderModel.getInterval())){
-                                    cronExpression+=orderModel.getOrderNum()+"L";
-                                    if(orderModel.isSmsRemind()){//短信提醒定时任务
-                                        remindCronExpression="0 "+arr[1]+" "+arr[0]+" ? * "+orderModel.getOrderNum()+"L";
-                                    }
-                                }else{
-                                    cronExpression+=orderModel.getWeekday()+"#"+orderModel.getOrderNum();
-                                    if(orderModel.isSmsRemind()){//短信提醒定时任务
-                                        remindCronExpression="0 "+arr[1]+" "+arr[0]+" ? * "+orderModel.getWeekday()
-                                                +"#"+orderModel.getOrderNum();
-                                    }
-                                }
-                            }
-                        }
-                        if(isSuccess){
-                            if(map==null){
-                                detail=newJob(ScheduleJob.class)
-                                        .withIdentity(jname, jgroup)
-                                        .usingJobData(ScheduleJob.HOST_NUM, orderModel.getHostNum())
-                                        .usingJobData(ScheduleJob.ORDER_MEET_ID,pid)
-                                        .usingJobData(ScheduleJob.IS_RECORD, orderModel.getIsRecord())
-                                        .usingJobData(ScheduleJob.CALL_NUM,callNum)
-                                        .usingJobData(ScheduleJob.SHOW_NUM,showNum)
-                                        .build();
-
-                                remindDetail=newJob(RemindScheduleJob.class)
-                                        .withIdentity(jname+"_remind",jgroup)
-                                        .usingJobData(RemindScheduleJob.ORDER_MEET_ID,pid)
-                                        .usingJobData(RemindScheduleJob.CONTAIN_HOST,orderModel.isContainHost())
-                                        .usingJobData(RemindScheduleJob.USER_ID,user.getId())
-                                        .usingJobData(RemindScheduleJob.REMIND_MINUTES,orderModel.getSmsRemindTime())
-                                        .build();
-                            }
-
-                            //添加邀请人数据
-                            for(int i=0,len=orderAttendeeList.size();i<len;i++){
-                                OrderAttendee orderAttendee=orderAttendeeList.get(i);
-                                orderAttendee.setOid(Integer.parseInt(pid.toString()));
-                            }
-                            int[] results=Db.batchSave(orderAttendeeList, 100);
-                            int k=0;
-                            for(int n=0,len=results.length;n<len;n++){
-                                k+=results[n];
-                            }
-                            isSuccess=k==orderAttendeeList.size();
-                            if(isSuccess){
-                                if(map!=null){
-                                    ScheduleHelper.addJobs(map);
-                                    if(remindMap!=null){
-                                        ScheduleHelper.addJobs(remindMap);
-                                    }
-                                }else if(cronExpression!=null){
-                                    ScheduleHelper.addJob(detail,jname,jgroup,cronExpression,null);
-                                    if(remindCronExpression!=null){
-                                        ScheduleHelper.addJob(remindDetail,jname+"_remind",jgroup,remindCronExpression,null);
-                                    }
-                                }else if(trigger!=null){
-                                    ScheduleHelper.addJob(detail, trigger);
-                                    if(remindTrigger!=null){
-                                        ScheduleHelper.addJob(remindDetail,remindTrigger);
-                                    }
-                                }
-                            }
-                        }
-                        return isSuccess;
-                    }
-                });
-                result.setResult(flag);
-                if(flag){//预约会议创建成功
-                    addRecord(orderMeet);
-                    //根据用户选择发送通知短信
-                    notice(orderModel.isSmsNotice(),orderModel.isContainHost(),orderMeet.getId(),orderAttendeeList,user.getId());
+                }else{
+                    result.setResult(false);
                 }
             }
         }
-
-        //预约会议创建成功
-        if(result.getResult()){
-            //会议创建成功后，将会议密码添加为已使用的密码中
-            MeetManager.getInstance().addUsedPassword(orderModel.getHostPwd());
-        }
-
         return result;
     }
-
-    /**
-     * 插入会议记录，和参会人记录，以及设置预约会议记录中rid字段
-     * @param orderMeet
-     * @return
-     */
-    private boolean addRecord(final OrderMeet orderMeet){
-        return Db.tx(new IAtom() {
-            @Override
-            public boolean run() throws SQLException {
-                com.dbkj.meet.model.Record record=new com.dbkj.meet.model.Record();
-                record.setSubject(orderMeet.getSubject());
-                record.setHostName(orderMeet.getHostName());
-                record.setHost(orderMeet.getHostNum());
-                record.setIsRecord(orderMeet.getIsRecord());
-                record.setBelong(orderMeet.getBelong());
-                record.setStatus(MeetState.OREDER_RECORD.getStateCode());
-                record.setHostPwd(orderMeet.getHostPwd());
-                record.setMeetNums(MeetManager.getInstance().getMeetNums());
-                record.setType(MeetType.ORDER_MEET.getCode());
-                record.setGmtCreate(new Date());
-                record.setOid(Integer.parseInt(orderMeet.getId().toString()));
-                if(record.save()) {
-                    List<OrderAttendee> orderAttendeeList = OrderAttendee.dao.findByOrderMeetId(orderMeet.getId());
-                    List<Attendee> attendeeList=new ArrayList<>();
-                    for(OrderAttendee orderAttendee:orderAttendeeList){
-                        Attendee attendee=new Attendee();
-                        attendee.setName(orderAttendee.getName());
-                        attendee.setRid(Integer.parseInt(record.getId().toString()));
-                        attendee.setPhone(orderAttendee.getPhone());
-                        attendee.setType(orderAttendee.getType());
-                        attendee.setStatus(Integer.parseInt(Constant.WATING_CALL));
-                        attendeeList.add(attendee);
-                    }
-                    Db.batchSave(attendeeList,100);
-
-                    orderMeet.setRid(Integer.parseInt(record.getId().toString()));
-                    orderMeet.setGmtModified(new Date());
-                    return orderMeet.update();
-                }
-                return false;
-            }
-        });
-    }
-
-    private String getRemindTime(String startTime,int minutes){
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        SimpleDateFormat timeFormat=new SimpleDateFormat("HH:mm");
-        try {
-            Date time=timeFormat.parse(startTime);
-            Date remindTime=DateUtil.addByMinutes(time,minutes*(-1));
-            String remindTimeStr=simpleDateFormat.format(remindTime);
-            remindTimeStr=remindTimeStr.substring(0,remindTimeStr.lastIndexOf(":"));
-            return remindTimeStr.split(" ")[1];
-        } catch (ParseException e) {
-            logger.error(e.getMessage(),e);
-        }
-        return null;
-    }
-
-
-    /**
-     * 向预约会议参会人发送短信通知
-     * @param isNotice 是否通知
-     * @param orid 预约会议记录id
-     * @param list 预约会议参会人
-     * @param uid
-     */
-    private void notice(boolean isNotice, boolean containHost, Long orid, List<OrderAttendee> list,Long uid){
-        if(isNotice){
-            OrderMeet orderMeet=OrderMeet.dao.findById(orid);
-            List<String> plist=new ArrayList<>(list.size());
-            for(OrderAttendee attendee:list){
-                if(!containHost&&attendee.getType()==AttendeeType.HOST.getCode()){
-                    continue;
-                }
-                messageService.sendOrderSms(orderMeet,attendee.getPhone(),attendee.getName());
-                plist.add(attendee.getPhone());
-            }
-            //根据号码去查询获取邮箱
-            List<String> toList=Employee.dao.getEmailByUsername(plist);
-            if(toList.size()>0){
-                smtpService.sendMail(uid,toList.toArray(new String[toList.size()]),orderMeet);
-            }
-        }
-    }
-
 
     private int getCount(int[] result){
         int count=0;
@@ -792,18 +406,6 @@ public class OrderMeetService implements IOrderMeetService {
             return false;
         }
         return true;
-    }
-
-    public static void main(String[] args) {
-        //System.out.println("123".matches("\\d{4}"));
-//        Gson gson=new Gson();
-//        String json="[{\"name\":\"123\",\"phone\":\"15671255551\"}]";
-//        List<Map<String,Object>> contacts = gson.fromJson(json,new TypeToken<List<HashMap<String,Object>>>(){}.getType());
-//        for (Map<String,Object> map:contacts) {
-//            System.out.println(map.toString());
-//        }
-        String remindTime=new OrderMeetService().getRemindTime("14:01",50);
-        System.out.println(remindTime);
     }
 
     /**

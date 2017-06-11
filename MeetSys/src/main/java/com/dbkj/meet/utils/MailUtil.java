@@ -1,5 +1,6 @@
 package com.dbkj.meet.utils;
 
+import com.jfinal.kit.StrKit;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -54,15 +57,22 @@ public class MailUtil {
                 message.setFrom(new InternetAddress(mailBean.getFrom()));
                 //加载发件人地址
                 int length = mailBean.getTo().length;
-                InternetAddress[] toAddrs=new InternetAddress[length];
+                List<InternetAddress> toAddrs=new ArrayList<>(length);
                 for (int i = 0; i < length; i++) {
                     String email=mailBean.getTo()[i];
-                    if(email!=null){
-                        toAddrs[i]=new InternetAddress(email);
+                    if(!StrKit.isBlank(email)&&ValidateUtil.validateEmail(email)){
+                        if(logger.isInfoEnabled()){
+                            logger.info("send email to:{}",email);
+                        }
+                        toAddrs.add(new InternetAddress(email));
                     }
                 }
+                //如果收件人地址都为空，则取消发送
+                if(toAddrs.size()==0){
+                    return;
+                }
                 //加载收件人地址
-                message.addRecipients(Message.RecipientType.TO,toAddrs);
+                message.addRecipients(Message.RecipientType.TO,toAddrs.toArray(new InternetAddress[toAddrs.size()]));
                 //加载标题
                 message.setSubject(mailBean.getSubject());
 

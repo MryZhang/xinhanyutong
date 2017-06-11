@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * Created by MrQin on 2016/11/17.
@@ -31,7 +32,7 @@ public class ScheduleJob implements Job {
     public static final String IS_RECORD="isRecord";
     public static final String CALL_NUM="callNum";
     public static final String SHOW_NUM="showNum";
-    public static final String TASK_COUNTER="tastCounter";
+//    public static final String TASK_COUNTER="tastCounter";
 
     private IOrderRecordService orderRecordService=new OrderRecordServiceImpl();
 
@@ -47,24 +48,37 @@ public class ScheduleJob implements Job {
 
         Date now=new Date();
         OrderMeet orderMeet=OrderMeet.dao.findById(oid);
+
         /**
          * 由于创建预约会议和定时任务是在不同的线程，为防止定时任务执行时，
          * 预约会议创建的事务还未提交，导致查不到预约会议的数据产生NPE，
          * 所以当获取不到预约会议的数据，休眠500毫秒后重新查询，一共重试5次
          */
         int attempt=1;
-        while (orderMeet==null||attempt>5){
+        while (orderMeet==null&&attempt<=5){
             try {
-                Thread.sleep(500);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             orderMeet=OrderMeet.dao.findById(oid);
+            attempt++;
         }
 
         Record record=null;
-        if(orderMeet.getRid()!=null){
-            record=Record.dao.findById(orderMeet.getRid());
+        Integer rid=orderMeet.getRid();
+        int recordAttempt=1;
+        while(rid==null&&recordAttempt<=5){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            rid=orderMeet.getRid();
+            recordAttempt++;
+        }
+        if(rid!=null){
+            record=Record.dao.findById(rid);
         }
         //如果会议已经开始或者结束，则不用创建会议
         if(record!=null&&record.getStatus()>MeetState.STARTED.getStateCode()){
@@ -115,6 +129,7 @@ public class ScheduleJob implements Job {
         logger.info("Enter method createRecord.");
         //如果会议记录已创建，则只需要更新会议记录
         Date date=new Date();
+        System.out.println(System.currentTimeMillis()+":"+record);
         if(record!=null){
             record.setStatus(MeetState.GOINGON.getStateCode());
             record.setStartTime(date);

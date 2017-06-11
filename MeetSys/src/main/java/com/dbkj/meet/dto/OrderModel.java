@@ -30,6 +30,7 @@ public class OrderModel {
     private boolean smsRemind;//会议开始前是否提醒
     private int smsRemindTime;//会议开始前多少分钟提醒
     private boolean smsNotice;//预约会议创建后是否向参会人发短信通知
+    private boolean emailNotice;//是否发送邮件通知
     private boolean containHost;//是否包含主持人
     private boolean callInitiative;//是否主动呼叫
 
@@ -224,5 +225,13 @@ public class OrderModel {
 
     public void setCallInitiative(boolean callInitiative) {
         this.callInitiative = callInitiative;
+    }
+
+    public boolean isEmailNotice() {
+        return emailNotice;
+    }
+
+    public void setEmailNotice(boolean emailNotice) {
+        this.emailNotice = emailNotice;
     }
 }

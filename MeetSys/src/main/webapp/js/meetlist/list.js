@@ -24,12 +24,13 @@ var meetlist={
                     data:obj,
                     dataType:"json",
                     success:function (data) {
+                        //common.isLoginTimeout(data);
                         if(data.result===true){//取消成功
                             $(dom).closest("tr").remove();
                         }else{
-                            if(data.result===undefined){//登陆过期
-                                location.href=common.getContextPath()+"/login"
-                            }
+                            // if(data.result===undefined){//登陆过期
+                            //     location.href=common.getContextPath()+"/login"
+                            // }
                         }
                     }
                 });

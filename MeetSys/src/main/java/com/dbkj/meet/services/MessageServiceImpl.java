@@ -78,11 +78,14 @@ public class MessageServiceImpl implements MessageService {
             //短信发送成功，扣费
             if(resultMap.get(MessageConstant.STATUS).equals(MessageConstant.SUCCESS)){
 //                charging(record,company.getId());
+                if(log.isInfoEnabled()){
+                    log.info("send meesage to:{}",phone);
+                }
                 charging(rid,company.getId(),smsContent.toString(),name,phone);
             }else{
                 //发送失败，重发
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     log.error(e.getMessage(),e);
                 }
@@ -139,11 +142,14 @@ public class MessageServiceImpl implements MessageService {
             Map<String,Object> resultMap= MessageUtil.sendMessage(paraMap);
             //短信发送成功，扣费
             if(resultMap.get(MessageConstant.STATUS).equals(MessageConstant.SUCCESS)){
+                if(log.isInfoEnabled()){
+                    log.info("send meesage to phone:{}",phone);
+                }
                 charging(rid,company.getId(),smsContent,name,phone);
             }else{
                 //发送失败，重发
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     log.error(e.getMessage(),e);
                 }

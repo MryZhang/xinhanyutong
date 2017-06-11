@@ -4,6 +4,7 @@ import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.model.Company;
 import com.dbkj.meet.model.User;
 import com.dbkj.meet.services.inter.ILoginService;
+import com.dbkj.meet.utils.WebUtil;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
@@ -17,7 +18,11 @@ public class LoginInterceptor implements Interceptor {
         Controller controller = invocation.getController();
         Object obj=controller.getSessionAttr(Constant.USER_KEY);
         if(obj==null){//未登陆或登陆过期
-            controller.redirect("/login");
+            if(WebUtil.isAjax(controller.getRequest())){
+                controller.renderText("{\"sessionState\":\"timeout\"}");
+            }else{
+                controller.redirect("/login");
+            }
         }else{
             User user= (User) obj;
             String sessionId=controller.getSession().getId();

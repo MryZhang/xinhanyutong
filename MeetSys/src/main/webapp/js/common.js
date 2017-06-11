@@ -91,22 +91,38 @@ var common={
     domainRegex:/^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/,
     //显示模态窗口
     showDialog:function (obj) {
-        dialog({
-            title:obj.title||"提示",
-            content:obj.content||"",
-            quickClose:true,
-            okValue:"确定",
-            ok:function () {
-                if(obj.ok&&(typeof obj.ok)=="function"){
-                    return obj.ok();
-                }
-            },
-            cancelValue:"取消",
-            cancel:function () {
-                if(obj.cancel&&(typeof obj.cancel)=="function"){
+        var config={
+                    title:obj.title||"提示",
+                    content:obj.content||"",
+                    quickClose:true,
+                    okValue:"确定",
+                    ok:function () {
+                        if(obj.ok&&(typeof obj.ok)=="function"){
+                            return obj.ok();
+                        }
+                    }
+                    };
+        //如果取消配置参数未定义获取类型为function，则添加取消按钮
+        if(obj.cancel===undefined||(obj.cancel&&(typeof obj.cancel)=="function")){
+            config.cancelValue="取消";
+            config.cancel=function () {
+                if(obj.cancel){
                     return obj.cancel();
                 }
             }
+        }
+        dialog(config).showModal();
+    },
+    //显示调试窗口
+    showTips:function (obj) {
+        dialog({
+            title:obj.title||"提示",
+            content:function () {
+                var content=obj.content||"";
+                content="<div style='text-align: center;'>"+content+"</div>";
+                return content;
+            },
+            width:200
         }).show();
     },
     //判断是闰年
@@ -273,4 +289,27 @@ var depart={
     }
 };
 
-
+//ajax操作全局监测，用户session失效
+jQuery(function ($) {
+    //备份jquery的ajax方法
+    var _ajax=$.ajax;
+    //重写ajax方法，先判断登陆再执行success函数
+    $.ajax=function (opt) {
+        var _success=opt&&opt.success||function (a,b) {};
+        var _opt=$.extend(opt,{
+            success:function (data,textstatus) {
+                try{
+                    if(data.sessionState&&data.sessionState=="timeout"){
+                        common.showDialog({content:"登陆过期，是否重新登陆？",ok:function () {
+                            location.href=common.getContextPath()||"/meetsys"+"/login";
+                        }});
+                    }
+                }catch (e){
+                    console.log(e);
+                }
+                _success(data,textstatus);
+            }
+        });
+        return _ajax(_opt);
+    };
+});

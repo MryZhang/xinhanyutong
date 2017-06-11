@@ -31,7 +31,7 @@ public class RemindScheduleJob implements Job {
     public static final String CONTAIN_HOST="containHost";
     public static final String USER_ID="userId";
     public static final String REMIND_MINUTES="remindMinutes";
-    public static final String TASK_COUNTER="tastCounter";
+//    public static final String TASK_COUNTER="tastCounter";
 
     private MessageService messageService=new MessageServiceImpl();
     private ISMTPService smtpService=new SMTPServiceImpl();
@@ -53,18 +53,31 @@ public class RemindScheduleJob implements Job {
          * 所以当获取不到预约会议的数据，休眠500毫秒后重新查询，一共重试5次
          */
         int attempt=1;
-        while (orderMeet==null||attempt>5){
+        while (orderMeet==null&&attempt<=5){
             try {
-                Thread.sleep(500);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             orderMeet=OrderMeet.dao.findById(roid);
+            attempt++;
+        }
+
+        Integer rid=orderMeet.getRid();
+        int recordAttempt=1;
+        while(rid==null||recordAttempt<=5){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            rid=orderMeet.getRid();
+            recordAttempt++;
         }
 
         Record record=null;
-        if(orderMeet.getRid()!=null){
-            record=Record.dao.findById(orderMeet.getRid());
+        if(rid!=null){
+            record=Record.dao.findById(rid);
         }
         if(record==null){
             //创建会议记录
