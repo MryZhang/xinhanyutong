@@ -8,6 +8,7 @@
         <div class="block_h1_bottom block_h1_pass">修改密码</div>
         <div class="block_h1_content">
             <form id="updpwdform" method="post" action="${ctx!}/admin/updatePwd">
+                <input type="hidden" name="key" value="${key!}">
                 <input type="hidden" id="contextPath" value="${ctx!}"/>
                 <input type="hidden" value="${publicKey!}" id="publicKey" name="publicKey">
                 <div class="person-style formClass">

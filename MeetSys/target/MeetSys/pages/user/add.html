@@ -8,6 +8,7 @@
         <div class="block_h1_bottom" id="addContact_title_Id"><#if (user.id)??>修改账号信息<#else>新建账号</#if></div>
         <div class="block_h1_content block_h1_content_h1">
             <form id="personformId" method="post">
+                <input type="hidden" value="${key!}" name="key">
                 <input type="hidden" value="${publicKey!}" id="publicKey" name="publicKey">
                 <input type="hidden" value="${queryString!}" id="queryString" name="queryString"/>
                 <input type="hidden" id="uid" value="${(user.id)!}" name="user.id"/>

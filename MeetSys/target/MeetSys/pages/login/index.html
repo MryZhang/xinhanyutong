@@ -1,97 +1,115 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>登陆</title>
-  <link href="${ctx!}/css/login/style.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <div class="logo">
-        <img src="${ctx!}/img/logo.png" alt="logo">
-      </div>
-      <div class="com_name">欢迎使用欣含宇通企业会议服务平台</div>
-    </div>
-    <div class="content">
-      <div>
-        <div class="c_left">
-          <!--<img src="${ctx!}/img/bg_logo.png">-->
-        </div>
-        <div class="c_right">
-          <form action="${ctx!}/dologin" method="post" id="loginForm" class="">
-            <input type="hidden" value="${publicKey!}" id="publicKey" name="publicKey">
-            <div>
-              <label>用户名：</label>
-              <div>
-                <input type="text" name="user.username" value="${(user.username)!}" tabindex="1" id="userName" class="input-text"/>
-              </div>
-            </div>
-            <div>
-              <label>密码：</label>
-              <div>
-                <input type="password" name="user.password" value="${(user.password)!}" id="password" class="input-text" tabindex="2"/>
-                <input type="hidden" name="user.encryptPwd" id="encryptPwd">
-              </div>
-            </div>
-            <#if (times??&&times?number>=3)||(user.authCode)??>
-              <div class="clearfix" id="vertifyCode">
-                <label for="authCode">验证码：</label>
-                <div>
-                  <input type="text" id="authCode" name="user.authCode" value="${(user.authCode)!}" tabindex="4" id="vcodeid" class="input-text" style="width:55px;padding:2px 2px;" maxlength="6"/>
-                  <label style="margin: 0px;width: 65px;margin-left: 2px;"><img src="${ctx!}/login/vertifyCode" title="看不清楚，换一张" id="authCodeImg" class="hand" onclick="javascript:this.src='${ctx!}/login/vertifyCode/'+new Date()"/></label>
-                  <label style="padding-left: 3px;width: 90px;padding-top: 5px;vertical-align: middle;clear:right;font-size: 12px;">
-                    看不清？<a href="javascript:;" class="fontColor" onclick="javascript:document.getElementById('authCodeImg').src='${ctx!}/login/vertifyCode/'+new Date()">换一张</a>
-                  </label>
-                </div>
-              </div>
-            </#if>
-            <div>
-              <label>
-                <input type="checkbox" name="user.remember" id="remember" <#if (user.remember)??>checked="checked"</#if>>记住密码
-              </label>
-            </div>
-            <div class="error_tips" id="error_tips" <#if !errorMsg??>style="display: none;"</#if>>
-                <span class="error_logo" id="error_log"></span>
-                <span class="err_m" id="err_m">${errorMsg!}</span>
-            </div>
-            <div>
-              <button type="submit">登陆</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="footer">
-      <div>
-        <span>客户服务热线：010-82667187</span>
-      </div>
-    </div>
-  </div>
-<script type="text/javascript" src="${ctx!}/js/jquery.min.js"></script>
+<#include "layout.html">
+<@layout "登陆">
+<meta charset="utf-8"/>
+<link href="${ctx!}/css/login.css" rel="stylesheet" type="text/css"/>
+<link href="${ctx!}/artDialog/css/ui-dialog.css" rel="stylesheet" type="text/css"/>
+<div class="part3">
+	<div class="block">
+		<div class="full-login">
+		<div class="shadow">
+		<div class="login-panel">
+				<form action="${ctx!}/dologin" method="post" id="loginForm" class="">
+				   <h2>登陆网站</h2>
+					<input type="hidden" name="key" value="${key!}">
+				   <input type="hidden" name="showAuthCode" id="showAuthCode" value="false"/>
+					<input type="hidden" value="${publicKey!}" id="publicKey" name="publicKey">
+				   <p class="clearfix">
+				   		<label for="userName">账号：</label>
+				   		<input type="text" name="user.username" value="${(user.username)!}" tabindex="1" id="userName" class="input-text"/>
+				   </p>
+				   <p class="clearfix">
+				   		<label for="password">密码：</label>
+				   		<input type="password" name="user.password" value="${(user.password)!}" id="password" class="input-text" tabindex="2"/>
+					   	<input type="hidden" name="user.encryptPwd" id="encryptPwd">
+				   </p>
+
+				  <!--  <p class="clearfix">
+				   		<label for="companyId">账号类型：</label>
+				   		<select id="companyId" style="font-size: 14px;border: 1px solid #bdc7d8;padding: 1px;vertical-align: middle;">
+				   			<option value="0">公司</option>
+				   			<option value="1">管理员</option>
+				   		</select>
+				   		<input type="text" id="companyCode" placeholder="公司代码" class="input-text" tabindex="3" style="width: 60px;"/>
+				   </p> -->
+				  <#if (times??&&times?number>=3)||(user.authCode)??>
+				  <p class="clearfix" id="vertifyCode">
+				   		<label for="authCode">验证码：</label>
+				   		<input type="text" id="authCode" name="user.authCode" value="${(user.authCode)!}" tabindex="4" id="vcodeid" class="input-text" style="float:left;width:55px;padding:5px 2px;" maxlength="6"/>
+				   		<label style="float:left;margin: 0px;width: 65px;margin-left: 2px;"><img src="${ctx!}/login/vertifyCode" title="看不清楚，换一张" id="authCodeImg" class="hand" onclick="javascript:this.src='/login/vertifyCode/'+new Date()"/></label>
+				   		<label style="float:left;padding-left: 3px;width: 90px;padding-top: 5px;vertical-align: middle;clear:right;font-size: 12px;">
+				   			看不清？<a href="javascript:;" class="fontColor" onclick="javascript:document.getElementById('authCodeImg').src='/login/vertifyCode/'+new Date()">换一张</a>
+				   		</label>
+				   </p>
+				  </#if>
+					<div class="error_tips" id="error_tips" <#if !errorMsg??>style="display: none;"</#if>>
+						<span class="error_logo" id="error_log"></span>
+						<span class="err_m" id="err_m">${errorMsg!}</span>
+					</div>
+				  <!--  <p class="right">
+				   		<span class="float-right"><a tabindex="5" href="/retrieve">取回密码</a></span>
+				   		<label for="mem">
+				   			<input type="checkbox" id="mem" name="mem" checked="checked" tabindex="4" class="input-checkbox"/>记住我的登陆状态
+				   		</label>
+				   </p> -->
+				   <p class="right">
+				   		<input type="submit" id="login" tabindex="5" class="input-submit large" value="登陆"/>&nbsp;&nbsp;&nbsp;&nbsp;
+				   		<!-- <a href="/register" target="_blank" style="font-size: 14px;vertical-align: middle;">注册</a> -->
+				   </p>
+				   <div class="separator"></div>
+				</form>
+		</div>
+		</div>
+		</div>
+	</div> 
+</div>
+</@layout>
+<@script>
 <script type="text/javascript" src="${ctx!}/js/jquery.cookie.js"></script>
 <script src="${ctx!}/js/jsencrypt.min.js"></script>
+<script type="text/javascript" src="${ctx!}/artDialog/dist/dialog.js?skin=blue"></script>
 <script type="text/javascript" src="${ctx!}/js/common.js"></script>
 <script type="text/javascript" src="${ctx!}/js/login/login.js"></script>
 <script type="text/javascript">
-      $(document).ready(function(){
-          //检查浏览器是否支持Websocket
-          login.isSupportWebsocket();
-          //登陆
-          $("#loginForm").submit(function () {
-              var flag = login.dologin();
-              if(flag){
-                  var password=$("#password").val().trim();
-                  var encrypt=new JSEncrypt();
-                  encrypt.setPublicKey($("#publicKey").val());
-                  var encrypted=encrypt.encrypt(password);
-                  $("#encryptPwd").val(encrypted);
-                  $("#password").val(common.generateMixed(password.length));
-              }
-              return flag;
-          });
-          //getTypeInfo();
-      });
+$(document).ready(function(){
+	//检查浏览器是否支持Websocket
+	login.isSupportWebsocket();
+	//登陆
+	$("#loginForm").submit(function () {
+		var flag = login.dologin();
+		if(flag){
+			var password=$("#password").val().trim();
+            var encrypt=new JSEncrypt();
+            encrypt.setPublicKey($("#publicKey").val());
+			var encrypted=encrypt.encrypt(password);
+			$("#encryptPwd").val(encrypted);
+			$("#password").val(common.generateMixed(password.length));
+		}
+		return flag;
+	});
+	//getTypeInfo();
+});
+//检查登陆错误次数是否超过3次
+function checkLogin(){
+	var times=$.cookie("times");
+	if(times&&times>=3){
+		$("#showAuthCode").val("true");
+		$("#vertifyCode").show();
+		document.getElementById('authCodeImg').src='${ctx!}/login/vertifyCode/'+new Date();
+	}
+}
+
+//获取上次本机登陆类型信息
+function getTypeInfo(){
+	var typeid=$.cookie("typeid");
+	var companyCode=$.cookie("companyCode");
+	if(typeid!=undefined){
+		$("#companyId").val(typeid);
+		if(typeid=="0"){
+			$("#companyCode").val(companyCode).show();
+		}else{
+			$("#companyCode").hide();
+		}
+	}
+}
 </script>
-</body>
-</html>
+</@script>

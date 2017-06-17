@@ -30,7 +30,6 @@ public interface ILoginService {
      */
     boolean login(UserLoginVo user, Controller controller);
 
-    Map<String,Key> getKeyMap();
 
     /**
      * 获取记住密码的登陆用户信息

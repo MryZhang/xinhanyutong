@@ -35,7 +35,7 @@ public interface IUserService {
 
     Map<String,Object> getUserPageData(Controller controller);
 
-    boolean addUserData(UserData userData,int cid,HttpServletRequest request);
+    boolean addUserData(UserData userData,int cid,HttpServletRequest request,String key);
 
     /**
      * 根据用户id获取用户相关信息
@@ -49,18 +49,16 @@ public interface IUserService {
      * @param userData
      * @return
      */
-    boolean updateUserData(UserData userData);
+    boolean updateUserData(UserData userData,String key);
 
     boolean deleteUsers(String idStr);
 
-    Result<?> changePwd(ChangePwd changePwd,String username,HttpServletRequest request);
-
-    void setPageData(HttpServletRequest request);
+    Result<?> changePwd(ChangePwd changePwd,String username,HttpServletRequest request,String key);
 
     /**
      * 修改个人资料
      * @param userData
      * @return
      */
-    Result<?> updateSelf(UserData userData, HttpServletRequest request);
+    Result<?> updateSelf(UserData userData, HttpServletRequest request,String key);
 }

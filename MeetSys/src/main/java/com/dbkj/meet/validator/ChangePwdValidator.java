@@ -4,6 +4,8 @@ import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dto.ChangePwd;
 import com.dbkj.meet.model.User;
 import com.dbkj.meet.services.AdminService;
+import com.dbkj.meet.services.RSAKeyServiceImpl;
+import com.dbkj.meet.services.inter.RSAKeyService;
 import com.dbkj.meet.utils.RSAUtil2;
 import com.jfinal.core.Controller;
 import com.jfinal.i18n.I18n;
@@ -12,6 +14,7 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.validate.Validator;
 
 import java.security.Key;
+import java.security.PrivateKey;
 import java.util.Map;
 
 
@@ -21,13 +24,14 @@ import java.util.Map;
 public class ChangePwdValidator extends Validator {
 
     private ChangePwd changePwd;
+    private RSAKeyService rsaKeyService=new RSAKeyServiceImpl();
 
     protected void validate(Controller controller) {
         Res resCn= I18n.use("zh_CN");
         changePwd = controller.getBean(ChangePwd.class,"p");
         String username=((User)controller.getSessionAttr(Constant.USER_KEY)).getUsername();
-        Map<String,Key> keyMap=controller.getSessionAttr(AdminService.KEY_MAP);
-        Key privateKey=keyMap.get(RSAUtil2.PRIVATE_KEY);
+        String key=controller.getPara("key");
+        String privateKey=rsaKeyService.getPrivateKey(key);
         if(StrKit.isBlank(changePwd.getEncryptOldPwd())){
             addError("oldPasswordMsg",resCn.get("oldPassword.not.empty"));
         }else{

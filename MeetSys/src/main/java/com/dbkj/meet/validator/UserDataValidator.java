@@ -4,8 +4,10 @@ import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dto.UserData;
 import com.dbkj.meet.dto.UserDto;
 import com.dbkj.meet.model.User;
+import com.dbkj.meet.services.RSAKeyServiceImpl;
 import com.dbkj.meet.services.UserService;
 import com.dbkj.meet.services.inter.IUserService;
+import com.dbkj.meet.services.inter.RSAKeyService;
 import com.dbkj.meet.utils.RSAUtil2;
 import com.dbkj.meet.utils.ValidateUtil;
 import com.jfinal.core.Controller;
@@ -13,8 +15,12 @@ import com.jfinal.i18n.I18n;
 import com.jfinal.i18n.Res;
 import com.jfinal.kit.StrKit;
 import com.jfinal.validate.Validator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.UnsupportedEncodingException;
 import java.security.Key;
+import java.security.PrivateKey;
 import java.util.Map;
 
 /**
@@ -24,6 +30,8 @@ public class UserDataValidator extends Validator {
 
     private IUserService userService=new UserService();
     private UserData userData;
+    private RSAKeyService rsaKeyService=new RSAKeyServiceImpl();
+    private static final Logger logger= LoggerFactory.getLogger(UserDataValidator.class);
 
     protected void validate(Controller controller) {
         userData = controller.getBean(UserData.class,"user");
@@ -42,8 +50,8 @@ public class UserDataValidator extends Validator {
             addError("usernameMsg",res.get("username.exist"));
         }
 
-        Map<String,Key> keyMap=controller.getSessionAttr(UserService.KEY_MAP);
-        Key privateKey=keyMap.get(RSAUtil2.PRIVATE_KEY);
+        String key=controller.getPara("key");
+        String privateKey=rsaKeyService.getPrivateKey(key);
 
         String encryptPwd=userData.getEncryptPwd();
         String decryptPwd=null;
@@ -63,7 +71,8 @@ public class UserDataValidator extends Validator {
             flag=false;
             addError("confirmPwdMsg",res.get("confirmPassword.not.empty"));
         }else {
-            String decryptConfimrPwd=RSAUtil2.decryptBase64(encryptConfimrPwd,privateKey);
+            String decryptConfimrPwd= null;
+            decryptConfimrPwd = RSAUtil2.decryptBase64(encryptConfimrPwd,privateKey);
             userData.setConfirmPwd(decryptConfimrPwd);
             if (!decryptConfimrPwd.equals(decryptPwd)) {
                 flag=false;
@@ -94,7 +103,7 @@ public class UserDataValidator extends Validator {
 
     protected void handleError(Controller controller) {
         controller.setAttr("user",userData);
-        controller.keepPara("queryString","publicKey");
+        controller.keepPara("queryString","publicKey","key");
         User user=controller.getSessionAttr(Constant.USER_KEY);
         controller.setAttr("dlist",userService.getDepartments(user.getCid()));
         controller.render("add.html");

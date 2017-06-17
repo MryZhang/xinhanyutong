@@ -2,22 +2,29 @@ package com.dbkj.meet.services;
 
 import com.dbkj.meet.converter.UserConverter;
 import com.dbkj.meet.dic.Constant;
+import com.dbkj.meet.interceptors.RemoveKeyCacheInterceptor;
 import com.dbkj.meet.model.User;
 import com.dbkj.meet.services.inter.ILoginService;
+import com.dbkj.meet.services.inter.RSAKeyService;
 import com.dbkj.meet.utils.AESUtil;
 import com.dbkj.meet.utils.RSAUtil2;
 import com.dbkj.meet.vo.UserLoginVo;
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.i18n.I18n;
 import com.jfinal.i18n.Res;
 import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.redis.Cache;
+import com.jfinal.plugin.redis.Redis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.security.Key;
+import java.security.PrivateKey;
 import java.util.Map;
 
 /**
@@ -31,6 +38,8 @@ public class LoginService implements ILoginService {
     private final String USERNAME_COOKIE="username";
     private final String PASSWORD_COOKIE="password";
     private final String REMEMBER_COOKIE="remember";
+
+    private RSAKeyService rsaKeyService;
     /**
      * 判断是否存在该用户
      * @param user
@@ -51,11 +60,17 @@ public class LoginService implements ILoginService {
      * @param controller
      * @return
      */
+    @Before({RemoveKeyCacheInterceptor.class})
     public boolean login(UserLoginVo user, Controller controller) {
         User u= UserConverter.of(user);
         //解密密码
-        Map<String,Key> keyMap=controller.getSessionAttr(LoginService.KEY_MAP);
-        String password=RSAUtil2.decryptBase64(user.getEncryptPwd(),keyMap.get(RSAUtil2.PRIVATE_KEY));
+        String key=controller.getPara("key");
+        if(rsaKeyService==null){
+            rsaKeyService=new RSAKeyServiceImpl();
+        }
+        String privateKey=rsaKeyService.getPrivateKey(key);
+        String password= null;
+        password = RSAUtil2.decryptBase64(user.getEncryptPwd(), privateKey);
         u.setPassword(password);
 
         User user1=isExistUser(u);
@@ -96,11 +111,6 @@ public class LoginService implements ILoginService {
             controller.setAttr("errorMsg",resCn.get("usernameOrPassword.not.correct"));
         }
         return flag;
-    }
-
-    @Override
-    public Map<String, Key> getKeyMap() {
-        return RSAUtil2.generateKeys();
     }
 
     @Override

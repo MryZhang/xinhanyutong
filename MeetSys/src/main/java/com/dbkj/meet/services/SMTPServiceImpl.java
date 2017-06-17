@@ -3,20 +3,28 @@ package com.dbkj.meet.services;
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dic.OrderCallType;
 import com.dbkj.meet.dto.Result;
+import com.dbkj.meet.interceptors.RemoveKeyCacheInterceptor;
 import com.dbkj.meet.model.*;
 import com.dbkj.meet.services.inter.IOrderTimeService;
 import com.dbkj.meet.services.inter.ISMTPService;
+import com.dbkj.meet.services.inter.RSAKeyService;
 import com.dbkj.meet.utils.MailUtil;
 import com.dbkj.meet.utils.RSAUtil2;
 import com.dbkj.meet.utils.ValidateUtil;
 import com.dbkj.meet.vo.SmtpEmailVO;
+import com.jfinal.aop.Before;
 import com.jfinal.i18n.I18n;
 import com.jfinal.i18n.Res;
 import com.jfinal.kit.StrKit;
+import com.sun.org.apache.regexp.internal.RE;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.security.Key;
+import java.security.PrivateKey;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -26,7 +34,8 @@ import java.util.Map;
  */
 public class SMTPServiceImpl implements ISMTPService {
 
-    private IOrderTimeService orderTimeService = new OrderTimeServiceImpl();
+    private RSAKeyService rsaKeyService;
+    private static final Logger logger= LoggerFactory.getLogger(SMTPServiceImpl.class);
 
     @Override
     public SmtpEmailVO getByUserId(Long uid) {
@@ -38,9 +47,10 @@ public class SMTPServiceImpl implements ISMTPService {
         return smtpEmailVO;
     }
 
+    @Before({RemoveKeyCacheInterceptor.class})
     @Override
-    public Result save(SmtpEmailVO smtpEmailVO, HttpServletRequest request) {
-        Result result=checkSmtpEmailVO(smtpEmailVO,request);
+    public Result save(SmtpEmailVO smtpEmailVO, HttpServletRequest request,String key) {
+        Result result=checkSmtpEmailVO(smtpEmailVO,request,key);
         if(result.getResult()){
             Date date=new Date();
 
@@ -76,7 +86,7 @@ public class SMTPServiceImpl implements ISMTPService {
      * @param request
      * @return
      */
-    private Result checkSmtpEmailVO(SmtpEmailVO smtpEmailVO,HttpServletRequest request){
+    private Result checkSmtpEmailVO(SmtpEmailVO smtpEmailVO,HttpServletRequest request,String key){
         Result result=new Result(false);
         if(smtpEmailVO==null){
             return result;
@@ -98,14 +108,15 @@ public class SMTPServiceImpl implements ISMTPService {
             return result;
         }
 
-        Map<String,Key> keyMap= (Map<String, Key>) request.getSession().getAttribute(Constant.KEY_MAP);
-        Key privateKey=keyMap.get(RSAUtil2.PRIVATE_KEY);
+        rsaKeyService=new RSAKeyServiceImpl();
+       String privateKey=rsaKeyService.getPrivateKey(key);
 
         if(StrKit.isBlank(smtpEmailVO.getEncryptPwd())){
             result.setMsg(resCn.get("smtp.password.not.empty"));
             return result;
         }else{
-            String password= RSAUtil2.decryptBase64(smtpEmailVO.getEncryptPwd(),privateKey);
+            String password= null;
+            password = RSAUtil2.decryptBase64(smtpEmailVO.getEncryptPwd(),privateKey);
             smtpEmailVO.setPassword(password);
         }
 
@@ -113,7 +124,8 @@ public class SMTPServiceImpl implements ISMTPService {
             result.setMsg(resCn.get("smtp.confirmpwd.not.empty"));
             return result;
         }else{
-            String confirmPassword=RSAUtil2.decryptBase64(smtpEmailVO.getEncryptConfirmPwd(),privateKey);
+            String confirmPassword= null;
+            confirmPassword = RSAUtil2.decryptBase64(smtpEmailVO.getEncryptConfirmPwd(),privateKey);
             if(!smtpEmailVO.getPassword().equals(confirmPassword)){
                 result.setMsg(resCn.get("smtp.confirmpwd.not.equal.password"));
                 return result;

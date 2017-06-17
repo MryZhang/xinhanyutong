@@ -3,10 +3,13 @@ package com.dbkj.meet.controller;
 import com.dbkj.meet.controller.base.BaseAdminController;
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dto.ChangePwd;
+import com.dbkj.meet.interceptors.LoadKeyInterceptor;
 import com.dbkj.meet.model.Company;
 import com.dbkj.meet.model.User;
 import com.dbkj.meet.services.AdminService;
+import com.dbkj.meet.services.RSAKeyServiceImpl;
 import com.dbkj.meet.services.inter.IAdminService;
+import com.dbkj.meet.services.inter.RSAKeyService;
 import com.dbkj.meet.validator.ChangePwdValidator;
 import com.dbkj.meet.validator.UserValidator;
 import com.dbkj.meet.vo.AdminUserVo;
@@ -21,13 +24,14 @@ import java.security.Key;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by MrQin on 2016/11/8.
  */
 public class AdminController extends BaseAdminController {
 
-    private IAdminService adminService=new AdminService();
+    private IAdminService adminService=enhance(AdminService.class);
 
     public void index(){
         List<Company> companyList=adminService.getCompanys();
@@ -64,21 +68,20 @@ public class AdminController extends BaseAdminController {
         render("index.html");
     }
 
-    @Before({GET.class})
+    @Before({GET.class, LoadKeyInterceptor.class})
     public void showAdd(){//添加用户
-        adminService.setPageData(getRequest());
         List<Company> companyList=adminService.getCompanys();
         setAttr("clist",companyList);
         String query = getRequest().getQueryString();
         setAttr("query",query);
+
         render("add.html");
     }
 
     @Before({POST.class, UserValidator.class})
     public void add(){//添加用户
         AdminUserVo user=getBean(AdminUserVo.class,"user");
-        Map<String,Key> keyMap=getSessionAttr(AdminService.KEY_MAP);
-        adminService.addUser(user,keyMap);
+        adminService.addUser(user,getPara("key"));
         String query=getPara("queryStr");
         redirect("/admin/page?"+query);
     }
@@ -86,9 +89,7 @@ public class AdminController extends BaseAdminController {
     @Before({POST.class, UserValidator.class})
     public void addAndContinue(){//保存并继续添加
         AdminUserVo user=getBean(AdminUserVo.class,"user");
-        Map<String,Key> keyMap=getSessionAttr(AdminService.KEY_MAP);
-        adminService.setPageData(getRequest());
-        adminService.addUser(user,keyMap);
+        adminService.addUser(user,getPara("key"));
         List<Company> companyList=adminService.getCompanys();
         setAttr("clist",companyList);
         String query=getPara("queryStr");
@@ -97,23 +98,23 @@ public class AdminController extends BaseAdminController {
     }
 
     @ActionKey("/admin/edit")
+    @Before({LoadKeyInterceptor.class})
     public void edit(){
         long id=getParaToLong(0);
-        adminService.setPageData(getRequest());
         User user=adminService.getUserById(id);
         setAttr("user",user);
         List<Company> companyList=adminService.getCompanys();
         setAttr("clist",companyList);
         String query = getRequest().getQueryString();
         setAttr("query",query);
+
         render("add.html");
     }
 
     @Before({POST.class,UserValidator.class})
     public void  update(){
         AdminUserVo user=getBean(AdminUserVo.class,"user");
-        Map<String,Key> keyMap=getSessionAttr(AdminService.KEY_MAP);
-        adminService.updateUser(user,keyMap);
+        adminService.updateUser(user,getPara("key"));
         String query=getPara("queryStr");
         setAttr("query",query);
         redirect("/admin/page?"+query);
@@ -133,8 +134,8 @@ public class AdminController extends BaseAdminController {
         renderJson("{\"result\":"+result+"}");
     }
 
+    @Before({LoadKeyInterceptor.class})
     public void showChangePwd(){
-        adminService.setPageData(getRequest());
         render("changepwd.html");
     }
 
@@ -142,7 +143,7 @@ public class AdminController extends BaseAdminController {
     public void updatePwd(){//修改密码
         ChangePwd changePwd=getBean(ChangePwd.class,"p");
         long id=((User)getSessionAttr(Constant.USER_KEY)).getId();
-        adminService.updatePassword(id,changePwd,getRequest());
+        adminService.updatePassword(id,changePwd,getRequest(),getPara("key"));
         redirect("/admin/showChangePwd");
     }
 }

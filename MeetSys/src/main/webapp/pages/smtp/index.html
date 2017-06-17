@@ -17,6 +17,7 @@
         <div class="block_h1_bottom" id="addContact_title_Id">设置SMTP邮箱</div>
         <div class="block_h1_content block_h1_content_h1">
             <form id="personformId" method="post">
+                <input type="hidden" value="${key!}" name="key">
                 <input type="hidden" value="${publicKey!}" id="publicKey" name="publicKey">
                 <input type="hidden" value="${(smtp.id)!}" id="sid" name="smtp.id">
                 <div class="person-style formClass">
@@ -91,7 +92,7 @@
                }
            });
            if(flag){
-               var data={"smtp.email":$("#c_email").val()};
+               var data={"smtp.email":$("#c_email").val(),"key":$("input[name=key]").val()};
 
                var encrypt=new JSEncrypt();
                encrypt.setPublicKey($("#publicKey").val());

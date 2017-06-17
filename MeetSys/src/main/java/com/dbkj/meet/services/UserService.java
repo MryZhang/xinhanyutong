@@ -5,11 +5,14 @@ import com.dbkj.meet.dic.UserType;
 import com.dbkj.meet.dto.ChangePwd;
 import com.dbkj.meet.dto.Result;
 import com.dbkj.meet.dto.UserData;
+import com.dbkj.meet.interceptors.RemoveKeyCacheInterceptor;
 import com.dbkj.meet.model.*;
 import com.dbkj.meet.services.inter.IUserService;
+import com.dbkj.meet.services.inter.RSAKeyService;
 import com.dbkj.meet.utils.AESUtil;
 import com.dbkj.meet.utils.RSAUtil2;
 import com.dbkj.meet.utils.ValidateUtil;
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.i18n.I18n;
 import com.jfinal.i18n.Res;
@@ -22,9 +25,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.security.Key;
-import java.security.PrivateKey;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -39,6 +41,8 @@ public class UserService implements IUserService {
     private final Logger logger= LoggerFactory.getLogger(this.getClass());
 
     private final int PAGE_SIZE=15;
+
+    private RSAKeyService rsaKeyService;
 
     /**
      * 根据用户名判断用户是否存在
@@ -118,7 +122,8 @@ public class UserService implements IUserService {
         return Department.dao.findByCompanyId(cid);
     }
 
-    public boolean addUserData(final UserData userData, final int cid,HttpServletRequest request) {
+    @Before({RemoveKeyCacheInterceptor.class})
+    public boolean addUserData(final UserData userData, final int cid,HttpServletRequest request,String key) {
         if(userData!=null){
             final User user=new User();
             user.setUsername(userData.getUsername());
@@ -200,7 +205,8 @@ public class UserService implements IUserService {
      * @param userData
      * @return
      */
-    public boolean updateUserData(UserData userData) {
+    @Before({RemoveKeyCacheInterceptor.class})
+    public boolean updateUserData(UserData userData,String key) {
         return updateUser(userData);
     }
 
@@ -248,9 +254,10 @@ public class UserService implements IUserService {
      * @param userData
      * @return
      */
+    @Before({RemoveKeyCacheInterceptor.class})
     @Override
-    public Result<?> updateSelf(UserData userData, HttpServletRequest request) {
-        Result result=validateUserData(userData,request);
+    public Result<?> updateSelf(UserData userData, HttpServletRequest request,String key) {
+        Result result=validateUserData(userData,request,key);
         if(!result.getResult()){
             return result;
         }
@@ -263,12 +270,12 @@ public class UserService implements IUserService {
      * @param userData
      * @return
      */
-    private Result<?> validateUserData(UserData userData,HttpServletRequest request){
+    private Result<?> validateUserData(UserData userData,HttpServletRequest request,String key){
         Result result=new Result(false);
 
         Res res = I18n.use("zh_CN");
-        Map<String,Key> keyMap= (Map<String, Key>) request.getSession().getAttribute(UserService.KEY_MAP);
-        Key privateKey=keyMap.get(RSAUtil2.PRIVATE_KEY);
+        rsaKeyService=new RSAKeyServiceImpl();
+        String privateKey=rsaKeyService.getPrivateKey(key);
 
         String encryptPwd=userData.getEncryptPwd();
         String decryptPwd=null;
@@ -288,7 +295,8 @@ public class UserService implements IUserService {
             result.setMsg(res.get("confirmPassword.not.empty"));
             return result;
         }else {
-            String decryptConfimrPwd=RSAUtil2.decryptBase64(encryptConfimrPwd,privateKey);
+            String decryptConfimrPwd= null;
+            decryptConfimrPwd = RSAUtil2.decryptBase64(encryptConfimrPwd,privateKey);
             userData.setConfirmPwd(decryptConfimrPwd);
             if (!decryptConfimrPwd.equals(decryptPwd)) {
                 result.setMsg(res.get("confirmPassword.not.equal"));
@@ -341,11 +349,13 @@ public class UserService implements IUserService {
         });
     }
 
-    public Result<?> changePwd(ChangePwd changePwd,String username,HttpServletRequest request) {
+    @Before({RemoveKeyCacheInterceptor.class})
+    public Result<?> changePwd(ChangePwd changePwd,String username,HttpServletRequest request,String key) {
         Result result=null;
         try {
-            Map<String,Key> keyMap= (Map<String, Key>) request.getSession().getAttribute(UserService.KEY_MAP);
-            Key privateKey=keyMap.get(RSAUtil2.PRIVATE_KEY);
+            rsaKeyService=new RSAKeyServiceImpl();
+            String privateKey=rsaKeyService.getPrivateKey(key);
+
             result=validateChangePwd(changePwd,username,privateKey);
             if(result.getResult()){
 //                //解密
@@ -364,7 +374,7 @@ public class UserService implements IUserService {
         return result;
     }
 
-    private Result<?> validateChangePwd(ChangePwd changePwd,String username,Key privateKey) throws Exception {
+    private Result<?> validateChangePwd(ChangePwd changePwd,String username,String privateKey) throws Exception {
         Result<Object> result=new Result<Object>(true);
         if(changePwd!=null){
             Res res= I18n.use("zh_CN");
@@ -374,7 +384,7 @@ public class UserService implements IUserService {
                 result.setMsg(res.get("oldPassword.not.empty"));
                 return result;
             }else {
-                oldPwd=RSAUtil2.decryptBase64(oldPwd,privateKey);
+                oldPwd=RSAUtil2.decryptBase64(oldPwd, privateKey);
                 changePwd.setOldPassword(oldPwd);
                 if(User.dao.findUser(username,AESUtil.encrypt(oldPwd, Constant.ENCRYPT_KEY))==null){
                     result.setResult(false);
@@ -389,7 +399,7 @@ public class UserService implements IUserService {
                 result.setMsg(res.get("newPassword.not.empty"));
                 return result;
             }else{
-                newPwd=RSAUtil2.decryptBase64(newPwd,privateKey);
+                newPwd=RSAUtil2.decryptBase64(newPwd, privateKey);
                 changePwd.setNewPassword(newPwd);
             }
 
@@ -399,7 +409,7 @@ public class UserService implements IUserService {
                 result.setMsg(res.get("confirmPassword.not.empty"));
                 return result;
             }else{
-                confirmPwd=RSAUtil2.decryptBase64(confirmPwd,privateKey);
+                confirmPwd=RSAUtil2.decryptBase64(confirmPwd, privateKey);
                 changePwd.setConfirmPassword(confirmPwd);
                 if(!confirmPwd.equals(newPwd)) {
                     result.setResult(false);
@@ -412,10 +422,4 @@ public class UserService implements IUserService {
         return result;
     }
 
-    @Override
-    public void setPageData(HttpServletRequest request) {
-        Map<String,Key> keyMap = RSAUtil2.generateKeys();
-        request.getSession().setAttribute(UserService.KEY_MAP,keyMap);
-        request.setAttribute("publicKey",RSAUtil2.getPublicKey(keyMap));
-    }
 }

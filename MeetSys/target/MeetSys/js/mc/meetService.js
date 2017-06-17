@@ -16,7 +16,7 @@ var meetService={
     isFirstStartRecord:true,//是否是首次开始录音
     remainSec:10,
     isShow:false,
-    serviceUrl:"ws://60.190.236.54:21280/meet1/meet_api",
+    serviceUrl:"ws://60.190.236.54:21280/app/meet_api",
     //初始化页面数据
     initPage:function () {
         //加载个人通信录
@@ -343,7 +343,7 @@ var meetService={
                     }
                 }else{
                     if(result.content.indexOf("会议ID不存在")!=-1){
-                        showCloseTip();
+                        meetService.showCloseTip();
                         meetService.finishMeet();
                     }
                 }

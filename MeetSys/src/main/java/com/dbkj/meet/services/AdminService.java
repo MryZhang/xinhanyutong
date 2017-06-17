@@ -3,25 +3,33 @@ package com.dbkj.meet.services;
 import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dic.UserType;
 import com.dbkj.meet.dto.ChangePwd;
+import com.dbkj.meet.interceptors.RemoveKeyCacheInterceptor;
 import com.dbkj.meet.model.Company;
 import com.dbkj.meet.model.Employee;
 import com.dbkj.meet.model.User;
 import com.dbkj.meet.services.inter.IAdminService;
+import com.dbkj.meet.services.inter.ILoginService;
+import com.dbkj.meet.services.inter.RSAKeyService;
 import com.dbkj.meet.utils.AESUtil;
 import com.dbkj.meet.utils.ParameterUtil;
 import com.dbkj.meet.utils.RSAUtil2;
 import com.dbkj.meet.utils.ValidateUtil;
 import com.dbkj.meet.vo.AdminUserVo;
+import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.IAtom;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.redis.Cache;
+import com.jfinal.plugin.redis.Redis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.security.Key;
+import java.security.PrivateKey;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +43,8 @@ public class AdminService implements IAdminService {
     private final Logger logger= LoggerFactory.getLogger(this.getClass());
 
     private final int PAGE_SIZE=15;
+
+    private RSAKeyService rsaKeyService;
 
     /**
      * 获取所有公司信息
@@ -80,9 +90,12 @@ public class AdminService implements IAdminService {
         return getUserPage(map);
     }
 
-    public boolean addUser(AdminUserVo userVo, Map<String,Key> keyMap) {
-        Key privateKey=keyMap.get(RSAUtil2.PRIVATE_KEY);
-        String password=RSAUtil2.decryptBase64(userVo.getEncryptPassword(),privateKey);
+    @Before({RemoveKeyCacheInterceptor.class})
+    public boolean addUser(AdminUserVo userVo,String key) {
+        rsaKeyService=new RSAKeyServiceImpl();
+        String privateKey=rsaKeyService.getPrivateKey(key);
+        String password= null;
+        password = RSAUtil2.decryptBase64(userVo.getEncryptPassword(),privateKey);
 
         User user=new User();
         user.setUsername(userVo.getUsername());
@@ -94,7 +107,8 @@ public class AdminService implements IAdminService {
         }
         user.setEid(0);
         user.setAid(UserType.ADMIN.getTypeCode());//管理员添加的用户为公司管理员用户
-        return user.save();
+        boolean result = user.save();
+        return result;
     }
 
     public User getUserById(long id) {
@@ -107,9 +121,12 @@ public class AdminService implements IAdminService {
         return user;
     }
 
-    public boolean updateUser(AdminUserVo userVo, Map<String,Key> keyMap) {
-        Key privateKey=keyMap.get(RSAUtil2.PRIVATE_KEY);
-        String password=RSAUtil2.decryptBase64(userVo.getEncryptPassword(),privateKey);
+    @Before({RemoveKeyCacheInterceptor.class})
+    public boolean updateUser(AdminUserVo userVo,String key) {
+        rsaKeyService=new RSAKeyServiceImpl();
+        String privateKey=rsaKeyService.getPrivateKey(key);
+        String password= null;
+        password = RSAUtil2.decryptBase64(userVo.getEncryptPassword(),privateKey);
 
         User user=new User();
         user.setId(userVo.getId());
@@ -165,13 +182,15 @@ public class AdminService implements IAdminService {
      * @param changePwd
      * @return
      */
-    public boolean updatePassword(long id, ChangePwd changePwd, HttpServletRequest request) {
+    @Before({RemoveKeyCacheInterceptor.class})
+    public boolean updatePassword(long id, ChangePwd changePwd, HttpServletRequest request,String key) {
         User user=User.dao.findById(id);
-        Map<String,Key> keyMap= (Map<String, Key>) request.getSession().getAttribute(AdminService.KEY_MAP);
-        Key privateKey=keyMap.get(RSAUtil2.PRIVATE_KEY);
-        String passowrd=RSAUtil2.decryptBase64(changePwd.getEncryptNewPwd(),privateKey);
+        rsaKeyService=new RSAKeyServiceImpl();
+        String privateKey=rsaKeyService.getPrivateKey(key);
+        String password= null;
+        password = RSAUtil2.decryptBase64(changePwd.getEncryptNewPwd(),privateKey);
         try {
-            user.setPassword(AESUtil.encrypt(passowrd,Constant.ENCRYPT_KEY));
+            user.setPassword(AESUtil.encrypt(password,Constant.ENCRYPT_KEY));
             return user.update();
         } catch (Exception e) {
             logger.error(e.getMessage(),e);
@@ -179,10 +198,4 @@ public class AdminService implements IAdminService {
         return false;
     }
 
-    @Override
-    public void setPageData(HttpServletRequest request) {
-        Map<String,Key> keyMap = RSAUtil2.generateKeys();
-        request.getSession().setAttribute(AdminService.KEY_MAP,keyMap);
-        request.setAttribute("publicKey",RSAUtil2.getPublicKey(keyMap));
-    }
 }

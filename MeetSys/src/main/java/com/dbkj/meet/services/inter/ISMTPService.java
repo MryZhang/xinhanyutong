@@ -21,7 +21,7 @@ public interface ISMTPService {
      */
     SmtpEmailVO getByUserId(Long uid);
 
-    Result save(SmtpEmailVO smtpEmailVO, HttpServletRequest request);
+    Result save(SmtpEmailVO smtpEmailVO, HttpServletRequest request,String key);
 
     /**
      * 发送邮件

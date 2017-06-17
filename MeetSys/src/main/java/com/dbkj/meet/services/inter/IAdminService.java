@@ -25,11 +25,11 @@ public interface IAdminService {
 
     Page<Record>  getUserPage();
 
-    boolean addUser(AdminUserVo userVo, Map<String,Key> keyMap);
+    boolean addUser(AdminUserVo userVo,String key);
 
     User getUserById(long id);
 
-    boolean updateUser(AdminUserVo userVo, Map<String,Key> keyMap);
+    boolean updateUser(AdminUserVo userVo,String key);
 
     boolean isExistUser(String username);
 
@@ -49,9 +49,8 @@ public interface IAdminService {
      * @param changePwd
      * @return
      */
-    boolean updatePassword(long id, ChangePwd changePwd, HttpServletRequest request);
+    boolean updatePassword(long id, ChangePwd changePwd, HttpServletRequest request,String key);
 
     Map<String,Object> getParameterMap(Map<String,String[]> map);
 
-    void setPageData(HttpServletRequest request);
 }

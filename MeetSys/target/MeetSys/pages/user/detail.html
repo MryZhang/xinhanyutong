@@ -8,6 +8,7 @@
         <div class="block_h1_bottom" id="addContact_title_Id">个人资料</div>
         <div class="block_h1_content block_h1_content_h1">
             <form id="personformId" method="post">
+                <input type="hidden" value="${key!}" name="key">
                 <input type="hidden" value="${publicKey!}" id="publicKey" name="publicKey">
                 <input type="hidden" value="${queryString!}" id="queryString" name="queryString"/>
                 <input type="hidden" id="uid" value="${(user.id)!}" name="user.id"/>
@@ -129,7 +130,7 @@
             //等待所有的验证完成
             d.then(function (result) {
                 if(result){
-                    var data={"user.id":$("#uid").val(),"user.eid":$("#eid").val(),"user.email":$("#c_email").val()};
+                    var data={"user.id":$("#uid").val(),"user.eid":$("#eid").val(),"user.email":$("#c_email").val(),"key":$("input[name=key]").val()};
 
                     var encrypt=new JSEncrypt();
                     encrypt.setPublicKey($("#publicKey").val());

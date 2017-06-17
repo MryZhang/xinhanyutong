@@ -32,7 +32,7 @@ public class LoginValidator extends Validator{
 
     protected void handleError(Controller controller) {
         controller.keepBean(UserLoginVo.class,"user");
-        controller.keepPara("publicKey");
+        controller.keepPara("publicKey","key");
         controller.render("index.html");
     }
 }

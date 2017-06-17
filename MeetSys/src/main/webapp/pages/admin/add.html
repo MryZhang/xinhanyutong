@@ -10,6 +10,7 @@
         <div class="block_h1_bottom" id="addContact_title_Id"><#if (user.id)??>修改账号信息<#else>新建账号</#if></div>
         <div class="block_h1_content block_h1_content_h1">
             <form id="personformId" method="post" action="<#if (user.id)??>${ctx!}/admin/update<#else>${ctx!}/admin/add</#if>">
+                <input type="hidden" name="key" value="${key!}">
                 <input type="hidden" id="uid" value="${(user.id)!}" name="user.id"/>
                 <input type="hidden" value="${query!}" name="queryStr"/>
                 <input type="hidden" value="${publicKey!}" id="publicKey" name="publicKey">

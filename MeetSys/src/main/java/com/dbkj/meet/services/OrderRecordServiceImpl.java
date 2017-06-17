@@ -62,7 +62,7 @@ public class OrderRecordServiceImpl implements IOrderRecordService {
                  * 所以当获取不到预约会议的数据，休眠500毫秒后重新查询，一共重试5次
                  */
                 int attempt=1;
-                while(rid==null||attempt>5){
+                while(rid==null||attempt<=5){
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {

@@ -12,6 +12,9 @@ import javax.crypto.NoSuchPaddingException;
 import java.io.UnsupportedEncodingException;
 import java.security.*;
 import java.security.interfaces.RSAPublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,9 +65,24 @@ public class RSAUtil2 {
      * @return
      * @throws UnsupportedEncodingException
      */
-    public static String getBase64PublicKey(Map<String,Key> keyMap) throws UnsupportedEncodingException {
+    public static String getBase64PublicKey(Map<String,Key> keyMap) {
         Key publicKey=keyMap.get(PUBLIC_KEY);
-        return new String(Base64.encodeBase64(publicKey.getEncoded()),DEFUALT_CHARSET);
+        try {
+            return new String(Base64.encodeBase64(publicKey.getEncoded()),DEFUALT_CHARSET);
+        } catch (UnsupportedEncodingException e) {
+            logger.error(e.getMessage(),e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String getBase64PrivateKey(Map<String,Key> keyMap) {
+        Key privateKey=keyMap.get(PRIVATE_KEY);
+        try {
+            return new String(Base64.encodeBase64(privateKey.getEncoded()),DEFUALT_CHARSET);
+        } catch (UnsupportedEncodingException e) {
+            logger.error(e.getMessage(),e);
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -92,8 +110,8 @@ public class RSAUtil2 {
      * @param privateKey
      * @return
      */
-    public static String decryptBase64(String data,Key privateKey){
-        return new String(decrypt(Base64.decodeBase64(data), (PrivateKey) privateKey));
+    public static String decryptBase64(String data,Key privateKey) throws UnsupportedEncodingException {
+        return new String(decrypt(Base64.decodeBase64(data), (PrivateKey) privateKey),DEFUALT_CHARSET);
     }
 
     /**
@@ -127,6 +145,44 @@ public class RSAUtil2 {
     }
 
     /**
+     *
+     * @param data
+     * @param publicKey
+     * @return
+     */
+    public static String encryptBase64(String data,String publicKey) {
+        try {
+            byte[] keyBytes = Base64.decodeBase64(publicKey.getBytes(DEFUALT_CHARSET));
+            X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(keyBytes);
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA", "BC");
+            PublicKey publicK = keyFactory.generatePublic(x509EncodedKeySpec);
+            return encryptBase64(data,publicK);
+        } catch (NoSuchAlgorithmException|NoSuchProviderException|InvalidKeySpecException|UnsupportedEncodingException e) {
+            logger.error(e.getMessage(),e);
+            throw new RuntimeException(e);
+        }
+    }
+
+        /**
+     *
+     * @param data
+     * @param privateKey
+     * @return
+     */
+    public static String decryptBase64(String data,String privateKey){
+        try {
+            byte[] keyBytes = Base64.decodeBase64(privateKey.getBytes(DEFUALT_CHARSET));
+            PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(keyBytes);
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA", "BC");
+            PrivateKey privateK = keyFactory.generatePrivate(pkcs8EncodedKeySpec);
+            return decryptBase64(data,privateK);
+        } catch (NoSuchAlgorithmException|InvalidKeySpecException|NoSuchProviderException|UnsupportedEncodingException e) {
+            logger.error(e.getMessage(),e);
+            throw new RuntimeException(e);
+        }
+    }
+
+        /**
      * 获取私钥
      * @param keyMap 密钥对
      * @return
@@ -150,9 +206,9 @@ public class RSAUtil2 {
         Map<String,Key> keyMap = generateKeys();
         String source="1234567890112315465446546545646";
         System.out.println("加密长度："+source.getBytes(DEFUALT_CHARSET).length);
-        String encrypted=encryptBase64(source,keyMap.get(PUBLIC_KEY));
+        String encrypted=encryptBase64(source,getBase64PublicKey(keyMap));
         System.out.println("加密后："+encrypted);
-        String decrypted=decryptBase64(encrypted,keyMap.get(PRIVATE_KEY));
+        String decrypted=decryptBase64(encrypted,getBase64PrivateKey(keyMap));
         System.out.println("解密后："+decrypted);
     }
 }

@@ -4,10 +4,13 @@ import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dic.UserType;
 import com.dbkj.meet.interceptors.AmountInterceptor;
 import com.dbkj.meet.interceptors.InfoInterceptor;
+import com.dbkj.meet.interceptors.LoadKeyInterceptor;
 import com.dbkj.meet.interceptors.LoginInterceptor;
 import com.dbkj.meet.model.User;
 import com.dbkj.meet.services.LoginService;
+import com.dbkj.meet.services.RSAKeyServiceImpl;
 import com.dbkj.meet.services.inter.ILoginService;
+import com.dbkj.meet.services.inter.RSAKeyService;
 import com.dbkj.meet.utils.RSAUtil;
 import com.dbkj.meet.utils.RSAUtil2;
 import com.dbkj.meet.utils.VertifyCodeUtil;
@@ -29,6 +32,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.Key;
 import java.security.PrivateKey;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by MrQin on 2016/11/4.
@@ -36,15 +40,13 @@ import java.util.Map;
 @Clear({LoginInterceptor.class, InfoInterceptor.class, AmountInterceptor.class})
 public class LoginController extends Controller {
 
-    private ILoginService loginService=new LoginService();
+    private ILoginService loginService=enhance(LoginService.class);
 
     private final Logger logger= LoggerFactory.getLogger(LoginController.class);
 
+    @Before({LoadKeyInterceptor.class})
     public void index(){
         setAttr("times",getCookie(LoginService.TIMES));
-        Map<String,Key> keyMap=loginService.getKeyMap();
-        setAttr("publicKey",RSAUtil2.getPublicKey(keyMap));
-        setSessionAttr(LoginService.KEY_MAP,keyMap);
 
         UserLoginVo userLoginVo=loginService.getRememberUser(getRequest());
         setAttr("user",userLoginVo);

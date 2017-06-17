@@ -3,19 +3,31 @@ package com.dbkj.meet.validator;
 import com.dbkj.meet.model.Company;
 import com.dbkj.meet.model.User;
 import com.dbkj.meet.services.AdminService;
+import com.dbkj.meet.services.LoginService;
+import com.dbkj.meet.services.RSAKeyServiceImpl;
 import com.dbkj.meet.services.inter.IAdminService;
+import com.dbkj.meet.services.inter.ILoginService;
 import com.dbkj.meet.services.inter.IUserService;
 import com.dbkj.meet.services.UserService;
+import com.dbkj.meet.services.inter.RSAKeyService;
 import com.dbkj.meet.utils.RSAUtil2;
+import com.dbkj.meet.utils.RedisUtil;
 import com.dbkj.meet.utils.ValidateUtil;
 import com.dbkj.meet.vo.AdminUserVo;
 import com.jfinal.core.Controller;
 import com.jfinal.i18n.I18n;
 import com.jfinal.i18n.Res;
 import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.ehcache.CacheKit;
+import com.jfinal.plugin.redis.Cache;
+import com.jfinal.plugin.redis.Redis;
 import com.jfinal.validate.Validator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.UnsupportedEncodingException;
 import java.security.Key;
+import java.security.PrivateKey;
 import java.util.List;
 import java.util.Map;
 
@@ -24,8 +36,11 @@ import java.util.Map;
  */
 public class UserValidator extends Validator {
 
+    private static final Logger logger= LoggerFactory.getLogger(UserValidator.class);
+
     private IUserService userService=new UserService();
     private AdminUserVo user=null;
+    private RSAKeyService rsaKeyService=new RSAKeyServiceImpl();
 
     protected void validate(Controller controller) {
         Res resCn= I18n.use("zh_CN");
@@ -42,14 +57,13 @@ public class UserValidator extends Validator {
             addError("usernameMsg",resCn.get("username.exist"));
         }
 
-        Map<String,Key> keyMap=controller.getSessionAttr(AdminService.KEY_MAP);
-        Key privateKey=keyMap.get(RSAUtil2.PRIVATE_KEY);
-
+        String key=controller.getPara("key");
+        String privateKey=rsaKeyService.getPrivateKey(key);
         String password=user.getEncryptPassword();
         if(StrKit.isBlank(password)){
             addError("passwordMsg",resCn.get("password.not.empty"));
         }else {
-            password=RSAUtil2.decryptBase64(password,privateKey);
+            password=RSAUtil2.decryptBase64(password, privateKey);
             user.setPassword(password);
             if(password.length()<6||password.length()>16){
                 addError("passwordMsg",resCn.get("passsword.length"));
@@ -75,7 +89,7 @@ public class UserValidator extends Validator {
 
     protected void handleError(Controller controller) {
         controller.setAttr("user",user);
-        controller.keepPara("queryStr","publicKey");
+        controller.keepPara("queryStr","publicKey","key");
         IAdminService adminService=new AdminService();
         List<Company> companyList = adminService.getCompanys();
         controller.setAttr("clist",companyList);

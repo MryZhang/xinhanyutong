@@ -35,7 +35,7 @@
                         <#if (pages.list?size>0)>
                             <#list pages.list as item>
                                 <tr>
-                                    <td class="t_index">${item_index+1}</td>
+                                    <td class="t_index">${pages.pageSize*(pages.pageNumber-1)+item_index+1}</td>
                                     <td class="t_cname">${item.name}</td>
                                     <td class="t_balance">￥ ${item.balance}</td>
                                     <td class="t_opara">
@@ -60,7 +60,7 @@
 </@header>
 <@footer>
 <script type="text/javascript" src="${ctx!}/artDialog/dist/dialog.js?skin=blue"></script>
-<script type="text/javascript" src="${ctx!}/js/admin/charge.js"/>
+<script type="text/javascript" src="${ctx!}/js/admin/charge.js"></script>
 <script type="text/javascript">
     $(function () {
         //首页
