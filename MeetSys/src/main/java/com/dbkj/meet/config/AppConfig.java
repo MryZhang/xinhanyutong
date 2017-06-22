@@ -128,7 +128,7 @@ public class AppConfig extends JFinalConfig {
     public void beforeJFinalStop() {
         //停止quartz定时任务
         try {
-            StdSchedulerFactory.getDefaultScheduler().shutdown();
+            StdSchedulerFactory.getDefaultScheduler().shutdown(true);
         } catch (SchedulerException e) {
             logger.error(e.getMessage(),e);
         }
