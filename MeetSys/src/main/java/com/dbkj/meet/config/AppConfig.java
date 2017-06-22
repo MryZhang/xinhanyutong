@@ -124,6 +124,16 @@ public class AppConfig extends JFinalConfig {
         },0,24, TimeUnit.HOURS);
     }
 
+    @Override
+    public void beforeJFinalStop() {
+        //停止quartz定时任务
+        try {
+            StdSchedulerFactory.getDefaultScheduler().shutdown();
+        } catch (SchedulerException e) {
+            logger.error(e.getMessage(),e);
+        }
+    }
+
     public static void main(String[] args){
         JFinal.start("/src/main/webapp",8080,"/",5);
     }
