@@ -20,6 +20,7 @@
         </div>
         <div class="c_right">
           <form action="${ctx!}/dologin" method="post" id="loginForm" class="">
+            <input type="hidden" value="${key!}" name="key">
             <input type="hidden" value="${publicKey!}" id="publicKey" name="publicKey">
             <div>
               <label>用户名：</label>
