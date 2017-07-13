@@ -1308,10 +1308,11 @@ var meetService={
      * @param recUrl
      */
     playRec:function (recUrl) {
-        var content="<div style='margin: 20px 80px;'><audio preload='auto' controls src='"+recUrl+"'>对不起，您的浏览器不支持播放音频文件！</audio></div>";
-        content+="<script>$('audio').audioPlayer()</script>";
+        var content="<div style='margin: 20px 80px;'><audio id='audio' preload='auto' controls src='"+recUrl+"'>对不起，您的浏览器不支持播放音频文件！</audio></div>";
+        content+="<script>$('#audio').audioPlayer()</script>";
         showTip(content,function () {
-           $("audio")[0].pause();
+           var audio=$("#audio")[0];
+           audio&&audio.pause();
         },"播放音频","default");
     },
     /**
