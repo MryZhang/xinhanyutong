@@ -5,13 +5,14 @@ import com.dbkj.meet.dic.Constant;
 import com.dbkj.meet.dic.MessageConstant;
 import com.dbkj.meet.dic.OrderCallType;
 import com.dbkj.meet.model.*;
+import com.dbkj.meet.model.Record;
+import com.dbkj.meet.services.inter.IChargeService;
 import com.dbkj.meet.services.inter.IOrderTimeService;
 import com.dbkj.meet.services.inter.ISMTPService;
 import com.dbkj.meet.services.inter.MessageService;
 import com.dbkj.meet.utils.MessageUtil;
 import com.dbkj.meet.utils.ValidateUtil;
-import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.IAtom;
+import com.jfinal.plugin.activerecord.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +31,7 @@ public class MessageServiceImpl implements MessageService {
 
     private IOrderTimeService orderTimeService = new OrderTimeServiceImpl();
     private ISMTPService smtpService=null;
+    private IChargeService chargeService=null;
 
     @Override
     public void sendNotice(HttpServletRequest request) {
@@ -98,24 +100,25 @@ public class MessageServiceImpl implements MessageService {
         Db.tx(new IAtom() {
             @Override
             public boolean run() throws SQLException {
-                Fee fee=getMessageFee();
+//                Fee fee=getMessageFee();
+                BigDecimal rate=getSmsRate(cid);
                 //添加短信发送记录
                 Sms sms=new Sms();
                 sms.setRid(rid!=null?Integer.parseInt(rid.toString()):null);
                 sms.setMsg(msg);
-                sms.setFee(fee.getRate());
-                sms.setRate(fee.getRate()+"元/条");
+                sms.setFee(rate);
+                sms.setRate(rate.doubleValue()+"元/条");
                 sms.setName(name);
                 sms.setPhone(phone);
                 sms.setGmtCreate(new Date());
                 if(sms.save()){
                     //扣除账户中短信费用
                     AccountBalance accountBalance = AccountBalance.dao.findByCompanyId(cid);
-                    accountBalance.setBalance(accountBalance.getBalance().subtract(fee.getRate()));
+                    accountBalance.setBalance(accountBalance.getBalance().subtract(rate));
                     if(accountBalance.update()){
                         //添加扣费记录
                         Chargeback chargeback=new Chargeback();
-                        chargeback.setFee(fee.getRate().multiply(new BigDecimal(-1)));
+                        chargeback.setFee(rate.multiply(new BigDecimal(-1)));
                         chargeback.setCid(cid);
                         chargeback.setGmtCreated(new Date());
                         chargeback.setRemark("短信费用");
@@ -196,23 +199,24 @@ public class MessageServiceImpl implements MessageService {
         Db.tx(new IAtom() {
             @Override
             public boolean run() throws SQLException {
-                Fee fee=getMessageFee();
+//                Fee fee=getMessageFee();
+                BigDecimal rate=getSmsRate(cid);
                 //添加短信发送记录
                 Sms sms=new Sms();
                 sms.setMsg(msg);
                 sms.setName(name);
                 sms.setPhone(phone);
-                sms.setRate(fee.getRate()+"元/条");
-                sms.setFee(fee.getRate());
+                sms.setRate(rate.doubleValue()+"元/条");
+                sms.setFee(rate);
                 sms.setGmtCreate(new Date());
                 if(sms.save()){
                     //扣除账户中短信费用
                     AccountBalance accountBalance = AccountBalance.dao.findByCompanyId(cid);
-                    accountBalance.setBalance(accountBalance.getBalance().subtract(fee.getRate()));
+                    accountBalance.setBalance(accountBalance.getBalance().subtract(rate));
                     if(accountBalance.update()){
                         //添加扣费记录
                         Chargeback chargeback=new Chargeback();
-                        chargeback.setFee(fee.getRate().multiply(new BigDecimal(-1)));
+                        chargeback.setFee(rate.multiply(new BigDecimal(-1)));
                         chargeback.setCid(cid);
                         chargeback.setGmtCreated(new Date());
                         chargeback.setRemark("短信费用");
@@ -228,11 +232,24 @@ public class MessageServiceImpl implements MessageService {
      * 获取短息费率
      * @return
      */
+    @Deprecated //费率获取有误
     private Fee getMessageFee(){
         Map<String,Object> map=new HashMap<>();
         map.put(Fee.dao.TYPE_KEY, CallTypeEnum.CALL_TYPE_MESSAGE.getCode());
         List<Fee> feeList=Fee.dao.getFee(map);
         return feeList.isEmpty()?null:feeList.get(0);
+    }
+
+    /**
+     * 获取短信费率
+     * @param cid 所属公司id
+     * @return
+     */
+    private BigDecimal getSmsRate(long cid){
+        AccountBalance accountBalance=AccountBalance.dao.findByCompanyId(cid);
+        chargeService=new ChargeService();
+        com.jfinal.plugin.activerecord.Record record = chargeService.getAccountInfoById(accountBalance.getId());
+        return record.getBigDecimal(AccountBalance.dao.SMS_RATE);
     }
 
     /**
