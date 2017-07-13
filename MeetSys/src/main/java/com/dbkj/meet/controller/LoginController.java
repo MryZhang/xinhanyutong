@@ -10,6 +10,7 @@ import com.dbkj.meet.model.User;
 import com.dbkj.meet.services.LoginService;
 import com.dbkj.meet.services.RSAKeyServiceImpl;
 import com.dbkj.meet.services.inter.ILoginService;
+import com.dbkj.meet.services.inter.IRSAService;
 import com.dbkj.meet.services.inter.RSAKeyService;
 import com.dbkj.meet.utils.RSAUtil;
 import com.dbkj.meet.utils.RSAUtil2;
@@ -40,7 +41,9 @@ import java.util.UUID;
 @Clear({LoginInterceptor.class, InfoInterceptor.class, AmountInterceptor.class})
 public class LoginController extends Controller {
 
-    private ILoginService loginService=enhance(LoginService.class);
+    private ILoginService loginService=new LoginService();
+
+    private RSAKeyService rsaKeyService;
 
     private final Logger logger= LoggerFactory.getLogger(LoginController.class);
 
@@ -59,8 +62,6 @@ public class LoginController extends Controller {
         UserLoginVo user=getBean(UserLoginVo.class,"user");
         boolean result=loginService.login(user,this);
         if(result){//登陆成功
-            //setSessionAttr(Constant.USER_KEY,user);
-
             int type = ((User)getSessionAttr(Constant.USER_KEY)).getAid();
             if(type== UserType.SUPER_ADMIN.getTypeCode()||type==UserType.SUPER_SUPER_ADMIN.getTypeCode()){//超级管理员
                 redirect("/admin");
@@ -68,8 +69,11 @@ public class LoginController extends Controller {
                 redirect("/meetlist");
             }
         }else{//登陆失败
-            Map<String,Key> keyMap=getSessionAttr(LoginService.KEY_MAP);
-            setAttr("publicKey",RSAUtil2.getPublicKey(keyMap));
+//            Map<String,Key> keyMap=getSessionAttr(LoginService.KEY_MAP);
+            String key=getPara("key");
+            setAttr("key",key);
+            rsaKeyService=new RSAKeyServiceImpl();
+            setAttr("publicKey",rsaKeyService.getPublicKey(key));
             render("index.html");
         }
     }
